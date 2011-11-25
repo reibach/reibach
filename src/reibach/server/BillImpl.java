@@ -88,9 +88,12 @@ public class BillImpl extends AbstractDBObject implements Bill
 	protected void insertCheck() throws ApplicationException
 	{
     try {
-      if (getName() == null || getName().length() == 0)
-        throw new ApplicationException(Settings.i18n().tr("Please enter a bill name"));
-     
+        if (getName() == null || getName().length() == 0)
+            throw new ApplicationException(Settings.i18n().tr("Please enter a bill name"));
+         
+        if (getCustomer() == null)
+            throw new ApplicationException(Settings.i18n().tr("Please create a Customer first"));
+         
     }
     catch (RemoteException e)
     {
