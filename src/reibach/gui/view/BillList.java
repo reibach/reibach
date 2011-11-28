@@ -34,7 +34,7 @@ public class BillList extends AbstractView
 		
 		// the last parameter "true" makes the button the default one
 		buttons.addButton(Settings.i18n().tr("Create new bill"), new BillDetail(),null,true);
-		// buttons.addButton(Settings.i18n().tr("PdfPrint"), new AboutPdf(),null,true);
+		buttons.addButton(Settings.i18n().tr("PdfPrint"), new AboutPdf(),null,true);
 		
 		buttons.paint(getParent());
 		

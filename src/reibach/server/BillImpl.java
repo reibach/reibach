@@ -1,7 +1,14 @@
 package reibach.server;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.rmi.RemoteException;
 import java.util.Date;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import reibach.Settings;
 import reibach.rmi.Bill;
@@ -78,7 +85,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	 */
 	protected void deleteCheck() throws ApplicationException
 	{
-  }
+	}
 
 	/**
    * This method is invoked before executing insert().
@@ -244,7 +251,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	 */
 	public void setBillDate(Date billDate) throws RemoteException
 	{
-    setAttribute("billdate",billDate);
+		setAttribute("billdate",billDate);
 	}
 
 	/**
@@ -289,6 +296,51 @@ public class BillImpl extends AbstractDBObject implements Bill
   	return sum;
   }
 
+  public void BillPrintPdf() throws RemoteException, ApplicationException
+  {
+	  	String description = getDescription();
+	  	String name = getName();
+	  	// cust = getCustomer();
+	  	// String price = getPrice();
+	  	String billdate = getBillDate().toString();
+	  try
+	  	{
+	  
+      OutputStream file = new FileOutputStream(new File("/tmp/Test.pdf"));
+      
+      Document document = new Document();
+      PdfWriter.getInstance(document, file);
+      document.open();
+      
+      document.add(new Paragraph("Printing da Bill"));
+      document.add(new Paragraph("description --->"));
+      document.add(new Paragraph(description));
+      
+      document.add(new Paragraph("<---- description "));
+      document.add(new Paragraph("name --->"));
+      document.add(new Paragraph(name));
+      document.add(new Paragraph("<---- name "));
+      
+      document.add(new Paragraph("billdate --->"));
+      document.add(new Paragraph(billdate));
+      document.add(new Paragraph("<---- billdate "));
+
+      
+      
+      // document.add(new Paragraph(billdate));
+      // document.add(new Paragraph(price));
+
+   //   document.add(new Paragraph(control.getCustomer());
+      document.add(new Paragraph(new Date().toString()));
+
+      document.close();
+      file.close();
+	  	} catch (Exception e) {
+			throw new ApplicationException(Settings.i18n().tr("error while printing the bill"),e);
+		} 
+  }
+  
+  
   /**
    * We overwrite the delete method to delete all assigned positions too.
    * @see de.willuhn.datasource.rmi.Changeable#delete()

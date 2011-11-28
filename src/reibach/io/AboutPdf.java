@@ -121,8 +121,7 @@ public class AboutPdf implements Action {
 			addContent(document);
 		    
 			// step 5
-	        document.close();
-	        
+	        document.close();	        
 
   	}
     catch (Exception e)

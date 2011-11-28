@@ -18,6 +18,7 @@ import java.util.Date;
 
 import de.willuhn.datasource.rmi.DBIterator;
 import de.willuhn.datasource.rmi.DBObject;
+import de.willuhn.util.ApplicationException;
 
 
 /**
@@ -87,6 +88,13 @@ public interface Bill extends DBObject
   public double getPrice() throws RemoteException;
   
   /**
+   * Prints the bill as aPdf.
+   * @throws RemoteException
+ * @throws ApplicationException 
+   */
+  public void BillPrintPdf() throws RemoteException, ApplicationException;
+  
+  /**
    * Returns the start date of the bill.
    * @return start date.
    * @throws RemoteException
@@ -134,6 +142,7 @@ public interface Bill extends DBObject
    * @throws RemoteException
    */
   public double getEfforts() throws RemoteException;
+
 
   
 

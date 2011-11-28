@@ -1,20 +1,8 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/gui/view/BillDetail.java,v $
- * $Revision: 1.5 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
-
 package reibach.gui.view;
-
 import reibach.Settings;
+import reibach.io.AboutPdf;
 import reibach.gui.action.BillDelete;
+import reibach.gui.action.BillPrintPdf;
 import reibach.gui.action.PositionDetail;
 import reibach.gui.control.BillControl;
 import de.willuhn.jameica.gui.AbstractView;
@@ -41,7 +29,7 @@ public class BillDetail extends AbstractView
 	public void bind() throws Exception
 	{
     // draw the title
-		GUI.getView().setTitle(Settings.i18n().tr("Bill details"));
+	GUI.getView().setTitle(Settings.i18n().tr("Bill details"));
 
     // instanciate controller
     final BillControl control = new BillControl(this);
@@ -72,6 +60,8 @@ public class BillDetail extends AbstractView
     buttons.addButton(new Back());
     buttons.addButton(Settings.i18n().tr("New Position"), new PositionDetail(),control.getCurrentObject());
     buttons.addButton(Settings.i18n().tr("Delete"),  	new BillDelete(),control.getCurrentObject());
+    buttons.addButton(Settings.i18n().tr("Guter Druck"), new AboutPdf(),control.getCurrentObject());
+    buttons.addButton(Settings.i18n().tr("Print Bill"), new BillPrintPdf(),control.getCurrentObject());
     buttons.addButton(Settings.i18n().tr("Store"),   	new Action()
     {
       public void handleAction(Object context) throws ApplicationException
@@ -99,11 +89,3 @@ public class BillDetail extends AbstractView
 	}
 
 }
-
-
-/**********************************************************************
- * $Log: BillDetail.java,v $
- * Revision 1.5  2010-11-09 17:20:16  willuhn
- * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
- *
- **********************************************************************/
