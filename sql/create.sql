@@ -1,3 +1,22 @@
+CREATE TABLE mandator (
+  id NUMERIC default UNIQUEKEY('mandator'),
+  company varchar(150) NOT NULL,
+  title varchar(50) NOT NULL,
+  firstname varchar(150) NOT NULL,
+  lastname varchar(150) NOT NULL,
+  street varchar(150) NOT NULL,
+  housenumber varchar(6) NOT NULL,
+  zipcode varchar(5) NOT NULL,
+  place varchar(255),
+  email varchar(150) ,
+  tel varchar(27) ,
+  fax varchar(27) ,
+  mobil varchar(27) ,
+  comment text,
+  UNIQUE (id),
+  PRIMARY KEY (id)
+);
+
 CREATE TABLE customer (
   id NUMERIC default UNIQUEKEY('customer'),
   company varchar(150) NOT NULL,

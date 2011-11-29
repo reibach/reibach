@@ -135,7 +135,7 @@ public class AboutPdf implements Action {
   
   
   /** Inner class to add a header and a footer. */
-  static class HeaderFooter extends PdfPageEventHelper {
+  public static class HeaderFooter extends PdfPageEventHelper {
 
       public void onEndPage (PdfWriter writer, Document document) {
           Rectangle rect = writer.getBoxSize("art");

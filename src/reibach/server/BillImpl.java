@@ -6,15 +6,14 @@ import java.io.OutputStream;
 import java.rmi.RemoteException;
 import java.util.Date;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
 
 import reibach.Settings;
+import reibach.io.AboutPdf.HeaderFooter;
 import reibach.rmi.Bill;
 import reibach.rmi.Customer;
 import reibach.rmi.Position;
-import reibach.rmi.Project;
 
 import de.willuhn.datasource.db.AbstractDBObject;
 import de.willuhn.datasource.rmi.DBIterator;
@@ -22,7 +21,6 @@ import de.willuhn.datasource.rmi.DBService;
 import de.willuhn.datasource.rmi.ObjectNotFoundException;
 import de.willuhn.logging.Logger;
 import de.willuhn.util.ApplicationException;
-
 
 /**
  * This is the implemtor of the bill interface.
@@ -44,7 +42,19 @@ import de.willuhn.util.ApplicationException;
  */
 public class BillImpl extends AbstractDBObject implements Bill
 {
+	private static Font logo = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLDITALIC);
+	private static Font headline = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
+	private static Font subHeadline = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
 
+	private static Font chapter = new Font(Font.FontFamily.HELVETICA , 10, Font.NORMAL);
+	private static Font chapterRed = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL, BaseColor.RED);
+
+	
+	private static Font normal = new Font(Font.FontFamily.HELVETICA , 10, Font.NORMAL);
+	private static Font normalRed = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL, BaseColor.RED);
+	
+	private static Font smallBold = new Font(Font.FontFamily.HELVETICA , 8, Font.BOLD);
+	private static Font smallFont = new Font(Font.FontFamily.HELVETICA , 8, Font.NORMAL);
 	/**
    * @throws RemoteException
    */
@@ -298,49 +308,289 @@ public class BillImpl extends AbstractDBObject implements Bill
 
   public void BillPrintPdf() throws RemoteException, ApplicationException
   {
-	  	String description = getDescription();
-	  	String name = getName();
-	  	// cust = getCustomer();
-	  	// String price = getPrice();
-	  	String billdate = getBillDate().toString();
-	  try
-	  	{
+
 	  
-      OutputStream file = new FileOutputStream(new File("/tmp/Test.pdf"));
-      
-      Document document = new Document();
-      PdfWriter.getInstance(document, file);
-      document.open();
-      
-      document.add(new Paragraph("Printing da Bill"));
-      document.add(new Paragraph("description --->"));
-      document.add(new Paragraph(description));
-      
-      document.add(new Paragraph("<---- description "));
-      document.add(new Paragraph("name --->"));
-      document.add(new Paragraph(name));
-      document.add(new Paragraph("<---- name "));
-      
-      document.add(new Paragraph("billdate --->"));
-      document.add(new Paragraph(billdate));
-      document.add(new Paragraph("<---- billdate "));
+	    // Get the Data of mandator
+	  
+	    // Get the Data of Customer
+	  	// Float customer = getCustomer();
+	  
+		String name = getName();
+	  	Double price = getPrice();
+	  	String billdate = getBillDate().toString();
+		  
+	  	
+	  	String description = getDescription();
+	  	
+	    // Get the Data of the positions
+	  	//String summary = getSummary();
+	  	//String positionlist = getPositionList();
+	  	
+	  	try
+	  	{
 
-      
-      
-      // document.add(new Paragraph(billdate));
-      // document.add(new Paragraph(price));
+	  	  /*
+	  	   * Getting some fonts
+	  	   */
+            BaseFont bf_helv_bold = BaseFont.createFont(BaseFont.HELVETICA_BOLD, "Cp1252", false);
+            BaseFont bf_helv = BaseFont.createFont(BaseFont.HELVETICA, "Cp1252", false);
+            BaseFont bf_helv_obl = BaseFont.createFont(BaseFont.HELVETICA_OBLIQUE, "Cp1252", false);
+            BaseFont bf_helvbold_obl = BaseFont.createFont(BaseFont.HELVETICA_BOLDOBLIQUE, "Cp1252", false);
 
-   //   document.add(new Paragraph(control.getCustomer());
-      document.add(new Paragraph(new Date().toString()));
+	  	/*
+	  	 *  generate the pdf
+	  	 */
+	  	  OutputStream file = new FileOutputStream(new File("/tmp/Test.pdf"));
 
-      document.close();
-      file.close();
+		  Document document = new Document(PageSize.A4, 36, 36, 54, 36);
+	  	  // String FILE = "/tmp/testme.pdf";
+	      PdfWriter writer = PdfWriter.getInstance(document, file);
+          writer.setBoxSize("art", new Rectangle(36, 54, 559, 788));
+
+          // headers and footers must be added before the document is opened
+          HeaderFooter event = new HeaderFooter();
+          writer.setPageEvent(event);
+          
+	      PdfWriter.getInstance(document, file);
+	      document.open();
+	      
+	        PdfContentByte cb = writer.getDirectContent();
+
+	        // add text at an absolute position
+            cb.beginText();
+            cb.setFontAndSize(bf_helv, 7);
+            
+            cb.setTextMatrix(10, 10);
+            cb.showText("Germany");
+            cb.setTextMatrix(10, 20);
+            cb.showText("27729 Holste");
+            cb.setTextMatrix(10, 30);
+            cb.showText("Buxhormer Weg 15");
+            cb.setTextMatrix(10, 40);
+            cb.setFontAndSize(bf_helv_bold, 8);
+            cb.showText("federa - Günter Mittler");
+
+            cb.setFontAndSize(bf_helv, 7);
+            cb.setTextMatrix(150, 10);
+            cb.showText("Internet: http://federa.de");
+            cb.setTextMatrix(150, 20);
+            cb.showText("E-Mail: guenter@federa.de");
+            cb.setTextMatrix(150, 30);
+            cb.showText("Fax:  +49(0)4748 442438");
+            cb.setTextMatrix(150, 40);
+            cb.showText("Tel:  +49(0)4748 442437");
+            
+            cb.setTextMatrix(350, 10);
+            cb.showText("BLZ: 29152300");
+            cb.setTextMatrix(350, 20);
+            cb.showText("Konto: 140180666");
+            cb.setTextMatrix(350, 30);
+            cb.showText("Kreissparkasse Osterholz");
+            cb.setTextMatrix(350, 40);
+            cb.showText("Bankverbindung");
+            
+            // cb.setTextMatrix(500, 10);
+            // cb.showText("BLZ: 29152300");
+            cb.setTextMatrix(500, 20);
+            cb.showText("36/130/11311");
+            cb.setTextMatrix(500, 30);
+            cb.showText("UST-IdNr. DE813084387");
+            cb.setTextMatrix(500, 40);
+            cb.showText("Finanzamt Osterholz ");
+            
+            cb.setTextMatrix(500, 6);
+            cb.setFontAndSize(bf_helv, 4);
+            cb.showText("generated by: ");
+
+            cb.setTextMatrix(530, 6);
+            cb.setFontAndSize(bf_helv_bold, 5);
+            cb.showText(" Reibach ");
+
+            cb.setTextMatrix(530, 2);
+            cb.setFontAndSize(bf_helv_obl, 4);
+            cb.showText(" ... to make a big haul ");
+
+            cb.endText();
+ 
+            // step 4	        
+			/*
+			 *
+			 */
+               
+			addMetaData(document);
+			addTitlePage(document);
+			addContent(document);
+		    
+
+	      
+	      document.add(new Paragraph("Printing da Bill"));
+	      document.add(new Paragraph(""));
+	      
+	      document.add(new Paragraph("customer --->"));
+	      // document.add(new Paragraph(customer));
+	      document.add(new Paragraph("<---- customer"));
+	      document.add(new Paragraph(""));
+	      
+	      document.add(new Paragraph("name --->"));
+	      document.add(new Paragraph(name));
+	      document.add(new Paragraph("<---- name "));
+	      document.add(new Paragraph(""));
+	      
+	      document.add(new Paragraph("price --->"));
+	      document.add(new Paragraph(price.toString()));
+	      document.add(new Paragraph("<---- price "));
+	      document.add(new Paragraph(""));
+	      
+	      document.add(new Paragraph("billdate --->"));
+	      document.add(new Paragraph(billdate));
+	      document.add(new Paragraph("<---- billdate "));
+	      document.add(new Paragraph(""));
+	
+	      document.add(new Paragraph("description --->"));
+	      document.add(new Paragraph(description));      
+	      document.add(new Paragraph("<---- description "));
+	      document.add(new Paragraph(""));
+	      
+	      document.add(new Paragraph("Printing Date: "));
+	      document.add(new Paragraph(""));
+	      document.add(new Paragraph(new Date().toString()));
+	
+	      document.close();
+	      file.close();
 	  	} catch (Exception e) {
-			throw new ApplicationException(Settings.i18n().tr("error while printing the bill"),e);
+			throw new ApplicationException(Settings.i18n().tr("error while printingaaaaaa the bill"),e);
 		} 
   }
   
+  /** Inner class to add a header and a footer. */
+  static class HeaderFooter extends PdfPageEventHelper {
+
+      public void onEndPage (PdfWriter writer, Document document) {
+          Rectangle rect = writer.getBoxSize("art");
+          ColumnText.showTextAligned(writer.getDirectContent(),
+                  Element.ALIGN_CENTER, new Phrase(String.format("Seite %d", writer.getPageNumber())),
+                  (rect.getLeft() + rect.getRight()) / 2, rect.getBottom() - 28, 0);        
+      }
+  }
   
+	// iText allows to add metadata to the PDF which can be viewed in your Adobe
+	// Reader
+	// under File -> Properties
+	private static void addMetaData(Document document) {
+		document.addTitle("federa: Internet - Support - Sicherheit");
+		document.addSubject("Rechnung");
+		document.addKeywords("Internet - Support - Sicherheit");
+		document.addAuthor("gm");
+		document.addCreator("gm");
+	}
+	private static void addTitlePage(Document document)	throws DocumentException {
+		Paragraph companiename = new Paragraph();
+		// We add one empty line
+		addEmptyLine(companiename, 1);
+		
+		// Lets write a big header
+		companiename.add(new Paragraph("federa", logo));
+		companiename.add(new Paragraph("Internet - Support - Sicherheit", smallFont));
+
+		document.add(companiename);
+
+		Paragraph bill = new Paragraph();
+		bill.add(new Paragraph("Rechnung" , subHeadline));
+		bill.add(new Paragraph("Rechnungsnummer" , normal));
+		bill.add(new Paragraph("Datum" , normal));
+		bill.setAlignment(Element.ALIGN_RIGHT);
+		// We add one empty line
+		addEmptyLine(bill, 2);
+		
+		document.add(bill);
+
+		//Addressdaten Kunde
+		Paragraph customer_address = new Paragraph();
+		customer_address.add(new Paragraph("company" , normal));
+		customer_address.add(new Paragraph("title" , normal));
+		customer_address.add(new Paragraph("firstname lastname" , normal));
+		customer_address.add(new Paragraph("street housenumber" , normal));
+		customer_address.add(new Paragraph("zipcode place" , normal));
+		
+		// We add one empty line
+		addEmptyLine(customer_address, 2);
+		
+		customer_address.add(new Paragraph("customer_id", normal));
+		customer_address.add(new Paragraph("payment", normal));
+
+		// We add one empty line
+		addEmptyLine(customer_address, 2);
+		
+		document.add(customer_address);
+	}		
+		
+		private static void addContent(Document document) throws DocumentException {
+			PdfPTable table = new PdfPTable(6);
+
+			table.setWidthPercentage(100);
+			table.setTotalWidth(new float[]{ 50, 300, 50 , 40 , 40, 40, });
+		    table.setLockedWidth(true);
+  			
+			PdfPCell c1 = new PdfPCell(new Phrase("Position"));
+			table.addCell(c1);
+			
+			c1 = new PdfPCell(new Phrase("Beschreibung"));
+			table.addCell(c1);
+			
+			c1 = new PdfPCell(new Phrase("Menge"));
+			table.addCell(c1);
+			
+			c1 = new PdfPCell(new Phrase("Preis"));
+			// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+			table.addCell(c1);
+			
+			c1 = new PdfPCell(new Phrase("MwSt"));
+			table.addCell(c1);
+			
+			c1 = new PdfPCell(new Phrase("Betrag"));
+			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			table.addCell(c1);
+				
+			
+			table.setHeaderRows(1);
+			
+			table.addCell("1.0");
+			table.addCell("1.1 Rund 3 Millionen Rechner wurden in den Monaten Juli bis September 2011 in Deutschland verkauft, melden die Analysten von Gartner. Im Vergleich zum Vorjahreszeitraum bedeutet das einen Rückgang um fast 8 Prozent, während in Westeuropa ein Minus von mehr als 11 Prozent auf 14,82 Millionen Stück zu verzeichnen ist. Insgesamt sind die PC-Verkaufszahlen hierzulande nun seit 5 Quartalen in Folge rückläufig. Die anhaltend schwache Consumer-Nachfrage habe im Privatkundensegment sogar zu einem Einbruch um 17 Prozent geführt, erklärte Gartner-Analystin Meike Escherich. In der Gesamtbetrachtung der Marktentwicklung gaben die Verkaufszahlen von mobilen Rechnern stärker nach (–8,8 Prozent) als die der Desktop-Systeme (–5,9 Prozent). ");
+			table.addCell("1.2");
+			table.addCell("1.3");
+			table.addCell("1.4");
+			table.addCell("1.5");
+			table.addCell("2.1");
+			table.addCell("2.2 Rund 3 Millionen Rechner wurden in den Monaten Juli bis September 2011 in Deutschland verkauft, melden die Analysten von Gartner. Im Vergleich zum Vorjahreszeitraum bedeutet das einen Rückgang um fast 8 Prozent, während in Westeuropa ein Minus von mehr als 11 Prozent auf 14,82 Millionen Stück zu verzeichnen ist. Insgesamt sind die PC-Verkaufszahlen hierzulande nun seit 5 Quartalen in Folge rückläufig. Die anhaltend schwache Consumer-Nachfrage habe im Privatkundensegment sogar zu einem Einbruch um 17 Prozent geführt, erklärte Gartner-Analystin Meike Escherich. In der Gesamtbetrachtung der Marktentwicklung gaben die Verkaufszahlen von mobilen Rechnern stärker nach (–8,8 Prozent) als die der Desktop-Systeme (–5,9 Prozent).");
+			table.addCell("2.3");
+			table.addCell("2.4");
+			table.addCell("2.5");
+			table.addCell("2.6");
+		
+			table.addCell("3.1");
+			table.addCell("3.2 Rund 3 Millionen Rechner wurden in den Monaten Juli bis September 2011 in Deutschland verkauft, melden die Analysten von Gartner. Im Vergleich zum Vorjahreszeitraum bedeutet das einen Rückgang um fast 8 Prozent, während in Westeuropa ein Minus von mehr als 11 Prozent auf 14,82 Millionen Stück zu verzeichnen ist. Insgesamt sind die PC-Verkaufszahlen hierzulande nun seit 5 Quartalen in Folge rückläufig. Die anhaltend schwache Consumer-Nachfrage habe im Privatkundensegment sogar zu einem Einbruch um 17 Prozent geführt, erklärte Gartner-Analystin Meike Escherich. In der Gesamtbetrachtung der Marktentwicklung gaben die Verkaufszahlen von mobilen Rechnern stärker nach (–8,8 Prozent) als die der Desktop-Systeme (–5,9 Prozent).");
+			table.addCell("3.3");
+			table.addCell("3.4");
+			table.addCell("3.5");
+			table.addCell("3.6");
+			document.add(table);
+			
+		
+			// We add one empty line
+			Paragraph space = new Paragraph();
+			space.add(new Paragraph("" , subHeadline));
+			addEmptyLine(space, 2);
+			document.add(space);
+			
+		}
+		private static void addEmptyLine(Paragraph paragraph, int number) {
+			for (int i = 0; i < number; i++) {
+				paragraph.add(new Paragraph(" "));
+			}
+		}			
+		
+		
+		
   /**
    * We overwrite the delete method to delete all assigned positions too.
    * @see de.willuhn.datasource.rmi.Changeable#delete()
