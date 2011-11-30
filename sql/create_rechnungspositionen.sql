@@ -12,7 +12,6 @@ CREATE TABLE customer (
   tel varchar(27) NOT NULL,
   fax varchar(27) NOT NULL,
   mob varchar(27) NOT NULL,
-
   UNIQUE (id),
   PRIMARY KEY (id)
 );
