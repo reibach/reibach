@@ -19,6 +19,7 @@ import reibach.Settings;
 import reibach.gui.action.ProjectDetail;
 import reibach.rmi.Project;
 
+
 import de.willuhn.datasource.rmi.DBIterator;
 import de.willuhn.jameica.search.Result;
 import de.willuhn.jameica.search.SearchProvider;

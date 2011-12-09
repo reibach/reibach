@@ -38,7 +38,7 @@ public class ProjectList extends AbstractView
 		control.getProjectsTable().paint(this.getParent());
 		
 		ButtonArea buttons = new ButtonArea();
-		buttons.addButton(new Back());
+    buttons.addButton(new Back());
 		
 		// the last parameter "true" makes the button the default one
 		buttons.addButton(Settings.i18n().tr("Create new project"), new ProjectDetail(),null,true);

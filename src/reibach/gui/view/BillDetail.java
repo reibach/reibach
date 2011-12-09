@@ -1,10 +1,10 @@
 package reibach.gui.view;
 import reibach.Settings;
-import reibach.io.AboutPdf;
 import reibach.gui.action.BillDelete;
 import reibach.gui.action.BillPrintPdf;
 import reibach.gui.action.PositionDetail;
 import reibach.gui.control.BillControl;
+import reibach.io.AboutPdf;
 import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.GUI;

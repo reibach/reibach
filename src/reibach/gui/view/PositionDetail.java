@@ -1,8 +1,8 @@
 package reibach.gui.view;
 
-import reibach.Settings;
 import reibach.gui.action.PositionDelete;
 import reibach.gui.control.PositionControl;
+import reibach.Settings;
 import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.GUI;

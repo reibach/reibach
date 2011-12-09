@@ -33,11 +33,11 @@ public class Welcome extends AbstractView
 	 */
 	public void bind() throws Exception
 	{
-		GUI.getView().setTitle(Settings.i18n().tr("Reibach"));
+		GUI.getView().setTitle(Settings.i18n().tr("Example plugin"));
 		
 		LabelGroup group = new LabelGroup(this.getParent(),Settings.i18n().tr("welcome"));
 		
-		group.addText(Settings.i18n().tr("nothing"),false);
+		group.addText(Settings.i18n().tr("this page intentionally left blank ;)"),false);
 
 	}
 

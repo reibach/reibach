@@ -17,10 +17,10 @@ import java.rmi.RemoteException;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
-import reibach.Settings;
 import reibach.gui.menu.ArticleListMenu;
-import reibach.rmi.Bill;
+import reibach.Settings;
 import reibach.rmi.Article;
+import reibach.rmi.Bill;
 
 import de.willuhn.datasource.rmi.DBIterator;
 import de.willuhn.datasource.rmi.DBService;

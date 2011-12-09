@@ -27,6 +27,7 @@ import de.willuhn.util.ApplicationException;
  * <pre>
  * CREATE TABLE bill (
  *   id NUMERIC default UNIQUEKEY('bill'),
+ *   customer_id int(4) NOT NULL,
  *   name varchar(255) NOT NULL,
  *   description text NOT NULL,
  *   email varchar(255) NOT NULL,
@@ -52,8 +53,8 @@ public interface Bill extends DBObject
   public Customer getCustomer() throws RemoteException;
 		
 	/**
-	 * Stores the Project for this task.
-   * @param project
+	 * Stores the Customer for this bill.
+   * @param customer
    * @throws RemoteException
    */
   public void setCustomer(Customer customer) throws RemoteException;
@@ -88,21 +89,21 @@ public interface Bill extends DBObject
   public double getPrice() throws RemoteException;
   
   /**
-   * Prints the bill as aPdf.
+   * Prints the bill as Pdf.
    * @throws RemoteException
  * @throws ApplicationException 
    */
   public void BillPrintPdf() throws RemoteException, ApplicationException;
   
   /**
-   * Returns the start date of the bill.
+   * Returns the date of the bill.
    * @return start date.
    * @throws RemoteException
    */
   public Date getBillDate() throws RemoteException;
   
   /**
-   * Sets the name of the bill.
+   * Sets the name of the bill. --> wird Rechnungsnummer
    * @param name name of the bill.
    * @throws RemoteException
    */
@@ -123,7 +124,7 @@ public interface Bill extends DBObject
   public void setPrice(double price) throws RemoteException;
   
   /**
-   * Sets the start date of the bill.
+   * Sets the date of the bill.
    * @param billDate of the bill.
    * @throws RemoteException
    */

@@ -13,9 +13,9 @@
 package reibach.gui.view;
 
 import reibach.Settings;
-import reibach.io.AboutPdf;
 import reibach.gui.action.CustomerDetail;
 import reibach.gui.control.CustomerControl;
+import reibach.io.AboutPdf;
 import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.GUI;

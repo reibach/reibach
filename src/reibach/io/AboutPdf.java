@@ -1,8 +1,19 @@
 package reibach.io;
 
 import java.io.FileOutputStream;
-import com.itextpdf.text.*;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.*;
+import com.itextpdf.text.*;
+
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfWriter;
+ 
+
+
 import reibach.Settings;
 import de.willuhn.jameica.gui.Action;
 import de.willuhn.logging.Logger;
@@ -32,96 +43,97 @@ public class AboutPdf implements Action {
   {
   	try
   	{
+		
 			// step 1
-	        // Document document = new Document();
-	        Document document = new Document(PageSize.A4, 36, 36, 54, 36);
+	    // Document document = new Document();
+	    Document document = new Document(PageSize.A4, 36, 36, 54, 36);
 	        
-	        // step 2
-	        // creation of the different writers
-	        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(FILE));
-            writer.setBoxSize("art", new Rectangle(36, 54, 559, 788));
+	    // step 2
+	    // creation of the different writers
+	    PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(FILE));
+      writer.setBoxSize("art", new Rectangle(36, 54, 559, 788));
 
             
-            // headers and footers must be added before the document is opened
-            HeaderFooter event = new HeaderFooter();
-            writer.setPageEvent(event);
+      // headers and footers must be added before the document is opened
+      HeaderFooter event = new HeaderFooter();
+      writer.setPageEvent(event);
 
-         // various fonts
-            BaseFont bf_helv_bold = BaseFont.createFont(BaseFont.HELVETICA_BOLD, "Cp1252", false);
-            BaseFont bf_helv = BaseFont.createFont(BaseFont.HELVETICA, "Cp1252", false);
-            BaseFont bf_helv_obl = BaseFont.createFont(BaseFont.HELVETICA_OBLIQUE, "Cp1252", false);
-            BaseFont bf_helvbold_obl = BaseFont.createFont(BaseFont.HELVETICA_BOLDOBLIQUE, "Cp1252", false);
-
-            
+	   	// various fonts
+      BaseFont bf_helv_bold = BaseFont.createFont(BaseFont.HELVETICA_BOLD, "Cp1252", false);
+      BaseFont bf_helv = BaseFont.createFont(BaseFont.HELVETICA, "Cp1252", false);
+      BaseFont bf_helv_obl = BaseFont.createFont(BaseFont.HELVETICA_OBLIQUE, "Cp1252", false);
+      BaseFont bf_helvbold_obl = BaseFont.createFont(BaseFont.HELVETICA_BOLDOBLIQUE, "Cp1252", false);
                 
-            // step 3
-	        document.open();
-	        
-	        PdfContentByte cb = writer.getDirectContent();
+        // step 3
+      document.open();
+      
+      PdfContentByte cb = writer.getDirectContent();
 
-	        // add text at an absolute position
-            cb.beginText();
-            cb.setFontAndSize(bf_helv, 7);
-            
-            cb.setTextMatrix(10, 10);
-            cb.showText("Germany");
-            cb.setTextMatrix(10, 20);
-            cb.showText("27729 Holste");
-            cb.setTextMatrix(10, 30);
-            cb.showText("Buxhormer Weg 15");
-            cb.setTextMatrix(10, 40);
-            cb.setFontAndSize(bf_helv_bold, 8);
-            cb.showText("federa - Günter Mittler");
+      // Start FOOTER
+      // add text at an absolute position
+      cb.beginText();
+      cb.setFontAndSize(bf_helv, 7);
+      
+      cb.setTextMatrix(10, 10);
+      cb.showText("Germany");
+      cb.setTextMatrix(10, 20);
+      cb.showText("27729 Holste");
+      cb.setTextMatrix(10, 30);
+      cb.showText("Buxhormer Weg 15");
+      cb.setTextMatrix(10, 40);
+      cb.setFontAndSize(bf_helv_bold, 8);
+      cb.showText("federa - Günter Mittler");
 
-            cb.setFontAndSize(bf_helv, 7);
-            cb.setTextMatrix(150, 10);
-            cb.showText("Internet: http://federa.de");
-            cb.setTextMatrix(150, 20);
-            cb.showText("E-Mail: guenter@federa.de");
-            cb.setTextMatrix(150, 30);
-            cb.showText("Fax:  +49(0)4748 442438");
-            cb.setTextMatrix(150, 40);
-            cb.showText("Tel:  +49(0)4748 442437");
-            
-            cb.setTextMatrix(350, 10);
-            cb.showText("BLZ: 29152300");
-            cb.setTextMatrix(350, 20);
-            cb.showText("Konto: 140180666");
-            cb.setTextMatrix(350, 30);
-            cb.showText("Kreissparkasse Osterholz");
-            cb.setTextMatrix(350, 40);
-            cb.showText("Bankverbindung");
-            
-            // cb.setTextMatrix(500, 10);
-            // cb.showText("BLZ: 29152300");
-            cb.setTextMatrix(500, 20);
-            cb.showText("36/130/11311");
-            cb.setTextMatrix(500, 30);
-            cb.showText("UST-IdNr. DE813084387");
-            cb.setTextMatrix(500, 40);
-            cb.showText("Finanzamt Osterholz ");
-            
-            cb.setTextMatrix(500, 6);
-            cb.setFontAndSize(bf_helv, 4);
-            cb.showText("generated by: ");
+      cb.setFontAndSize(bf_helv, 7);
+      cb.setTextMatrix(150, 10);
+      cb.showText("Internet: http://federa.de");
+      cb.setTextMatrix(150, 20);
+      cb.showText("E-Mail: guenter@federa.de");
+      cb.setTextMatrix(150, 30);
+      cb.showText("Fax:  +49(0)4748 442438");
+      cb.setTextMatrix(150, 40);
+      cb.showText("Tel:  +49(0)4748 442437");
+      
+      cb.setTextMatrix(350, 10);
+      cb.showText("BLZ: 29152300");
+      cb.setTextMatrix(350, 20);
+      cb.showText("Konto: 140180666");
+      cb.setTextMatrix(350, 30);
+      cb.showText("Kreissparkasse Osterholz");
+      cb.setTextMatrix(350, 40);
+      cb.showText("Bankverbindung");
+      
+      // cb.setTextMatrix(500, 10);
+      // cb.showText("BLZ: 29152300");
+      cb.setTextMatrix(500, 20);
+      cb.showText("36/130/11311");
+      cb.setTextMatrix(500, 30);
+      cb.showText("UST-IdNr. DE813084387");
+      cb.setTextMatrix(500, 40);
+      cb.showText("Finanzamt Osterholz ");
+      
+      cb.setTextMatrix(500, 6);
+      cb.setFontAndSize(bf_helv, 4);
+      cb.showText("generated by: ");
 
-            cb.setTextMatrix(530, 6);
-            cb.setFontAndSize(bf_helv_bold, 5);
-            cb.showText(" Reibach ");
+      cb.setTextMatrix(530, 6);
+      cb.setFontAndSize(bf_helv_bold, 5);
+      cb.showText(" Reibach ");
 
-            cb.setTextMatrix(530, 2);
-            cb.setFontAndSize(bf_helv_obl, 4);
-            cb.showText(" ... to make a big haul ");
+      cb.setTextMatrix(530, 2);
+      cb.setFontAndSize(bf_helv_obl, 4);
+      cb.showText(" ... to make a big haul ");
+      // END FOOTER
+      
+      cb.endText();
 
-            cb.endText();
- 
-            // step 4	        
-			addMetaData(document);
-			addTitlePage(document);
-			addContent(document);
+      // step 4	        
+      addMetaData(document);
+      addTitlePage(document);
+      addContent(document);
 		    
-			// step 5
-	        document.close();	        
+      // step 5
+      document.close();	        
 
   	}
     catch (Exception e)
@@ -129,8 +141,6 @@ public class AboutPdf implements Action {
   		Logger.error("error while opening about dialog",e);
   		throw new ApplicationException(Settings.i18n().tr("Error while opening the About dialog"));
   	}
-     
-
   }  
   
   

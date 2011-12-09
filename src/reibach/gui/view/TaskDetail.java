@@ -76,3 +76,11 @@ public class TaskDetail extends AbstractView
     buttons.paint(getParent());
   }
 }
+
+
+/**********************************************************************
+ * $Log: TaskDetail.java,v $
+ * Revision 1.3  2010-11-09 17:20:16  willuhn
+ * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
+ *
+ **********************************************************************/

@@ -17,11 +17,11 @@ import java.rmi.RemoteException;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
-import reibach.Settings;
 import reibach.gui.menu.CustomerListMenu;
+import reibach.Settings;
 import reibach.rmi.Bill;
-import reibach.rmi.Project;
 import reibach.rmi.Customer;
+import reibach.rmi.Project;
 
 import de.willuhn.datasource.rmi.DBIterator;
 import de.willuhn.datasource.rmi.DBService;

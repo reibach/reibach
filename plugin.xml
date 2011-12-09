@@ -3,7 +3,7 @@
 <plugin xmlns="http://www.willuhn.de/schema/jameica-plugin"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.willuhn.de/schema/jameica-plugin http://www.willuhn.de/schema/jameica-plugin-1.0.xsd"
-        name="reibach" version="0.0.1" class="reibach.ReibachPlugin">
+        name="jameica.example" version="1.2.0" class="reibach.ExamplePlugin">
 
   <description>Example Plugin for Jameica</description>
   <url></url>
@@ -40,12 +40,13 @@
             shortcut="CTRL+E"/>
       
     //-->
-    <item name="Example plugin">
-		<item name="New Project" shortcut="ALT+Z" action="reibach.gui.action.ProjectDetail" />
-		<item name="New Customer" shortcut="ALT+K" action="reibach.gui.action.CustomerDetail" />
-      	<item name="New Bill" shortcut="ALT+R" action="reibach.gui.action.BillDetail" />
-      	<item name="New Article" shortcut="ALT+P" action="reibach.gui.action.ArticleDetail" />
+    <item name="Reibach plugin">
 
+
+      <!-- <item name="New Project" shortcut="ALT+P" action="reibach.gui.action.ProjectDetail" /> //-->
+      <item name="New Customer" shortcut="ALT+K" action="reibach.gui.action.CustomerDetail" />
+      <item name="New Bill" shortcut="ALT+R" action="reibach.gui.action.BillDetail" />
+      <item name="New Article" shortcut="ALT+P" action="reibach.gui.action.ArticleDetail" />
       <!-- use "-" as name to create a separator //-->
       <item name="-" />
 
@@ -57,8 +58,9 @@
   <navigation>
 
     <!-- Same procedure as in the menu tag //-->
-    <item name="Example Plugin" icon-close="folder.png" icon-open="folder-open.png" action="reibach.gui.action.Welcome">
-      <item name="Projects" icon-close="text-x-generic.png" action="reibach.gui.action.ProjectList" />
+
+    <item name="Reibach Plugin" icon-close="folder.png" icon-open="folder-open.png" action="reibach.gui.action.Welcome">
+      <!--       <item name="Projects" icon-close="text-x-generic.png" action="reibach.gui.action.ProjectList" /> //-->
       <item name="Customers" icon-close="text-x-generic.png" action="reibach.gui.action.CustomerList" />
       <item name="Bills" icon-close="text-x-generic.png" action="reibach.gui.action.BillList" />
       <item name="Articles" icon-close="text-x-generic.png" action="reibach.gui.action.ArticleList" />
@@ -82,4 +84,3 @@
     <service name="exampledatabase" depends="" autostart="true" class="reibach.rmi.ExampleDBService" />
   </services>
 </plugin>
-

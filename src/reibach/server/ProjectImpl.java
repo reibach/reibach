@@ -20,6 +20,7 @@ import reibach.Settings;
 import reibach.rmi.Project;
 import reibach.rmi.Task;
 
+
 import de.willuhn.datasource.db.AbstractDBObject;
 import de.willuhn.datasource.rmi.DBIterator;
 import de.willuhn.datasource.rmi.DBService;
@@ -34,7 +35,7 @@ import de.willuhn.util.ApplicationException;
  * implementor of your interface.
  * Example:
  * 
- * DBService service = (DBService) Application.getServiceFactory().lookup(ReibachPlugin.class,"exampledatabase");
+ * DBService service = (DBService) Application.getServiceFactory().lookup(ExamplePlugin.class,"exampledatabase");
  * 
  * a) create new project
  * Project project = (Project) service.createObject(Project.class,null);

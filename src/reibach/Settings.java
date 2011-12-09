@@ -1,3 +1,16 @@
+/**********************************************************************
+ * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/Settings.java,v $
+ * $Revision: 1.6 $
+ * $Date: 2010-11-09 17:20:15 $
+ * $Author: willuhn $
+ * $Locker:  $
+ * $State: Exp $
+ *
+ * Copyright (c) by willuhn.webdesign
+ * All rights reserved
+ *
+ **********************************************************************/
+
 package reibach;
 
 import java.rmi.RemoteException;
@@ -56,7 +69,7 @@ public class Settings
 			// client, the factory returns the remote dbService from the
 			// Jameica server.
 			// The name and class of the service is defined in plugin.xml
-			db = (DBService) Application.getServiceFactory().lookup(ReibachPlugin.class,"exampledatabase");
+			db = (DBService) Application.getServiceFactory().lookup(ExamplePlugin.class,"exampledatabase");
 			return db;
 		}
 		catch (Exception e)
@@ -73,8 +86,16 @@ public class Settings
 	{
 		if (i18n != null)
 			return i18n;
-		i18n = Application.getPluginLoader().getPlugin(ReibachPlugin.class).getResources().getI18N();
+		i18n = Application.getPluginLoader().getPlugin(ExamplePlugin.class).getResources().getI18N();
 		return i18n; 
 	}
   
 }
+
+
+/**********************************************************************
+ * $Log: Settings.java,v $
+ * Revision 1.6  2010-11-09 17:20:15  willuhn
+ * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
+ *
+ **********************************************************************/

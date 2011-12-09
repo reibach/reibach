@@ -22,14 +22,11 @@ import java.util.Date;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 
-import reibach.Settings;
 import reibach.gui.action.PositionDetail;
 import reibach.gui.menu.BillListMenu;
 import reibach.gui.menu.PositionListMenu;
+import reibach.Settings;
 import reibach.rmi.Bill;
 import reibach.rmi.Customer;
 
@@ -347,8 +344,7 @@ public class BillControl extends AbstractControl
       // insertCheck() or updateCheck() failed.
 
       // we can cast the value of the customer dialogInput directly to "Customer".
-      p.setCustomer((Customer) getCustomer().getValue());
-      
+      p.setCustomer((Customer) getCustomer().getValue());      
       try
       {
         p.store();

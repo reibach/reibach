@@ -12,9 +12,9 @@
  **********************************************************************/
 package reibach.gui.view;
 
-import reibach.Settings;
 import reibach.gui.action.ArticleDelete;
 import reibach.gui.control.ArticleControl;
+import reibach.Settings;
 import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.GUI;

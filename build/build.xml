@@ -8,12 +8,10 @@
  Copyright (c) by willuhn software & services
  All rights reserved
 -->
-
 <project basedir=".." default="all" name="All">
-
-
-
-  <target name="init" description="inits the build">
+	
+	
+	<target name="init" description="inits the build">
 
     <property environment="env" />
     <property name="build.dir" value="build" />
@@ -48,7 +46,7 @@
 		<property name="project.zipdir" 			  value="${project.release}/${plugin.name}" />
 
 		<property name="src.dir" 					      value="src" />
-    <property name="sql.dir"                value="sql" />
+    	<property name="sql.dir"                value="sql" />
 		<property name="lang.dir" 					    value="${src.dir}/lang" />
 		<property name="lib.dir" 					      value="lib" />
 		<property name="class.dir" 					    value="${project.tmp}/bin" />
@@ -56,11 +54,11 @@
 		<available file="${lib.dir}"     type="dir" property="havelib" />
 
 		<path id="compilepath">
-			<pathelement path="${define.compilepath}" />
+			<pathelement path="${define.compilepath}" />			
 
-			<pathelement location="/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/iText-5.0.6.jar" />
-			<pathelement location="/usr/lib/jvm/java-6-sun-1.6.0.26/jre/lib/itextpdf-5.1.2.jar" />			
-      
+						<pathelement location="iText-5.0.6.jar" />
+			<!-- 
+			<pathelement location="lib/itextpdf-5.1.2.jar" />		//-->
       <fileset dir="." >
         <include name="${lib.dir}/**/*.jar" if="havelib"/>
       </fileset>
@@ -209,8 +207,7 @@
 	</target>
 
 
-	<target depends="init,compile,jar,src,clean" description="build an official release" name="all" />
-	
-	<target depends="init,compile,src,clean" description="build inofficial release" name="fast" />
+	<target depends="init,compile,jar,clean" description="build an official release" name="all" />
+	<target depends="init,compile,jar,src,clean" description="build inofficial release" name="fast" />
 
 </project>

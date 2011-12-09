@@ -12,10 +12,10 @@
  **********************************************************************/
 package reibach.gui.menu;
 
-import reibach.Settings;
 import reibach.gui.action.CustomerDelete;
 import reibach.gui.action.CustomerDetail;
 import reibach.gui.action.CustomerDuplicate;
+import reibach.Settings;
 import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.parts.CheckedContextMenuItem;
 import de.willuhn.jameica.gui.parts.ContextMenu;

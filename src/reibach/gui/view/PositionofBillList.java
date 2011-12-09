@@ -12,12 +12,12 @@
  **********************************************************************/
 package reibach.gui.view;
 
-import reibach.io.Demo;
-import reibach.io.printPdf;
 import reibach.Settings;
-import reibach.io.AboutPdf;
 import reibach.gui.action.PositionDetail;
 import reibach.gui.control.PositionControl;
+import reibach.io.AboutPdf;
+import reibach.io.Demo;
+import reibach.io.printPdf;
 import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.GUI;

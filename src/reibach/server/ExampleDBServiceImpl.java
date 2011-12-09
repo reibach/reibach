@@ -14,8 +14,9 @@ package reibach.server;
 
 import java.rmi.RemoteException;
 
-import reibach.ReibachPlugin;
+import reibach.ExamplePlugin;
 import reibach.rmi.ExampleDBService;
+
 
 import de.willuhn.datasource.db.EmbeddedDBServiceImpl;
 import de.willuhn.jameica.system.Application;
@@ -31,7 +32,7 @@ public class ExampleDBServiceImpl extends EmbeddedDBServiceImpl implements Examp
    */
   public ExampleDBServiceImpl() throws RemoteException
   {
-    super(Application.getPluginLoader().getPlugin(ReibachPlugin.class).getResources().getWorkPath() + "/db/db.conf",
+    super(Application.getPluginLoader().getPlugin(ExamplePlugin.class).getResources().getWorkPath() + "/db/db.conf",
     			"exampleuser", "examplepassword");
 
     // We have to define jameicas classfinder.
