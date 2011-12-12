@@ -9,13 +9,13 @@ import java.util.Date;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 
+import reibach.Settings;
 // import reibach.io.AboutPdf.HeaderFooter;
 import reibach.gui.action.PositionDetail;
 import reibach.gui.menu.PositionListMenu;
-import reibach.Settings;
-import reibach.server.CustomerImpl;
 import reibach.rmi.Bill;
 import reibach.rmi.Customer;
+import reibach.server.CustomerImpl;
 import reibach.rmi.Position;
 
 import de.willuhn.datasource.db.AbstractDBObject;
@@ -319,21 +319,53 @@ public class BillImpl extends AbstractDBObject implements Bill
   public void BillPrintPdf() throws RemoteException, ApplicationException
   {
 
+
+	  	Paragraph pos = new Paragraph(); 
+	    // We add one empty line
+	    addEmptyLine(new Paragraph(""),2);
+
+	    /***
+	    pos.add(new Paragraph(positions));
+		positionList = new TablePart(positions,new PositionDetail());
+		positionList.addColumn(Settings.i18n().tr("Position name"),"name");
+		positionList.addColumn(Settings.i18n().tr("Effort"),"effort",new Formatter()
+		***///
+	    
+	  	// DBIterator positions = getPositions();
+	
+	  	// pos.add(new Paragraph(sum));
+	   // document.add(pos);
+	      
+	  
 	  
 	    // Get the Data of mandator
 	  
 	    // Get the Data of Customer
-	  	String customer = getCustomer().toString();
+	    String customerCompany = getCustomer().getCompany();
+	  	String customerTitle = getCustomer().getTitle();
+	  	String customerFirstname = getCustomer().getFirstname();
+	    String customerLastname = getCustomer().getLastname();
+	  	// String customerName = getCustomer().getLastname();
+	  	 
 	  	// company = new CustomerImpl
 	  	// String company = getCompany().toString();
 	    
 	  	String name = getName();
 	  	Double price = getPrice();
+	  	Double efforts = getEfforts();
+	  	// String effortSummary = getEffortSummary().toString();
+	  	
+	  	
 	  	String billdate = getBillDate().toString();
-		  
+	  	
+	  	// String positions = getPositions().toString();
+		
+	  	// DBIterator positions = getPositions();
+	  	// String positionComment = getPosition();
 	  	
 	  	String description = getDescription();
-	  	
+
+	 
 	    // Get the Data of the positions
 	  	//String summary = getSummary();
 	  	
@@ -343,11 +375,14 @@ public class BillImpl extends AbstractDBObject implements Bill
 	   * @throws RemoteException
 	   */
 
-		DBIterator positions = getPositions();
+
+	  	
+	  
+	  	
 	  	try
 	  	{
 
-	  	  /*
+		  	/*
 	  	   * Getting some fonts
 	  	   */
 	        BaseFont bf_helv_bold = BaseFont.createFont(BaseFont.HELVETICA_BOLD, "Cp1252", false);
@@ -443,7 +478,27 @@ public class BillImpl extends AbstractDBObject implements Bill
 			Paragraph bill = new Paragraph();
 			bill.add(new Paragraph("Rechnung", subHeadline));
 			bill.add(new Paragraph("Rechnungsnummer: " + name , normal));
+			addEmptyLine(bill, 2);
+			bill.add(new Paragraph("EFFORTS: " + efforts , normal));
+			addEmptyLine(bill, 2);
+			bill.add(new Paragraph("PRICE: " + price , normal));
+			addEmptyLine(bill, 2);
+			// bill.add(new Paragraph("POSITIONS: " + positions , normal));
+			addEmptyLine(bill, 2);
+			bill.add(new Paragraph("DESCRIPTION: " + description , normal));
+			addEmptyLine(bill, 2);
+			bill.add(new Paragraph("COMPANY: " + customerCompany , normal));
+			addEmptyLine(bill, 2);
+			bill.add(new Paragraph("TITLE: " + customerTitle , normal));
+			addEmptyLine(bill, 2);
+			bill.add(new Paragraph("FIRSTNAME: " + customerFirstname , normal));
+			addEmptyLine(bill, 2);
+			bill.add(new Paragraph("LASTNAME: " + customerLastname , normal));
+			addEmptyLine(bill, 2);
+			bill.add(new Paragraph("KUNDENNAME: " + customerLastname , normal));
+			addEmptyLine(bill, 2);
 			bill.add(new Paragraph(billdate , normal));
+			addEmptyLine(bill, 2);
 			bill.setAlignment(Element.ALIGN_RIGHT);
 			// We add one empty line
 			addEmptyLine(bill, 2);
@@ -454,11 +509,11 @@ public class BillImpl extends AbstractDBObject implements Bill
 		    // We add one empty line
 		    addEmptyLine(new Paragraph(""),2);
 
-		    cust.add(new Paragraph(customer));
+		    // cust.add(new Paragraph(customerName));
 		    addEmptyLine(cust,2);
 		    document.add(cust);
 		      
-			Paragraph pos = new Paragraph(); 
+			// Paragraph pos = new Paragraph(); 
 		    // We add one empty line
 		    addEmptyLine(new Paragraph(""),2);
 
@@ -467,8 +522,13 @@ public class BillImpl extends AbstractDBObject implements Bill
 			positionList = new TablePart(positions,new PositionDetail());
 			positionList.addColumn(Settings.i18n().tr("Position name"),"name");
 			positionList.addColumn(Settings.i18n().tr("Effort"),"effort",new Formatter()
-			****/
+			***///
 		    
+		  	// DBIterator positions = getPositions();
+		
+		  	
+		    //pos.add(new Paragraph(efforts));
+		    // pos.add(new Paragraph(price));
 		    addEmptyLine(cust,2);
 		    document.add(pos);
 		      
