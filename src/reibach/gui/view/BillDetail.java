@@ -53,7 +53,7 @@ public class BillDetail extends AbstractView
     right.addInput(control.getDescription());
     
     c.addHeadline(Settings.i18n().tr("Summary"));
-		c.addInput(control.getEffortSummary());
+	c.addInput(control.getEffortSummary());
 
     // add some buttons
     ButtonArea buttons = new ButtonArea();

@@ -292,6 +292,7 @@ public class BillControl extends AbstractControl
 		DBIterator positions = getBill().getPositions();
 		positionList = new TablePart(positions,new PositionDetail());
 		positionList.addColumn(Settings.i18n().tr("Position name"),"name");
+		positionList.addColumn(Settings.i18n().tr("Description"),"description");
 		positionList.addColumn(Settings.i18n().tr("Effort"),"effort",new Formatter()
     {
       public String format(Object o)

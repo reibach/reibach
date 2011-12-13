@@ -30,6 +30,23 @@ import de.willuhn.jameica.gui.parts.TablePart;
 import de.willuhn.logging.Logger;
 import de.willuhn.util.ApplicationException;
 
+
+import reibach.gui.menu.BillListMenu;
+
+import de.willuhn.jameica.gui.AbstractControl;
+import de.willuhn.jameica.gui.AbstractView;
+import de.willuhn.jameica.gui.formatter.CurrencyFormatter;
+import de.willuhn.jameica.gui.formatter.DateFormatter;
+import de.willuhn.jameica.gui.input.DateInput;
+import de.willuhn.jameica.gui.input.DecimalInput;
+import de.willuhn.jameica.gui.input.Input;
+import de.willuhn.jameica.gui.input.LabelInput;
+import de.willuhn.jameica.gui.input.SelectInput;
+import de.willuhn.jameica.gui.input.TextAreaInput;
+import de.willuhn.jameica.gui.input.TextInput;
+import de.willuhn.jameica.messaging.StatusBarMessage;
+import de.willuhn.jameica.system.Application;
+
 /**
  * This is the implemtor of the bill interface.
  * You never need to instanciate this class directly.
@@ -67,6 +84,11 @@ public class BillImpl extends AbstractDBObject implements Bill
    * @throws RemoteException
    */
 	
+	// list of positions contained in this bill
+	private TablePart positionListPdf;
+	
+	// this is the currently opened bill
+    private Bill bill;
 	
   public BillImpl() throws RemoteException
   {
@@ -315,6 +337,31 @@ public class BillImpl extends AbstractDBObject implements Bill
   	}
   	return sum;
   }
+  
+  
+	/**
+	 * Returns a list of positions in this bill just for Printing.
+ * @return list of positions in this bill
+ * @throws RemoteException
+ */
+  public String getPositionListPdf() throws RemoteException 
+  {
+	  String posStr = ""; 
+	  String posName = ""; 
+		String posPrice = ""; 
+		String posComment = ""; 
+	DBIterator positionListPdf = getPositions();
+	while (positionListPdf.hasNext())
+  	{
+  		Position t = (Position) positionListPdf.next();
+  		posName =  t.getName() + " ";
+  		posPrice =  getPrice() + " ";
+  		posComment = t.getComment() + " ";
+  		posStr += posName + posPrice + posComment;
+  	}
+	return posStr;	
+  }
+
 
   public void BillPrintPdf() throws RemoteException, ApplicationException
   {
@@ -323,19 +370,9 @@ public class BillImpl extends AbstractDBObject implements Bill
 	  	Paragraph pos = new Paragraph(); 
 	    // We add one empty line
 	    addEmptyLine(new Paragraph(""),2);
-
-	    /***
-	    pos.add(new Paragraph(positions));
-		positionList = new TablePart(positions,new PositionDetail());
-		positionList.addColumn(Settings.i18n().tr("Position name"),"name");
-		positionList.addColumn(Settings.i18n().tr("Effort"),"effort",new Formatter()
-		***///
 	    
-	  	// DBIterator positions = getPositions();
-	
-	  	// pos.add(new Paragraph(sum));
-	   // document.add(pos);
-	      
+	    // We are starting with the Bill
+	    String billdate = getBillDate().toString();	      
 	  
 	  
 	    // Get the Data of mandator
@@ -345,25 +382,28 @@ public class BillImpl extends AbstractDBObject implements Bill
 	  	String customerTitle = getCustomer().getTitle();
 	  	String customerFirstname = getCustomer().getFirstname();
 	    String customerLastname = getCustomer().getLastname();
-	  	// String customerName = getCustomer().getLastname();
-	  	 
-	  	// company = new CustomerImpl
-	  	// String company = getCompany().toString();
-	    
-	  	String name = getName();
-	  	Double price = getPrice();
-	  	Double efforts = getEfforts();
-	  	// String effortSummary = getEffortSummary().toString();
+	    String customerStreet = getCustomer().getStreet();
+	    String customerZipcode = getCustomer().getZipcode();
+	    String customerHousenumber = getCustomer().getHousenumber();
+	    String customerPlace = getCustomer().getPlace();	    
+
+	    // Get the Data of the Positions
+	    String posPlace = getPositionListPdf();	    
+	  	
+	  	String posName = getName();
 	  	
 	  	
-	  	String billdate = getBillDate().toString();
+	  	Double posPrice = getPrice();
 	  	
+	  	Double posEfforts = getEfforts();
+	  	String effortSummary = posEfforts.toString();
+	  	
+
+	  	
+
+	    // Get the Data of the positions
 	  	// String positions = getPositions().toString();
-		
-	  	// DBIterator positions = getPositions();
-	  	// String positionComment = getPosition();
-	  	
-	  	String description = getDescription();
+		// String description = getDescription();
 
 	 
 	    // Get the Data of the positions
@@ -470,96 +510,147 @@ public class BillImpl extends AbstractDBObject implements Bill
          // Autor, Eigenschaften des Dokumentes   
 			addMetaData(document);
 			
-			// Logo, Slogan, Rechnung, Rechnungsnummer, Rechnungsdatum  
-			addMandatoryTitle(document);
+			// Logo, Slogan
+			addMandatoryTitle(document);			
 			
-			// addTitlePage(document);
-			
+			// Rechnungsnummer, Rechnungsdatum  
 			Paragraph bill = new Paragraph();
-			bill.add(new Paragraph("Rechnung", subHeadline));
-			bill.add(new Paragraph("Rechnungsnummer: " + name , normal));
-			addEmptyLine(bill, 2);
-			bill.add(new Paragraph("EFFORTS: " + efforts , normal));
-			addEmptyLine(bill, 2);
-			bill.add(new Paragraph("PRICE: " + price , normal));
-			addEmptyLine(bill, 2);
-			// bill.add(new Paragraph("POSITIONS: " + positions , normal));
-			addEmptyLine(bill, 2);
-			bill.add(new Paragraph("DESCRIPTION: " + description , normal));
-			addEmptyLine(bill, 2);
-			bill.add(new Paragraph("COMPANY: " + customerCompany , normal));
-			addEmptyLine(bill, 2);
-			bill.add(new Paragraph("TITLE: " + customerTitle , normal));
-			addEmptyLine(bill, 2);
-			bill.add(new Paragraph("FIRSTNAME: " + customerFirstname , normal));
-			addEmptyLine(bill, 2);
-			bill.add(new Paragraph("LASTNAME: " + customerLastname , normal));
-			addEmptyLine(bill, 2);
-			bill.add(new Paragraph("KUNDENNAME: " + customerLastname , normal));
-			addEmptyLine(bill, 2);
-			bill.add(new Paragraph(billdate , normal));
-			addEmptyLine(bill, 2);
 			bill.setAlignment(Element.ALIGN_RIGHT);
+			bill.add(new Paragraph("Rechnung", subHeadline));
+			bill.add(new Paragraph("Rechnungsnummer: " + posName , normal));
+			addEmptyLine(bill, 2);
+			
 			// We add one empty line
 			addEmptyLine(bill, 2);
 			
+			// writing 
 			document.add(bill);
 			
+			// Kundendaten
 			Paragraph cust = new Paragraph(); 
-		    // We add one empty line
+
+			// We add one empty line
 		    addEmptyLine(new Paragraph(""),2);
 
-		    // cust.add(new Paragraph(customerName));
+		    cust.add(new Paragraph(customerCompany));
+		    cust.add(new Paragraph(customerTitle));
+		    cust.add(new Paragraph(customerFirstname + " " + customerLastname));
+		    cust.add(new Paragraph(customerStreet + " " + customerHousenumber));
+		    cust.add(new Paragraph(customerZipcode + " " + customerPlace));
+
+		    addEmptyLine(cust,2);
+		    
 		    addEmptyLine(cust,2);
 		    document.add(cust);
 		      
 			// Paragraph pos = new Paragraph(); 
 		    // We add one empty line
+
 		    addEmptyLine(new Paragraph(""),2);
 
-		    /***
-		    pos.add(new Paragraph(positions));
-			positionList = new TablePart(positions,new PositionDetail());
-			positionList.addColumn(Settings.i18n().tr("Position name"),"name");
-			positionList.addColumn(Settings.i18n().tr("Effort"),"effort",new Formatter()
-			***///
-		    
-		  	// DBIterator positions = getPositions();
-		
-		  	
-		    //pos.add(new Paragraph(efforts));
-		    // pos.add(new Paragraph(price));
-		    addEmptyLine(cust,2);
-		    document.add(pos);
-		      
-		      /*
-		      document.add(new Paragraph("price --->"));
-		      document.add(new Paragraph(price.toString()));
-		      document.add(new Paragraph("<---- price "));
-		      document.add(new Paragraph(""));
-		      
-		      document.add(new Paragraph("billdate --->"));
-		      document.add(new Paragraph(billdate));
-		      document.add(new Paragraph("<---- billdate "));
-		      document.add(new Paragraph(""));
-		
-		      document.add(new Paragraph("description --->"));
-		      document.add(new Paragraph(description));      
-		      document.add(new Paragraph("<---- description "));
-		      document.add(new Paragraph(""));
-		      
-		      document.add(new Paragraph("Printing Date: "));
-		      document.add(new Paragraph(""));
-		      document.add(new Paragraph(new Date().toString()));
-				*/
+		    addEmptyLine(pos,2);
+			pos.add(new Paragraph("POSPLACE" + posPlace));
 
+		    pos.add(new Paragraph("SUM" + effortSummary));
+		    
+		    document.add(pos);
+		    
+		    
+		    
+		    
+		    PdfPTable table = new PdfPTable(6);
+
+			table.setWidthPercentage(100);
+			table.setTotalWidth(new float[]{ 50, 300, 50 , 40 , 40, 40, });
+		    table.setLockedWidth(true);
+  			
+			PdfPCell c1 = new PdfPCell(new Phrase("Position"));
+			table.addCell(c1);
+			
+			c1 = new PdfPCell(new Phrase("Beschreibung"));
+			table.addCell(c1);
+			
+			c1 = new PdfPCell(new Phrase("Menge"));
+			table.addCell(c1);
+			
+			c1 = new PdfPCell(new Phrase("Preis"));
+			// c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+			table.addCell(c1);
+			
+			c1 = new PdfPCell(new Phrase("MwSt"));
+			table.addCell(c1);
+			
+			c1 = new PdfPCell(new Phrase("Betrag"));
+			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			table.addCell(c1);
+				
+			
+			table.setHeaderRows(1);
+			
+			// pos.add(new Paragraph("POSPLACE" + posPlace));
+
+		    // pos.add(new Paragraph("SUM" + effortSummary));
+
+			
+			  String posStr = ""; 
+			  // String posName = ""; 
+			  //	String posPrice = ""; 
+				String posComment = ""; 
+			DBIterator positionListPdf = getPositions();
+			int i = 1;
+			String a;
+			while (positionListPdf.hasNext())
+		  	{
+		  		Position t = (Position) positionListPdf.next();
+		  		posName =  t.getName() + " ";
+		  		// posPrice =  getPrice() + " ";
+		  		posComment = t.getComment() + " ";
+		  		a=""+i;
+		  		table.addCell(a);
+				table.addCell(posName);
+				table.addCell(posComment);
+				table.addCell(posPrice.toString());
+				table.addCell("1.4");
+				table.addCell("1.5");
+				i++;
+		  	}
+
+			
+			table.addCell("posPlace");
+			table.addCell(posPlace);
+			table.addCell("1.2");
+			table.addCell("1.3");
+			table.addCell("1.4");
+			table.addCell("1.5");
+			table.addCell("2.1");
+			table.addCell("2.2 Rund 3 Millionen Rechner w) als die der Desktop-Systeme (–5,9 Prozent).");
+			table.addCell("2.3");
+			table.addCell("2.4");
+			table.addCell("2.5");
+			table.addCell("2.6");
+		
+			table.addCell("3.1");
+			table.addCell("3.2 Rund 3 Millionen Rechner wmobilen Rechnern stärker nach (–8,8 Prozent) als die der Desktop-Systeme (–5,9 Prozent).");
+			table.addCell("3.3");
+			table.addCell("3.4");
+			table.addCell("3.5");
+			table.addCell("3.6");
+			document.add(table);
+			
+		
+			// We add one empty line
+			Paragraph space = new Paragraph();
+			space.add(new Paragraph("" , subHeadline));
+			addEmptyLine(space, 2);
+			document.add(space);
+	
             
             // step 4	        
 			/*
 			 *
 			 */
             
-			addContent(document);
+			// addContent(document);
 			/*
 			 * Kundendaten inkl. Zahlweise
 			 * addCustomer(document);
@@ -699,7 +790,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 			
 			table.setHeaderRows(1);
 			
-			table.addCell("1.0");
+			table.addCell("");
 			table.addCell("1.1 Rund 3 Millionen Rechner wProzent) als die der Desktop-Systeme (–5,9 Prozent). ");
 			table.addCell("1.2");
 			table.addCell("1.3");
