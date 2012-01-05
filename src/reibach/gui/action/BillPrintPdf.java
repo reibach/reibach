@@ -10,7 +10,7 @@ import de.willuhn.logging.Logger;
 import de.willuhn.util.ApplicationException;
 
 /**
- * Action for "delete bill".
+ * Action for "print bill".
  */
 public class BillPrintPdf implements Action
 {
@@ -30,7 +30,7 @@ public class BillPrintPdf implements Action
     try
     {
 
-			  p.BillPrintPdf();
+    	p.BillPrintPdf();
 		    
       // Send Status update message
       Application.getMessagingFactory().sendMessage(new StatusBarMessage(Settings.i18n().tr("Bill printing successfully"),StatusBarMessage.TYPE_SUCCESS));
@@ -41,11 +41,10 @@ public class BillPrintPdf implements Action
     }
     catch (Exception e)
     {
-      Logger.error("error while printing bill",e);
-      throw new ApplicationException(Settings.i18n().tr("Error while printing bill"));
+    	Logger.error("error while printing bill",e);
+    	throw new ApplicationException(Settings.i18n().tr("Error while printing bill from gui.action.BillPrintPdf"));
     }
-	// ok, lets start the dialog
-	GUI.startView(reibach.gui.view.BillDetail.class.getName(),p);
-
-  }
+		// ok, lets start the dialog
+		GUI.startView(reibach.gui.view.BillDetail.class.getName(),p);
+  	}
 }

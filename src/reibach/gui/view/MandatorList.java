@@ -1,8 +1,8 @@
 package reibach.gui.view;
 
 import reibach.Settings;
-import reibach.gui.action.BillDetail;
-import reibach.gui.control.BillControl;
+import reibach.gui.action.MandatorDetail;
+import reibach.gui.control.MandatorControl;
 import reibach.io.AboutPdf;
 import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.Action;
@@ -14,7 +14,7 @@ import de.willuhn.jameica.gui.parts.ButtonArea;
 /**
  * View to show the list of existing projects.
  */
-public class BillList extends AbstractView
+public class MandatorList extends AbstractView
 {
 
   /**
@@ -22,17 +22,16 @@ public class BillList extends AbstractView
    */
   public void bind() throws Exception {
 
-		GUI.getView().setTitle(Settings.i18n().tr("Existing bills"));
-		BillControl control = new BillControl(this);
+		GUI.getView().setTitle(Settings.i18n().tr("Existing mandators"));
+		MandatorControl control = new MandatorControl(this);
 		
-		control.getBillsTable().paint(this.getParent());
-		// control.getBillsID().paint(this.getParent());
+		control.getMandatorsTable().paint(this.getParent());
 		
 		ButtonArea buttons = new ButtonArea();
 		buttons.addButton(new Back());
 		
 		// the last parameter "true" makes the button the default one
-		buttons.addButton(Settings.i18n().tr("Create new bill"), new BillDetail(),null,true);
+		buttons.addButton(Settings.i18n().tr("Create new mandator"), new MandatorDetail(),null,true);
 		// buttons.addButton(Settings.i18n().tr("PdfPrint"), new AboutPdf(),null,true);
 		
 		buttons.paint(getParent());

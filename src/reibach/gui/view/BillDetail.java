@@ -5,6 +5,7 @@ import reibach.gui.action.BillPrintPdf;
 import reibach.gui.action.PositionDetail;
 import reibach.gui.control.BillControl;
 import reibach.io.AboutPdf;
+import reibach.rmi.Position;
 import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.GUI;
@@ -34,6 +35,7 @@ public class BillDetail extends AbstractView
     // instanciate controller
     final BillControl control = new BillControl(this);
 
+    // control.getBillsID().paint(this.getParent());
     Container c = new SimpleContainer(getParent());
 
     // layout with 2 columns
@@ -41,10 +43,17 @@ public class BillDetail extends AbstractView
 
     // left side
     Container left = new SimpleContainer(columns.getComposite());
-    left.addHeadline(Settings.i18n().tr("Details"));
+    left.addHeadline(Settings.i18n().tr("Details Bill"));
+
+    // String billnumber  = getID();
+    left.addHeadline(Settings.i18n().tr("Bill Number: " +  " " ));
+    // left.addColumn(Settings.i18n().tr("Bill number"),"id"); // "name" is the field name from the sql table.
+
+    left.addInput(control.getMandator());
     left.addInput(control.getCustomer());
-    left.addInput(control.getName());
-    left.addInput(control.getPrice());
+    
+    // left.addInput(control.getName());
+    // left.addInput(control.getPrice());
     left.addInput(control.getBillDate());
     
     // right side
@@ -60,8 +69,9 @@ public class BillDetail extends AbstractView
     buttons.addButton(new Back());
     buttons.addButton(Settings.i18n().tr("New Position"), new PositionDetail(),control.getCurrentObject());
     buttons.addButton(Settings.i18n().tr("Delete"),  	new BillDelete(),control.getCurrentObject());
-    buttons.addButton(Settings.i18n().tr("Guter Druck"), new AboutPdf(),control.getCurrentObject());
+    // buttons.addButton(Settings.i18n().tr("Guter Druck"), new AboutPdf(),control.getCurrentObject());
     buttons.addButton(Settings.i18n().tr("Print Bill"), new BillPrintPdf(),control.getCurrentObject());
+ 
     buttons.addButton(Settings.i18n().tr("Store"),   	new Action()
     {
       public void handleAction(Object context) throws ApplicationException

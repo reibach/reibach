@@ -35,7 +35,7 @@ import de.willuhn.util.ApplicationException;
  * implementor of your interface.
  * Example:
  * 
- * DBService service = (DBService) Application.getServiceFactory().lookup(ExamplePlugin.class,"exampledatabase");
+ * DBService service = (DBService) Application.getServiceFactory().lookup(ReibachPlugin.class,"exampledatabase");
  * 
  * a) create new project
  * Project project = (Project) service.createObject(Project.class,null);

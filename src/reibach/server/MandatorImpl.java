@@ -1,9 +1,10 @@
 package reibach.server;
 
+
 import java.rmi.RemoteException;
 
 import reibach.Settings;
-import reibach.rmi.Customer;
+import reibach.rmi.Mandator;
 
 import de.willuhn.datasource.db.AbstractDBObject;
 import de.willuhn.datasource.rmi.DBIterator;
@@ -13,17 +14,17 @@ import de.willuhn.logging.Logger;
 import de.willuhn.util.ApplicationException;
 
 /**
- * Implementation of the customer interface.
+ * Implementation of the mandator interface.
  * Look into ProjectImpl for more code comments.
  */
-public class CustomerImpl extends AbstractDBObject implements Customer
+public class MandatorImpl extends AbstractDBObject implements Mandator
 {
 
   /**
    * ct.
    * @throws RemoteException
    */
-  public CustomerImpl() throws RemoteException
+  public MandatorImpl() throws RemoteException
   {
     super();
   }
@@ -34,7 +35,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   protected String getTableName()
   {
   	// this is the sql table name.
-    return "customer";
+    return "mandator";
   }
 
   /**
@@ -61,7 +62,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   {
 		try {
 			if (getLastname() == null || getLastname().length() == 0)
-				throw new ApplicationException(Settings.i18n().tr("Please enter a customer lastname"));
+				throw new ApplicationException(Settings.i18n().tr("Please enter a mandator lastname"));
 		}
 		catch (RemoteException e)
 		{
@@ -80,33 +81,58 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#getName()
+   * @see reibach.rmi.Mandator#getName()
    */
   public String getCompany() throws RemoteException
   {
     return (String) getAttribute("company");
   }
 
-  public void setTitle(String title) throws RemoteException
-  {
-  	setAttribute("title",title);
-  }
-  public String getTitle() throws RemoteException
-  {
-    return (String) getAttribute("title");
-  }
-
-  
   /**
-   * @see reibach.rmi.Customer#setName(java.lang.String)
+   * @see reibach.rmi.Mandator#setName(java.lang.String)
    */
   public void setCompany(String company) throws RemoteException
   {
   	setAttribute("company",company);
   }
 
+ 
   /**
-   * @see reibach.rmi.Customer#getName()
+   * @see reibach.rmi.Mandator#getSlogan()
+   */
+  public String getSlogan() throws RemoteException
+  {
+    return (String) getAttribute("slogan");
+  }
+
+  /**
+   * @see reibach.rmi.Mandator#setName(java.lang.String)
+   */
+  public void setSlogan(String slogan) throws RemoteException
+  {
+  	setAttribute("slogan",slogan);
+  }
+
+  
+  /**
+   * @see reibach.rmi.Mandator#setName(java.lang.String)
+   */
+  public void setTitle(String title) throws RemoteException
+  {
+  	setAttribute("title",title);
+  }
+
+  
+   /**
+   * @see reibach.rmi.Mandator#getName()
+   */
+  public String getTitle() throws RemoteException
+  {
+    return (String) getAttribute("title");
+  }
+
+  /**
+   * @see reibach.rmi.Mandator#getName()
    */
   public String getFirstname() throws RemoteException
   {
@@ -114,7 +140,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#setName(java.lang.String)
+   * @see reibach.rmi.Mandator#setName(java.lang.String)
    */
   public void setFirstname(String firstname) throws RemoteException
   {
@@ -123,7 +149,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
 
 
   /**
-   * @see reibach.rmi.Customer#getName()
+   * @see reibach.rmi.Mandator#getName()
    */
   public String getLastname() throws RemoteException
   {
@@ -131,7 +157,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#setName(java.lang.String)
+   * @see reibach.rmi.Mandator#setName(java.lang.String)
    */
   public void setLastname(String lastname) throws RemoteException
   {
@@ -139,7 +165,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#getName()
+   * @see reibach.rmi.Mandator#getName()
    */
   public String getStreet() throws RemoteException
   {
@@ -147,7 +173,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#setName(java.lang.String)
+   * @see reibach.rmi.Mandator#setName(java.lang.String)
    */
   public void setStreet(String street) throws RemoteException
   {
@@ -155,7 +181,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#getName()
+   * @see reibach.rmi.Mandator#getName()
    */
   public String getHousenumber() throws RemoteException
   {
@@ -163,7 +189,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#setName(java.lang.String)
+   * @see reibach.rmi.Mandator#setName(java.lang.String)
    */
   public void setHousenumber(String housenumber) throws RemoteException
   {
@@ -171,7 +197,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#getName()
+   * @see reibach.rmi.Mandator#getName()
    */
   public String getZipcode() throws RemoteException
   {
@@ -179,7 +205,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#setName(java.lang.String)
+   * @see reibach.rmi.Mandator#setName(java.lang.String)
    */
   public void setZipcode(String zipcode) throws RemoteException
   {
@@ -187,7 +213,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#getName()
+   * @see reibach.rmi.Mandator#getName()
    */
   public String getPlace() throws RemoteException
   {
@@ -195,7 +221,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#setName(java.lang.String)
+   * @see reibach.rmi.Mandator#setName(java.lang.String)
    */
   public void setPlace(String place) throws RemoteException
   {
@@ -203,7 +229,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#getName()
+   * @see reibach.rmi.Mandator#getName()
    */
   public String getEmail() throws RemoteException
   {
@@ -211,7 +237,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#setName(java.lang.String)
+   * @see reibach.rmi.Mandator#setName(java.lang.String)
    */
   public void setEmail(String email) throws RemoteException
   {
@@ -219,7 +245,23 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#getName()
+   * @see reibach.rmi.Mandator#getName()
+   */
+  public String getWebsite() throws RemoteException
+  {
+    return (String) getAttribute("website");
+  }
+
+  /**
+   * @see reibach.rmi.Mandator#setName(java.lang.String)
+   */
+  public void setWebsite(String website) throws RemoteException
+  {
+  	setAttribute("website",website);
+  }
+
+  /**
+   * @see reibach.rmi.Mandator#getName()
    */
   public String getTel() throws RemoteException
   {
@@ -227,7 +269,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#setName(java.lang.String)
+   * @see reibach.rmi.Mandator#setName(java.lang.String)
    */
   public void setTel(String tel) throws RemoteException
   {
@@ -235,7 +277,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#getName()
+   * @see reibach.rmi.Mandator#getName()
    */
   public String getFax() throws RemoteException
   {
@@ -243,7 +285,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#setName(java.lang.String)
+   * @see reibach.rmi.Mandator#setName(java.lang.String)
    */
   public void setFax(String fax) throws RemoteException
   {
@@ -251,7 +293,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#getName()
+   * @see reibach.rmi.Mandator#getName()
    */
   public String getMobil() throws RemoteException
   {
@@ -259,7 +301,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
   /**
-   * @see reibach.rmi.Customer#setName(java.lang.String)
+   * @see reibach.rmi.Mandator#setName(java.lang.String)
    */
   public void setMobil(String mobil) throws RemoteException
   {
@@ -268,7 +310,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
 
   
   /**
-   * @see reibach.rmi.Customer#getComment()
+   * @see reibach.rmi.Mandator#getComment()
    */
   public String getComment() throws RemoteException
   {
@@ -276,7 +318,7 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
  
   /**
-   * @see reibach.rmi.Customer#setComment(java.lang.String)
+   * @see reibach.rmi.Mandator#setComment(java.lang.String)
    */
   public void setComment(String comment) throws RemoteException
   {
@@ -284,12 +326,93 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
 
+  public void setBankname(String bankname) throws RemoteException
+  {
+  	setAttribute("bankname",bankname);
+  }
+  public String getBankname() throws RemoteException
+  {
+    return (String) getAttribute("bankname");
+  }
+
+  public void setBankaccount(String bankaccount) throws RemoteException
+  {
+  	setAttribute("bankaccount",bankaccount);
+  }
+  public String getBankaccount() throws RemoteException
+  {
+    return (String) getAttribute("bankaccount");
+  }
+
+  public void setBankcodenumber(String bankcodenumber) throws RemoteException
+  {
+  	setAttribute("bankcodenumber",bankcodenumber);
+  }
+ 
+  public String getBankcodenumber() throws RemoteException
+  {
+    return (String) getAttribute("bankcodenumber");
+  }
+  
+  
+  public String getIban() throws RemoteException
+  {
+    return (String) getAttribute("iban");
+  }
+
+  public void setIban(String iban) throws RemoteException
+  {
+  	setAttribute("iban",iban);
+  }
+ 
+  public String getBic() throws RemoteException
+  {
+    return (String) getAttribute("bic");
+  }
+
+  public void setBic(String bic) throws RemoteException
+  {
+  	setAttribute("bic",bic);
+  }
+
+  
+  
+  public void setTaxoffice(String taxoffice) throws RemoteException
+  {
+  	setAttribute("taxoffice",taxoffice);
+  }
+
+  public String getTaxoffice() throws RemoteException
+  {
+    return (String) getAttribute("taxoffice");
+  }
+
+  public void setVatnumber(String vatnumber) throws RemoteException
+  {
+  	setAttribute("vatnumber",vatnumber);
+  }
+
+  public String getVatnumber() throws RemoteException
+  {
+    return (String) getAttribute("vatnumber");
+  }
+
+  public void setTaxnumber(String taxnumber) throws RemoteException
+  {
+  	setAttribute("taxnumber",taxnumber);
+  }
+
+  public String getTaxnumber() throws RemoteException
+  {
+    return (String) getAttribute("taxnumber");
+  }
+  
 
   
   /**
-   * @see reibach.rmi.Customer#getCustomers()
+   * @see reibach.rmi.Mandator#getMandators()
    */
-	public DBIterator getCustomers() throws RemoteException
+	public DBIterator getMandators() throws RemoteException
 	{
 		try
   {
@@ -300,13 +423,13 @@ public class CustomerImpl extends AbstractDBObject implements Customer
     // DBService service = this.getService();
     
     // 3) We create the task list using getList(Class)
-    DBIterator customers = service.createList(Customer.class);
+    DBIterator mandators = service.createList(Mandator.class);
         
-    return customers;
+    return mandators;
   }
   catch (Exception e)
   {
-  	throw new RemoteException("unable to load customer list",e);
+  	throw new RemoteException("unable to load mandators list",e);
   }
 	}
 	
@@ -330,5 +453,3 @@ public class CustomerImpl extends AbstractDBObject implements Customer
 
 
 }
-
-

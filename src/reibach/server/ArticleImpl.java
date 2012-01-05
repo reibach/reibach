@@ -144,6 +144,23 @@ public class ArticleImpl extends AbstractDBObject implements Article
     return d == null || Double.isNaN(d) ? 0.0 : d.doubleValue();
   }
 
+  /**
+   * @see reibach.rmi.Article#getUnit()
+   */
+  public String getUnit() throws RemoteException
+  {
+    return (String) getAttribute("unit");
+  }
+
+  /**
+   * @see reibach.rmi.Article#setUnit(java.lang.String)
+   */
+  public void setUnit(String unit) throws RemoteException
+  {
+  	setAttribute("unit", unit);
+  }
+
+
 
   
   /**

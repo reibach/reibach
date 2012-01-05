@@ -106,6 +106,15 @@ public class CustomerDetail extends AbstractView
 			}
 		},null,true); // "true" defines this button as the default button
 
+
+		buttons.addButton(Settings.i18n().tr("StoreDefault"),  new Action()
+		{
+			public void handleAction(Object context) throws ApplicationException
+			{
+				control.handleStoreDefault();
+			}
+		},null,false); // "true" defines this button as the default button
+
 		// Don't forget to paint the button area
     buttons.paint(getParent());
   }

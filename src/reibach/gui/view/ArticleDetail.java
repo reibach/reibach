@@ -50,9 +50,10 @@ public class ArticleDetail extends AbstractView
     // left side
     Container left = new SimpleContainer(columns.getComposite());
     left.addHeadline(Settings.i18n().tr("Details"));
-		// left.addInput(control.getProject());
-		left.addInput(control.getName());
-		left.addInput(control.getPrice());
+	// left.addInput(control.getProject());
+	left.addInput(control.getName());
+	left.addInput(control.getPrice());
+	left.addInput(control.getUnit());
 
     // right side
     Container right = new SimpleContainer(columns.getComposite(),true);

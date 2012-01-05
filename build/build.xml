@@ -9,8 +9,7 @@
  All rights reserved
 -->
 <project basedir=".." default="all" name="All">
-	
-	
+
 	<target name="init" description="inits the build">
 
     <property environment="env" />

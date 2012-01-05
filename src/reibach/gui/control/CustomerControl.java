@@ -1,15 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/gui/control/CustomerControl.java,v $
- * $Revision: 1.3 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
 package reibach.gui.control;
 
 import java.rmi.RemoteException;
@@ -45,9 +33,7 @@ import de.willuhn.util.ApplicationException;
  * Controller for the customer view.
  */
 public class CustomerControl extends AbstractControl
-{
-
-	
+{	
 	// list of all bills
 	private TablePart customerList;
 	
@@ -339,6 +325,52 @@ public Input getMobil() throws RemoteException
 			t.setFax((String) getFax().getValue());
 			t.setMobil((String) getMobil().getValue());			
 			t.setComment((String) getComment().getValue());
+
+			// Now, let's store the project
+			// The store() method throws ApplicationExceptions if
+			// insertCheck() or updateCheck() failed.
+			try
+			{
+				t.store();
+      Application.getMessagingFactory().sendMessage(new StatusBarMessage(Settings.i18n().tr("Customer stored successfully"),StatusBarMessage.TYPE_SUCCESS));
+			}
+			catch (ApplicationException e)
+			{
+      Application.getMessagingFactory().sendMessage(new StatusBarMessage(e.getMessage(),StatusBarMessage.TYPE_ERROR));
+			}
+		}
+		catch (RemoteException e)
+		{
+			Logger.error("error while storing customer",e);
+    Application.getMessagingFactory().sendMessage(new StatusBarMessage(Settings.i18n().tr("Error while storing Customer: {0}",e.getMessage()),StatusBarMessage.TYPE_ERROR));
+		}
+	}
+
+	/**
+	 * This method stores the customer using the current values. 
+	 */
+	public void handleStoreDefault()
+	{
+		try
+		{
+
+			// get the current customer.
+			Customer t = getCustomer();
+
+			// invoke all Setters of this customer and assign the current values
+			t.setCompany("TestFirma GmbH");
+			t.setTitle("Herr");
+			t.setFirstname("Max");
+			t.setLastname("Mustermann");
+			t.setStreet("Waldstr. ");
+			t.setHousenumber("22");
+			t.setZipcode("12345");
+			t.setPlace("Waldstadt");
+			t.setEmail("test@testfirma.de");
+			t.setTel("01234 456723");
+			t.setFax("01234 456725");
+			t.setMobil("0150 456723");			
+			t.setComment("Nothing ....");
 
 			// Now, let's store the project
 			// The store() method throws ApplicationExceptions if

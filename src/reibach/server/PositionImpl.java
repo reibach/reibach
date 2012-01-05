@@ -1,15 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/server/PositionImpl.java,v $
- * $Revision: 1.4 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
 package reibach.server;
 
 import java.rmi.RemoteException;
@@ -164,10 +152,47 @@ public class PositionImpl extends AbstractDBObject implements Position
    */
   public void setComment(String comment) throws RemoteException
   {
-  	setAttribute("comment",comment);
+	  setAttribute("comment",comment);
   }
+	
+  
+/**
+ * @see reibach.rmi.Position#getUnit()
+ */
+public String getUnit() throws RemoteException
+{
+  return (String) getAttribute("unit");
+}
 
-	/**
+/**
+ * @see reibach.rmi.Position#setUnit(java.lang.String)
+ */
+public void setUnit(String unit) throws RemoteException
+{
+	setAttribute("unit", unit);
+}
+
+
+
+public double getQuantity() throws RemoteException
+{
+	  // AbstractDBObject will create a java.lang.Double.
+	  // We only have to cast it.
+	  Double d = (Double) getAttribute("quantity");
+	  return d == null || Double.isNaN(d) ? 0.0 : d.doubleValue();
+}
+
+/**
+ * @see reibach.rmi.Bill#setPrice(double)
+ */
+public void setQuantity(double quantity) throws RemoteException
+{
+    setAttribute("quantity",new Double(quantity));
+}
+
+
+
+/**
 	 * @see reibach.rmi.Bill#getPrice()
 	 */
 	public double getPrice() throws RemoteException
@@ -183,11 +208,70 @@ public class PositionImpl extends AbstractDBObject implements Position
 	 */
 	public void setPrice(double price) throws RemoteException
 	{
-    // setField() wants to have an object but <prive> is a primitive type.
-    // So we have to make a java.lang.Double
-    setAttribute("price",new Double(price));
-  }
+	    // setField() wants to have an object but <prive> is a primitive type.
+	    // So we have to make a java.lang.Double
+	    setAttribute("price",new Double(price));
+	}
 
+	 
+	  /**
+	 * @see reibach.rmi.Bill#getTax()
+	 */
+	public double getTax() throws RemoteException
+	{
+	  // AbstractDBObject will create a java.lang.Double.
+	  // We only have to cast it.
+	  Double d = (Double) getAttribute("tax");
+	  return d == null || Double.isNaN(d) ? 0.0 : d.doubleValue();
+	}
+
+	/**
+	 * @see reibach.rmi.Bill#setTax(double)
+	 */
+	public void setTax(double tax) throws RemoteException
+	{
+	    // setField() wants to have an object but <prive> is a primitive type.
+	    // So we have to make a java.lang.Double
+	    setAttribute("tax",new Double(tax));
+	}
+	  /**
+	 * @see reibach.rmi.Bill#getAmount()
+	 */
+	public double getAmount() throws RemoteException
+	{
+	  // AbstractDBObject will create a java.lang.Double.
+	  // We only have to cast it.
+	  Double d = (Double) getAttribute("amount");
+	  return d == null || Double.isNaN(d) ? 0.0 : d.doubleValue();
+	}
+
+	/**
+	 * @see reibach.rmi.Bill#setAmount(double)
+	 */
+	public void setAmount(double amount) throws RemoteException
+	{
+	    // setField() wants to have an object but <prive> is a primitive type.
+	    // So we have to make a java.lang.Double
+	    setAttribute("amount",new Double(amount));
+	}
+
+	  /**
+	 * @see reibach.rmi.Bill#getPos_num()
+	 */
+	public String getPos_num() throws RemoteException
+	{
+		  return (String) getAttribute("pos_num");
+	}
+
+	/**
+	 * @see reibach.rmi.Bill#setPos_num(double)
+	 */
+	public void setPos_num(String pos_num) throws RemoteException
+	{
+	    // setField() wants to have an object but <prive> is a primitive type.
+	    // So we have to make a java.lang.Double
+	    setAttribute("pos_num", pos_num);
+	}
 }
 
 

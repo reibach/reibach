@@ -3,7 +3,7 @@
 <plugin xmlns="http://www.willuhn.de/schema/jameica-plugin"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.willuhn.de/schema/jameica-plugin http://www.willuhn.de/schema/jameica-plugin-1.0.xsd"
-        name="jameica.example" version="1.2.0" class="reibach.ExamplePlugin">
+        name="jameica.example" version="0.0.1" class="reibach.ReibachPlugin">
 
   <description>Example Plugin for Jameica</description>
   <url></url>
@@ -47,10 +47,11 @@
       <item name="New Customer" shortcut="ALT+K" action="reibach.gui.action.CustomerDetail" />
       <item name="New Bill" shortcut="ALT+R" action="reibach.gui.action.BillDetail" />
       <item name="New Article" shortcut="ALT+P" action="reibach.gui.action.ArticleDetail" />
+      <item name="New Mandator" shortcut="ALT+P" action="reibach.gui.action.MandatorDetail" />
       <!-- use "-" as name to create a separator //-->
       <item name="-" />
+            <item name="About" action="reibach.gui.action.About" />
 
-      <item name="About" action="reibach.gui.action.About" />
     </item>
   </menu>
 
@@ -64,7 +65,9 @@
       <item name="Customers" icon-close="text-x-generic.png" action="reibach.gui.action.CustomerList" />
       <item name="Bills" icon-close="text-x-generic.png" action="reibach.gui.action.BillList" />
       <item name="Articles" icon-close="text-x-generic.png" action="reibach.gui.action.ArticleList" />
-    </item>
+      <item name="-" />
+      <item name="Mandator" icon-close="text-x-generic.png" action="reibach.gui.action.MandatorList" />
+      </item>
   </navigation>
 
   <!--
@@ -81,6 +84,6 @@
     //-->
 
   <services>
-    <service name="exampledatabase" depends="" autostart="true" class="reibach.rmi.ExampleDBService" />
+    <service name="reibachdatabase" depends="" autostart="true" class="reibach.rmi.ReibachDBService" />
   </services>
 </plugin>

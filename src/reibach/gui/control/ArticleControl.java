@@ -1,15 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/gui/control/ArticleControl.java,v $
- * $Revision: 1.3 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
 package reibach.gui.control;
 
 import java.rmi.RemoteException;
@@ -55,9 +43,9 @@ public class ArticleControl extends AbstractControl
 
 	// the input fields for the article.
 	private TextInput name;
-	private TextAreaInput comment;
+	private TextInput unit;
 	private DecimalInput price;
-
+	private TextAreaInput comment;
   /**
    * ct.
    * @param view
@@ -132,6 +120,21 @@ public Input getPrice() throws RemoteException
 	}
 
   
+/**
+ * Returns an input field for the article unit.
+* @return input field.
+* @throws RemoteException
+*/
+public Input getUnit() throws RemoteException
+{
+	if (unit != null)
+		return unit;
+	// "255" is the maximum length of the name attribute.
+	unit = new TextInput(getArticle().getUnit(),255);
+	unit.setName(Settings.i18n().tr("Unit"));
+	return unit;
+}
+
 	/**
 	 * This method stores the article using the current values. 
 	 */
@@ -145,6 +148,7 @@ public Input getPrice() throws RemoteException
 
 			// invoke all Setters of this article and assign the current values
 			t.setName((String) getName().getValue());
+			t.setUnit((String) getUnit().getValue());
 
 			// the DecimalInput fields returns a Double object
 			Double d = (Double) getPrice().getValue(); 
@@ -200,6 +204,8 @@ public Input getPrice() throws RemoteException
 	     articleList.addColumn(Settings.i18n().tr("Name of article"),"name"); // "name" is the field name from the sql table.	
 	     
 	     articleList.addColumn(Settings.i18n().tr("Price"),"price"); // "preis" is the field name from the sql table.
+
+	     articleList.addColumn(Settings.i18n().tr("Unit"),"unit"); // "unit" is the field name from the sql table.
 
 	     /** 	    
 

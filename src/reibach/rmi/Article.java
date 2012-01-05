@@ -48,6 +48,10 @@ public interface Article extends DBObject
    public double getPrice() throws RemoteException;
    public void setPrice( double price) throws RemoteException;
   
+
+   public String getUnit() throws RemoteException;
+   public void setUnit(String unit) throws RemoteException;
+
    public String getComment() throws RemoteException;
    public void setComment(String comment) throws RemoteException;
    

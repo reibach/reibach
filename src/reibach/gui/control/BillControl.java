@@ -1,16 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/gui/control/ProjectControl.java,v $
- * $Revision: 1.9 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
-
 package reibach.gui.control;
 
 import java.io.File;
@@ -29,6 +16,7 @@ import reibach.gui.menu.PositionListMenu;
 import reibach.Settings;
 import reibach.rmi.Bill;
 import reibach.rmi.Customer;
+import reibach.rmi.Mandator;
 
 import de.willuhn.datasource.rmi.DBIterator;
 import de.willuhn.datasource.rmi.DBService;
@@ -62,7 +50,7 @@ public class BillControl extends AbstractControl
 
   // list of all bills
   private TablePart billList;
-
+  
   // Input fields for the bill attributes,
   private TextInput name;
   private TextAreaInput description;
@@ -83,6 +71,9 @@ public class BillControl extends AbstractControl
     
     /** Select fuer customer**/
     private SelectInput customer; 
+    
+    /** Select fuer mandator**/
+    private SelectInput mandator; 
     
   
   /**
@@ -116,12 +107,11 @@ public class BillControl extends AbstractControl
     if (name != null)
       return name;
     // "255" is the maximum length for this input field.
-    name = new TextInput(getBill().getName(),255);
+    // name = new TextInput(getBill().getName(),255);
     name.setMandatory(true);
     name.setName(Settings.i18n().tr("Name"));
     return name;
   }
-  
   
 
   
@@ -139,6 +129,23 @@ public class BillControl extends AbstractControl
 		customer.setName(Settings.i18n().tr("Customer"));
 		customer.setMandatory(true);
 		return customer;
+	}
+
+
+	/**
+	 * Returns a the field to choose the project.
+	 * @return the project.
+	 * @throws RemoteException
+	 */
+	public Input getMandator() throws RemoteException
+	{
+		if (mandator != null)
+			return mandator;
+		
+		mandator = new SelectInput(Settings.getDBService().createList(Mandator.class),getBill().getMandator());
+		mandator.setName(Settings.i18n().tr("Mandator"));
+		mandator.setMandatory(true);
+		return mandator;
 	}
 
   
@@ -265,21 +272,26 @@ public class BillControl extends AbstractControl
     billList = new TablePart(bills,new reibach.gui.action.BillDetail());
 
     // 5) now we have to add some columns.
-    billList.addColumn(Settings.i18n().tr("Name of bill"),"name"); // "name" is the field name from the sql table.
+    // billList.addColumn(Settings.i18n().tr("Name of bill"),"name"); // "name" is the field name from the sql table.
+    billList.addColumn(Settings.i18n().tr("Bill number"),"id"); // "id" is the field id from the sql table.
+    billList.addColumn(Settings.i18n().tr("Customer"),"customer_id"); // "name" is the field name from the sql table.
+    // billList.addColumn(Settings.i18n().tr("Mandator"),"mandator_id"); // "name" is the field name from the sql table.
 
     // 6) the following fields are a date fields. So we add a date formatter. 
-    billList.addColumn(Settings.i18n().tr("Start date"),"startdate",new DateFormatter(Settings.DATEFORMAT));
-    billList.addColumn(Settings.i18n().tr("End date"),"enddate",    new DateFormatter(Settings.DATEFORMAT));
+    billList.addColumn(Settings.i18n().tr("Bill date"),"billdate",new DateFormatter(Settings.DATEFORMAT));
+
+    // billList.addColumn(Settings.i18n().tr("End date"),"enddate",    new DateFormatter(Settings.DATEFORMAT));
 
     // 7) calculated bill price (price per hour * hours)
+    billList.addColumn(Settings.i18n().tr("State of payment"),"pay_id"); // "name" is the field name from the sql table.
     billList.addColumn(Settings.i18n().tr("Efforts"),"summary", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
 
-		// 8) we are adding a context menu
-		billList.setContextMenu(new BillListMenu());
+	// 8) we are adding a context menu
+	billList.setContextMenu(new BillListMenu());
     return billList;
   }
-
-	/**
+ 
+  /**
 	 * Returns a list of positions in this bill.
    * @return list of positions in this bill
    * @throws RemoteException
@@ -291,10 +303,20 @@ public class BillControl extends AbstractControl
 
 		DBIterator positions = getBill().getPositions();
 		positionList = new TablePart(positions,new PositionDetail());
+		// positionList.addColumn(Settings.i18n().tr("ID"),"id");
+		// positionList.addColumn(Settings.i18n().tr("Bill ID"),this.getID());
+		positionList.addColumn(Settings.i18n().tr("Pos_num"),"pos_num");
 		positionList.addColumn(Settings.i18n().tr("Position name"),"name");
-		positionList.addColumn(Settings.i18n().tr("Description"),"description");
-		positionList.addColumn(Settings.i18n().tr("Effort"),"effort",new Formatter()
-    {
+		positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity");
+		positionList.addColumn(Settings.i18n().tr("Unit"),"unit");
+		positionList.addColumn(Settings.i18n().tr("Price"),"price");
+		positionList.addColumn(Settings.i18n().tr("Amount"),"amount");
+		positionList.addColumn(Settings.i18n().tr("Tax (included)"),"tax");
+
+		/****
+		positionList.addColumn(Settings.i18n().tr("Amount"),"amount",new Formatter()
+		
+		{
       public String format(Object o)
       {
       	if (o == null)
@@ -302,6 +324,7 @@ public class BillControl extends AbstractControl
         return o + " h";
       }
     });
+      ****/
     
 		PositionListMenu tlm = new PositionListMenu();
 
@@ -330,7 +353,8 @@ public class BillControl extends AbstractControl
       Bill p = getBill();
 
       // invoke all Setters of this bill and assign the current values
-      p.setName((String) getName().getValue());
+      // p.setName((String) getName().getValue());
+      // p.setName((String) " ");
       p.setDescription((String) getDescription().getValue());
 
       // we can cast the return value of date input directly to "java.util.Date".
@@ -346,6 +370,9 @@ public class BillControl extends AbstractControl
 
       // we can cast the value of the customer dialogInput directly to "Customer".
       p.setCustomer((Customer) getCustomer().getValue());      
+       
+      // we can cast the value of the mandator dialogInput directly to "Mandator".
+      p.setMandator((Mandator) getMandator().getValue());      
       try
       {
         p.store();
