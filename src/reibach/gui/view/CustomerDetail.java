@@ -1,20 +1,8 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/gui/view/CustomerDetail.java,v $
- * $Revision: 1.3 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
 package reibach.gui.view;
 
+import reibach.Settings;
 import reibach.gui.action.CustomerDelete;
 import reibach.gui.control.CustomerControl;
-import reibach.Settings;
 import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.GUI;
@@ -31,12 +19,15 @@ import de.willuhn.util.ApplicationException;
 public class CustomerDetail extends AbstractView
 {
 
+	
   /**
    * @see de.willuhn.jameica.gui.AbstractView#bind()
    */
   public void bind() throws Exception
   {
-		// draw the title
+			 
+
+	  // draw the title
 		GUI.getView().setTitle(Settings.i18n().tr("Customer details"));
 
 		// instanciate controller
@@ -51,7 +42,7 @@ public class CustomerDetail extends AbstractView
     Container left = new SimpleContainer(columns.getComposite());
     left.addHeadline(Settings.i18n().tr("Details"));
     
-    //left.addInput(control.getCompany());
+
     left.addInput(control.getCompany());
     left.addInput(control.getTitle());
 	
@@ -119,11 +110,3 @@ public class CustomerDetail extends AbstractView
     buttons.paint(getParent());
   }
 }
-
-
-/**********************************************************************
- * $Log: CustomerDetail.java,v $
- * Revision 1.3  2010-11-09 17:20:16  willuhn
- * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
- *
- **********************************************************************/

@@ -33,20 +33,17 @@ public class ArticleDetail implements Action
   public void handleAction(Object context) throws ApplicationException
   {
 
-		Article article = null;
+		Article a = null;
 		
 		// check if the context is a article
 		if (context != null && (context instanceof Article))
-			article = (Article) context;
+			a = (Article) context;
 		
-
-		// context null?
-		// --> create a new article
-		if (context == null)
-		{
+		else
+		{	
 			try
 			{
-				article = (Article) Settings.getDBService().createObject(Article.class,null);
+				a = (Article) Settings.getDBService().createObject(Article.class,null);
 			}
 			catch (RemoteException e)
 			{
@@ -54,27 +51,9 @@ public class ArticleDetail implements Action
 			}
 		}
 
-		// check if the context is a bill
-		// --> create a new article and assign the given bill
-/*  	if (context != null && (context instanceof Bill))
-  	{
-			try
-			{
-				//Bill p = (Bill) context;
-				//if (p.isNewObject())
-					//throw new ApplicationException(Settings.i18n().tr("Please store the bill first"));
-				article = (Article) Settings.getDBService().createObject(Article.class,null);
-				//article.setBill(p);
-			}
-			catch (RemoteException e)
-			{
-				throw new ApplicationException(Settings.i18n().tr("Error while creating new article"),e);
-			}
-  	}
-
-*/
+	
 		// ok, lets start the dialog
-  		GUI.startView(reibach.gui.view.ArticleDetail.class.getName(),article);
+  		GUI.startView(reibach.gui.view.ArticleDetail.class.getName(),a);
   }
 
 }

@@ -1,7 +1,6 @@
 package reibach.gui.control;
 
 import java.rmi.RemoteException;
-
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
@@ -28,6 +27,17 @@ import de.willuhn.jameica.messaging.StatusBarMessage;
 import de.willuhn.jameica.system.Application;
 import de.willuhn.logging.Logger;
 import de.willuhn.util.ApplicationException;
+
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.rmi.RemoteException;
+import java.util.Date;
+
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+
 
 /**
  * Controller for the customer view.
@@ -87,9 +97,13 @@ public Input getCompany() throws RemoteException
 		if (company != null)
 			return company;
 		// "255" is the maximum length of the name attribute.
-		company = new TextInput(getCustomer().getCompany(),255);
-		company.setMandatory(true);
-		company.setName(Settings.i18n().tr("company"));
+		try { 
+				company = new TextInput(getCustomer().getCompany(),255);
+				company.setMandatory(true);
+				company.setName(Settings.i18n().tr("company"));
+		} catch(Exception exc) { 
+				exc.printStackTrace();
+		}
 		return company;
 	}
 

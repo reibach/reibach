@@ -44,7 +44,6 @@ public class CustomerList extends AbstractView
 		
 		// the last parameter "true" makes the button the default one
 		buttons.addButton(Settings.i18n().tr("Create new customer"), new CustomerDetail(),null,true);
-		// buttons.addButton(Settings.i18n().tr("PdfPrint"), new AboutPdf(),null,true);
 		
 		buttons.paint(getParent());
 		

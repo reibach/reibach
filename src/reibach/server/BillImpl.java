@@ -479,7 +479,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  	/*
 		  	 *  generate the pdf
 		  	 */
-			  OutputStream file = new FileOutputStream(new File("/tmp/Test.pdf"));
+			  OutputStream file = new FileOutputStream(new File("/tmp/RE_" + billnumber + ".pdf"));
 			
 			  Document document = new Document(PageSize.A4, 36, 36, 54, 36);
 			  // String FILE = "/tmp/testme.pdf";
