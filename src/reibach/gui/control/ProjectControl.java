@@ -1,16 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/gui/control/ProjectControl.java,v $
- * $Revision: 1.9 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
-
 package reibach.gui.control;
 
 import java.rmi.RemoteException;
@@ -338,11 +325,3 @@ public class ProjectControl extends AbstractControl
     }
   }
 }
-
-
-/**********************************************************************
- * $Log: ProjectControl.java,v $
- * Revision 1.9  2010-11-09 17:20:16  willuhn
- * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
- *
- **********************************************************************/

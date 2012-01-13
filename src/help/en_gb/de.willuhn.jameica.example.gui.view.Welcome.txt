@@ -4,6 +4,6 @@
 	</p>
 
 	<p>
-	  This is an example plugin.
+	  This is the reibach plugin.
 	</p>
 </form>

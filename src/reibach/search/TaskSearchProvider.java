@@ -1,14 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/search/TaskSearchProvider.java,v $
- * $Revision: 1.1 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- *
- * Copyright (c) by willuhn - software & services
- * All rights reserved
- *
- **********************************************************************/
-
 package reibach.search;
 
 import java.rmi.RemoteException;
@@ -104,12 +93,3 @@ public class TaskSearchProvider implements SearchProvider
   }
 
 }
-
-
-
-/**********************************************************************
- * $Log: TaskSearchProvider.java,v $
- * Revision 1.1  2010-11-09 17:20:16  willuhn
- * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
- *
- **********************************************************************/

@@ -1,15 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/gui/view/ProjectList.java,v $
- * $Revision: 1.4 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
 package reibach.gui.view;
 
 import reibach.Settings;
@@ -50,10 +38,3 @@ public class CustomerList extends AbstractView
   }
 }
 
-
-/**********************************************************************
- * $Log: BillList.java,v $
- * Revision 1.4  2010-11-09 17:20:16  willuhn
- * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
- *
- **********************************************************************/

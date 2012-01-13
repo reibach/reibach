@@ -1,16 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/server/ProjectImpl.java,v $
- * $Revision: 1.9 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
-
 package reibach.server;
 
 import java.rmi.RemoteException;
@@ -331,9 +318,3 @@ public class ProjectImpl extends AbstractDBObject implements Project
 }
 
 
-/**********************************************************************
- * $Log: ProjectImpl.java,v $
- * Revision 1.9  2010-11-09 17:20:16  willuhn
- * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
- *
- **********************************************************************/

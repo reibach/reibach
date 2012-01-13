@@ -214,6 +214,4 @@ public Input getUnit() throws RemoteException
 	    articleList.setContextMenu(new ArticleListMenu());
 	    return articleList;
 	  }
-
-	
 }

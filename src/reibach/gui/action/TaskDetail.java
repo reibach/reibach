@@ -1,15 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/gui/action/TaskDetail.java,v $
- * $Revision: 1.5 $
- * $Date: 2010-11-09 17:20:15 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
 package reibach.gui.action;
 
 import java.rmi.RemoteException;
@@ -81,10 +69,3 @@ public class TaskDetail implements Action
 
 }
 
-
-/**********************************************************************
- * $Log: TaskDetail.java,v $
- * Revision 1.5  2010-11-09 17:20:15  willuhn
- * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
- *
- **********************************************************************/

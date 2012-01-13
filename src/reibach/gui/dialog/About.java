@@ -1,15 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/gui/dialog/About.java,v $
- * $Revision: 1.1 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
 package reibach.gui.dialog;
 
 import org.eclipse.swt.widgets.Composite;
@@ -91,11 +79,3 @@ public class About extends AbstractDialog
   }
 
 }
-
-
-/**********************************************************************
- * $Log: About.java,v $
- * Revision 1.1  2010-11-09 17:20:16  willuhn
- * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
- *
- **********************************************************************/

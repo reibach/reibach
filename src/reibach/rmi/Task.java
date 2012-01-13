@@ -1,16 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/rmi/Task.java,v $
- * $Revision: 1.3 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
-
 package reibach.rmi;
 
 import java.rmi.RemoteException;
@@ -95,11 +82,3 @@ public interface Task extends DBObject
   public void setEffort(double effort) throws RemoteException;
 
 }
-
-
-/**********************************************************************
- * $Log: Task.java,v $
- * Revision 1.3  2010-11-09 17:20:16  willuhn
- * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
- *
- **********************************************************************/

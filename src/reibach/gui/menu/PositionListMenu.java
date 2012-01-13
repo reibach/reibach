@@ -1,15 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/gui/menu/PositionListMenu.java,v $
- * $Revision: 1.2 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
 package reibach.gui.menu;
 
 import reibach.gui.action.PositionDelete;
@@ -55,10 +43,3 @@ public class PositionListMenu extends ContextMenu
 	}
 }
 
-
-/**********************************************************************
- * $Log: PositionListMenu.java,v $
- * Revision 1.2  2010-11-09 17:20:16  willuhn
- * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
- *
- **********************************************************************/

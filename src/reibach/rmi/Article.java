@@ -1,16 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/rmi/Bill.java,v $
- * $Revision: 1.5 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
-
 package reibach.rmi;
 
 import java.rmi.RemoteException;
@@ -58,9 +45,3 @@ public interface Article extends DBObject
 }
 
 
-/**********************************************************************
- * $Log: Bill.java,v $
- * Revision 1.5  2010-11-09 17:20:16  willuhn
- * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
- *
- **********************************************************************/

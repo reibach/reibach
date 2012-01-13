@@ -1,15 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/server/TaskImpl.java,v $
- * $Revision: 1.4 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
 package reibach.server;
 
 import java.rmi.RemoteException;
@@ -187,10 +175,3 @@ public class TaskImpl extends AbstractDBObject implements Task
 
 }
 
-
-/**********************************************************************
- * $Log: TaskImpl.java,v $
- * Revision 1.4  2010-11-09 17:20:16  willuhn
- * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
- *
- **********************************************************************/

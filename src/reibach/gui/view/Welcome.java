@@ -1,16 +1,3 @@
-/**********************************************************************
- * $Source: /cvsroot/jameica/jameica_exampleplugin/src/de/willuhn/jameica/example/gui/view/Welcome.java,v $
- * $Revision: 1.3 $
- * $Date: 2010-11-09 17:20:16 $
- * $Author: willuhn $
- * $Locker:  $
- * $State: Exp $
- *
- * Copyright (c) by willuhn.webdesign
- * All rights reserved
- *
- **********************************************************************/
-
 package reibach.gui.view;
 
 import reibach.Settings;
@@ -21,7 +8,7 @@ import de.willuhn.util.ApplicationException;
 
 
 /**
- * Welcome screen of this example plugin.
+ * Welcome screen of this reibach plugin.
  * @author willuhn
  */
 public class Welcome extends AbstractView
@@ -33,11 +20,11 @@ public class Welcome extends AbstractView
 	 */
 	public void bind() throws Exception
 	{
-		GUI.getView().setTitle(Settings.i18n().tr("Example plugin"));
+		GUI.getView().setTitle(Settings.i18n().tr("Reibach plugin - .... to make a big haul!"));
 		
 		LabelGroup group = new LabelGroup(this.getParent(),Settings.i18n().tr("welcome"));
 		
-		group.addText(Settings.i18n().tr("this page intentionally left blank ;)"),false);
+		group.addText(Settings.i18n().tr("Moin ;)"),false);
 
 	}
 
@@ -53,11 +40,3 @@ public class Welcome extends AbstractView
 	}
 
 }
-
-
-/**********************************************************************
- * $Log: Welcome.java,v $
- * Revision 1.3  2010-11-09 17:20:16  willuhn
- * @N Beispiel-Plugin auf aktuellen Stand gebracht. Code-Cleanup und Beispiel-Implementierung fuer Search-API hinzugefuegt
- *
- **********************************************************************/
