@@ -2,7 +2,7 @@ package reibach.gui.dialog;
 
 import org.eclipse.swt.widgets.Composite;
 
-import reibach.ReibachPlugin;
+import reibach.REIBACH;
 import reibach.Settings;
 
 import de.willuhn.jameica.gui.Action;
@@ -53,7 +53,7 @@ public class About extends AbstractDialog
 
 		LabelGroup group = new LabelGroup(parent, " Information ");
 
-		AbstractPlugin p = Application.getPluginLoader().getPlugin(ReibachPlugin.class);
+		AbstractPlugin p = Application.getPluginLoader().getPlugin(REIBACH.class);
 
 		group.addLabelPair(Settings.i18n().tr("Version"), 					new LabelInput(""+p.getManifest().getVersion()));
 		group.addLabelPair(Settings.i18n().tr("Working directory"), new LabelInput(""+p.getResources().getWorkPath()));

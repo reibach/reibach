@@ -247,7 +247,7 @@ public Input getQuantity() throws RemoteException
 			// Betrag brutto bei 19 % MwSt:  Bruttobetrag = Menge * Einzelpreis brutto 
 			Double a = (Double) q * d; 
 			a = Math.round( a * 100. ) / 100.;	
-			t.setAmount(a == null ? 0.0 : a.doubleValue());
+			t.setAmount(a == null ? 0.00 : a.doubleValue());
 			
 			/* Nettobetrag ermitteln
 			 * Nettobetrag = Bruttobetrag : 1 + Umsatzsteuersatz
@@ -259,7 +259,7 @@ public Input getQuantity() throws RemoteException
 			// Umsatzsteuer = Bruttobetrag - Nettobetrag
 			Double x = (Double) a - n;
 			x = Math.round( x * 100. ) / 100.;
-			t.setTax(x == null ? 0.0 : x.doubleValue());
+			t.setTax(x == null ? 0.00 : x.doubleValue());
 			
 
 			

@@ -3,9 +3,7 @@ package reibach.gui.view;
 import reibach.Settings;
 import reibach.gui.action.BillDetail;
 import reibach.gui.control.BillControl;
-import reibach.io.AboutPdf;
 import de.willuhn.jameica.gui.AbstractView;
-import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.GUI;
 import de.willuhn.jameica.gui.internal.buttons.Back;
 import de.willuhn.jameica.gui.parts.ButtonArea;
@@ -26,7 +24,6 @@ public class BillList extends AbstractView
 		BillControl control = new BillControl(this);
 		
 		control.getBillsTable().paint(this.getParent());
-		// control.getBillsID().paint(this.getParent());
 		
 		ButtonArea buttons = new ButtonArea();
 		buttons.addButton(new Back());

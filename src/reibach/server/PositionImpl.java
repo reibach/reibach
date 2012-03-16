@@ -200,7 +200,7 @@ public void setQuantity(double quantity) throws RemoteException
 	  // AbstractDBObject will create a java.lang.Double.
 	  // We only have to cast it.
 	  Double d = (Double) getAttribute("price");
-	  return d == null || Double.isNaN(d) ? 0.0 : d.doubleValue();
+	  return d == null || Double.isNaN(d) ? 0.00 : d.doubleValue();
 	}
 
 	/**

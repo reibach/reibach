@@ -25,13 +25,11 @@ public class MandatorDetail implements Action
 		
 		// check if the context is a mandator
 		if (context != null && (context instanceof Mandator))
-			mandator = (Mandator) context;
-		
-
-		// context null?
-		// --> create a new mandator
-		if (context == null)
 		{
+			mandator = (Mandator) context;
+		}
+		else
+		{	
 			try
 			{
 				mandator = (Mandator) Settings.getDBService().createObject(Mandator.class,null);

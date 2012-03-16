@@ -55,7 +55,7 @@ public class Settings
 			// client, the factory returns the remote dbService from the
 			// Jameica server.
 			// The name and class of the service is defined in plugin.xml
-			db = (DBService) Application.getServiceFactory().lookup(ReibachPlugin.class,"reibachdatabase");
+			db = (DBService) Application.getServiceFactory().lookup(REIBACH.class,"reibachdatabase");
 			return db;
 		}
 		catch (Exception e)
@@ -72,7 +72,7 @@ public class Settings
 	{
 		if (i18n != null)
 			return i18n;
-		i18n = Application.getPluginLoader().getPlugin(ReibachPlugin.class).getResources().getI18N();
+		i18n = Application.getPluginLoader().getPlugin(REIBACH.class).getResources().getI18N();
 		return i18n; 
 	}
   

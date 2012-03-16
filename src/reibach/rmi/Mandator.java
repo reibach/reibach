@@ -52,8 +52,7 @@ public interface Mandator extends DBObject
 	   public void setMobil(String mobil) throws RemoteException;
 		 
 	   public String getComment() throws RemoteException;
-	   public void setComment(String comment) throws RemoteException;
-	   
+	   public void setComment(String comment) throws RemoteException;	   
 	
 	   public String getBankname() throws RemoteException;
 	   public void setBankname(String bankname) throws RemoteException;

@@ -100,7 +100,7 @@ public Input getCompany() throws RemoteException
 		try { 
 				company = new TextInput(getCustomer().getCompany(),255);
 				company.setMandatory(true);
-				company.setName(Settings.i18n().tr("company"));
+				company.setName(Settings.i18n().tr("Company"));
 		} catch(Exception exc) { 
 				exc.printStackTrace();
 		}
@@ -119,7 +119,7 @@ public Input getTitle() throws RemoteException
 	// "255" is the maximum length of the name attribute.
 	title = new TextInput(getCustomer().getTitle(),255);
 	title.setMandatory(true);
-	title.setName(Settings.i18n().tr("title"));
+	title.setName(Settings.i18n().tr("Title"));
 	return title;
 }
 
@@ -135,7 +135,7 @@ public Input getFirstname() throws RemoteException
 	// "255" is the maximum length of the name attribute.
 	firstname = new TextInput(getCustomer().getFirstname(),255);
 	firstname.setMandatory(true);
-	firstname.setName(Settings.i18n().tr("firstname"));
+	firstname.setName(Settings.i18n().tr("Firstname"));
 	return firstname;
 }
 
@@ -173,7 +173,7 @@ public Input getStreet() throws RemoteException
 	// "255" is the maximum length of the name attribute.
 	street = new TextInput(getCustomer().getStreet(),255);
 	street.setMandatory(true);
-	street.setName(Settings.i18n().tr("street"));
+	street.setName(Settings.i18n().tr("Street"));
 	return street;
 }
 
@@ -190,7 +190,7 @@ public Input getHousenumber() throws RemoteException
 	// "255" is the maximum length of the name attribute.
 	housenumber = new TextInput(getCustomer().getHousenumber(),255);
 	housenumber.setMandatory(true);
-	housenumber.setName(Settings.i18n().tr("housenumber"));
+	housenumber.setName(Settings.i18n().tr("Housenumber"));
 	return housenumber;
 }
 
@@ -207,7 +207,7 @@ public Input getZipcode() throws RemoteException
 	// "255" is the maximum length of the name attribute.
 	zipcode = new TextInput(getCustomer().getZipcode(),255);
 	zipcode.setMandatory(true);
-	zipcode.setName(Settings.i18n().tr("zipcode"));
+	zipcode.setName(Settings.i18n().tr("Zipcode"));
 	return zipcode;
 }
 
@@ -224,7 +224,7 @@ public Input getPlace() throws RemoteException
 	// "255" is the maximum length of the name attribute.
 	place = new TextInput(getCustomer().getPlace(),255);
 	place.setMandatory(true);
-	place.setName(Settings.i18n().tr("place"));
+	place.setName(Settings.i18n().tr("Place"));
 	return place;
 }
 
@@ -241,7 +241,7 @@ public Input getEmail() throws RemoteException
 	// "255" is the maximum length of the name attribute.
 	email = new TextInput(getCustomer().getEmail(),255);
 	email.setMandatory(true);
-	email.setName(Settings.i18n().tr("email"));
+	email.setName(Settings.i18n().tr("Email"));
 	return email;
 }
 
@@ -258,7 +258,7 @@ public Input getTel() throws RemoteException
 	// "255" is the maximum length of the name attribute.
 	tel = new TextInput(getCustomer().getTel(),255);
 	tel.setMandatory(true);
-	tel.setName(Settings.i18n().tr("tel"));
+	tel.setName(Settings.i18n().tr("Tel"));
 	return tel;
 }
 
@@ -274,7 +274,7 @@ public Input getFax() throws RemoteException
 	// "255" is the maximum length of the name attribute.
 	fax = new TextInput(getCustomer().getFax(),255);
 	fax.setMandatory(true);
-	fax.setName(Settings.i18n().tr("fax"));
+	fax.setName(Settings.i18n().tr("Fax"));
 	return fax;
 }
 
@@ -292,7 +292,7 @@ public Input getMobil() throws RemoteException
 	// "255" is the maximum length of the name attribute.
 	mobil = new TextInput(getCustomer().getMobil(),255);
 	mobil.setMandatory(true);
-	mobil.setName(Settings.i18n().tr("mobil"));
+	mobil.setName(Settings.i18n().tr("Mobil"));
 	return mobil;
 }
 
@@ -432,8 +432,8 @@ public Input getMobil() throws RemoteException
 	    // 5) now we have to add some columns.
 	     customerList.addColumn(Settings.i18n().tr("Company"),"company"); // "preis" is the field name from the sql table.
 	     customerList.addColumn(Settings.i18n().tr("Title"),"title"); // "preis" is the field name from the sql table.
-	     customerList.addColumn(Settings.i18n().tr("Firstname "),"firstname"); // "name" is the field name from the sql table.	
-	     customerList.addColumn(Settings.i18n().tr("Lastname "),"lastname"); // "name" is the field name from the sql table.	
+	     customerList.addColumn(Settings.i18n().tr("Firstname"),"firstname"); // "name" is the field name from the sql table.	
+	     customerList.addColumn(Settings.i18n().tr("Lastname"),"lastname"); // "name" is the field name from the sql table.	
 	     customerList.addColumn(Settings.i18n().tr("Street"),"street"); // "name" is the field name from the sql table.	
 	     customerList.addColumn(Settings.i18n().tr("Housenumber"),"housenumber"); // "name" is the field name from the sql table.	
 	     customerList.addColumn(Settings.i18n().tr("Zipcode"),"zipcode"); // "name" is the field name from the sql table.	

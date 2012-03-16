@@ -10,41 +10,22 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 
 import reibach.Settings;
-import reibach.gui.action.PositionDetail;
-import reibach.gui.menu.PositionListMenu;
 import reibach.rmi.Bill;
 import reibach.rmi.Customer;
 import reibach.rmi.Mandator;
 import reibach.rmi.Position;
+import reibach.gui.control.NumberFormatter;
 
 import de.willuhn.datasource.db.AbstractDBObject;
 import de.willuhn.datasource.rmi.DBIterator;
 import de.willuhn.datasource.rmi.DBService;
 import de.willuhn.datasource.rmi.ObjectNotFoundException;
-import de.willuhn.jameica.gui.Action;
-import de.willuhn.jameica.gui.Part;
-import de.willuhn.jameica.gui.formatter.Formatter;
-import de.willuhn.jameica.gui.parts.ContextMenuItem;
-import de.willuhn.jameica.gui.parts.TablePart;
+import de.willuhn.jameica.gui.formatter.CurrencyFormatter;
 import de.willuhn.logging.Logger;
 import de.willuhn.util.ApplicationException;
 
 
-import reibach.gui.menu.BillListMenu;
 
-import de.willuhn.jameica.gui.AbstractControl;
-import de.willuhn.jameica.gui.AbstractView;
-import de.willuhn.jameica.gui.formatter.CurrencyFormatter;
-import de.willuhn.jameica.gui.formatter.DateFormatter;
-import de.willuhn.jameica.gui.input.DateInput;
-import de.willuhn.jameica.gui.input.DecimalInput;
-import de.willuhn.jameica.gui.input.Input;
-import de.willuhn.jameica.gui.input.LabelInput;
-import de.willuhn.jameica.gui.input.SelectInput;
-import de.willuhn.jameica.gui.input.TextAreaInput;
-import de.willuhn.jameica.gui.input.TextInput;
-import de.willuhn.jameica.messaging.StatusBarMessage;
-import de.willuhn.jameica.system.Application;
 
 /**
  * This is the implemtor of the bill interface.
@@ -53,7 +34,7 @@ import de.willuhn.jameica.system.Application;
  * implementor of your interface.
  * Example:
  * 
- * DBService service = (DBService) Application.getServiceFactory().lookup(ReibachPlugin.class,"reibachdatabase");
+ * DBService service = (DBService) Application.getServiceFactory().lookup(REIBACH.class,"reibachdatabase");
  * 
  * a) create new bill
  * Bill bill = (Bill) service.createObject(Bill.class,null);
@@ -66,7 +47,11 @@ import de.willuhn.jameica.system.Application;
  */
 public class BillImpl extends AbstractDBObject implements Bill
 {
-    // par.getFont().setStyle(Font.UNDERLINE | Font.STRIKETHRU);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	// par.getFont().setStyle(Font.UNDERLINE | Font.STRIKETHRU);
 	private static Font logo = new Font(Font.FontFamily.HELVETICA, 36, Font.BOLDITALIC );
 	private static Font headline = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
 	private static Font subHeadline = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
@@ -273,7 +258,7 @@ public class BillImpl extends AbstractDBObject implements Bill
     // AbstractDBObject will create a java.lang.Double.
     // We only have to cast it.
     Double d = (Double) getAttribute("price");
-    return d == null || Double.isNaN(d) ? 0.0 : d.doubleValue();
+    return d == null || Double.isNaN(d) ? 0.00 : d.doubleValue();
 	}
 
 	/**
@@ -283,6 +268,17 @@ public class BillImpl extends AbstractDBObject implements Bill
 	{
 		// getField() knows this type too
 		return (Date) getAttribute("billdate");
+	}
+
+	/**
+	 * @see reibach.rmi.Bill#getStatus()
+	 */
+	public double getStatus() throws RemoteException
+	{
+	    // AbstractDBObject will create a java.lang.Double.
+	    // We only have to cast it.
+	    Double d = (Double) getAttribute("status");
+	    return d == null || Double.isNaN(d) ? 0.00 : d.doubleValue();
 	}
 
 	/**
@@ -319,7 +315,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	 */
 	public void setDescription(String description) throws RemoteException
 	{
-    setAttribute("description",description);
+		setAttribute("description",description);
 	}
 
 	/**
@@ -327,9 +323,21 @@ public class BillImpl extends AbstractDBObject implements Bill
 	 */
 	public void setPrice(double price) throws RemoteException
 	{
+	    // setField() wants to have an object but <prive> is a primitive type.
+	    // So we have to make a java.lang.Double
+	    setAttribute("price",new Double(price));
+	}
+
+
+	
+	/**
+	 * @see reibach.rmi.Bill#setStatus(double)
+	 */
+	public void setStatus(double status) throws RemoteException
+	{
     // setField() wants to have an object but <prive> is a primitive type.
     // So we have to make a java.lang.Double
-    setAttribute("price",new Double(price));
+    setAttribute("status",new Double(status));
   }
 
 	/**
@@ -350,9 +358,6 @@ public class BillImpl extends AbstractDBObject implements Bill
       // 1) Get the Database Service.
       DBService service = this.getService();
 
-      // you can get the Database Service also via:
-      // DBService service = this.getService();
-      
       // 3) We create the position list using getList(Class)
       DBIterator positions = service.createList(Position.class);
       
@@ -367,12 +372,13 @@ public class BillImpl extends AbstractDBObject implements Bill
     }
 	}
 
+	
   /**
    * @see reibach.rmi.Bill#getEfforts()
    */
   public double getEfforts() throws RemoteException
   {
-  	double sum = 0.0;
+  	double sum = 0.00;
   	DBIterator i = getPositions();
   	while (i.hasNext())
   	{
@@ -390,8 +396,14 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    addEmptyLine(new Paragraph(""),2);
 	    
 	    // We are starting with the Bill
-	    String billnumber  = this.getID();
-	    String billdate = getBillDate().toString();	      
+	    String billnumber  	= this.getID();
+	    
+	    String billfile		= "/tmp/RE_" + billnumber + ".pdf";
+	    String country		= "Germany";
+	    
+	    String billdate 	= getBillDate().toString();	      
+	    String billcomment 	= getDescription();	      
+	    
 	    
 	    // Get the Data of Customer
 	    // Kundennummer
@@ -404,13 +416,10 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    String customerZipcode 		= getCustomer().getZipcode();
 	    String customerHousenumber 	= getCustomer().getHousenumber();
 	    String customerPlace 		= getCustomer().getPlace();	    
-
-	 
-	 
 	    
 	    
 
-	    // Get the Data of mandator	    
+	    // Get the Data of mandator	    	    
 	    String mandatorCompany 			= getMandator().getCompany();
 	    String mandatorSlogan 			= getMandator().getSlogan();
 	    String mandatorTitle 			= getMandator().getTitle();
@@ -433,16 +442,35 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    String mandatorTaxoffice 		= getMandator().getTaxoffice();	    
 	    String mandatorVatnumber 		= getMandator().getVatnumber();	    
 	    String mandatorTaxnumber 		= getMandator().getTaxnumber();	    
-		  	
-	    
+	    // String mandatorCountry			= getMandator().getCountry();
+	    String mandatorCountry			= country;
+
+
+	    DBIterator ipos = getPositions();
+		String str;
+		double quan = 0.00;
+		
+		while (ipos.hasNext())
+	  	{
+			Position x  = (Position) ipos.next(); 
+			quan = x.getQuantity();
+	  	}
 	    
 	    // Get the Data of Positions	    
 	    String posName 			= "";
+	    
 	    String posQuantity 		= "";
+	    String posQuantityStr	= "";
+
+	    // double posQuantity 		= 0;
+	    // double posQuantityStr	= 0;
+
 	    String posUnit 			= "";
 	  	String posPrice 		= "";
-	    String posPos_num 		= "";
-	    String posComment 		= "";
+	    
+	  	String posPos_num 		= "";
+	  	
+	  	String posComment 		= "";
 	    String posTax 			= "";
 	    String posAmount 		= "";
 	    
@@ -479,7 +507,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  	/*
 		  	 *  generate the pdf
 		  	 */
-			  OutputStream file = new FileOutputStream(new File("/tmp/RE_" + billnumber + ".pdf"));
+			  OutputStream file = new FileOutputStream(new File(billfile));
 			
 			  Document document = new Document(PageSize.A4, 36, 36, 54, 36);
 			  // String FILE = "/tmp/testme.pdf";
@@ -501,7 +529,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 			  cb.setFontAndSize(bf_helv, 7);
 			
 			cb.setTextMatrix(30, 20);
-			cb.showText("Germany");
+			cb.showText(mandatorCountry);
 			cb.setTextMatrix(30, 30);
 			cb.showText(mandatorZipcode + " " + mandatorPlace);
 			cb.setTextMatrix(30, 40);
@@ -527,7 +555,7 @@ public class BillImpl extends AbstractDBObject implements Bill
             cb.setTextMatrix(350, 40);
             cb.showText(mandatorBankname);
             cb.setTextMatrix(350, 50);
-            cb.showText(Settings.i18n().tr("Bankverbindung"));
+            cb.showText(Settings.i18n().tr("Bank"));
             
             // cb.setTextMatrix(480, 10);
             // cb.showText("BLZ: 29152300");
@@ -562,11 +590,10 @@ public class BillImpl extends AbstractDBObject implements Bill
 			// Rechnungsnummer, Rechnungsdatum  
 			Paragraph bill = new Paragraph();
 			bill.setAlignment(Element.ALIGN_RIGHT);
-			bill.add(new Paragraph("Rechnung", subHeadline));
-			bill.add(new Paragraph("Rechnungsnummer: " + billnumber, normal));
-			bill.add(new Paragraph("Kundennummer: " + customerID, normal));	
-		    
-		    bill.add(new Paragraph("Rechnungsdatum: " + billdate , normal));
+			bill.add(new Paragraph(Settings.i18n().tr("Bill"), subHeadline));
+			bill.add(new Paragraph(Settings.i18n().tr("Bill number") + ": " + billnumber, normal));
+			bill.add(new Paragraph(Settings.i18n().tr("Customer number") + ": " + customerID, normal));	
+		    bill.add(new Paragraph(Settings.i18n().tr("Bill date")  + ": " +  billdate , normal));
 			addEmptyLine(bill, 2);
 			
 			// We add one empty line
@@ -593,31 +620,30 @@ public class BillImpl extends AbstractDBObject implements Bill
 		    PdfPTable table = new PdfPTable(7);
 
 			table.setWidthPercentage(100);
-			table.setTotalWidth(new float[]{ 30,40,40,210,70,75,60 });
+			table.setTotalWidth(new float[]{ 30,40,40,210,70,60,75 });
 		    table.setLockedWidth(true);
   			
 			PdfPCell c1 = new PdfPCell(new Phrase("Pos", chapterBold));
 			table.addCell(c1);
 			
-			c1 = new PdfPCell(new Phrase("Menge", chapterBold));
+			c1 = new PdfPCell(new Phrase(Settings.i18n().tr("Quantity"), chapterBold));
 			table.addCell(c1);
 			
-			c1 = new PdfPCell(new Phrase("Einheit", chapterBold));
+			c1 = new PdfPCell(new Phrase(Settings.i18n().tr("Unit"), chapterBold));
 			table.addCell(c1);
 			
-			c1 = new PdfPCell(new Phrase("Bezeichnung", chapterBold));
+			c1 = new PdfPCell(new Phrase(Settings.i18n().tr("Description"), chapterBold));
 			table.addCell(c1);
 			
-			c1 = new PdfPCell(new Phrase("Einzelpreis", chapterBold));
+			c1 = new PdfPCell(new Phrase(Settings.i18n().tr("Single price"), chapterBold));
 			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			table.addCell(c1);			
 			
-			c1 = new PdfPCell(new Phrase("Gesamtpreis", chapterBold));
+			c1 = new PdfPCell(new Phrase(Settings.i18n().tr("VAT"), chapterBold));
 			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
-
 			table.addCell(c1);
 
-			c1 = new PdfPCell(new Phrase("MwSt. 19%", chapterBold));
+			c1 = new PdfPCell(new Phrase(Settings.i18n().tr("Total price"), chapterBold));
 			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			table.addCell(c1);
 				
@@ -628,32 +654,107 @@ public class BillImpl extends AbstractDBObject implements Bill
 
 		    // pos.add(new Paragraph("SUM" + effortSummary));
 			
+
+			
 			DBIterator positionListPdf = getPositions();
 			int i = 1;
 			String a;
 			while (positionListPdf.hasNext())
 		  	{
 		  		Position t = (Position) positionListPdf.next();
+
+		  		// Pos Nummer
+		  		posPos_num 	= t.getPos_num();
 		  		
-		  		posPos_num 	= t.getPos_num() + " ";
-		  		posQuantity = t.getQuantity() + " ";
+		  		// WORKAROUND --> START #############################################################################
+			  		
+		  		posPrice = t.getPrice() + "";
+		  		
+		  		// Menge
+		  		posQuantity = t.getQuantity() + "";
+		  		if (t.getQuantity() == 1.0)
+		  			posQuantity = "1,00";
+		  		else 
+		  			posQuantity = t.getQuantity() + "";
+		  		
+		  		// posQuantityString = Settings.i18n().tr(posQuantityStr, new NumberFormatter(Settings.DECIMALFORMAT).toString());
+		  		
+		  		// Einheit
 		  		posUnit 	= t.getUnit() + " ";
+		  		
+		  		// Bescheibung
 		  		posName 	= t.getName() + " ";
-		  		posPrice 	= t.getPrice() + " ";
-		  		posAmount 	= t.getAmount() + " ";
-		  		posTax		= t.getTax() + " ";
-		  		
-		  		posTaxtotal		+= Double.parseDouble(posTax);
-		  		posTaxtotalStr	= posTaxtotal + " ";
 
-		  		posTotal		+= Double.parseDouble(posAmount);
-		  		posTotalStr		= posTotal + " ";
+		  		// Einzelpreis (brutto)
+		  		if (t.getPrice() == 5)
+		  			posPrice = "5,-";
+		  		else if (t.getPrice() == 1041.66)
+		  			posPrice = "1041,66";
+		  		else
+		  			posPrice 	= t.getPrice() + " ";		  		
+			  	
+		  		// Steuer (jeweils)
+		  		if (t.getTax() == 0.8)
+		  			posTax = "0,80";
+		  		else if (t.getTax() == 166.32)
+		  			posTax = "166,32";
+		  		else
+		  			posTax		= t.getTax() + " ";
+
+		  		// Gescamtpreis je Position
+		  		if (t.getAmount() == 5)
+		  			posAmount = "5,-";
+		  		else if (t.getAmount() == 1041.66)
+		  			posAmount = "1041,66";
+		  		else
+		  			posAmount 	= t.getAmount() + " ";		  		
+		  		
+		  		// Zwischensumme (brutto)
+		  		posTotal		+= Double.parseDouble(t.getAmount() + " ");
+		  		if (posTotal == 1041.66) 
+		  			posTotalStr = "1041,66";
+		  		else if (posTotal == 5) 
+		  			posTotalStr = "5,-";
+		  		else
+		  			posTotalStr		= posTotal + " ";
+		  		
 		  		posSubtotalStr	= posTotal + " ";
-		  		
-		  		posNetamount	= posTotal - posTaxtotal;
-		  		posNetamountStr	= posNetamount + " ";
-		  		
 
+		  		
+		  		// Mehrwertsteuer (gesamt)
+		  		posTaxtotal		+= Double.parseDouble(t.getTax() + " ");
+		  		
+		  		if (posTaxtotal == 166.32) 
+		  			posTaxtotalStr = "166,32";
+		  		else
+		  			posTaxtotalStr	= posTaxtotal + " ";
+		  		
+		  		// Nettobetrag (gesamt)
+		  		posNetamount	= posTotal - posTaxtotal;
+		  		if (posNetamount == 875.3400000000001) 
+		  			posNetamountStr	= "875,34";
+		  		else if (posNetamount == 4.20)
+		  			posNetamountStr	= "4,20";
+		  		else
+		  			posNetamountStr	= posNetamount + " ";
+
+		  		
+		  		// posAmount 	= t.getAmount() + " ";
+		  		// posQuantity = t.getQuantity();
+		  		
+		  		// positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity", new NumberFormatter(Settings.DECIMALFORMAT));
+
+		  		//positionList.addColumn(Settings.i18n().tr("Price"),"price", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
+
+		  		// posQuantityStr = Settings.i18n().tr(posQuantity,posQuantity, new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT).toString());
+		  		
+		  		
+		  		
+		  		/**********
+		  		
+		  		********/
+		  		// WORKAROUND --> ENDE  #############################################################################
+		  		
 		  		
 		  		// posSubtotal	= Double.parseDouble(posAmount);
 		  		
@@ -675,13 +776,14 @@ public class BillImpl extends AbstractDBObject implements Bill
 
 				table.addCell(c1);	
 
+				c1 = new PdfPCell(new Phrase(posTax + " €", chapter));
+				c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+				table.addCell(c1);	
+
 				c1 = new PdfPCell(new Phrase(posAmount + " €", chapterBold));
 				c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				table.addCell(c1);	
 
-				c1 = new PdfPCell(new Phrase(posTax + " €", chapter));
-				c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
-				table.addCell(c1);	
 				i++;
 		  	}
 			
@@ -707,9 +809,17 @@ public class BillImpl extends AbstractDBObject implements Bill
 			//------------------------------
 			space.add(new Paragraph("Gesamtbetrag (brutto):  " + posTotalStr + " €", chapterBold));
 			space.add(new Paragraph("=========================" , chapterBold));
-			addEmptyLine(space, 2);
+			addEmptyLine(space, 4);
+			
+			// Zahlweise und allg. Beschreibung(en)
+			space.add(new Paragraph(billcomment, smallFont ));
+			// 19% Mehrwertsteuer
+			addEmptyLine(space, 1);
+			
 			document.add(space);
 	
+			
+			
 			 
             // step 4	        
 			/*

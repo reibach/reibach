@@ -43,17 +43,15 @@ public class BillDetail extends AbstractView
 
     // left side
     Container left = new SimpleContainer(columns.getComposite());
-    left.addHeadline(Settings.i18n().tr("Details Bill"));
+    left.addHeadline(Settings.i18n().tr("Bill Details"));
 
-    // String billnumber  = getID();
-    left.addHeadline(Settings.i18n().tr("Bill Number: " +  " " ));
-    // left.addColumn(Settings.i18n().tr("Bill number"),"id"); // "name" is the field name from the sql table.
+    // Rechnungsnummer ausgeben
+    String bill_id = control.getBill().getID();
+    left.addHeadline(Settings.i18n().tr("Bill Number: " + bill_id));
 
+    left.addInput(control.getStatus());
     left.addInput(control.getMandator());
     left.addInput(control.getCustomer());
-    
-    // left.addInput(control.getName());
-    // left.addInput(control.getPrice());
     left.addInput(control.getBillDate());
     
     // right side
@@ -62,6 +60,7 @@ public class BillDetail extends AbstractView
     right.addInput(control.getDescription());
     
     c.addHeadline(Settings.i18n().tr("Summary"));
+	//c.addInput(control.getEffortSummary());
 	c.addInput(control.getEffortSummary());
 
     // add some buttons
@@ -69,7 +68,6 @@ public class BillDetail extends AbstractView
     buttons.addButton(new Back());
     buttons.addButton(Settings.i18n().tr("New Position"), new PositionDetail(),control.getCurrentObject());
     buttons.addButton(Settings.i18n().tr("Delete"),  	new BillDelete(),control.getCurrentObject());
-    // buttons.addButton(Settings.i18n().tr("Guter Druck"), new AboutPdf(),control.getCurrentObject());
     buttons.addButton(Settings.i18n().tr("Print Bill"), new BillPrintPdf(),control.getCurrentObject());
  
     buttons.addButton(Settings.i18n().tr("Store"),   	new Action()
@@ -84,8 +82,9 @@ public class BillDetail extends AbstractView
     buttons.paint(getParent());
 
 		// show position positions in this bill
-		new Headline(getParent(),Settings.i18n().tr("Position within this bill"));
+		new Headline(getParent(),Settings.i18n().tr("Positions within this bill"));
 		control.getPositionList().paint(getParent());
+		// control.getPositionPdf().paint(getParent());
 	}
 
 	/**

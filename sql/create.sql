@@ -122,3 +122,4 @@ CREATE TABLE task (
 );
 
 ALTER TABLE task ADD CONSTRAINT fk_project FOREIGN KEY (project_id) REFERENCES project (id) DEFERRABLE;
+COMMIT;

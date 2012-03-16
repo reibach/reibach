@@ -187,9 +187,10 @@ public Input getUnit() throws RemoteException
 	    // do we have an allready created table?
 	    if (articleList != null)
 	      return articleList;
-	   
+	    Logger.info("SERVICE:  ");
 	    // 1) get the dataservice
 	       DBService service = Settings.getDBService();
+	      
 	    
 	    // 2) now we can create the bill list.
 	    //    We do not need to specify the implementing class for

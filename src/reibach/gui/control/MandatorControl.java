@@ -552,8 +552,8 @@ public void handleStoreDefault()
 	    // 5) now we have to add some columns.
 	     mandatorList.addColumn(Settings.i18n().tr("Company"),"company"); // "preis" is the field name from the sql table.
 	     mandatorList.addColumn(Settings.i18n().tr("Title"),"title"); // "preis" is the field name from the sql table.
-	     mandatorList.addColumn(Settings.i18n().tr("Firstname "),"firstname"); // "name" is the field name from the sql table.	
-	     mandatorList.addColumn(Settings.i18n().tr("Lastname "),"lastname"); // "name" is the field name from the sql table.	
+	     mandatorList.addColumn(Settings.i18n().tr("Firstname"),"firstname"); // "name" is the field name from the sql table.	
+	     mandatorList.addColumn(Settings.i18n().tr("Lastname"),"lastname"); // "name" is the field name from the sql table.	
 	     mandatorList.addColumn(Settings.i18n().tr("Street"),"street"); // "name" is the field name from the sql table.	
 	     mandatorList.addColumn(Settings.i18n().tr("Housenumber"),"housenumber"); // "name" is the field name from the sql table.	
 	     mandatorList.addColumn(Settings.i18n().tr("Zipcode"),"zipcode"); // "name" is the field name from the sql table.	

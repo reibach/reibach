@@ -74,9 +74,6 @@ public class CustomerDetail extends AbstractView
     // left side
     Container left1 = new SimpleContainer(columns.getComposite());
     left1.addHeadline(Settings.i18n().tr(""));
-		// left.addInput(control.getProject());
-		// left1.addInput(control.getFirstname());
-		// left1.addInput(control.getLastname());
 
     // right side
     Container right1 = new SimpleContainer(columns.getComposite(),true);
@@ -85,17 +82,17 @@ public class CustomerDetail extends AbstractView
 
     
     // add some buttons
-		ButtonArea buttons = new ButtonArea();
+	ButtonArea buttons = new ButtonArea();
 
-		buttons.addButton(new Back());
-		buttons.addButton(Settings.i18n().tr("Delete"), new CustomerDelete(),control.getCurrentObject());
-		buttons.addButton(Settings.i18n().tr("Store"),  new Action()
+	buttons.addButton(new Back());
+	buttons.addButton(Settings.i18n().tr("Delete"), new CustomerDelete(),control.getCurrentObject());
+	buttons.addButton(Settings.i18n().tr("Store"),  new Action()
+	{
+		public void handleAction(Object context) throws ApplicationException
 		{
-			public void handleAction(Object context) throws ApplicationException
-			{
-				control.handleStore();
-			}
-		},null,true); // "true" defines this button as the default button
+			control.handleStore();
+		}
+	},null,true); // "true" defines this button as the default button
 
 
 		buttons.addButton(Settings.i18n().tr("StoreDefault"),  new Action()

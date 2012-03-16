@@ -1,8 +1,5 @@
 package reibach.gui.control;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.rmi.RemoteException;
 import java.util.Date;
 
@@ -17,6 +14,8 @@ import reibach.Settings;
 import reibach.rmi.Bill;
 import reibach.rmi.Customer;
 import reibach.rmi.Mandator;
+import reibach.rmi.Position;
+import reibach.gui.control.NumberFormatter;
 
 import de.willuhn.datasource.rmi.DBIterator;
 import de.willuhn.datasource.rmi.DBService;
@@ -26,7 +25,7 @@ import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.Part;
 import de.willuhn.jameica.gui.formatter.CurrencyFormatter;
 import de.willuhn.jameica.gui.formatter.DateFormatter;
-import de.willuhn.jameica.gui.formatter.Formatter;
+import de.willuhn.jameica.gui.input.CheckboxInput;
 import de.willuhn.jameica.gui.input.DateInput;
 import de.willuhn.jameica.gui.input.DecimalInput;
 import de.willuhn.jameica.gui.input.Input;
@@ -64,6 +63,8 @@ public class BillControl extends AbstractControl
 
 	// list of positions contained in this bill
 	private TablePart positionList;
+	
+	private String positionListPdf;
 
     // this is the currently opened bill
     private Bill bill;
@@ -74,6 +75,12 @@ public class BillControl extends AbstractControl
     
     /** Select fuer mandator**/
     private SelectInput mandator; 
+    
+    
+    /** Select fuer Rechnungsstatus**/
+    private CheckboxInput status; 
+    
+    
     
   
   /**
@@ -89,7 +96,7 @@ public class BillControl extends AbstractControl
    * Small helper method to get the current bill.
    * @return
    */
-  private Bill getBill()
+  public Bill getBill()
   {
     if (bill != null)
       return bill;
@@ -146,6 +153,23 @@ public class BillControl extends AbstractControl
 		mandator.setName(Settings.i18n().tr("Mandator"));
 		mandator.setMandatory(true);
 		return mandator;
+	}
+
+	
+	/**
+	 * Returns a the field to choose the project.
+	 * @return the project.
+	 * @throws RemoteException
+	 */
+	public Input getStatus() throws RemoteException
+	{
+		if (status != null)
+			return status;
+		
+		status = new CheckboxInput(false);
+		status.setName(Settings.i18n().tr("Status"));
+		// status.setStatus(true);
+		return status;
 	}
 
   
@@ -243,8 +267,9 @@ public class BillControl extends AbstractControl
     double sum = effort * getBill().getPrice();
 
     effortSummary = new LabelInput(Settings.DECIMALFORMAT.format(sum));
-    effortSummary.setName(Settings.i18n().tr("Efforts"));
-    effortSummary.setComment(Settings.i18n().tr("{0} [{1} Hours]",Settings.CURRENCY,Settings.DECIMALFORMAT.format(effort)));
+    // effortSummary.setName(Settings.i18n().tr("Efforts"));
+//    effortSummary.setComment(Settings.i18n().tr("{0} [{1} Hours]",Settings.CURRENCY,Settings.DECIMALFORMAT.format(effort)));
+    effortSummary.setComment(Settings.i18n().tr(" {1} $",Settings.CURRENCY,Settings.DECIMALFORMAT.format(effort)));
 		return effortSummary;
 	}
 
@@ -284,13 +309,37 @@ public class BillControl extends AbstractControl
 
     // 7) calculated bill price (price per hour * hours)
     billList.addColumn(Settings.i18n().tr("State of payment"),"pay_id"); // "name" is the field name from the sql table.
-    billList.addColumn(Settings.i18n().tr("Efforts"),"summary", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
+    //billList.addColumn(Settings.i18n().tr("Efforts"),"summary", new NumberFormatter(Settings.DECIMALFORMAT));
+    billList.addColumn(Settings.i18n().tr("Efforts"),"summary", new NumberFormatter(Settings.DECIMALFORMAT));
 
 	// 8) we are adding a context menu
 	billList.setContextMenu(new BillListMenu());
     return billList;
   }
  
+  
+  /**
+	 * Returns a list of positions in this bill.
+ * @return list of positions in this bill
+ * @throws RemoteException
+ */
+public String getPositionListPdf() throws RemoteException
+	{
+		if (positionListPdf != null)
+			return positionListPdf;
+
+		DBIterator positions = getBill().getPositions();
+		
+		while (positions.hasNext())
+	  	{
+			positionListPdf += Settings.i18n().tr("quantity", new NumberFormatter(Settings.DECIMALFORMAT).toString());
+			positionListPdf += Settings.i18n().tr("unit", new NumberFormatter(Settings.DECIMALFORMAT).toString());
+	  	}
+
+		return positionListPdf;
+	}
+
+
   /**
 	 * Returns a list of positions in this bill.
    * @return list of positions in this bill
@@ -307,11 +356,11 @@ public class BillControl extends AbstractControl
 		// positionList.addColumn(Settings.i18n().tr("Bill ID"),this.getID());
 		positionList.addColumn(Settings.i18n().tr("Pos_num"),"pos_num");
 		positionList.addColumn(Settings.i18n().tr("Position name"),"name");
-		positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity");
+		positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity", new NumberFormatter(Settings.DECIMALFORMAT));
 		positionList.addColumn(Settings.i18n().tr("Unit"),"unit");
-		positionList.addColumn(Settings.i18n().tr("Price"),"price");
-		positionList.addColumn(Settings.i18n().tr("Amount"),"amount");
-		positionList.addColumn(Settings.i18n().tr("Tax (included)"),"tax");
+		positionList.addColumn(Settings.i18n().tr("Price"),"price", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
+		positionList.addColumn(Settings.i18n().tr("Tax"),"tax", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
+		positionList.addColumn(Settings.i18n().tr("Amount"),"amount", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
 
 		/****
 		positionList.addColumn(Settings.i18n().tr("Amount"),"amount",new Formatter()
@@ -362,7 +411,7 @@ public class BillControl extends AbstractControl
 
 	  // the DecimalInput fields returns a Double object
       Double d = (Double) getPrice().getValue();
-      p.setPrice(d == null ? 0.0 : d.doubleValue());
+      p.setPrice(d == null ? 0.00 : d.doubleValue());
 
       // Now, let's store the bill
       // The store() method throws ApplicationExceptions if
@@ -389,5 +438,4 @@ public class BillControl extends AbstractControl
       Application.getMessagingFactory().sendMessage(new StatusBarMessage(Settings.i18n().tr("Error while storing Bill: {0}",e.getMessage()),StatusBarMessage.TYPE_ERROR));
     }
   }
-
 }

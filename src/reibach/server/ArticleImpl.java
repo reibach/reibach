@@ -70,6 +70,27 @@ public class ArticleImpl extends AbstractDBObject implements Article
 		}
   }
 
+  
+  /**
+   * Liefert den Inhalt der Datei.
+   * @return Inhalt der Datei.
+   * @throws RemoteException
+   */
+  public byte[] getData() throws RemoteException
+  {
+    return (byte[]) this.getAttribute("data");
+  }
+ 
+  /**
+   * Speichert den Inhalt der Datei.
+   * @param data Inhalt der Datei.
+   * @throws RemoteException
+   */
+  public void setData(byte[] data) throws RemoteException
+  {
+    setAttribute("data",data);
+  }
+
   /**
    * @see de.willuhn.datasource.db.AbstractDBObject#updateCheck()
    */
@@ -192,8 +213,4 @@ public class ArticleImpl extends AbstractDBObject implements Article
 	    // So we have to make a java.lang.Double
 	    setAttribute("price",new Double(price));
 	  }
-
-
 }
-
-

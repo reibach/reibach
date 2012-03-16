@@ -17,16 +17,28 @@ public interface Bill extends DBObject
 	  public void setMandator(Mandator mandator) throws RemoteException;
 	  
 	  public String getName() throws RemoteException;
-	  public String getDescription() throws RemoteException;
-	  public String getEmail() throws RemoteException;
-	  public double getPrice() throws RemoteException;
-	  public void BillPrintPdf() throws RemoteException, ApplicationException;
-	  public Date getBillDate() throws RemoteException;
 	  public void setName(String name) throws RemoteException;
+	  
+	  public String getDescription() throws RemoteException;
 	  public void setDescription(String description) throws RemoteException;
-	  public void setPrice(double price) throws RemoteException;
+	  
+	  public Date getBillDate() throws RemoteException;
 	  public void setBillDate(Date billDate) throws RemoteException;
+
+	  
+	  public double getPrice() throws RemoteException;
+	  public void setPrice(double price) throws RemoteException;
+	  
+	  public double getStatus() throws RemoteException;
+	  public void setStatus(double status) throws RemoteException;
+	  
+	  public String getEmail() throws RemoteException;
+	  
+	  public void BillPrintPdf() throws RemoteException, ApplicationException;
+	  
 	  public DBIterator getPositions() throws RemoteException;
+	  
 	  public double getEfforts() throws RemoteException;
+
 }
 

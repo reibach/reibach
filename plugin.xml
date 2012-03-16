@@ -3,12 +3,13 @@
 <plugin xmlns="http://www.willuhn.de/schema/jameica-plugin"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.willuhn.de/schema/jameica-plugin http://www.willuhn.de/schema/jameica-plugin-1.0.xsd"
-        name="jameica.example" version="0.0.1" class="reibach.ReibachPlugin">
+        name="reibach" version="0.0.2" class="reibach.REIBACH">
 
-  <description>Example Plugin for Jameica</description>
+  <description>Rechnungs-Plugin for Jameica</description>
   <url></url>
-  <homepage>http://www.willuhn.de/products/jameica</homepage>
+  <homepage>http://reibach.federa.de</homepage>
   <license>GPL - http://www.gnu.org/copyleft/gpl.html</license>
+    <icon>reibach-icon-64x64.png</icon>
 
   <!-- Define dependencies to jameica or other plugins -->
   <requires jameica="1.10+">
@@ -17,7 +18,7 @@
 
   <!-- Define regex wildcards for the classes and jars the classfinder should load -->
   <classfinder>
-    <include>jameica\.example\.jar</include>
+    <include>reibach\.jar</include>
     <include>.*\.class</include>
   </classfinder>
 
@@ -40,11 +41,11 @@
             shortcut="CTRL+E"/>
       
     //-->
-    <item name="Reibach plugin">
+    <item name="Reibach">
 
 
-      <!-- <item name="New Project" shortcut="ALT+P" action="reibach.gui.action.ProjectDetail" /> //-->
-      <item name="New Customer List" shortcut="ALT+K" action="reibach.gui.action.CustomerList" />
+      <!-- <item name="New Project" shortcut="ALT+P" action="reibach.gui.action.ProjectDetail" />
+      <item name="New Customer List" shortcut="ALT+K" action="reibach.gui.action.CustomerList" /> //-->
       <item name="New Customer" shortcut="ALT+K" action="reibach.gui.action.CustomerDetail" />
       <item name="New Bill" shortcut="ALT+R" action="reibach.gui.action.BillDetail" />
       <item name="New Article" shortcut="ALT+A" action="reibach.gui.action.ArticleDetail" />
@@ -61,7 +62,7 @@
 
     <!-- Same procedure as in the menu tag //-->
 
-    <item name="Reibach Plugin" icon-close="folder.png" icon-open="folder-open.png" action="reibach.gui.action.Welcome">
+    <item name="Reibach" icon-close="folder.png" icon-open="folder-open.png" action="reibach.gui.action.Welcome">
       <!--       <item name="Projects" icon-close="text-x-generic.png" action="reibach.gui.action.ProjectList" /> //-->
       <item name="Customers" icon-close="text-x-generic.png" action="reibach.gui.action.CustomerList" />
       <item name="Bills" icon-close="text-x-generic.png" action="reibach.gui.action.BillList" />
@@ -85,6 +86,6 @@
     //-->
 
   <services>
-    <service name="reibachdatabase" depends="" autostart="true" class="reibach.rmi.ReibachDBService" />
+    <service name="reibachdatabase" depends="" autostart="true" class="reibach.rmi.REIBACHDBService" />
   </services>
 </plugin>

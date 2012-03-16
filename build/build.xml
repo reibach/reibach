@@ -206,7 +206,7 @@
 	</target>
 
 
-	<target depends="init,compile,jar,clean" description="build an official release" name="all" />
-	<target depends="init,compile,jar,src,clean" description="build inofficial release" name="fast" />
+	<target depends="init,compile,jar,src,clean" description="build an official release" name="all" />
+	<target depends="init,compile,jar,clean" description="build inofficial release" name="fast" />
 
 </project>
