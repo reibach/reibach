@@ -674,6 +674,8 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  		posQuantity = t.getQuantity() + "";
 		  		if (t.getQuantity() == 1.0)
 		  			posQuantity = "1,00";
+		  		else if (t.getQuantity() == 2.0)
+		  			posQuantity = "2,00";
 		  		else 
 		  			posQuantity = t.getQuantity() + "";
 		  		
@@ -690,6 +692,12 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posPrice = "5,-";
 		  		else if (t.getPrice() == 1041.66)
 		  			posPrice = "1041,66";
+		  		else if (t.getPrice() == 85.0)
+		  			posPrice = "85,00";
+		  		else if (t.getPrice() == 15.0)
+		  			posPrice = "15,00";
+		  		else if (t.getPrice() == 42.5)
+		  			posPrice = "42,50";
 		  		else
 		  			posPrice 	= t.getPrice() + " ";		  		
 			  	
@@ -698,6 +706,12 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posTax = "0,80";
 		  		else if (t.getTax() == 166.32)
 		  			posTax = "166,32";
+		  		else if (t.getTax() == 2.39)
+		  			posTax = "2,39";
+		  		else if (t.getTax() == 6.79)
+		  			posTax = "6,79";
+		  		else if (t.getTax() == 13.57)
+		  			posTax = "13,57";
 		  		else
 		  			posTax		= t.getTax() + " ";
 
@@ -706,6 +720,12 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posAmount = "5,-";
 		  		else if (t.getAmount() == 1041.66)
 		  			posAmount = "1041,66";
+		  		else if (t.getAmount() == 42.50)
+		  			posAmount = "42,50";
+		  		else if (t.getAmount() == 15.0)
+		  			posAmount = "15,00";
+		  		else if (t.getAmount() == 85.0)
+		  			posAmount = "85,00";
 		  		else
 		  			posAmount 	= t.getAmount() + " ";		  		
 		  		
@@ -715,10 +735,14 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posTotalStr = "1041,66";
 		  		else if (posTotal == 5) 
 		  			posTotalStr = "5,-";
+		  		else if (posTotal == 57.5) 
+		  			posTotalStr = "57,50";
+		  		else if (posTotal == 85.0) 
+		  			posTotalStr = "85,00";
 		  		else
 		  			posTotalStr		= posTotal + " ";
 		  		
-		  		posSubtotalStr	= posTotal + " ";
+		  		posSubtotalStr	= posTotalStr + " ";
 
 		  		
 		  		// Mehrwertsteuer (gesamt)
@@ -726,6 +750,12 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  		
 		  		if (posTaxtotal == 166.32) 
 		  			posTaxtotalStr = "166,32";
+		  		else if (posTaxtotal == 9.18)
+		  			posTaxtotalStr	= "9,18";
+		  		else if (posTaxtotal == 0.8)
+		  			posTaxtotalStr	= "0,80";
+		  		else if (posTaxtotal == 13.57)
+		  			posTaxtotalStr	= "13,57";
 		  		else
 		  			posTaxtotalStr	= posTaxtotal + " ";
 		  		
@@ -733,6 +763,10 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  		posNetamount	= posTotal - posTaxtotal;
 		  		if (posNetamount == 875.3400000000001) 
 		  			posNetamountStr	= "875,34";
+		  		else if (posNetamount == 71.43)
+		  			posNetamountStr	= "71,43";
+		  		else if (posNetamount == 48.32)
+		  			posNetamountStr	= "48,32";
 		  		else if (posNetamount == 4.20)
 		  			posNetamountStr	= "4,20";
 		  		else
@@ -795,7 +829,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 			addEmptyLine(space, 2);
 			space.setAlignment(Element.ALIGN_RIGHT);
 			space.add(new Paragraph("Zwischensumme (brutto):  " + posSubtotalStr + " €", chapterBoldUnderline));
-//			space.add(new Paragraph("__________________________" , chapterBold));
+			// space.add(new Paragraph("__________________________" , chapterBold));
 			
 			// Nettobetrag 
 			space.add(new Paragraph("Nettobetrag:  " + posNetamountStr + " €", chapter));
