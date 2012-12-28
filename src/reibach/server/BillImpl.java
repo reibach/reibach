@@ -14,7 +14,7 @@ import reibach.rmi.Bill;
 import reibach.rmi.Customer;
 import reibach.rmi.Mandator;
 import reibach.rmi.Position;
-import reibach.gui.control.NumberFormatter;
+// import reibach.gui.control.NumberFormatter;
 
 import de.willuhn.datasource.db.AbstractDBObject;
 import de.willuhn.datasource.rmi.DBIterator;
@@ -676,6 +676,8 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posQuantity = "1,00";
 		  		else if (t.getQuantity() == 2.0)
 		  			posQuantity = "2,00";
+		  		else if (t.getQuantity() == 3.0)
+		  			posQuantity = "3,00";
 		  		else 
 		  			posQuantity = t.getQuantity() + "";
 		  		
@@ -696,6 +698,10 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posPrice = "85,00";
 		  		else if (t.getPrice() == 15.0)
 		  			posPrice = "15,00";
+		  		else if (t.getPrice() == 20.0)
+		  			posPrice = "20,00";
+		  		else if (t.getPrice() == 30.0)
+		  			posPrice = "30,00";
 		  		else if (t.getPrice() == 42.5)
 		  			posPrice = "42,50";
 		  		else
@@ -708,8 +714,14 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posTax = "166,32";
 		  		else if (t.getTax() == 2.39)
 		  			posTax = "2,39";
+		  		else if (t.getTax() == 3.19)
+		  			posTax = "3,19";
 		  		else if (t.getTax() == 6.79)
 		  			posTax = "6,79";
+		  		else if (t.getTax() == 6.79)
+		  			posTax = "6,79";
+		  		else if (t.getTax() == 9.58)
+		  			posTax = "9,58";
 		  		else if (t.getTax() == 13.57)
 		  			posTax = "13,57";
 		  		else
@@ -724,8 +736,16 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posAmount = "42,50";
 		  		else if (t.getAmount() == 15.0)
 		  			posAmount = "15,00";
-		  		else if (t.getAmount() == 85.0)
+		  		else if (t.getAmount() == 20.0)
+		  			posAmount = "20,00";
+		  		else if (t.getAmount() == 30.0)
+		  			posAmount = "30,00";
+		  		else if (t.getAmount() == 60.0)
+		  			posAmount = "60,00";
+		  		else if (t.getAmount() == 85.0) 
 		  			posAmount = "85,00";
+		  		else if (t.getAmount() == 95.0) 
+		  			posAmount = "95,00";
 		  		else
 		  			posAmount 	= t.getAmount() + " ";		  		
 		  		
@@ -737,8 +757,12 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posTotalStr = "5,-";
 		  		else if (posTotal == 57.5) 
 		  			posTotalStr = "57,50";
+		  		else if (posTotal == 30.0) 
+		  			posTotalStr = "30,00";
 		  		else if (posTotal == 85.0) 
 		  			posTotalStr = "85,00";
+		  		else if (posTotal == 95.0) 
+		  			posTotalStr = "95,00";
 		  		else
 		  			posTotalStr		= posTotal + " ";
 		  		
@@ -756,6 +780,8 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posTaxtotalStr	= "0,80";
 		  		else if (posTaxtotal == 13.57)
 		  			posTaxtotalStr	= "13,57";
+		  		else if (posTaxtotal == 15.16)
+		  			posTaxtotalStr	= "15,16";
 		  		else
 		  			posTaxtotalStr	= posTaxtotal + " ";
 		  		
@@ -767,8 +793,12 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posNetamountStr	= "71,43";
 		  		else if (posNetamount == 48.32)
 		  			posNetamountStr	= "48,32";
+		  		else if (posNetamount == 25.21)
+		  			posNetamountStr	= "25,21";
 		  		else if (posNetamount == 4.20)
 		  			posNetamountStr	= "4,20";
+		  		else if (posNetamount == 79.84)
+		  			posNetamountStr	= "79,84";
 		  		else
 		  			posNetamountStr	= posNetamount + " ";
 
