@@ -45,8 +45,9 @@
 		<property name="project.zipdir" 			  value="${project.release}/${plugin.name}" />
 
 		<property name="src.dir" 					      value="src" />
-    	<property name="sql.dir"                value="sql" />
+    	<property name="sql.dir"                			value="sql" />
 		<property name="lang.dir" 					    value="${src.dir}/lang" />
+		<property name="icon.dir" 					    value="icons" />
 		<property name="lib.dir" 					      value="lib" />
 		<property name="class.dir" 					    value="${project.tmp}/bin" />
 

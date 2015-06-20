@@ -95,9 +95,11 @@ public class AboutPdf implements Action {
       cb.showText("Tel:  +49(0)4748 442437");
       
       cb.setTextMatrix(350, 10);
-      cb.showText("BLZ: 29152300");
+//       cb.showText("BLZ: 29152300");
+      cb.showText("BIC: BRLADE21OHZ");
       cb.setTextMatrix(350, 20);
-      cb.showText("Konto: 140180666");
+      cb.showText("IBAN: DE89291523001401080666");
+//      cb.showText("Konto: 140180666");
       cb.setTextMatrix(350, 30);
       cb.showText("Kreissparkasse Osterholz");
       cb.setTextMatrix(350, 40);
@@ -118,7 +120,7 @@ public class AboutPdf implements Action {
 
       cb.setTextMatrix(530, 6);
       cb.setFontAndSize(bf_helv_bold, 5);
-      cb.showText(" Reibach ");
+      cb.showText(" Reibach defewfwegtwe");
 
       cb.setTextMatrix(530, 2);
       cb.setFontAndSize(bf_helv_obl, 4);
@@ -299,17 +301,19 @@ public class AboutPdf implements Action {
 			
 			table.addCell(new Phrase("Buxhorner Weg 15", FontFactory.getFont(FontFactory.HELVETICA, 10)));
 			table.addCell(new Phrase("Telefax:  +49(0)4748 442438", FontFactory.getFont(FontFactory.HELVETICA, 10)));
-			table.addCell(new Phrase("Kreissparkasse Osterholz", FontFactory.getFont(FontFactory.HELVETICA, 10)));
+			table.addCell(new Phrase("Kreidsdsdsdsdssparkasse Osterholz", FontFactory.getFont(FontFactory.HELVETICA, 10)));
 
 			
 			table.addCell(new Phrase("27729 Holste", FontFactory.getFont(FontFactory.HELVETICA, 10)));
 			table.addCell(new Phrase("E-Mail: guenter@federa.de", FontFactory.getFont(FontFactory.HELVETICA, 10)));
-			table.addCell(new Phrase("Kontonummer: 140180666", FontFactory.getFont(FontFactory.HELVETICA, 10)));
+			// table.addCell(new Phrase("Kontonummer: 140180666", FontFactory.getFont(FontFactory.HELVETICA, 10)));
+			table.addCell(new Phrase("IBAN: DE89291523001401080666", FontFactory.getFont(FontFactory.HELVETICA, 10)));
 		
 			table.addCell(new Phrase("Germany", FontFactory.getFont(FontFactory.HELVETICA, 10)));
 			table.addCell(new Phrase("Internet: http://federa.de", FontFactory.getFont(FontFactory.HELVETICA, 10)));
-			table.addCell(new Phrase("BLZ:29152300", FontFactory.getFont(FontFactory.HELVETICA, 10)));
-		
+			// table.addCell(new Phrase("BLZ:29152300", FontFactory.getFont(FontFactory.HELVETICA, 10)));
+			table.addCell(new Phrase("BIC: BRLADE21OHZ", FontFactory.getFont(FontFactory.HELVETICA, 10)));
+
 			document.add(table);
 		}
 }

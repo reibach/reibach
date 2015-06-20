@@ -3,7 +3,7 @@
 <plugin xmlns="http://www.willuhn.de/schema/jameica-plugin"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.willuhn.de/schema/jameica-plugin http://www.willuhn.de/schema/jameica-plugin-1.0.xsd"
-        name="reibach" version="0.0.2" class="reibach.REIBACH">
+        name="reibach" version="0.0.3" class="reibach.REIBACH">
 
   <description>Rechnungs-Plugin for Jameica</description>
   <url></url>

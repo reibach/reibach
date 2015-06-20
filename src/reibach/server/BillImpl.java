@@ -694,8 +694,12 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posPrice = "5,-";
 		  		else if (t.getPrice() == 1041.66)
 		  			posPrice = "1041,66";
+		  		else if (t.getPrice() == 250.0)
+		  			posPrice = "250,00";
 		  		else if (t.getPrice() == 85.0)
 		  			posPrice = "85,00";
+		  		else if (t.getPrice() == 100.0)
+		  			posPrice = "100,00";
 		  		else if (t.getPrice() == 15.0)
 		  			posPrice = "15,00";
 		  		else if (t.getPrice() == 20.0)
@@ -712,6 +716,8 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posTax = "0,80";
 		  		else if (t.getTax() == 166.32)
 		  			posTax = "166,32";
+		  		else if (t.getTax() == 15.96)
+		  			posTax = "15,96";
 		  		else if (t.getTax() == 2.39)
 		  			posTax = "2,39";
 		  		else if (t.getTax() == 3.19)
@@ -724,6 +730,8 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posTax = "9,58";
 		  		else if (t.getTax() == 13.57)
 		  			posTax = "13,57";
+		  		else if (t.getTax() == 39.92)
+		  			posTax = "39,92";
 		  		else
 		  			posTax		= t.getTax() + " ";
 
@@ -746,6 +754,10 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posAmount = "85,00";
 		  		else if (t.getAmount() == 95.0) 
 		  			posAmount = "95,00";
+		  		else if (t.getAmount() == 100.0) 
+			  			posAmount = "100,00";
+		  		else if (t.getAmount() == 250.0) 
+		  			posAmount = "250,00";
 		  		else
 		  			posAmount 	= t.getAmount() + " ";		  		
 		  		
@@ -763,6 +775,10 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posTotalStr = "85,00";
 		  		else if (posTotal == 95.0) 
 		  			posTotalStr = "95,00";
+		  		else if (posTotal == 100.0) 
+		  			posTotalStr = "100,00";
+		  		else if (posTotal == 1000.0) 
+		  			posTotalStr = "250,00";
 		  		else
 		  			posTotalStr		= posTotal + " ";
 		  		
@@ -791,6 +807,8 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posNetamountStr	= "875,34";
 		  		else if (posNetamount == 71.43)
 		  			posNetamountStr	= "71,43";
+		  		else if (posNetamount == 210.07999999999998)
+		  			posNetamountStr	= "210,08";
 		  		else if (posNetamount == 48.32)
 		  			posNetamountStr	= "48,32";
 		  		else if (posNetamount == 25.21)
@@ -799,6 +817,10 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  			posNetamountStr	= "4,20";
 		  		else if (posNetamount == 79.84)
 		  			posNetamountStr	= "79,84";
+		  		else if (posNetamount == 15.96)
+		  			posNetamountStr	= "15,96";
+		  		else if (posNetamount == 39.92)
+		  			posNetamountStr	= "39,92";
 		  		else
 		  			posNetamountStr	= posNetamount + " ";
 
@@ -904,7 +926,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	      document.close();
 	      file.close();
 	  	} catch (Exception e) {
-			throw new ApplicationException(Settings.i18n().tr("error while printingaaaaaa the bill"),e);
+			throw new ApplicationException(Settings.i18n().tr("error while printing the bill"),e);
 		} 
   }
   

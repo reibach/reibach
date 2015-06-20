@@ -15,7 +15,7 @@ import reibach.rmi.Bill;
 import reibach.rmi.Customer;
 import reibach.rmi.Mandator;
 import reibach.rmi.Position;
-import reibach.gui.control.NumberFormatter;
+// import reibach.gui.control.NumberFormatter;
 
 import de.willuhn.datasource.rmi.DBIterator;
 import de.willuhn.datasource.rmi.DBService;
@@ -309,8 +309,9 @@ public class BillControl extends AbstractControl
 
     // 7) calculated bill price (price per hour * hours)
     billList.addColumn(Settings.i18n().tr("State of payment"),"pay_id"); // "name" is the field name from the sql table.
-    //billList.addColumn(Settings.i18n().tr("Efforts"),"summary", new NumberFormatter(Settings.DECIMALFORMAT));
-    billList.addColumn(Settings.i18n().tr("Efforts"),"summary", new NumberFormatter(Settings.DECIMALFORMAT));
+    // billList.addColumn(Settings.i18n().tr("Efforts"),"summary", new NumberFormatter(Settings.DECIMALFORMAT));
+    billList.addColumn(Settings.i18n().tr("Efforts"),"summary");
+   // billList.addColumn(Settings.i18n().tr("Efforts"),"summary", new NumberFormatter(Settings.DECIMALFORMAT));
 
 	// 8) we are adding a context menu
 	billList.setContextMenu(new BillListMenu());
@@ -332,8 +333,10 @@ public String getPositionListPdf() throws RemoteException
 		
 		while (positions.hasNext())
 	  	{
-			positionListPdf += Settings.i18n().tr("quantity", new NumberFormatter(Settings.DECIMALFORMAT).toString());
-			positionListPdf += Settings.i18n().tr("unit", new NumberFormatter(Settings.DECIMALFORMAT).toString());
+			// positionListPdf += Settings.i18n().tr("quantity", new NumberFormatter(Settings.DECIMALFORMAT).toString());
+			// positionListPdf += Settings.i18n().tr("unit", new NumberFormatter(Settings.DECIMALFORMAT).toString());
+			positionListPdf += Settings.i18n().tr("quantity");
+			positionListPdf += Settings.i18n().tr("unit");
 	  	}
 
 		return positionListPdf;
@@ -356,7 +359,8 @@ public String getPositionListPdf() throws RemoteException
 		// positionList.addColumn(Settings.i18n().tr("Bill ID"),this.getID());
 		positionList.addColumn(Settings.i18n().tr("Pos_num"),"pos_num");
 		positionList.addColumn(Settings.i18n().tr("Position name"),"name");
-		positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity", new NumberFormatter(Settings.DECIMALFORMAT));
+		// positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity", new NumberFormatter(Settings.DECIMALFORMAT));
+		positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity");
 		positionList.addColumn(Settings.i18n().tr("Unit"),"unit");
 		positionList.addColumn(Settings.i18n().tr("Price"),"price", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
 		positionList.addColumn(Settings.i18n().tr("Tax"),"tax", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));

@@ -498,8 +498,10 @@ public void handleStoreDefault()
 		t.setMobil("Mob: +49(0)175 2717291");			
 		t.setComment("");
 		t.setBankname("Bank: KSK OHZ");
-		t.setBankaccount("Konto-Nr.: 1401080666");
-		t.setBankcodenumber("BLZ: 291523000");
+		t.setBankaccount("IBAN: DE89291523001401080666");
+		t.setBankcodenumber("BIC: BRLADE21OHZ");
+//		t.setBankaccount("Konto-Nr.: 1401080666");
+//		t.setBankcodenumber("BLZ: 291523000");
 		t.setIban("DE66788");
 		t.setBic("DE9899898989");
 		t.setTaxoffice("Finanzamt ");
