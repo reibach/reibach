@@ -95,6 +95,7 @@ public class MandatorDetail extends AbstractView
     right2.addInput(control.getTaxoffice());
     right2.addInput(control.getVatnumber());
     right2.addInput(control.getTaxnumber());
+    right2.addInput(control.getVat());
 
     
     // add some buttons
@@ -113,7 +114,6 @@ public class MandatorDetail extends AbstractView
 	/***
 	* Schalter um DefaultWerte in die Tabelle mandator einzutragen, 
 	* Methode control.handleStoreDefault ist in gui.control/MandatorControl
-	****/
 	buttons.addButton(Settings.i18n().tr("StoreDefault"),  new Action()
 	{
 		public void handleAction(Object context) throws ApplicationException
@@ -121,6 +121,8 @@ public class MandatorDetail extends AbstractView
 			control.handleStoreDefault();
 		}
 	},null,true); // "true" defines this button as the default button
+	****/
+	
 	
 	// Don't forget to paint the button area
     buttons.paint(getParent());

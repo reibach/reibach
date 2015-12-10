@@ -56,7 +56,6 @@ public class MandatorControl extends AbstractControl
 	private TextInput fax;
 	private TextInput mobil;
 	private TextAreaInput comment;
-
 	private TextInput bankname;
 	private TextInput bankaccount;
 	private TextInput bankcodenumber;
@@ -64,6 +63,7 @@ public class MandatorControl extends AbstractControl
 	private TextInput bic;
 	private TextInput taxoffice;
 	private TextInput vatnumber;
+	private TextInput vat;
 	private TextInput taxnumber;
 	
 
@@ -403,6 +403,16 @@ public Input getVatnumber() throws RemoteException
 	return vatnumber;
 }
 
+public Input getVat() throws RemoteException
+{
+	if (vat != null)
+		return vat;
+	
+	vat = new TextInput(getMandator().getVat());
+	vat.setName("vat");		
+	return vat;
+}
+
 public Input getTaxnumber() throws RemoteException
 {
 	if (taxnumber != null)
@@ -449,6 +459,7 @@ public void handleStore()
 		t.setTaxoffice((String) getTaxoffice().getValue());
 		t.setVatnumber((String) getVatnumber().getValue());
 		t.setTaxnumber((String) getTaxnumber().getValue());
+		t.setVat((String) getVat().getValue());
 
 		// Now, let's store the project
 		// The store() method throws ApplicationExceptions if
@@ -507,6 +518,7 @@ public void handleStoreDefault()
 		t.setTaxoffice("Finanzamt ");
 		t.setVatnumber("Osterholz-Scharmbeck");
 		t.setTaxnumber("Steuer-Nr.: 36/130/11311");
+		t.setVat("1");
 
 		// Now, let's store the project
 		// The store() method throws ApplicationExceptions if
@@ -564,6 +576,7 @@ public void handleStoreDefault()
 	     mandatorList.addColumn(Settings.i18n().tr("Tel"),"tel"); // "name" is the field name from the sql table.	
 	     mandatorList.addColumn(Settings.i18n().tr("Fax"),"fax"); // "name" is the field name from the sql table.	
 	     mandatorList.addColumn(Settings.i18n().tr("Mobil"),"mobil"); // "name" is the field name from the sql table.	
+	     mandatorList.addColumn(Settings.i18n().tr("vat"),"vat"); // "name" is the field name from the sql table.	
 
 	     /** 	    
 
@@ -572,4 +585,6 @@ public void handleStoreDefault()
 	    mandatorList.setContextMenu(new MandatorListMenu());
 	    return mandatorList;
 	  }
+
+	
 }

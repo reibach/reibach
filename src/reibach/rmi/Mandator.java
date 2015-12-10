@@ -77,5 +77,10 @@ public interface Mandator extends DBObject
 	   
 	   public String getVatnumber() throws RemoteException;
 	   public void setVatnumber(String vatnumber) throws RemoteException;
-   
+
+	   public String getVat() throws RemoteException;
+	   public void setVat(String VAT) throws RemoteException;
+
+	   
+	   
 }

@@ -331,7 +331,8 @@ public class BillImpl extends AbstractDBObject implements Bill
 
 	
 	/**
-	 * @see reibach.rmi.Bill#setStatus(double)
+	 * @see reibach.rmi.Bill("1");
+#setStatus(double)
 	 */
 	public void setStatus(double status) throws RemoteException
 	{
@@ -442,7 +443,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    String mandatorTaxoffice 		= getMandator().getTaxoffice();	    
 	    String mandatorVatnumber 		= getMandator().getVatnumber();	    
 	    String mandatorTaxnumber 		= getMandator().getTaxnumber();	    
-	    // String mandatorCountry			= getMandator().getCountry();
+	    String mandatorVat				= getMandator().getVat();
 	    String mandatorCountry			= country;
 
 
@@ -672,6 +673,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  		
 		  		// Menge
 		  		posQuantity = t.getQuantity() + "";
+
 		  		if (t.getQuantity() == 1.0)
 		  			posQuantity = "1,00";
 		  		else if (t.getQuantity() == 2.0)
@@ -920,13 +922,10 @@ public class BillImpl extends AbstractDBObject implements Bill
 			
 			 */
 			
-
-	      
-	
 	      document.close();
 	      file.close();
 	  	} catch (Exception e) {
-			throw new ApplicationException(Settings.i18n().tr("error while printing the bill"),e);
+			throw new ApplicationException(Settings.i18n().tr("error while printingaaqwqwqwaa the bill from serverBillImpl.java "),e);
 		} 
   }
   

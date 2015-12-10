@@ -22,6 +22,7 @@ CREATE TABLE mandator (
   taxoffice varchar(27) ,
   vatnumber varchar(27) ,
   taxnumber varchar(27) ,
+  vat tinyint(4) ,
   comment text,
   UNIQUE (id),
   PRIMARY KEY (id)

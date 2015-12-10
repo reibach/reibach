@@ -387,6 +387,16 @@ public class MandatorImpl extends AbstractDBObject implements Mandator
     return (String) getAttribute("taxoffice");
   }
 
+  public void setVat(String vat) throws RemoteException
+  {
+  	setAttribute("vat",vat);
+  }
+
+  public String getVat() throws RemoteException
+  {
+    return (String) getAttribute("vat");
+  }
+
   public void setVatnumber(String vatnumber) throws RemoteException
   {
   	setAttribute("vatnumber",vatnumber);
