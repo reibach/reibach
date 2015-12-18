@@ -88,4 +88,6 @@
   <services>
     <service name="reibachdatabase" depends="" autostart="true" class="reibach.rmi.REIBACHDBService" />
   </services>
+
+
 </plugin>

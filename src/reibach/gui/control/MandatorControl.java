@@ -407,7 +407,7 @@ public Input getVat() throws RemoteException
 {
 	if (vat != null)
 		return vat;
-	
+
 	vat = new TextInput(getMandator().getVat());
 	vat.setName("vat");		
 	return vat;
