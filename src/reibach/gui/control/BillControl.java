@@ -259,19 +259,19 @@ public class BillControl extends AbstractControl
    * @throws RemoteException
    */
   public Input getEffortSummary() throws RemoteException
-	{
-		if (effortSummary != null)
-			return effortSummary;
+  {
+    if (effortSummary != null)
+	  return effortSummary;
 
     double effort = getBill().getEfforts();
     double sum = effort * getBill().getPrice();
 
     effortSummary = new LabelInput(Settings.DECIMALFORMAT.format(sum));
     // effortSummary.setName(Settings.i18n().tr("Efforts"));
-//    effortSummary.setComment(Settings.i18n().tr("{0} [{1} Hours]",Settings.CURRENCY,Settings.DECIMALFORMAT.format(effort)));
+    // effortSummary.setComment(Settings.i18n().tr("{0} [{1} Hours]",Settings.CURRENCY,Settings.DECIMALFORMAT.format(effort)));
     effortSummary.setComment(Settings.i18n().tr(" {1} $",Settings.CURRENCY,Settings.DECIMALFORMAT.format(effort)));
-		return effortSummary;
-	}
+	return effortSummary;
+  }
 
   /**
    * Creates a table containing all bills.
@@ -359,8 +359,8 @@ public String getPositionListPdf() throws RemoteException
 		// positionList.addColumn(Settings.i18n().tr("Bill ID"),this.getID());
 		positionList.addColumn(Settings.i18n().tr("Pos_num"),"pos_num");
 		positionList.addColumn(Settings.i18n().tr("Position name"),"name");
-		// positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity", new NumberFormatter(Settings.DECIMALFORMAT));
-		positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity");
+		positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
+		// positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity");
 		positionList.addColumn(Settings.i18n().tr("Unit"),"unit");
 		positionList.addColumn(Settings.i18n().tr("Price"),"price", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
 		positionList.addColumn(Settings.i18n().tr("Tax"),"tax", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));

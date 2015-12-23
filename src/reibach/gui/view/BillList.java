@@ -10,7 +10,7 @@ import de.willuhn.jameica.gui.parts.ButtonArea;
 
  
 /**
- * View to show the list of existing projects.
+ * View to show the list of existing bills
  */
 public class BillList extends AbstractView
 {

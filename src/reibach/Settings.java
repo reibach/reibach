@@ -3,13 +3,16 @@ package reibach;
 import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 
 import de.willuhn.datasource.rmi.DBService;
+// import de.willuhn.jameica.fibu.Fibu;
 import de.willuhn.jameica.system.Application;
 import de.willuhn.util.I18N;
 
 /**
- * This class holds some settings for our plugin.
+ * Verwaltet die Einstellungen des Plugins.
+ * @author gm
  */
 public class Settings
 {
@@ -17,10 +20,29 @@ public class Settings
 	private static DBService db;
 	private static I18N i18n;
 
+	
+	  /**
+	   * Die Settings.
+	   */
+	  public final static de.willuhn.jameica.system.Settings SETTINGS = new de.willuhn.jameica.system.Settings(REIBACH.class);
+
+
+/**
+   * Dateformatter.
+   */
+  public final static DateFormat LONGDATEFORMAT   = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+
   /**
    * Our DateFormatter.
    */
-  public final static DateFormat DATEFORMAT = DateFormat.getDateInstance(DateFormat.DEFAULT, Application.getConfig().getLocale());
+   // public final static DateFormat DATEFORMAT = DateFormat.getDateInstance(DateFormat.DEFAULT, Application.getConfig().getLocale());
+  
+  /**
+   * Dateformatter.
+   */
+  public final static DateFormat DATEFORMAT       = new SimpleDateFormat("dd.MM.yyyy");
+
+  
   
   /**
    * Our decimal formatter.
@@ -38,6 +60,8 @@ public class Settings
 		DECIMALFORMAT.setMaximumFractionDigits(2);
 	}
 
+	
+	
 	/**
 	 * Small helper function to get the database service.
    * @return db service.
