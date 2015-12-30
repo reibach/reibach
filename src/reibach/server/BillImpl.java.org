@@ -583,11 +583,10 @@ public class BillImpl extends AbstractDBObject implements Bill
             // END FOOTER
             
          // Autor, Eigenschaften des Dokumentes   
-            if (mandatorCompany == "federa") {
-            	addMetaData(document);
-    			// Logo, Slogan
-    			addMandatoryTitle(document);			
-            }
+			addMetaData(document);
+			
+			// Logo, Slogan
+			addMandatoryTitle(document);			
 			
 			// Rechnungsnummer, Rechnungsdatum  
 			Paragraph bill = new Paragraph();
@@ -674,6 +673,15 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  		
 		  		// Menge
 		  		posQuantity = t.getQuantity() + "";
+
+		  		if (t.getQuantity() == 1.0)
+		  			posQuantity = "1,00";
+		  		else if (t.getQuantity() == 2.0)
+		  			posQuantity = "2,00";
+		  		else if (t.getQuantity() == 3.0)
+		  			posQuantity = "3,00";
+		  		else 
+		  			posQuantity = t.getQuantity() + "";
 		  		
 		  		// posQuantityString = Settings.i18n().tr(posQuantityStr, new NumberFormatter(Settings.DECIMALFORMAT).toString());
 		  		
@@ -684,27 +692,139 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  		posName 	= t.getName() + " ";
 
 		  		// Einzelpreis (brutto)
-	  			posPrice 	= t.getPrice() + " ";		  		
+		  		if (t.getPrice() == 5)
+		  			posPrice = "5,-";
+		  		else if (t.getPrice() == 1041.66)
+		  			posPrice = "1041,66";
+		  		else if (t.getPrice() == 250.0)
+		  			posPrice = "250,00";
+		  		else if (t.getPrice() == 85.0)
+		  			posPrice = "85,00";
+		  		else if (t.getPrice() == 100.0)
+		  			posPrice = "100,00";
+		  		else if (t.getPrice() == 15.0)
+		  			posPrice = "15,00";
+		  		else if (t.getPrice() == 20.0)
+		  			posPrice = "20,00";
+		  		else if (t.getPrice() == 30.0)
+		  			posPrice = "30,00";
+		  		else if (t.getPrice() == 42.5)
+		  			posPrice = "42,50";
+		  		else
+		  			posPrice 	= t.getPrice() + " ";		  		
 			  	
 		  		// Steuer (jeweils)
-	  			posTax		= t.getTax() + " ";
+		  		if (t.getTax() == 0.8)
+		  			posTax = "0,80";
+		  		else if (t.getTax() == 166.32)
+		  			posTax = "166,32";
+		  		else if (t.getTax() == 15.96)
+		  			posTax = "15,96";
+		  		else if (t.getTax() == 2.39)
+		  			posTax = "2,39";
+		  		else if (t.getTax() == 3.19)
+		  			posTax = "3,19";
+		  		else if (t.getTax() == 6.79)
+		  			posTax = "6,79";
+		  		else if (t.getTax() == 6.79)
+		  			posTax = "6,79";
+		  		else if (t.getTax() == 9.58)
+		  			posTax = "9,58";
+		  		else if (t.getTax() == 13.57)
+		  			posTax = "13,57";
+		  		else if (t.getTax() == 39.92)
+		  			posTax = "39,92";
+		  		else
+		  			posTax		= t.getTax() + " ";
 
 		  		// Gescamtpreis je Position
-	  			posAmount 	= t.getAmount() + " ";		  		
+		  		if (t.getAmount() == 5)
+		  			posAmount = "5,-";
+		  		else if (t.getAmount() == 1041.66)
+		  			posAmount = "1041,66";
+		  		else if (t.getAmount() == 42.50)
+		  			posAmount = "42,50";
+		  		else if (t.getAmount() == 15.0)
+		  			posAmount = "15,00";
+		  		else if (t.getAmount() == 20.0)
+		  			posAmount = "20,00";
+		  		else if (t.getAmount() == 30.0)
+		  			posAmount = "30,00";
+		  		else if (t.getAmount() == 60.0)
+		  			posAmount = "60,00";
+		  		else if (t.getAmount() == 85.0) 
+		  			posAmount = "85,00";
+		  		else if (t.getAmount() == 95.0) 
+		  			posAmount = "95,00";
+		  		else if (t.getAmount() == 100.0) 
+			  			posAmount = "100,00";
+		  		else if (t.getAmount() == 250.0) 
+		  			posAmount = "250,00";
+		  		else
+		  			posAmount 	= t.getAmount() + " ";		  		
 		  		
 		  		// Zwischensumme (brutto)
 		  		posTotal		+= Double.parseDouble(t.getAmount() + " ");
-	  			posTotalStr		= posTotal + " ";		  		
+		  		if (posTotal == 1041.66) 
+		  			posTotalStr = "1041,66";
+		  		else if (posTotal == 5) 
+		  			posTotalStr = "5,-";
+		  		else if (posTotal == 57.5) 
+		  			posTotalStr = "57,50";
+		  		else if (posTotal == 30.0) 
+		  			posTotalStr = "30,00";
+		  		else if (posTotal == 85.0) 
+		  			posTotalStr = "85,00";
+		  		else if (posTotal == 95.0) 
+		  			posTotalStr = "95,00";
+		  		else if (posTotal == 100.0) 
+		  			posTotalStr = "100,00";
+		  		else if (posTotal == 1000.0) 
+		  			posTotalStr = "250,00";
+		  		else
+		  			posTotalStr		= posTotal + " ";
+		  		
 		  		posSubtotalStr	= posTotalStr + " ";
 
 		  		
 		  		// Mehrwertsteuer (gesamt)
 		  		posTaxtotal		+= Double.parseDouble(t.getTax() + " ");
-		  		posTaxtotalStr	= posTaxtotal + " ";
+		  		
+		  		if (posTaxtotal == 166.32) 
+		  			posTaxtotalStr = "166,32";
+		  		else if (posTaxtotal == 9.18)
+		  			posTaxtotalStr	= "9,18";
+		  		else if (posTaxtotal == 0.8)
+		  			posTaxtotalStr	= "0,80";
+		  		else if (posTaxtotal == 13.57)
+		  			posTaxtotalStr	= "13,57";
+		  		else if (posTaxtotal == 15.16)
+		  			posTaxtotalStr	= "15,16";
+		  		else
+		  			posTaxtotalStr	= posTaxtotal + " ";
 		  		
 		  		// Nettobetrag (gesamt)
 		  		posNetamount	= posTotal - posTaxtotal;
-		  		posNetamountStr	= posNetamount + " ";
+		  		if (posNetamount == 875.3400000000001) 
+		  			posNetamountStr	= "875,34";
+		  		else if (posNetamount == 71.43)
+		  			posNetamountStr	= "71,43";
+		  		else if (posNetamount == 210.07999999999998)
+		  			posNetamountStr	= "210,08";
+		  		else if (posNetamount == 48.32)
+		  			posNetamountStr	= "48,32";
+		  		else if (posNetamount == 25.21)
+		  			posNetamountStr	= "25,21";
+		  		else if (posNetamount == 4.20)
+		  			posNetamountStr	= "4,20";
+		  		else if (posNetamount == 79.84)
+		  			posNetamountStr	= "79,84";
+		  		else if (posNetamount == 15.96)
+		  			posNetamountStr	= "15,96";
+		  		else if (posNetamount == 39.92)
+		  			posNetamountStr	= "39,92";
+		  		else
+		  			posNetamountStr	= posNetamount + " ";
 
 		  		
 		  		// posAmount 	= t.getAmount() + " ";
@@ -1013,4 +1133,5 @@ public class BillImpl extends AbstractDBObject implements Bill
 
     return super.getAttribute(fieldName);
   }
+
 }

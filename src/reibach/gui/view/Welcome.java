@@ -24,7 +24,7 @@ public class Welcome extends AbstractView
 		
 		LabelGroup group = new LabelGroup(this.getParent(),Settings.i18n().tr("welcome"));
 		
-		group.addText(Settings.i18n().tr("Moin ;)"),false);
+		group.addText(Settings.i18n().tr("Moin, da geit wat.)"),false);
 
 	}
 

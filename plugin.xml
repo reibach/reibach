@@ -3,7 +3,7 @@
 <plugin xmlns="http://www.willuhn.de/schema/jameica-plugin"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.willuhn.de/schema/jameica-plugin http://www.willuhn.de/schema/jameica-plugin-1.0.xsd"
-        name="reibach" version="0.0.3" class="reibach.REIBACH">
+        name="reibach" version="0.0.4" class="reibach.REIBACH">
 
   <description>Rechnungs-Plugin for Jameica</description>
   <url></url>
@@ -47,6 +47,7 @@
       <!-- <item name="New Project" shortcut="ALT+P" action="reibach.gui.action.ProjectDetail" />
       <item name="New Customer List" shortcut="ALT+K" action="reibach.gui.action.CustomerList" /> //-->
       <item name="New Customer" shortcut="ALT+K" action="reibach.gui.action.CustomerDetail" />
+      <item name="New Offer" shortcut="ALT+O" action="reibach.gui.action.BillDetail" />
       <item name="New Bill" shortcut="ALT+R" action="reibach.gui.action.BillDetail" />
       <item name="New Article" shortcut="ALT+A" action="reibach.gui.action.ArticleDetail" />
       <item name="New Mandator" shortcut="ALT+M" action="reibach.gui.action.MandatorDetail" />
@@ -65,6 +66,7 @@
     <item name="Reibach" icon-close="folder.png" icon-open="folder-open.png" action="reibach.gui.action.Welcome">
       <!--       <item name="Projects" icon-close="text-x-generic.png" action="reibach.gui.action.ProjectList" /> //-->
       <item name="Customers" icon-close="text-x-generic.png" action="reibach.gui.action.CustomerList" />
+      <item name="Offers" icon-close="text-x-generic.png" action="reibach.gui.action.OffersList" />
       <item name="Bills" icon-close="text-x-generic.png" action="reibach.gui.action.BillList" />
       <item name="Articles" icon-close="text-x-generic.png" action="reibach.gui.action.ArticleList" />
       <item name="-" />
