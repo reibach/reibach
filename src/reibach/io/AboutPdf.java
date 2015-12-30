@@ -175,7 +175,7 @@ public class AboutPdf implements Action {
 		
 		// Lets write a big header
 		companiename.add(new Paragraph("federa", logo));
-		companiename.add(new Paragraph("Internet - Sasasasasupport - Sicherheit", smallFont));
+		companiename.add(new Paragraph("Internet - Ssupport - Sicherheit", smallFont));
 
 		document.add(companiename);
 

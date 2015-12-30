@@ -65,7 +65,7 @@
 
     <item name="Reibach" icon-close="folder.png" icon-open="folder-open.png" action="reibach.gui.action.Welcome">
       <!--       <item name="Projects" icon-close="text-x-generic.png" action="reibach.gui.action.ProjectList" /> //-->
-      <item name="Customers" icon-close="text-x-generic.png" action="reibach.gui.action.CustomerList" />
+      <item name="Kunden" icon-close="text-x-generic.png" action="reibach.gui.action.CustomerList" />
       <item name="Offers" icon-close="text-x-generic.png" action="reibach.gui.action.OffersList" />
       <item name="Bills" icon-close="text-x-generic.png" action="reibach.gui.action.BillList" />
       <item name="Articles" icon-close="text-x-generic.png" action="reibach.gui.action.ArticleList" />
