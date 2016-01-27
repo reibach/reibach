@@ -3,9 +3,9 @@ package reibach;
 import java.io.File;
 
 import de.willuhn.datasource.db.EmbeddedDatabase;
-import reibach.rmi.REIBACHDBService;
-import reibach.server.DBSupportH2Impl;
-import reibach.server.REIBACHDBServiceImpl;
+// import reibach.rmi.REIBACHDBService;
+// import reibach.server.DBSupportH2Impl;
+// import reibach.server.REIBACHDBServiceImpl;
 import de.willuhn.jameica.plugin.AbstractPlugin;
 import de.willuhn.jameica.plugin.Manifest;
 import de.willuhn.jameica.plugin.PluginResources;

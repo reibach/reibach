@@ -4,11 +4,12 @@ import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import de.willuhn.datasource.rmi.DBService;
-// import de.willuhn.jameica.fibu.Fibu;
 import de.willuhn.jameica.system.Application;
 import de.willuhn.util.I18N;
+
 
 /**
  * Verwaltet die Einstellungen des Plugins.
@@ -17,8 +18,9 @@ import de.willuhn.util.I18N;
 public class Settings
 {
 
-	private static DBService db;
-	private static I18N i18n;
+	private static volatile DBService db;
+	private static volatile I18N i18n;
+	Locale l = Locale.GERMANY;
 
 	
 	  /**

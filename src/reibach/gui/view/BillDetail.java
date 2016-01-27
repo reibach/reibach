@@ -42,8 +42,8 @@ public class BillDetail extends AbstractView
     ColumnLayout columns = new ColumnLayout(c.getComposite(),2);
 
     // left side
-    Container left = new SimpleContainer(columns.getComposite());
-    left.addHeadline(Settings.i18n().tr("Bill Details"));
+     Container left = new SimpleContainer(columns.getComposite());
+    // left.addHeadline(Settings.i18n().tr("Bill Details"));
 
     // Rechnungsnummer ausgeben
     String bill_id = control.getBill().getID();
