@@ -71,9 +71,9 @@ public class PositionControl extends AbstractControl
 			return bill;
 		
 		bill = new SelectInput(Settings.getDBService().createList(Bill.class),getPosition().getBill());
-    bill.setName(Settings.i18n().tr("Bill"));
-    bill.setMandatory(true);
-    return bill;
+		bill.setName(Settings.i18n().tr("Bill"));
+		bill.setMandatory(true);
+		return bill;
 	}
 
 	/**
@@ -138,7 +138,7 @@ public Input getPrice() throws RemoteException
 	// we assign our system decimal formatter
 	price = new DecimalInput(getPosition().getPrice(),Settings.DECIMALFORMAT);
 	price.setName(Settings.i18n().tr("Price"));
-	// price.setComment(Settings.i18n().tr("Hours [example: enter \"0,5\" to store 30 minutes]"));
+	price.setComment(Settings.i18n().tr("Hours [example: enter \"0,5\" to store 30 minutes]"));
 	return price;
 }
 
@@ -213,16 +213,43 @@ public Input getQuantity() throws RemoteException
 			Double q = (Double) getQuantity().getValue(); 
 			t.setQuantity(q == null ? 0 : q.doubleValue());
 
-			/*** Berechnung mittels NETTO - Verkaufspreis ***/
+
 			
+			/*** Berechnung mittels BRUTTO - Verkaufspreis ***/
+			
+			
+
+			
+			
+			/*** Berechnung mittels NETTO - Verkaufspreis ***/
+				
 			// Einzelpreis netto
 			// the DecimalInput fields returns a Double object
-			/*
-			 * Double d = (Double) getPrice().getValue(); 
-			 * d = Math.round( d * 100. ) / 100.;
-			 * t.setPrice(d == null ? 0.00 : d.doubleValue());
-			 */
+			 Double d = (Double) getPrice().getValue(); 
+			 d = Math.round( d * 100. ) / 100.;
+			 t.setPrice(d == null ? 0.00 : d.doubleValue());
+			 
+			// Einzelpreis brutto
+			// Betrag brutto bei 19 % MwSt:  Bruttobetrag = Menge * Einzelpreis brutto 
+			Double a = (Double) q * d * 1.19; 
+			a = Math.round( a * 100. ) / 100.;	
+			t.setAmount(a == null ? 0.00 : a.doubleValue());
 			
+			/* Nettobetrag ermitteln
+			 * Nettobetrag = Bruttobetrag : 1 + Umsatzsteuersatz
+			 */
+			Double n = (Double) a; 
+			n = Math.round( n * 100. ) / 100.;
+			
+			// Mehrwertsteueranteil in € berechnen 
+			// Umsatzsteuer = Bruttobetrag - Nettobetrag
+			Double x = (Double) a - n;
+			x = Math.round( x * 100. ) / 100.;
+			t.setTax(x == null ? 0.00 : x.doubleValue());						
+			t.setComment((String) getComment().getValue());
+
+			
+
 			// Betrag brutto bei 19 % MwSt Bruttobetrag = Menge * Nettobetrag ∙ (1 + Umsatzsteuersatz)
 			// Double a = (Double) q * d * 1.19; 
 			// a = Math.round( a * 100. ) / 100.;	
@@ -233,38 +260,6 @@ public Input getQuantity() throws RemoteException
 			x = Math.round( x * 100. ) / 100.;
 			t.setTax(x == null ? 0.0 : x.doubleValue());
 			*/
-
-			/*** Berechnung mittels BRUTTO - Verkaufspreis ***/
-
-			// Einzelpreis brutto
-			// the DecimalInput fields returns a Double object
-			 Double d = (Double) getPrice().getValue(); 
-			 d = Math.round( d * 100. ) / 100.;
-			 t.setPrice(d == null ? 0.00 : d.doubleValue());
-			 
-
-			// Einzelpreis brutto
-			// Betrag brutto bei 19 % MwSt:  Bruttobetrag = Menge * Einzelpreis brutto 
-			Double a = (Double) q * d; 
-			a = Math.round( a * 100. ) / 100.;	
-			t.setAmount(a == null ? 0.00 : a.doubleValue());
-			
-			/* Nettobetrag ermitteln
-			 * Nettobetrag = Bruttobetrag : 1 + Umsatzsteuersatz
-			 */
-			Double n = (Double) a/1.19; 
-			n = Math.round( n * 100. ) / 100.;
-			
-			// Mehrwertsteueranteil in € berechnen 
-			// Umsatzsteuer = Bruttobetrag - Nettobetrag
-			Double x = (Double) a - n;
-			x = Math.round( x * 100. ) / 100.;
-			t.setTax(x == null ? 0.00 : x.doubleValue());
-			
-
-			
-			t.setComment((String) getComment().getValue());
-
 			// Now, let's store the bill
 			// The store() method throws ApplicationExceptions if
 			// insertCheck() or updateCheck() failed.

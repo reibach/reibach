@@ -4,6 +4,6 @@
 	</p>
 
 	<p>
-	  Das ist ein Beispiel-Plugin.
+	  Das ist das Reibach-Plugin.
 	</p>
 </form>

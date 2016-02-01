@@ -1,5 +1,4 @@
 /**********************************************************************
- * $Source: /cvsroot/hibiscus/hibiscus/src/de/willuhn/jameica/hbci/server/DBSupportMySqlImpl.java,v $
  * $Revision: 1.11 $
  * $Date: 2010/11/02 12:02:19 $
  * $Author: willuhn $
@@ -49,7 +48,7 @@ public class DBSupportMySqlImpl extends AbstractDBSupportImpl
    */
   public String getJdbcUrl()
   {
-    return REIBACHDBService.SETTINGS.getString("database.driver.mysql.jdbcurl","jdbc:mysql://localhost:3306/hibiscus?useUnicode=Yes&characterEncoding=ISO8859_1");
+    return REIBACHDBService.SETTINGS.getString("database.driver.mysql.jdbcurl","jdbc:mysql://localhost:3306/reibach?useUnicode=Yes&characterEncoding=ISO8859_1");
   }
 
   /**
@@ -57,12 +56,12 @@ public class DBSupportMySqlImpl extends AbstractDBSupportImpl
    */
   public String getJdbcUsername()
   {
-    return REIBACHDBService.SETTINGS.getString("database.driver.mysql.username","hibiscus");
+    return REIBACHDBService.SETTINGS.getString("database.driver.mysql.username","reibach");
   }
 
   /**
    * Ueberschrieben, weil SQL-Scripts bei MySQL nicht automatisch durchgefuehrt werden.
-   * Andernfalls wuerde jeder Hibiscus-Client beim ersten Start versuchen, diese anzulegen.
+   * Andernfalls wuerde jeder reibach-Client beim ersten Start versuchen, diese anzulegen.
    * Das soll der Admin sicherheitshalber manuell durchfuehren. Wir hinterlassen stattdessen
    * nur einen Hinweistext mit den auszufuehrenden SQL-Scripts.
    * @see reibach.server.AbstractDBSupportImpl#execute(java.sql.Connection, java.io.File)
@@ -121,15 +120,3 @@ public class DBSupportMySqlImpl extends AbstractDBSupportImpl
 
 }
 
-
-/*********************************************************************
- * $Log: DBSupportMySqlImpl.java,v $
- * Revision 1.11  2010/11/02 12:02:19  willuhn
- * @R Support fuer McKoi entfernt. User, die noch dieses alte DB-Format nutzen, sollen erst auf Jameica 1.6/Hibiscus 1.8 (oder maximal Jameica 1.9/Hibiscus 1.11) wechseln, dort die Migration auf H2 durchfuehren und dann erst auf Hibiscus 1.12 updaten
- *
- * Revision 1.10  2010/02/10 14:32:59  willuhn
- * *** empty log message ***
- *
- * Revision 1.9  2009/04/05 21:40:56  willuhn
- * @C checkConnection() nur noch alle hoechstens 10 Sekunden ausfuehren
- **********************************************************************/

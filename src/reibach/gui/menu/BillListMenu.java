@@ -1,5 +1,7 @@
 package reibach.gui.menu;
 
+import reibach.gui.action.BillDelete;
+import reibach.gui.action.BillDetail;
 import reibach.gui.action.ProjectDelete;
 import reibach.gui.action.ProjectDetail;
 import reibach.gui.action.TaskDetail;
@@ -21,24 +23,24 @@ public class BillListMenu extends ContextMenu
   public BillListMenu()
 	{
 		// CheckedContextMenuItems will be disabled, if the user clicks into an empty space of the table
-		addItem(new CheckedContextMenuItem(Settings.i18n().tr("Open..."),new ProjectDetail()));
+		addItem(new CheckedContextMenuItem(Settings.i18n().tr("Open..."),new BillDetail()));
 
 		// separator
 		addItem(ContextMenuItem.SEPARATOR);
 
-		addItem(new CheckedContextMenuItem(Settings.i18n().tr("Add Task..."),new TaskDetail()));
+// 		addItem(new CheckedContextMenuItem(Settings.i18n().tr("Add Task..."),new TaskDetail()));
 
 		addItem(new ContextMenuItem(Settings.i18n().tr("New..."),new Action()
 		{
 			public void handleAction(Object context) throws ApplicationException
 			{
 				// we force the context to be null to create a new project in any case
-				new ProjectDetail().handleAction(null);
+				new BillDetail().handleAction(null);
 			}
 		}));
 
 		addItem(ContextMenuItem.SEPARATOR);
-		addItem(new CheckedContextMenuItem(Settings.i18n().tr("Delete..."),new ProjectDelete()));
+		addItem(new CheckedContextMenuItem(Settings.i18n().tr("Delete..."),new BillDelete()));
 
 	}
 }

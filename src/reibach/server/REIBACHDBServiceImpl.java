@@ -1,5 +1,4 @@
 /**********************************************************************
- * $Source: /cvsroot/hibiscus/hibiscus/src/de/willuhn/jameica/hbci/server/REIBACHDBServiceImpl.java,v $
  * $Revision: 1.32 $
  * $Date: 2011/07/25 10:00:41 $
  * $Author: willuhn $
@@ -80,7 +79,7 @@ public class REIBACHDBServiceImpl extends DBServiceImpl implements REIBACHDBServ
   public String getName() throws RemoteException
   {
 		I18N i18n = Application.getPluginLoader().getPlugin(REIBACH.class).getResources().getI18N();
-    return i18n.tr("Datenbank-Service f�r Hibiscus");
+    return i18n.tr("DatabaseService for Reibach");
   }
 
   /**
@@ -160,7 +159,7 @@ public class REIBACHDBServiceImpl extends DBServiceImpl implements REIBACHDBServ
   {
     I18N i18n = Application.getPluginLoader().getPlugin(REIBACH.class).getResources().getI18N();
     ProgressMonitor monitor = Application.getCallback().getStartupMonitor();
-    monitor.setStatusText(i18n.tr("Installiere Hibiscus"));
+    monitor.setStatusText(i18n.tr("Installing Reibach"));
     this.driver.install();
     
     Manifest mf = Application.getPluginLoader().getPlugin(REIBACH.class).getManifest();
@@ -225,7 +224,6 @@ public class REIBACHDBServiceImpl extends DBServiceImpl implements REIBACHDBServ
  * @N explizites Encoding
  *
  * Revision 1.31  2010-11-02 11:32:09  willuhn
- * @R Alten SQL-Update-Mechanismus komplett entfernt. Wir haben das jetzt seit Hibiscus 1.8 (2008) aus Migrationsgruenden mit uns herumgetragen. Das ist jetzt lange genug her. User, die noch Hibiscus < 1.8 nutzen, muessen jetzt erst auf 1.8 updaten, damit noch die letzten sql/update_x.y-x.y.sql ausgefuehrt werden und dann erst auf die aktuelle Version
  *
  * Revision 1.30  2010/04/21 10:39:52  willuhn
  * @N Beim Shutdown kein Backup erstellen, wenn ein Plugin einen Fehler an den Channel "jameica.error" gemeldet hat. Das soll verhindern, dass die Backup-Rotation die letzten noch verbliebenen intakten Backups ueberschreibt
@@ -267,8 +265,6 @@ public class REIBACHDBServiceImpl extends DBServiceImpl implements REIBACHDBServ
  * @N Neuer Konstruktor
  *
  * Revision 1.17  2007/04/23 18:07:15  willuhn
- * @C Redesign: "Adresse" nach "HibiscusAddress" umbenannt
- * @C Redesign: "Transfer" nach "HibiscusTransfer" umbenannt
  * @C Redesign: Neues Interface "Transfer", welches von Ueberweisungen, Lastschriften UND Umsaetzen implementiert wird
  * @N Anbindung externer Adressbuecher
  *

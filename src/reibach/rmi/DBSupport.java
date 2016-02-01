@@ -1,5 +1,4 @@
 /**********************************************************************
- * $Source: /cvsroot/hibiscus/hibiscus/src/de/willuhn/jameica/hbci/rmi/DBSupport.java,v $
  * $Revision: 1.9 $
  * $Date: 2010/11/02 12:02:20 $
  * $Author: willuhn $
@@ -21,7 +20,6 @@ import java.sql.Connection;
 /**
  * Interface fuer eine unterstuetzte Datenbank.
  * Fuer den Suppoert einer neuen Datenbank (z.Bsp. MySQL)
- * in Hibiscus muss dieses Interface implementiert werden.
  */
 public interface DBSupport extends Serializable
 {
@@ -107,7 +105,6 @@ public interface DBSupport extends Serializable
 /*********************************************************************
  * $Log: DBSupport.java,v $
  * Revision 1.9  2010/11/02 12:02:20  willuhn
- * @R Support fuer McKoi entfernt. User, die noch dieses alte DB-Format nutzen, sollen erst auf Jameica 1.6/Hibiscus 1.8 (oder maximal Jameica 1.9/Hibiscus 1.11) wechseln, dort die Migration auf H2 durchfuehren und dann erst auf Hibiscus 1.12 updaten
  *
  * Revision 1.8  2008/12/30 15:21:40  willuhn
  * @N Umstellung auf neue Versionierung
@@ -125,8 +122,6 @@ public interface DBSupport extends Serializable
  * @N Automatisches Neuerstellen der JDBC-Connection bei MySQL
  *
  * Revision 1.3  2007/04/23 18:07:14  willuhn
- * @C Redesign: "Adresse" nach "HibiscusAddress" umbenannt
- * @C Redesign: "Transfer" nach "HibiscusTransfer" umbenannt
  * @C Redesign: Neues Interface "Transfer", welches von Ueberweisungen, Lastschriften UND Umsaetzen implementiert wird
  * @N Anbindung externer Adressbuecher
  *

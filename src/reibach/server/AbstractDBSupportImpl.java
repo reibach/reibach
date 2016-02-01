@@ -1,5 +1,4 @@
 /**********************************************************************
- * $Source: /cvsroot/hibiscus/hibiscus/src/de/willuhn/jameica/hbci/server/AbstractDBSupportImpl.java,v $
  * $Revision: 1.7 $
  * $Date: 2011/07/25 10:05:32 $
  * $Author: willuhn $
@@ -153,7 +152,6 @@ public abstract class AbstractDBSupportImpl implements DBSupport
  * @N explizites Encoding
  *
  * Revision 1.6  2010-11-02 12:02:19  willuhn
- * @R Support fuer McKoi entfernt. User, die noch dieses alte DB-Format nutzen, sollen erst auf Jameica 1.6/Hibiscus 1.8 (oder maximal Jameica 1.9/Hibiscus 1.11) wechseln, dort die Migration auf H2 durchfuehren und dann erst auf Hibiscus 1.12 updaten
  *
  * Revision 1.5  2009/04/05 21:40:56  willuhn
  * @C checkConnection() nur noch alle hoechstens 10 Sekunden ausfuehren

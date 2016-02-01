@@ -47,38 +47,38 @@ import de.willuhn.util.ApplicationException;
 public class BillControl extends AbstractControl
 {
 
-  // list of all bills
-  private TablePart billList;
+    // list of all bills
+    private TablePart billList;
   
-  // Input fields for the bill attributes,
-  private TextInput name;
-  private TextAreaInput description;
-  private DecimalInput price;
+    // Input fields for the bill attributes,
+    private TextInput name;
+    private TextAreaInput description;
+    private DecimalInput price;
   
   
-  // private DateInput startDate;
-  private DateInput billDate;
+    // private DateInput startDate;
+    private DateInput billDate;
 
-  private LabelInput effortSummary;
+  	private LabelInput effortSummary;
 
 	// list of positions contained in this bill
 	private TablePart positionList;
 	
 	private String positionListPdf;
-
-    // this is the currently opened bill
-    private Bill bill;
-    
-    
-    /** Select fuer customer**/
-    private SelectInput customer; 
-    
-    /** Select fuer mandator**/
-    private SelectInput mandator; 
-    
-    
-    /** Select fuer Rechnungsstatus**/
-    private CheckboxInput status; 
+	
+	// this is the currently opened bill
+	private Bill bill;
+	
+	
+	/** Select fuer customer**/
+	private SelectInput customer; 
+	
+	/** Select fuer mandator**/
+	private SelectInput mandator; 
+	
+	
+	/** Select fuer Rechnungsstatus**/
+	private CheckboxInput status; 
     
     
     
@@ -297,7 +297,7 @@ public class BillControl extends AbstractControl
     billList = new TablePart(bills,new reibach.gui.action.BillDetail());
 
     // 5) now we have to add some columns.
-    // billList.addColumn(Settings.i18n().tr("Name of bill"),"name"); // "name" is the field name from the sql table.
+    billList.addColumn(Settings.i18n().tr("Name of bill"),"name"); // "name" is the field name from the sql table.
     billList.addColumn(Settings.i18n().tr("Bill number"),"id"); // "id" is the field id from the sql table.
     billList.addColumn(Settings.i18n().tr("Customer"),"customer_id"); // "name" is the field name from the sql table.
     // billList.addColumn(Settings.i18n().tr("Mandator"),"mandator_id"); // "name" is the field name from the sql table.
@@ -310,7 +310,8 @@ public class BillControl extends AbstractControl
     // 7) calculated bill price (price per hour * hours)
     billList.addColumn(Settings.i18n().tr("State of payment"),"pay_id"); // "name" is the field name from the sql table.
     // billList.addColumn(Settings.i18n().tr("Efforts"),"summary", new NumberFormatter(Settings.DECIMALFORMAT));
-    billList.addColumn(Settings.i18n().tr("Efforts"),"summary");
+    billList.addColumn(Settings.i18n().tr("Efforts net"),"description");
+    billList.addColumn(Settings.i18n().tr("Efforts gross"),"summary");
    // billList.addColumn(Settings.i18n().tr("Efforts"),"summary", new NumberFormatter(Settings.DECIMALFORMAT));
 
 	// 8) we are adding a context menu
@@ -390,7 +391,7 @@ public String getPositionListPdf() throws RemoteException
       }
     }));
     positionList.setContextMenu(tlm);
-    positionList.setSummary(false);
+    positionList.setSummary(true);
     return positionList;
 	}
 
