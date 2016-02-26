@@ -213,56 +213,24 @@ public Input getQuantity() throws RemoteException
 			Double q = (Double) getQuantity().getValue(); 
 			t.setQuantity(q == null ? 0 : q.doubleValue());
 
-
-			
-			/*** Berechnung mittels BRUTTO - Verkaufspreis ***/
-			
-			
-
-			
-			
-			/*** Berechnung mittels NETTO - Verkaufspreis ***/
-				
 			// Einzelpreis netto
 			// the DecimalInput fields returns a Double object
 			 Double d = (Double) getPrice().getValue(); 
 			 d = Math.round( d * 100. ) / 100.;
 			 t.setPrice(d == null ? 0.00 : d.doubleValue());
-			 
-			// Einzelpreis brutto
-			// Betrag brutto bei 19 % MwSt:  Bruttobetrag = Menge * Einzelpreis brutto 
-			Double a = (Double) q * d * 1.19; 
-			a = Math.round( a * 100. ) / 100.;	
-			t.setAmount(a == null ? 0.00 : a.doubleValue());
-			
-			/* Nettobetrag ermitteln
-			 * Nettobetrag = Bruttobetrag : 1 + Umsatzsteuersatz
-			 */
-			Double n = (Double) a; 
-			n = Math.round( n * 100. ) / 100.;
-			
+
 			// Mehrwertsteueranteil in € berechnen 
-			// Umsatzsteuer = Bruttobetrag - Nettobetrag
-			Double x = (Double) a - n;
+			// Umsatzsteuer = Anzahl * Einzelpreis * 1.19
+			Double x = (Double) q * d * 0.19;
 			x = Math.round( x * 100. ) / 100.;
 			t.setTax(x == null ? 0.00 : x.doubleValue());						
 			t.setComment((String) getComment().getValue());
 
-			
-
 			// Betrag brutto bei 19 % MwSt Bruttobetrag = Menge * Nettobetrag ∙ (1 + Umsatzsteuersatz)
-			// Double a = (Double) q * d * 1.19; 
-			// a = Math.round( a * 100. ) / 100.;	
-			// t.setAmount(a == null ? 0.0 : a.doubleValue());
-
-			// Mehrwertsteuer in € berechnen
-			/* Double x = (Double) q * d * 19/100 ; 
-			x = Math.round( x * 100. ) / 100.;
-			t.setTax(x == null ? 0.0 : x.doubleValue());
-			*/
-			// Now, let's store the bill
-			// The store() method throws ApplicationExceptions if
-			// insertCheck() or updateCheck() failed.
+			Double a = (Double) q * d; 
+			a = Math.round( a * 100. ) / 100.;	
+			t.setAmount(a == null ? 0.0 : a.doubleValue());
+			 
 			try
 			{
 				t.store();

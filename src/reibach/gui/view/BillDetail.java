@@ -47,7 +47,7 @@ public class BillDetail extends AbstractView
 
     // Rechnungsnummer ausgeben
     String bill_id = control.getBill().getID();
-    left.addHeadline(Settings.i18n().tr("Bill Number: " + bill_id));
+    left.addHeadline(Settings.i18n().tr("Bill number") + ": " + bill_id);
 
     left.addInput(control.getStatus());
     left.addInput(control.getMandator());

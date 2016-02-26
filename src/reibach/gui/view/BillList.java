@@ -9,7 +9,6 @@ import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.GUI;
 import de.willuhn.jameica.gui.internal.buttons.Back;
 import de.willuhn.jameica.gui.parts.ButtonArea;
-import de.willuhn.logging.Logger;
 
  
 /**
@@ -17,22 +16,12 @@ import de.willuhn.logging.Logger;
  */
 public class BillList extends AbstractView
 {
-
-	
-	Locale l = Locale.GERMANY;
-	// String lang    = Locale.getLanguage();
-    // String country = this.locale.getCountry();
-	
   /**
    * @see de.willuhn.jameica.gui.AbstractView#bind()
    */
   public void bind() throws Exception {
 
-// 		GUI.getView().setTitle(Settings.i18n().tr("Existing bills"+l));
 		GUI.getView().setTitle(Settings.i18n().tr("Existing bills"));
-
-		// GUI.getView().setTitle(Settings.i18n().tr("checking resource bundle for language"));
-
 		
 		BillControl control = new BillControl(this);
 		

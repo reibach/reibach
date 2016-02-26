@@ -382,9 +382,10 @@ public class BillImpl extends AbstractDBObject implements Bill
   	double sum = 0.00;
   	DBIterator i = getPositions();
   	while (i.hasNext())
-  	{
+  	{	
+  		
   		Position t = (Position) i.next();
-  		sum += t.getPrice();
+  		sum += t.getPrice()*t.getQuantity();
   	}
   	return sum;
   }
@@ -446,6 +447,8 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    String mandatorVat				= getMandator().getVat();
 	    String mandatorCountry			= country;
 
+	    
+	   
 
 	    DBIterator ipos = getPositions();
 		String str;
@@ -472,7 +475,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	  	String posPos_num 		= "";
 	  	
 	  	String posComment 		= "";
-	    String posTax 			= "";
+	    // String posTax 			= "";
 	    String posAmount 		= "";
 	    
 	    // Berechnung
@@ -508,27 +511,56 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  	/*
 		  	 *  generate the pdf
 		  	 */
-			  OutputStream file = new FileOutputStream(new File(billfile));
+			OutputStream file = new FileOutputStream(new File(billfile));
 			
-			  Document document = new Document(PageSize.A4, 36, 36, 54, 36);
-			  // String FILE = "/tmp/testme.pdf";
-			  PdfWriter writer = PdfWriter.getInstance(document, file);
-			  writer.setBoxSize("art", new Rectangle(36, 54, 559, 788));
-			
-			  // headers and footers must be added before the document is opened
-			  HeaderFooter event = new HeaderFooter();
-			  writer.setPageEvent(event);
+			Document document = new Document(PageSize.A4, 36, 36, 54, 36);
+			// String FILE = "/tmp/testme.pdf";
+			PdfWriter writer = PdfWriter.getInstance(document, file);
+			writer.setBoxSize("art", new Rectangle(36, 54, 559, 788));
+		
+			// headers and footers must be added before the document is opened
+			HeaderFooter event = new HeaderFooter();
+			writer.setPageEvent(event);
 			  
-			  PdfWriter.getInstance(document, file);
-			  document.open();
+			PdfWriter.getInstance(document, file);
+			document.open();
 			  
-			  PdfContentByte cb = writer.getDirectContent();
+            // START
+		    // cust.add(new Paragraph(mandatorCompany + " " + mandatorCompany, normal));	
+            
+            // Daten des Mandanten als Kopf
+            Paragraph manTitle = new Paragraph();
+    		manTitle.add(new Paragraph(mandatorCompany, logo));
+    		manTitle.add(new Paragraph("______", logo));
+    		manTitle.add(new Paragraph(mandatorSlogan, subHeadline));
+    		manTitle.add(new Paragraph(mandatorFirstname  + " " + mandatorLastname, normal));
+    		manTitle.add(new Paragraph(mandatorStreet + " " + mandatorHousenumber, normal));
+    		manTitle.add(new Paragraph(mandatorZipcode + " " + mandatorPlace, normal));
+    		manTitle.add(new Paragraph("mandatorVat: " + mandatorVat, normal));
+    		
+    		 // Steuer oder nicht 
+		    if (mandatorVat.equals("not")) { 
+				manTitle.add(new Paragraph("Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird Umsatzsteuer nicht berechnet!", chapterBold));
+		    } else {
+				manTitle.add(new Paragraph("Else will nix", chapterBold));
+		    	
+		    };
+			addEmptyLine(manTitle, 4);
+    		
+			addEmptyLine(manTitle, 2);
+    		document.add(manTitle);	
+
+            
+            // END
+
 			
-			  // Start FOOTER , Daten des Mandanten
-			  // add text at an absolute position
-			  cb.beginText();
-			  cb.setFontAndSize(bf_helv, 7);
+			PdfContentByte cb = writer.getDirectContent();
 			
+			// Start FOOTER , Daten des Mandanten
+			// add text at an absolute position
+			cb.beginText();
+			cb.setFontAndSize(bf_helv, 7);
+			  
 			cb.setTextMatrix(30, 20);
 			cb.showText(mandatorCountry);
 			cb.setTextMatrix(30, 30);
@@ -582,12 +614,15 @@ public class BillImpl extends AbstractDBObject implements Bill
             cb.endText();
             // END FOOTER
             
-         // Autor, Eigenschaften des Dokumentes   
-            if (mandatorCompany == "federa") {
-            	addMetaData(document);
+            
+            
+            
+            // Autor, Eigenschaften des Dokumentes   
+            // if (mandatorCompany == "federa") {
+            	// addMetaData(document);
     			// Logo, Slogan
-    			addMandatoryTitle(document);			
-            }
+    			// addMandatoryTitle(document);			
+            // }
 			
 			// Rechnungsnummer, Rechnungsdatum  
 			Paragraph bill = new Paragraph();
@@ -616,13 +651,14 @@ public class BillImpl extends AbstractDBObject implements Bill
 		    cust.add(new Paragraph(customerStreet + " " + customerHousenumber, normal));
 		    cust.add(new Paragraph(customerZipcode + " " + customerPlace, normal));	
 		    
+		    
 		    addEmptyLine(cust,3);
 		    document.add(cust);
 	    
-		    PdfPTable table = new PdfPTable(7);
+		    PdfPTable table = new PdfPTable(6);
 
 			table.setWidthPercentage(100);
-			table.setTotalWidth(new float[]{ 30,40,40,210,70,60,75 });
+			table.setTotalWidth(new float[]{ 30,40,40,230,70,80 });
 		    table.setLockedWidth(true);
   			
 			PdfPCell c1 = new PdfPCell(new Phrase("Pos", chapterBold));
@@ -641,9 +677,9 @@ public class BillImpl extends AbstractDBObject implements Bill
 			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			table.addCell(c1);			
 			
-			c1 = new PdfPCell(new Phrase(Settings.i18n().tr("VAT"), chapterBold));
-			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
-			table.addCell(c1);
+//			c1 = new PdfPCell(new Phrase(Settings.i18n().tr("VAT"), chapterBold));
+//			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+//			table.addCell(c1);
 
 			c1 = new PdfPCell(new Phrase(Settings.i18n().tr("Total price"), chapterBold));
 			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -654,7 +690,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 			
 			// pos.add(new Paragraph("POSPLACE" + posPlace));
 
-		    // pos.add(new Paragraph("SUM" + effortSummary));
+		    pos.add(new Paragraph("SUM" + effortSummary));
 			
 
 			
@@ -687,7 +723,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	  			posPrice 	= t.getPrice() + " ";		  		
 			  	
 		  		// Steuer (jeweils)
-	  			posTax		= t.getTax() + " ";
+	  			// posTax		= t.getTax() + " ";
 
 		  		// Gescamtpreis je Position
 	  			posAmount 	= t.getAmount() + " ";		  		
@@ -699,6 +735,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 
 		  		
 		  		// Mehrwertsteuer (gesamt)
+		  		
 		  		posTaxtotal		+= Double.parseDouble(t.getTax() + " ");
 		  		posTaxtotalStr	= posTaxtotal + " ";
 		  		
@@ -744,9 +781,9 @@ public class BillImpl extends AbstractDBObject implements Bill
 
 				table.addCell(c1);	
 
-				c1 = new PdfPCell(new Phrase(posTax + " €", chapter));
-				c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
-				table.addCell(c1);	
+				// c1 = new PdfPCell(new Phrase(posTax + " €", chapter));
+				// c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+				// table.addCell(c1);	
 
 				c1 = new PdfPCell(new Phrase(posAmount + " €", chapterBold));
 				c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -762,14 +799,20 @@ public class BillImpl extends AbstractDBObject implements Bill
 			Paragraph space = new Paragraph();
 			addEmptyLine(space, 2);
 			space.setAlignment(Element.ALIGN_RIGHT);
-			space.add(new Paragraph("Zwischensumme (brutto):  " + posSubtotalStr + " €", chapterBoldUnderline));
+			
+			
+			// c1 = new PdfPCell(new Phrase(Settings.i18n().tr("Description"), chapterBold));
+
+			// space.add(new Paragraph("Zwischensumme (brutto):  " +  posSubtotalStr + " €", chapterBoldUnderline));
+			space.add(new Paragraph(new Phrase(Settings.i18n().tr("Subtotal")+ ": " + posSubtotalStr, chapterBoldUnderline)));
 			// space.add(new Paragraph("__________________________" , chapterBold));
 			
 			// Nettobetrag 
-			space.add(new Paragraph("Nettobetrag:  " + posNetamountStr + " €", chapter));
+			// space.add(new Paragraph("Nettobetrag:  " + posNetamountStr + " €", chapter));
 			// 19% Mehrwertsteuer
-			space.add(new Paragraph("19% Mehrwertsteuer:  " + posTaxtotalStr + " €" , chapter));
-			addEmptyLine(space, 1);
+			// space.add(new Paragraph(new Phrase(Settings.i18n().tr("excl. 19% VAT")+ ": " + posTaxtotalStr + " €" , chapter)));
+//			space.add(new Paragraph("zzgl. 19% Mehrwertsteuer:  " + posTaxtotalStr + " €" , chapter));
+			// addEmptyLine(space, 1);
 		
 			// Gesamtbetrag (brutto) 
 			
@@ -778,6 +821,9 @@ public class BillImpl extends AbstractDBObject implements Bill
 			space.add(new Paragraph("Gesamtbetrag (brutto):  " + posTotalStr + " €", chapterBold));
 			space.add(new Paragraph("=========================" , chapterBold));
 			addEmptyLine(space, 4);
+
+			
+			
 			
 			// Zahlweise und allg. Beschreibung(en)
 			space.add(new Paragraph(billcomment, smallFont ));
@@ -835,13 +881,14 @@ public class BillImpl extends AbstractDBObject implements Bill
 	
 	private static void addMandatoryTitle(Document document)	throws DocumentException {
 		// Lets write a big header
-		/***
+		
 		Paragraph manTitle = new Paragraph();
-		manTitle.add(new Paragraph("federa", logo));
+// 		String mandatorCompany = getMandator().getCompany();
+	// 	manTitle.add(new Paragraph(mandatorCompany, logo));
 		manTitle.add(new Paragraph("______", logo));
 		manTitle.add(new Paragraph("Internet - Support - Sicherheit", smallFont));
 		document.add(manTitle);	
-		****/
+		
 		
 	    // testme.add(new Paragraph("The following chunk is "));
 		

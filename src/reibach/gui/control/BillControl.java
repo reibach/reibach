@@ -3,6 +3,8 @@ package reibach.gui.control;
 import java.rmi.RemoteException;
 import java.util.Date;
 
+import javax.swing.text.NumberFormatter;
+
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
@@ -167,7 +169,7 @@ public class BillControl extends AbstractControl
 			return status;
 		
 		status = new CheckboxInput(false);
-		status.setName(Settings.i18n().tr("Status"));
+		status.setName(Settings.i18n().tr("Paid yes/no"));
 		// status.setStatus(true);
 		return status;
 	}
@@ -264,12 +266,12 @@ public class BillControl extends AbstractControl
 	  return effortSummary;
 
     double effort = getBill().getEfforts();
-    double sum = effort * getBill().getPrice();
+    // double sum =  getBill().getPrice();
 
-    effortSummary = new LabelInput(Settings.DECIMALFORMAT.format(sum));
-    // effortSummary.setName(Settings.i18n().tr("Efforts"));
+    effortSummary = new LabelInput(Settings.DECIMALFORMAT.format(effort));
+    effortSummary.setName(Settings.i18n().tr("Efforts"));
     // effortSummary.setComment(Settings.i18n().tr("{0} [{1} Hours]",Settings.CURRENCY,Settings.DECIMALFORMAT.format(effort)));
-    effortSummary.setComment(Settings.i18n().tr(" {1} $",Settings.CURRENCY,Settings.DECIMALFORMAT.format(effort)));
+   //  effortSummary.setComment(Settings.i18n().tr(" {1} $",Settings.CURRENCY,Settings.DECIMALFORMAT.format(effort)));
 	return effortSummary;
   }
 
@@ -297,7 +299,7 @@ public class BillControl extends AbstractControl
     billList = new TablePart(bills,new reibach.gui.action.BillDetail());
 
     // 5) now we have to add some columns.
-    billList.addColumn(Settings.i18n().tr("Name of bill"),"name"); // "name" is the field name from the sql table.
+    // billList.addColumn(Settings.i18n().tr("Name of bill"),"name"); // "name" is the field name from the sql table.
     billList.addColumn(Settings.i18n().tr("Bill number"),"id"); // "id" is the field id from the sql table.
     billList.addColumn(Settings.i18n().tr("Customer"),"customer_id"); // "name" is the field name from the sql table.
     // billList.addColumn(Settings.i18n().tr("Mandator"),"mandator_id"); // "name" is the field name from the sql table.
@@ -334,10 +336,10 @@ public String getPositionListPdf() throws RemoteException
 		
 		while (positions.hasNext())
 	  	{
-			// positionListPdf += Settings.i18n().tr("quantity", new NumberFormatter(Settings.DECIMALFORMAT).toString());
-			// positionListPdf += Settings.i18n().tr("unit", new NumberFormatter(Settings.DECIMALFORMAT).toString());
-			positionListPdf += Settings.i18n().tr("quantity");
-			positionListPdf += Settings.i18n().tr("unit");
+			positionListPdf += Settings.i18n().tr("quantity", new NumberFormatter(Settings.DECIMALFORMAT).toString());
+			positionListPdf += Settings.i18n().tr("unit", new NumberFormatter(Settings.DECIMALFORMAT).toString());
+			// positionListPdf += Settings.i18n().tr("quantity");
+			// positionListPdf += Settings.i18n().tr("unit");
 	  	}
 
 		return positionListPdf;
@@ -360,12 +362,12 @@ public String getPositionListPdf() throws RemoteException
 		// positionList.addColumn(Settings.i18n().tr("Bill ID"),this.getID());
 		positionList.addColumn(Settings.i18n().tr("Pos_num"),"pos_num");
 		positionList.addColumn(Settings.i18n().tr("Position name"),"name");
-		positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
-		// positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity");
+		// positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
+		positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity");
 		positionList.addColumn(Settings.i18n().tr("Unit"),"unit");
-		positionList.addColumn(Settings.i18n().tr("Price"),"price", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
-		positionList.addColumn(Settings.i18n().tr("Tax"),"tax", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
-		positionList.addColumn(Settings.i18n().tr("Amount"),"amount", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
+		positionList.addColumn(Settings.i18n().tr("Price per unit net"),"price", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
+// 		positionList.addColumn(Settings.i18n().tr("Tax 19%"),"tax", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
+		positionList.addColumn(Settings.i18n().tr("Amount net"),"amount", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
 
 		/****
 		positionList.addColumn(Settings.i18n().tr("Amount"),"amount",new Formatter()
@@ -383,7 +385,8 @@ public String getPositionListPdf() throws RemoteException
 		PositionListMenu tlm = new PositionListMenu();
 
 		// we add an additional menu item to create positions with predefined bill.
-		tlm.addItem(new ContextMenuItem(Settings.i18n().tr("Create new position within this Bill"),new Action()
+		// tlm.addItem(new ContextMenuItem(Settings.i18n().tr("Create new position within this Bill"),new Action()
+		tlm.addItem(new ContextMenuItem(Settings.i18n().tr("Take an article to this bill"),new Action()
     {
       public void handleAction(Object context) throws ApplicationException
       {
