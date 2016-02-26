@@ -536,17 +536,8 @@ public class BillImpl extends AbstractDBObject implements Bill
     		manTitle.add(new Paragraph(mandatorFirstname  + " " + mandatorLastname, normal));
     		manTitle.add(new Paragraph(mandatorStreet + " " + mandatorHousenumber, normal));
     		manTitle.add(new Paragraph(mandatorZipcode + " " + mandatorPlace, normal));
-    		manTitle.add(new Paragraph("mandatorVat: " + mandatorVat, normal));
-    		
-    		 // Steuer oder nicht 
-		    if (mandatorVat.equals("not")) { 
-				manTitle.add(new Paragraph("Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird Umsatzsteuer nicht berechnet!", chapterBold));
-		    } else {
-				manTitle.add(new Paragraph("Else will nix", chapterBold));
-		    	
-		    };
-			addEmptyLine(manTitle, 4);
-    		
+    		// manTitle.add(new Paragraph("mandatorVat: " + mandatorVat, normal));
+    		    		
 			addEmptyLine(manTitle, 2);
     		document.add(manTitle);	
 
@@ -820,7 +811,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 			//------------------------------
 			space.add(new Paragraph("Gesamtbetrag (brutto):  " + posTotalStr + " €", chapterBold));
 			space.add(new Paragraph("=========================" , chapterBold));
-			addEmptyLine(space, 4);
+			addEmptyLine(space, 2);
 
 			
 			
@@ -831,8 +822,21 @@ public class BillImpl extends AbstractDBObject implements Bill
 			addEmptyLine(space, 1);
 			
 			document.add(space);
-	
 			
+			
+			Paragraph Tax = new Paragraph();
+    		// Tax.add(new Paragraph("mandatorVat: " + mandatorVat, normal));
+   		 	
+	    	// Steuer oder nicht 
+		    if (mandatorVat.equals("not")) { 
+				Tax.add(new Paragraph("Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird Umsatzsteuer nicht berechnet!", chapterBold));
+		    } else {
+				Tax.add(new Paragraph("Else will nix", chapterBold));
+		    	
+		    };
+			addEmptyLine(Tax, 4);
+
+			document.add(Tax);
 			
 			 
             // step 4	        
