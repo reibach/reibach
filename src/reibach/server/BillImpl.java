@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.itextpdf.text.*;
@@ -21,6 +22,7 @@ import de.willuhn.datasource.rmi.DBIterator;
 import de.willuhn.datasource.rmi.DBService;
 import de.willuhn.datasource.rmi.ObjectNotFoundException;
 import de.willuhn.jameica.gui.formatter.CurrencyFormatter;
+import de.willuhn.jameica.system.Application;
 import de.willuhn.logging.Logger;
 import de.willuhn.util.ApplicationException;
 
@@ -53,7 +55,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	private static final long serialVersionUID = 1L;
 	// par.getFont().setStyle(Font.UNDERLINE | Font.STRIKETHRU);
 	private static Font logo = new Font(Font.FontFamily.HELVETICA, 36, Font.BOLDITALIC );
-	private static Font headline = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
+	private static Font headline = new Font(Font.FontFamily.HELVETICA, 24, Font.UNDERLINE);
 	private static Font subHeadline = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
 
 	private static Font chapter = new Font(Font.FontFamily.HELVETICA , 10, Font.NORMAL);
@@ -403,9 +405,18 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    String billfile		= "/tmp/RE_" + billnumber + ".pdf";
 	    String country		= "Germany";
 	    
-	    String billdate 	= getBillDate().toString();	      
-	    String billcomment 	= getDescription();	      
+ 	   //  String billdate 	= getBillDate().toString();	      
+	    // this.df = new SimpleDateFormat("EEEE, dd.MM.yyyy HH:mm", Application.getConfig().getLocale());
+
 	    
+	    java.util.Date myDate = new java.util.Date();
+	    SimpleDateFormat df 		= new SimpleDateFormat("dd.MM.yyyy", Application.getConfig().getLocale());	      
+	    String billdate = df.format(myDate);
+	   
+	   // 	    String billdate = getBillDate().toLocaleString();
+	    // String billdate = getBillDate().;
+	    
+	    String billcomment 	= getDescription();	      	    
 	    
 	    // Get the Data of Customer
 	    // Kundennummer
@@ -417,8 +428,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    String customerStreet 		= getCustomer().getStreet();
 	    String customerZipcode 		= getCustomer().getZipcode();
 	    String customerHousenumber 	= getCustomer().getHousenumber();
-	    String customerPlace 		= getCustomer().getPlace();	    
-	    
+	    String customerPlace 		= getCustomer().getPlace();	    	    
 	    
 
 	    // Get the Data of mandator	    	    
@@ -470,7 +480,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    // double posQuantityStr	= 0;
 
 	    String posUnit 			= "";
-	  	String posPrice 		= "";
+	  	double posPrice 		= 0;
 	    
 	  	String posPos_num 		= "";
 	  	
@@ -530,9 +540,14 @@ public class BillImpl extends AbstractDBObject implements Bill
             
             // Daten des Mandanten als Kopf
             Paragraph manTitle = new Paragraph();
-    		manTitle.add(new Paragraph(mandatorCompany, logo));
-    		manTitle.add(new Paragraph("______", logo));
-    		manTitle.add(new Paragraph(mandatorSlogan, subHeadline));
+    		manTitle.add(new Paragraph(mandatorCompany, subHeadline));
+    		// manTitle.add(new Paragraph("______", headline));
+    		
+    		// if (mandatorVat.equals("not")) { 
+    		if (!mandatorSlogan.isEmpty()) {
+        		manTitle.add(new Paragraph(mandatorSlogan, subHeadline));   			
+    		};
+    			
     		manTitle.add(new Paragraph(mandatorFirstname  + " " + mandatorLastname, normal));
     		manTitle.add(new Paragraph(mandatorStreet + " " + mandatorHousenumber, normal));
     		manTitle.add(new Paragraph(mandatorZipcode + " " + mandatorPlace, normal));
@@ -544,68 +559,6 @@ public class BillImpl extends AbstractDBObject implements Bill
             
             // END
 
-			
-			PdfContentByte cb = writer.getDirectContent();
-			
-			// Start FOOTER , Daten des Mandanten
-			// add text at an absolute position
-			cb.beginText();
-			cb.setFontAndSize(bf_helv, 7);
-			  
-			cb.setTextMatrix(30, 20);
-			cb.showText(mandatorCountry);
-			cb.setTextMatrix(30, 30);
-			cb.showText(mandatorZipcode + " " + mandatorPlace);
-			cb.setTextMatrix(30, 40);
-			cb.showText(mandatorStreet + " " + mandatorHousenumber);
-			cb.setTextMatrix(30, 50);
-			cb.setFontAndSize(bf_helv_bold, 8);
-			cb.showText(mandatorCompany + " " + mandatorFirstname  + " " + mandatorLastname);
-			
-			cb.setFontAndSize(bf_helv, 7);
-			cb.setTextMatrix(150, 20);
-			cb.showText(mandatorWebsite);
-			cb.setTextMatrix(150, 30);
-			cb.showText(mandatorEmail);
-			cb.setTextMatrix(150, 40);
-			cb.showText(mandatorFax);
-			cb.setTextMatrix(150, 50);
-			cb.showText(mandatorTel);
-            
-            cb.setTextMatrix(350, 20);
-            cb.showText(mandatorBankcodenumber);
-            cb.setTextMatrix(350, 30);
-            cb.showText(mandatorBankaccount);
-            cb.setTextMatrix(350, 40);
-            cb.showText(mandatorBankname);
-            cb.setTextMatrix(350, 50);
-            cb.showText(Settings.i18n().tr("Bank"));
-            
-            // cb.setTextMatrix(480, 10);
-            // cb.showText("BLZ: 29152300");
-            cb.setTextMatrix(480, 30);
-            cb.showText(mandatorTaxnumber);
-            cb.setTextMatrix(480, 40);
-            cb.showText(mandatorVatnumber);
-            cb.setTextMatrix(480, 50);
-            cb.showText(mandatorTaxoffice);
-            
-            cb.setTextMatrix(480, 22);
-            cb.setFontAndSize(bf_helv, 4);
-            cb.showText("generated by: ");
-
-            cb.setTextMatrix(510, 22);
-            cb.setFontAndSize(bf_helv_bold, 5);
-            cb.showText(" Reibach ");
-
-            cb.setTextMatrix(510, 18);
-            cb.setFontAndSize(bf_helv_obl, 4);
-            cb.showText(" ... to make a big haul ");
-            
-            cb.endText();
-            // END FOOTER
-            
-            
             
             
             // Autor, Eigenschaften des Dokumentes   
@@ -697,12 +650,12 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  		
 		  		// WORKAROUND --> START #############################################################################
 			  		
-		  		posPrice = t.getPrice() + "";
+		  		posPrice = t.getPrice();
 		  		
 		  		// Menge
 		  		posQuantity = t.getQuantity() + "";
 		  		
-		  		// posQuantityString = Settings.i18n().tr(posQuantityStr, new NumberFormatter(Settings.DECIMALFORMAT).toString());
+		  		// String posQuantityString = Settings.i18n().tr(posQuantityStr, new NumberFormatter(Settings.DECIMALFORMAT).toString());
 		  		
 		  		// Einheit
 		  		posUnit 	= t.getUnit() + " ";
@@ -711,15 +664,17 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  		posName 	= t.getName() + " ";
 
 		  		// Einzelpreis (brutto)
-	  			posPrice 	= t.getPrice() + " ";		  		
+	  			posPrice 	= t.getPrice();		  		
 			  	
 		  		// Steuer (jeweils)
 	  			// posTax		= t.getTax() + " ";
 
 		  		// Gescamtpreis je Position
-	  			posAmount 	= t.getAmount() + " ";		  		
+	  			posAmount 	= t.getAmount() + "";		  		
+	  			// positionList.addColumn(Settings.i18n().tr("Amount net"),"amount", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
 		  		
-		  		// Zwischensumme (brutto)
+	  			
+	  			// Zwischensumme (brutto)
 		  		posTotal		+= Double.parseDouble(t.getAmount() + " ");
 	  			posTotalStr		= posTotal + " ";		  		
 		  		posSubtotalStr	= posTotalStr + " ";
@@ -781,7 +736,11 @@ public class BillImpl extends AbstractDBObject implements Bill
 				table.addCell(c1);	
 
 				i++;
-		  	}
+		  	
+		  	
+		  	} // ENDE while
+			
+			
 			
 			document.add(table);
 
@@ -795,7 +754,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 			// c1 = new PdfPCell(new Phrase(Settings.i18n().tr("Description"), chapterBold));
 
 			// space.add(new Paragraph("Zwischensumme (brutto):  " +  posSubtotalStr + " €", chapterBoldUnderline));
-			space.add(new Paragraph(new Phrase(Settings.i18n().tr("Subtotal")+ ": " + posSubtotalStr, chapterBoldUnderline)));
+			space.add(new Paragraph(new Phrase(Settings.i18n().tr("Subtotal")+ ": " + posSubtotalStr  + " €", chapterBoldUnderline)));
 			// space.add(new Paragraph("__________________________" , chapterBold));
 			
 			// Nettobetrag 
@@ -838,6 +797,65 @@ public class BillImpl extends AbstractDBObject implements Bill
 
 			document.add(Tax);
 			
+			// Start FOOTER , Daten des Mandanten
+			// add text at an absolute position
+			PdfContentByte cb = writer.getDirectContent();
+			cb.beginText();
+			cb.setFontAndSize(bf_helv, 7);
+			  
+			cb.setTextMatrix(30, 20);
+			cb.showText(mandatorCountry);
+			cb.setTextMatrix(30, 30);
+			cb.showText(mandatorZipcode + " " + mandatorPlace);
+			cb.setTextMatrix(30, 40);
+			cb.showText(mandatorStreet + " " + mandatorHousenumber);
+			cb.setTextMatrix(30, 50);
+			cb.setFontAndSize(bf_helv_bold, 8);
+			cb.showText(mandatorCompany + " " + mandatorFirstname  + " " + mandatorLastname);
+			
+			cb.setFontAndSize(bf_helv, 7);
+			cb.setTextMatrix(160, 20);
+			cb.showText(mandatorWebsite);
+			cb.setTextMatrix(160, 30);
+			cb.showText(mandatorEmail);
+			cb.setTextMatrix(160, 40);
+			cb.showText(mandatorMobil);
+			cb.setTextMatrix(160, 50);
+			cb.showText(mandatorTel);
+            
+            cb.setTextMatrix(350, 20);
+            cb.showText(mandatorBankcodenumber);
+            cb.setTextMatrix(350, 30);
+            cb.showText(mandatorBankaccount);
+            cb.setTextMatrix(350, 40);
+            cb.showText(mandatorBankname);
+            cb.setTextMatrix(350, 50);
+            cb.showText(Settings.i18n().tr("Bank"));
+            
+            // cb.setTextMatrix(480, 10);
+            // cb.showText("BLZ: 29152300");
+            cb.setTextMatrix(480, 30);
+            cb.showText(mandatorTaxnumber);
+            cb.setTextMatrix(480, 40);
+            cb.showText(mandatorVatnumber);
+            cb.setTextMatrix(480, 50);
+            cb.showText(mandatorTaxoffice);
+            
+            cb.setTextMatrix(480, 22);
+            cb.setFontAndSize(bf_helv, 4);
+            cb.showText("generated by: ");
+
+            cb.setTextMatrix(510, 22);
+            cb.setFontAndSize(bf_helv_bold, 5);
+            cb.showText(" Reibach ");
+
+            cb.setTextMatrix(510, 18);
+            cb.setFontAndSize(bf_helv_obl, 4);
+            cb.showText(" ... to make a big haul ");
+            
+            cb.endText();
+            // END FOOTER
+
 			 
             // step 4	        
 			/*

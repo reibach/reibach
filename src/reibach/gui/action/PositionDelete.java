@@ -1,7 +1,7 @@
 package reibach.gui.action;
 
 import reibach.Settings;
-import reibach.rmi.Task;
+import reibach.rmi.Position;
 import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.messaging.StatusBarMessage;
 import de.willuhn.jameica.system.Application;
@@ -9,7 +9,7 @@ import de.willuhn.logging.Logger;
 import de.willuhn.util.ApplicationException;
 
 /**
- * Action for "delete task".
+ * Action for "delete position".
  */
 public class PositionDelete implements Action
 {
@@ -21,28 +21,28 @@ public class PositionDelete implements Action
   {
 
 		// check if the context is a project
-  	if (context == null || !(context instanceof Task))
-  		throw new ApplicationException(Settings.i18n().tr("Please choose a task you want to delete"));
+  	if (context == null || !(context instanceof Position))
+  		throw new ApplicationException(Settings.i18n().tr("Please choose a position you want to delete"));
 
-    Task t = (Task) context;
+    Position p = (Position) context;
     
     try
     {
 
-			// before deleting the task, we show up a confirm dialog ;)
+			// before deleting the position, we show up a confirm dialog ;)
       // before deleting the project, we show up a confirm dialog ;)
-      String question = Settings.i18n().tr("Do you really want to delete this task?");
+      String question = Settings.i18n().tr("Do you really want to delete this position?");
       if (!Application.getCallback().askUser(question))
         return;
 			
-      t.delete();
+      p.delete();
       // Send Status update message
-      Application.getMessagingFactory().sendMessage(new StatusBarMessage(Settings.i18n().tr("Task deleted successfully"),StatusBarMessage.TYPE_SUCCESS));
+      Application.getMessagingFactory().sendMessage(new StatusBarMessage(Settings.i18n().tr("Position deleted successfully"),StatusBarMessage.TYPE_SUCCESS));
     }
     catch (Exception e)
     {
-      Logger.error("error while deleting task",e);
-      throw new ApplicationException(Settings.i18n().tr("Error while deleting task"));
+      Logger.error("error while deleting position",e);
+      throw new ApplicationException(Settings.i18n().tr("Error while deleting position"));
     }
   }
 

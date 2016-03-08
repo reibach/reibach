@@ -9,6 +9,7 @@ import reibach.rmi.Position;
 import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.GUI;
+import de.willuhn.jameica.gui.input.DecimalInput;
 import de.willuhn.jameica.gui.internal.buttons.Back;
 import de.willuhn.jameica.gui.parts.ButtonArea;
 import de.willuhn.jameica.gui.util.ColumnLayout;
@@ -84,7 +85,6 @@ public class BillDetail extends AbstractView
 		// show position positions in this bill
 		new Headline(getParent(),Settings.i18n().tr("Positions within this bill"));
 		control.getPositionList().paint(getParent());
-		// control.getPositionPdf().paint(getParent());
 	}
 
 	/**

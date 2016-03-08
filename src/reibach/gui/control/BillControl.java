@@ -16,8 +16,7 @@ import reibach.Settings;
 import reibach.rmi.Bill;
 import reibach.rmi.Customer;
 import reibach.rmi.Mandator;
-import reibach.rmi.Position;
-// import reibach.gui.control.NumberFormatter;
+// import reibach.rmi.Position;
 
 import de.willuhn.datasource.rmi.DBIterator;
 import de.willuhn.datasource.rmi.DBService;
@@ -27,6 +26,7 @@ import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.Part;
 import de.willuhn.jameica.gui.formatter.CurrencyFormatter;
 import de.willuhn.jameica.gui.formatter.DateFormatter;
+import de.willuhn.jameica.gui.formatter.Formatter;
 import de.willuhn.jameica.gui.input.CheckboxInput;
 import de.willuhn.jameica.gui.input.DateInput;
 import de.willuhn.jameica.gui.input.DecimalInput;
@@ -346,50 +346,53 @@ public String getPositionListPdf() throws RemoteException
 	}
 
 
-  /**
+  	/**
 	 * Returns a list of positions in this bill.
-   * @return list of positions in this bill
-   * @throws RemoteException
-   */
-  public Part getPositionList() throws RemoteException
+	 * @return list of positions in this bill
+	 * @throws RemoteException
+	 */
+  	public Part getPositionList() throws RemoteException
 	{
 		if (positionList != null)
 			return positionList;
 
 		DBIterator positions = getBill().getPositions();
 		positionList = new TablePart(positions,new PositionDetail());
-		// positionList.addColumn(Settings.i18n().tr("ID"),"id");
-		// positionList.addColumn(Settings.i18n().tr("Bill ID"),this.getID());
+		positionList.addColumn(Settings.i18n().tr("ID"),"id");
+		//positionList.addColumn(Settings.i18n().tr("Bill ID"),this.getID());
 		positionList.addColumn(Settings.i18n().tr("Pos_num"),"pos_num");
 		positionList.addColumn(Settings.i18n().tr("Position name"),"name");
-		// positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
-		positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity");
+		
+		
+		// ERROR Menge muss in dezimalZahlen angezeigt werden 
+		// positionList.addColumn(Settings.i18n().tr("Quantity"), "quantity",new CurrencyFormatter(Settings.CURRENCY, Settings.DECIMALFORMAT));
+		positionList.addColumn(Settings.i18n().tr("Quantity"), "quantity");
+		
+		
 		positionList.addColumn(Settings.i18n().tr("Unit"),"unit");
 		positionList.addColumn(Settings.i18n().tr("Price per unit net"),"price", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
 // 		positionList.addColumn(Settings.i18n().tr("Tax 19%"),"tax", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
 		positionList.addColumn(Settings.i18n().tr("Amount net"),"amount", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
-
-		/****
-		positionList.addColumn(Settings.i18n().tr("Amount"),"amount",new Formatter()
 		
-		{
-      public String format(Object o)
-      {
-      	if (o == null)
-      		return "-";
-        return o + " h";
-      }
-    });
-      ****/
-    
+		
+		// Integer Myquantity = 220;
+		// positionList.addColumn(Settings.i18n().tr("Quantityasasa"), "quantity", new NumberFormatter(Settings.DECIMALFORMAT));
+		
+		positionList.addColumn(Settings.i18n().tr("Quantity"), "quantity");
+		
+		// quantity.setName(Settings.i18n().tr("Quantity"));
+		// return quantity;
+		
+		
+		
 		PositionListMenu tlm = new PositionListMenu();
 
 		// we add an additional menu item to create positions with predefined bill.
 		// tlm.addItem(new ContextMenuItem(Settings.i18n().tr("Create new position within this Bill"),new Action()
 		tlm.addItem(new ContextMenuItem(Settings.i18n().tr("Take an article to this bill"),new Action()
-    {
-      public void handleAction(Object context) throws ApplicationException
-      {
+		{
+			public void handleAction(Object context) throws ApplicationException
+		{
       	new PositionDetail().handleAction(getBill());
       }
     }));
