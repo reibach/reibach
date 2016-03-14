@@ -411,11 +411,11 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    
 	    java.util.Date myDate = new java.util.Date();
 	    SimpleDateFormat df 		= new SimpleDateFormat("dd.MM.yyyy", Application.getConfig().getLocale());	      
-	    String billdate = df.format(myDate);
-	   
-	   // 	    String billdate = getBillDate().toLocaleString();
-	    // String billdate = getBillDate().;
 	    
+	    // String billdate = getBillDate().toLocaleString();
+	    Date billdate = getBillDate();
+	    String bd = df.format(billdate);
+		   
 	    String billcomment 	= getDescription();	      	    
 	    
 	    // Get the Data of Customer
@@ -574,7 +574,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 			bill.add(new Paragraph(Settings.i18n().tr("Bill"), subHeadline));
 			bill.add(new Paragraph(Settings.i18n().tr("Bill number") + ": " + billnumber, normal));
 			bill.add(new Paragraph(Settings.i18n().tr("Customer number") + ": " + customerID, normal));	
-		    bill.add(new Paragraph(Settings.i18n().tr("Bill date")  + ": " +  billdate , normal));
+		    bill.add(new Paragraph(Settings.i18n().tr("Bill date")  + ": " +  bd , normal));
 			addEmptyLine(bill, 2);
 			
 			// We add one empty line

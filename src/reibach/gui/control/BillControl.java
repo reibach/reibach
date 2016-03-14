@@ -359,7 +359,7 @@ public String getPositionListPdf() throws RemoteException
 		DBIterator positions = getBill().getPositions();
 		positionList = new TablePart(positions,new PositionDetail());
 		positionList.addColumn(Settings.i18n().tr("ID"),"id");
-		//positionList.addColumn(Settings.i18n().tr("Bill ID"),this.getID());
+		positionList.addColumn(Settings.i18n().tr("Bill ID"), "bill_id");
 		positionList.addColumn(Settings.i18n().tr("Pos_num"),"pos_num");
 		positionList.addColumn(Settings.i18n().tr("Position name"),"name");
 		
@@ -371,7 +371,11 @@ public String getPositionListPdf() throws RemoteException
 		
 		positionList.addColumn(Settings.i18n().tr("Unit"),"unit");
 		positionList.addColumn(Settings.i18n().tr("Price per unit net"),"price", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
-// 		positionList.addColumn(Settings.i18n().tr("Tax 19%"),"tax", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
+		
+		// ASteuer nur anzeigen,m wenn 
+		positionList.addColumn(Settings.i18n().tr("Tax 19%"),"tax", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
+		
+		
 		positionList.addColumn(Settings.i18n().tr("Amount net"),"amount", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
 		
 		
