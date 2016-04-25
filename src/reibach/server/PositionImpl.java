@@ -255,7 +255,11 @@ public void setQuantity(double quantity) throws RemoteException
 	    setAttribute("amount",new Double(amount));
 	}
 
-	  /**
+
+	
+	
+	
+	/**
 	 * @see reibach.rmi.Bill#getPos_num()
 	 */
 	public String getPos_num() throws RemoteException
@@ -272,6 +276,7 @@ public void setQuantity(double quantity) throws RemoteException
 	    // So we have to make a java.lang.Double
 	    setAttribute("pos_num", pos_num);
 	}
+
 }
 
 

@@ -1,5 +1,6 @@
 package reibach.server;
 
+import java.text.DecimalFormat;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -25,9 +26,6 @@ import de.willuhn.jameica.gui.formatter.CurrencyFormatter;
 import de.willuhn.jameica.system.Application;
 import de.willuhn.logging.Logger;
 import de.willuhn.util.ApplicationException;
-
-
-
 
 /**
  * This is the implemtor of the bill interface.
@@ -403,18 +401,14 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    String billnumber  	= this.getID();
 	    
 	    String billfile		= "/tmp/RE_" + billnumber + ".pdf";
+	    
+	    // ERROR: country must be checked
 	    String country		= "Germany";
-	    
- 	   //  String billdate 	= getBillDate().toString();	      
-	    // this.df = new SimpleDateFormat("EEEE, dd.MM.yyyy HH:mm", Application.getConfig().getLocale());
 
-	    
-	    java.util.Date myDate = new java.util.Date();
-	    SimpleDateFormat df 		= new SimpleDateFormat("dd.MM.yyyy", Application.getConfig().getLocale());	      
-	    
-	    // String billdate = getBillDate().toLocaleString();
+	    // Rechnungsdatum 
+	    SimpleDateFormat SDF 		= new SimpleDateFormat("dd.MM.yyyy", Application.getConfig().getLocale());	      
 	    Date billdate = getBillDate();
-	    String bd = df.format(billdate);
+	    String MyBillDate = SDF.format(billdate);
 		   
 	    String billcomment 	= getDescription();	      	    
 	    
@@ -458,7 +452,9 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    String mandatorCountry			= country;
 
 	    
-	   
+		// Geld mit 000,00 und EUR anzeigen 	
+	    CurrencyFormatter  MyCF = new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT);
+
 
 	    DBIterator ipos = getPositions();
 		String str;
@@ -472,13 +468,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    
 	    // Get the Data of Positions	    
 	    String posName 			= "";
-	    
-	    String posQuantity 		= "";
-	    String posQuantityStr	= "";
-
-	    // double posQuantity 		= 0;
-	    // double posQuantityStr	= 0;
-
+	    double posQuantity 		= 0;
 	    String posUnit 			= "";
 	  	double posPrice 		= 0;
 	    
@@ -486,7 +476,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	  	
 	  	String posComment 		= "";
 	    // String posTax 			= "";
-	    String posAmount 		= "";
+	    double posAmount 		= 0;
 	    
 	    // Berechnung
 	    
@@ -505,6 +495,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 
 	    Double posEfforts 		= getEfforts();
 	  	String effortSummary = posEfforts.toString();
+		System.out.println("Zeile: " + "502");
 	  	
  	
 	  	try
@@ -516,7 +507,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	        BaseFont bf_helv_bold = BaseFont.createFont(BaseFont.HELVETICA_BOLD, "Cp1252", false);
 	        BaseFont bf_helv = BaseFont.createFont(BaseFont.HELVETICA, "Cp1252", false);
 	        BaseFont bf_helv_obl = BaseFont.createFont(BaseFont.HELVETICA_OBLIQUE, "Cp1252", false);
-	        BaseFont bf_helvbold_obl = BaseFont.createFont(BaseFont.HELVETICA_BOLDOBLIQUE, "Cp1252", false);
+	        // BaseFont bf_helvbold_obl = BaseFont.createFont(BaseFont.HELVETICA_BOLDOBLIQUE, "Cp1252", false);
 
 		  	/*
 		  	 *  generate the pdf
@@ -567,14 +558,15 @@ public class BillImpl extends AbstractDBObject implements Bill
     			// Logo, Slogan
     			// addMandatoryTitle(document);			
             // }
-			
+			System.out.println("Zeile: " + "564");
+
 			// Rechnungsnummer, Rechnungsdatum  
 			Paragraph bill = new Paragraph();
 			bill.setAlignment(Element.ALIGN_RIGHT);
 			bill.add(new Paragraph(Settings.i18n().tr("Bill"), subHeadline));
 			bill.add(new Paragraph(Settings.i18n().tr("Bill number") + ": " + billnumber, normal));
 			bill.add(new Paragraph(Settings.i18n().tr("Customer number") + ": " + customerID, normal));	
-		    bill.add(new Paragraph(Settings.i18n().tr("Bill date")  + ": " +  bd , normal));
+		    bill.add(new Paragraph(Settings.i18n().tr("Bill date")  + ": " +  MyBillDate , normal));
 			addEmptyLine(bill, 2);
 			
 			// We add one empty line
@@ -635,33 +627,39 @@ public class BillImpl extends AbstractDBObject implements Bill
 			// pos.add(new Paragraph("POSPLACE" + posPlace));
 
 		    pos.add(new Paragraph("SUM" + effortSummary));
-			
+			System.out.println("Zeile: " + "632");
+
 
 			
 			DBIterator positionListPdf = getPositions();
-			int i = 1;
-			String a;
+
+			// String a;
 			while (positionListPdf.hasNext())
 		  	{
 		  		Position t = (Position) positionListPdf.next();
 
-		  		// Pos Nummer
-		  		posPos_num 	= t.getPos_num();
 		  		
+				System.out.println("Zeile: " + "646");
+		  		// Pos Nummer
+		  		posPos_num 	= t.getPos_num() + " ";
+		  		
+		  		// posPos_num 	= "666";
+				System.out.println("Zeile: " + "649");
+
 		  		// WORKAROUND --> START #############################################################################
 			  		
 		  		posPrice = t.getPrice();
 		  		
 		  		// Menge
-		  		posQuantity = t.getQuantity() + "";
+		  		posQuantity = t.getQuantity();
 		  		
 		  		// String posQuantityString = Settings.i18n().tr(posQuantityStr, new NumberFormatter(Settings.DECIMALFORMAT).toString());
 		  		
 		  		// Einheit
-		  		posUnit 	= t.getUnit() + " ";
+		  		posUnit 	= t.getUnit();
 		  		
 		  		// Bescheibung
-		  		posName 	= t.getName() + " ";
+		  		posName 	= t.getName();
 
 		  		// Einzelpreis (brutto)
 	  			posPrice 	= t.getPrice();		  		
@@ -670,15 +668,14 @@ public class BillImpl extends AbstractDBObject implements Bill
 	  			// posTax		= t.getTax() + " ";
 
 		  		// Gescamtpreis je Position
-	  			posAmount 	= t.getAmount() + "";		  		
-	  			// positionList.addColumn(Settings.i18n().tr("Amount net"),"amount", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
+	  			posAmount 	= t.getAmount();		  		
 		  		
 	  			
 	  			// Zwischensumme (brutto)
 		  		posTotal		+= Double.parseDouble(t.getAmount() + " ");
-	  			posTotalStr		= posTotal + " ";		  		
+		  		posTotalStr		= posTotal + " ";		  		
 		  		posSubtotalStr	= posTotalStr + " ";
-
+		  		
 		  		
 		  		// Mehrwertsteuer (gesamt)
 		  		
@@ -687,19 +684,9 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  		
 		  		// Nettobetrag (gesamt)
 		  		posNetamount	= posTotal - posTaxtotal;
-		  		posNetamountStr	= posNetamount + " ";
+		  		posNetamountStr	= posNetamount + " ";		  		
+				System.out.println("Zeile: " + "688");
 
-		  		
-		  		// posAmount 	= t.getAmount() + " ";
-		  		// posQuantity = t.getQuantity();
-		  		
-		  		// positionList.addColumn(Settings.i18n().tr("Quantity"),"quantity", new NumberFormatter(Settings.DECIMALFORMAT));
-
-		  		//positionList.addColumn(Settings.i18n().tr("Price"),"price", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
-
-		  		// posQuantityStr = Settings.i18n().tr(posQuantity,posQuantity, new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT).toString());
-		  		
-		  		
 		  		
 		  		/**********
 		  		
@@ -709,11 +696,14 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  		
 		  		// posSubtotal	= Double.parseDouble(posAmount);
 		  		
-		  		a=""+i;
-		  		c1 = new PdfPCell(new Phrase(posPos_num, chapter));
+		  		
+		  		String posPos_num_Str = String.valueOf(posPos_num);
+		  		c1 = new PdfPCell(new Phrase(posPos_num_Str, chapter));
 		  		table.addCell(c1);
 				
-		  		c1 = new PdfPCell(new Phrase(posQuantity, chapter));
+		  		String posQuantity_Str = String.valueOf(posQuantity);
+		  		
+		  		c1 = new PdfPCell(new Phrase(posQuantity_Str, chapter));
 				table.addCell(c1);
 
 				c1 = new PdfPCell(new Phrase(posUnit, chapter));
@@ -722,7 +712,9 @@ public class BillImpl extends AbstractDBObject implements Bill
 				c1 = new PdfPCell(new Phrase(posName, chapter));
 				table.addCell(c1);
 				
-				c1 = new PdfPCell(new Phrase(posPrice + " €", chapter));
+				c1 = new PdfPCell(new Phrase(MyCF.format(posPrice), chapter));
+				// price.setComment(Settings.i18n().tr("Hours [example: enter \"0,5\" to store 30 minutes]"));
+				
 				c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 
 				table.addCell(c1);	
@@ -731,16 +723,15 @@ public class BillImpl extends AbstractDBObject implements Bill
 				// c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				// table.addCell(c1);	
 
-				c1 = new PdfPCell(new Phrase(posAmount + " €", chapterBold));
+				c1 = new PdfPCell(new Phrase(MyCF.format(posAmount), chapterBold));
 				c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				table.addCell(c1);	
 
-				i++;
-		  	
 		  	
 		  	} // ENDE while
 			
-			
+			System.out.println("Zeile: " + "727");
+
 			
 			document.add(table);
 
@@ -754,26 +745,18 @@ public class BillImpl extends AbstractDBObject implements Bill
 			// c1 = new PdfPCell(new Phrase(Settings.i18n().tr("Description"), chapterBold));
 
 			// space.add(new Paragraph("Zwischensumme (brutto):  " +  posSubtotalStr + " €", chapterBoldUnderline));
-			space.add(new Paragraph(new Phrase(Settings.i18n().tr("Subtotal")+ ": " + posSubtotalStr  + " €", chapterBoldUnderline)));
+			space.add(new Paragraph(new Phrase(Settings.i18n().tr("Subtotal")+ ": " + MyCF.format(posTotal), chapterBoldUnderline)));
 			// space.add(new Paragraph("__________________________" , chapterBold));
 			
-			// Nettobetrag 
-			// space.add(new Paragraph("Nettobetrag:  " + posNetamountStr + " €", chapter));
-			// 19% Mehrwertsteuer
-			// space.add(new Paragraph(new Phrase(Settings.i18n().tr("excl. 19% VAT")+ ": " + posTaxtotalStr + " €" , chapter)));
-//			space.add(new Paragraph("zzgl. 19% Mehrwertsteuer:  " + posTaxtotalStr + " €" , chapter));
-			// addEmptyLine(space, 1);
-		
-			// Gesamtbetrag (brutto) 
+
+			// 	
+			// CurrencyFormatter  MyCF = new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT);
+	
 			
-			//_____________________________
-			//------------------------------
-			space.add(new Paragraph("Gesamtbetrag (brutto):  " + posTotalStr + " €", chapterBold));
+			space.add(new Paragraph("Gesamtbetrag (brutto):  " + MyCF.format(posTotal), chapterBold));
+
 			space.add(new Paragraph("=========================" , chapterBold));
 			addEmptyLine(space, 2);
-
-			
-			
 			
 			// Zahlweise und allg. Beschreibung(en)
 			space.add(new Paragraph(billcomment, smallFont ));
@@ -793,7 +776,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 				Tax.add(new Paragraph("Else will nix", chapterBold));
 		    	
 		    };
-			addEmptyLine(Tax, 4);
+			addEmptyLine(Tax, 3);
 
 			document.add(Tax);
 			
@@ -830,7 +813,7 @@ public class BillImpl extends AbstractDBObject implements Bill
             cb.setTextMatrix(350, 40);
             cb.showText(mandatorBankname);
             cb.setTextMatrix(350, 50);
-            cb.showText(Settings.i18n().tr("Bank"));
+            cb.showText(Settings.i18n().tr("Bank"+" @ "+" € "));
             
             // cb.setTextMatrix(480, 10);
             // cb.showText("BLZ: 29152300");
@@ -856,20 +839,7 @@ public class BillImpl extends AbstractDBObject implements Bill
             cb.endText();
             // END FOOTER
 
-			 
-            // step 4	        
-			/*
-			 *
-			 */
-            
-			// addContent(document);
-			/*
-			 * 
-			 * Rechnungspositionen, Summe, Mehrwertsteuer 
-			 * addPositions(document);
-			
-			 */
-			
+			             
 	      document.close();
 	      file.close();
 	  	} catch (Exception e) {
@@ -888,143 +858,12 @@ public class BillImpl extends AbstractDBObject implements Bill
       }
   }
 
-	// iText allows to add metadata to the PDF which can be viewed in your Adobe
-	// Reader
-	// under File -> Properties
-	private static void addMetaData(Document document) {
-		document.addTitle("federa: Internet - Support - Sicherheit");
-		document.addSubject("Rechnung");
-		document.addKeywords("Internet - Support - Sicherheit");
-		document.addAuthor("gm");
-		document.addCreator("gm");
-	}
-	
-	
-	
-	private static void addMandatoryTitle(Document document)	throws DocumentException {
-		// Lets write a big header
-		
-		Paragraph manTitle = new Paragraph();
-// 		String mandatorCompany = getMandator().getCompany();
-	// 	manTitle.add(new Paragraph(mandatorCompany, logo));
-		manTitle.add(new Paragraph("______", logo));
-		manTitle.add(new Paragraph("Internet - Support - Sicherheit", smallFont));
-		document.add(manTitle);	
-		
-		
-	    // testme.add(new Paragraph("The following chunk is "));
-		
-		// Chunk chunk = new Chunk("federa",logo);
-		String mandatorCompany 			= "federa";
-		Chunk chunk = new Chunk(mandatorCompany,logo);
-	    chunk.setUnderline(2f, -4f);
-	    Paragraph paragraph = 
-	     new Paragraph("");
-	    paragraph.add(chunk);
-	    document.add(paragraph);
-	    
-	    Chunk chunk1 = new Chunk("Inasasternet - Support - Sicherheit", smallFont);
-	    document.add(chunk1);  
-	    
-
-	}
-	
-	private static void addTitlePage(Document document)	throws DocumentException {
-		Paragraph companiename = new Paragraph();
-		
-		// We add one empty line
-		addEmptyLine(companiename, 1);	
-
-		//Addressdaten Kunde
-		Paragraph customer_address = new Paragraph();
-		customer_address.add(new Paragraph("company" , normal));
-		customer_address.add(new Paragraph("title" , normal));
-		customer_address.add(new Paragraph("firstname lastname" , normal));
-		customer_address.add(new Paragraph("street housenumber" , normal));
-		customer_address.add(new Paragraph("zipcode place" , normal));
-		
-		// We add one empty line
-		addEmptyLine(customer_address, 2);
-		
-		customer_address.add(new Paragraph("customer_id", normal));
-		//customer_address.add(new Paragraph(name, normal));
-		customer_address.add(new Paragraph("payment", normal));
-
-		// We add one empty line
-		addEmptyLine(customer_address, 2);
-				
-		document.add(customer_address);
-	}		
-		
-		private static void addContent(Document document) throws DocumentException {
-			PdfPTable table = new PdfPTable(6);
-
-			table.setWidthPercentage(100);
-			table.setTotalWidth(new float[]{ 50, 300, 50 , 40 , 40, 40, });
-		    table.setLockedWidth(true);
-  			
-			PdfPCell c1 = new PdfPCell(new Phrase("Position"));
-			table.addCell(c1);
-			
-			c1 = new PdfPCell(new Phrase("Beschreibung"));
-			table.addCell(c1);
-			
-			c1 = new PdfPCell(new Phrase("Menge"));
-			table.addCell(c1);
-			
-			c1 = new PdfPCell(new Phrase("Preis"));
-			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
-			table.addCell(c1);
-			
-			c1 = new PdfPCell(new Phrase("MwSt"));
-			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
-			table.addCell(c1);
-			
-			c1 = new PdfPCell(new Phrase("Betrag"));
-			c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
-			table.addCell(c1);
-				
-			
-			table.setHeaderRows(1);
-			
-			table.addCell("");
-			table.addCell("1.1 Rund 3 Millionen Rechner wProzent) als die der Desktop-Systeme (–5,9 Prozent). ");
-			table.addCell("1.2");
-			table.addCell("1.3");
-			table.addCell("1.4");
-			table.addCell("1.5");
-			table.addCell("2.1");
-			table.addCell("2.2 Rund 3 Millionen Rechner w) als die der Desktop-Systeme (–5,9 Prozent).");
-			table.addCell("2.3");
-			table.addCell("2.4");
-			table.addCell("2.5");
-			table.addCell("2.6");
-		
-			table.addCell("3.1");
-			table.addCell("3.2 Rund 3 Millionen Rechner wmobilen Rechnern stärker nach (–8,8 Prozent) als die der Desktop-Systeme (–5,9 Prozent).");
-			table.addCell("3.3");
-			table.addCell("3.4");
-			table.addCell("3.5");
-			table.addCell("3.6");
-			document.add(table);
-			
-		
-			// We add one empty line
-			Paragraph space = new Paragraph();
-			space.add(new Paragraph("" , subHeadline));
-			addEmptyLine(space, 2);
-			document.add(space);
-			
-		}
 		private static void addEmptyLine(Paragraph paragraph, int number) {
 			for (int i = 0; i < number; i++) {
 				paragraph.add(new Paragraph(" "));
 			}
 		}			
-		private static void addFilledLine(Paragraph paragraph, String string) {
-				paragraph.add(new Paragraph(string));
-		}			
-		
+
 		
 		
   /**

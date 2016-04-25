@@ -204,6 +204,7 @@ public Input getQuantity() throws RemoteException
 			// invoke all Setters of this position and assign the current values
 			t.setName((String) getName().getValue());
 			t.setUnit((String) getUnit().getValue());
+			// t.setPos_num((Double) getPos_num().getValue());
 			t.setPos_num((String) getPos_num().getValue());
 			
 			// we can cast the value of the bill dialogInput directly to "Bill".
