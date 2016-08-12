@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 
 import reibach.Settings;
 import reibach.rmi.Customer;
+import reibach.rmi.Mandator;
 
 import de.willuhn.datasource.db.AbstractDBObject;
 import de.willuhn.datasource.rmi.DBIterator;
@@ -87,23 +88,26 @@ public class CustomerImpl extends AbstractDBObject implements Customer
     return (String) getAttribute("company");
   }
 
-  public void setTitle(String title) throws RemoteException
-  {
-  	setAttribute("title",title);
-  }
-  public String getTitle() throws RemoteException
-  {
-    return (String) getAttribute("title");
-  }
-
-  
   /**
-   * @see reibach.rmi.Customer#setName(java.lang.String)
+   * @see reibach.rmi.Customer#setCompany(java.lang.String)
    */
   public void setCompany(String company) throws RemoteException
   {
   	setAttribute("company",company);
   }
+
+  
+  public String getTitle() throws RemoteException
+  {
+    return (String) getAttribute("title");
+  }
+  
+  public void setTitle(String title) throws RemoteException
+  {
+  	setAttribute("title",title);
+  }
+  
+  
 
   /**
    * @see reibach.rmi.Customer#getName()
@@ -122,6 +126,36 @@ public class CustomerImpl extends AbstractDBObject implements Customer
   }
 
 
+  
+  /**
+   * @see reibach.rmi.Bill#getMandator
+   */
+  public Mandator getMandator() throws RemoteException
+  {
+  	// Yes, we can cast this directly to Mandator, because getForeignObject(String)
+  	// contains the mapping for this attribute.
+  	try
+  	{
+			return (Mandator) getAttribute("mandator_id");
+  	}
+  	catch (ObjectNotFoundException e)
+  	{
+  		return null;
+  	}
+  }
+
+	/**
+	 * @see reibach.rmi.Bill#setMandator(java.lang.String)
+	 */
+	public void setMandator(Mandator mandator) throws RemoteException
+	{
+  // Please use setField(<fieldname>,<value>) to store the data into the right field.
+  	setAttribute("mandator_id",mandator);
+	}
+
+
+	
+  
   /**
    * @see reibach.rmi.Customer#getName()
    */

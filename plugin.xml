@@ -3,7 +3,7 @@
 <plugin xmlns="http://www.willuhn.de/schema/jameica-plugin"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.willuhn.de/schema/jameica-plugin http://www.willuhn.de/schema/jameica-plugin-1.0.xsd"
-        name="reibach" version="0.0.5" class="reibach.REIBACH">
+        name="reibach" version="0.0.6" class="reibach.REIBACH">
 
   <description>Rechnungs-Plugin for Jameica</description>
   <url></url>
@@ -52,6 +52,7 @@
       <item name="New Bill" shortcut="ALT+R" action="reibach.gui.action.BillDetail" />
       <item name="New Article" shortcut="ALT+A" action="reibach.gui.action.ArticleDetail" />
       <item name="New Mandator" shortcut="ALT+M" action="reibach.gui.action.MandatorDetail" />
+      <item name="Choose Mandator" shortcut="ALT+C" action="reibach.gui.action.MandatorChoose" />
       <!-- use "-" as name to create a separator //-->
       <item name="-" />
             <item name="About" action="reibach.gui.action.About" />

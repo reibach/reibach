@@ -52,20 +52,20 @@ public class BillImpl extends AbstractDBObject implements Bill
 	 */
 	private static final long serialVersionUID = 1L;
 	// par.getFont().setStyle(Font.UNDERLINE | Font.STRIKETHRU);
-	private static Font logo = new Font(Font.FontFamily.HELVETICA, 36, Font.BOLDITALIC );
-	private static Font headline = new Font(Font.FontFamily.HELVETICA, 24, Font.UNDERLINE);
+	// private static Font logo = new Font(Font.FontFamily.HELVETICA, 36, Font.BOLDITALIC );
+	// private static Font headline = new Font(Font.FontFamily.HELVETICA, 24, Font.UNDERLINE);
 	private static Font subHeadline = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
 
 	private static Font chapter = new Font(Font.FontFamily.HELVETICA , 10, Font.NORMAL);
 	private static Font chapterBold = new Font(Font.FontFamily.HELVETICA , 10, Font.BOLD);
 	private static Font chapterBoldUnderline = new Font(Font.FontFamily.HELVETICA , 10, Font.UNDERLINE);
-	private static Font chapterRed = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL, BaseColor.RED);
+	// private static Font chapterRed = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL, BaseColor.RED);
 
 	
 	private static Font normal = new Font(Font.FontFamily.HELVETICA , 10, Font.NORMAL);
-	private static Font normalRed = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL, BaseColor.RED);
+	// private static Font normalRed = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL, BaseColor.RED);
 	
-	private static Font smallBold = new Font(Font.FontFamily.HELVETICA , 8, Font.BOLD);
+	// private static Font smallBold = new Font(Font.FontFamily.HELVETICA , 8, Font.BOLD);
 	private static Font smallFont = new Font(Font.FontFamily.HELVETICA , 8, Font.NORMAL);
 	/**
    * @throws RemoteException
@@ -75,7 +75,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	// private TablePart positionListPdf;
 	
 	// this is the currently opened bill
-    private Bill bill;
+    // private Bill bill;
 	
 	  public BillImpl() throws RemoteException
 	  {
@@ -318,6 +318,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 		setAttribute("description",description);
 	}
 
+
 	/**
 	 * @see reibach.rmi.Bill#setPrice(double)
 	 */
@@ -400,7 +401,8 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    // We are starting with the Bill
 	    String billnumber  	= this.getID();
 	    
-	    String billfile		= "/tmp/RE_" + billnumber + ".pdf";
+	    // String billfile		= "/tmp/RE_" + billnumber + ".pdf";
+	    String billfile		= "/home/gm/RE_" + billnumber + ".pdf";
 	    
 	    // ERROR: country must be checked
 	    String country		= "Germany";
@@ -428,7 +430,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    // Get the Data of mandator	    	    
 	    String mandatorCompany 			= getMandator().getCompany();
 	    String mandatorSlogan 			= getMandator().getSlogan();
-	    String mandatorTitle 			= getMandator().getTitle();
+	    // String mandatorTitle 			= getMandator().getTitle();
 	  	String mandatorFirstname 		= getMandator().getFirstname();
 	    String mandatorLastname 		= getMandator().getLastname();
 	    String mandatorStreet 			= getMandator().getStreet();
@@ -438,13 +440,13 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    String mandatorEmail			= getMandator().getEmail();	    	    
 	    String mandatorWebsite			= getMandator().getWebsite();	    	    
 	    String mandatorTel 				= getMandator().getTel();	    	    
-	    String mandatorFax 				= getMandator().getFax();	    	    
+	    // String mandatorFax 				= getMandator().getFax();	    	    
 	    String mandatorMobil 			= getMandator().getMobil();	    	    
 	    String mandatorBankname 		= getMandator().getBankname();	    
 	    String mandatorBankaccount 		= getMandator().getBankaccount();	    
 	    String mandatorBankcodenumber 	= getMandator().getBankcodenumber();	    
-	    String mandatorIban 			= getMandator().getIban();	    
-	    String mandatorBic 				= getMandator().getBic();	    
+	    // String mandatorIban 			= getMandator().getIban();	    
+	    // String mandatorBic 				= getMandator().getBic();	    
 	    String mandatorTaxoffice 		= getMandator().getTaxoffice();	    
 	    String mandatorVatnumber 		= getMandator().getVatnumber();	    
 	    String mandatorTaxnumber 		= getMandator().getTaxnumber();	    
@@ -455,15 +457,25 @@ public class BillImpl extends AbstractDBObject implements Bill
 		// Geld mit 000,00 und EUR anzeigen 	
 	    CurrencyFormatter  MyCF = new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT);
 
-
+	  
+	    
 	    DBIterator ipos = getPositions();
-		String str;
-		double quan = 0.00;
+		// double quan = 0.00;
 		
 		while (ipos.hasNext())
 	  	{
 			Position x  = (Position) ipos.next(); 
-			quan = x.getQuantity();
+			double quan = x.getQuantity();
+			System.out.println("Zeile: " + "469" + x);
+			System.out.println("Zeile: " + "470" + quan);
+			
+			double pric = x.getPrice();
+			System.out.println("Zeile: " + "473" + pric);
+			
+			System.out.println(	Settings.i18n().tr("Subtotal") + "475" + MyCF.format(pric));
+			
+
+
 	  	}
 	    
 	    // Get the Data of Positions	    
@@ -491,7 +503,6 @@ public class BillImpl extends AbstractDBObject implements Bill
 	    // Gesamtbetrag (brutto) / Zwischensumme (brutto)
 	    double posTotal			= 0;
 	    String posTotalStr 		= "";
-	    String posSubtotalStr 		= "";
 
 	    Double posEfforts 		= getEfforts();
 	  	String effortSummary = posEfforts.toString();
@@ -560,20 +571,43 @@ public class BillImpl extends AbstractDBObject implements Bill
             // }
 			System.out.println("Zeile: " + "564");
 
-			// Rechnungsnummer, Rechnungsdatum  
-			Paragraph bill = new Paragraph();
-			bill.setAlignment(Element.ALIGN_RIGHT);
-			bill.add(new Paragraph(Settings.i18n().tr("Bill"), subHeadline));
-			bill.add(new Paragraph(Settings.i18n().tr("Bill number") + ": " + billnumber, normal));
-			bill.add(new Paragraph(Settings.i18n().tr("Customer number") + ": " + customerID, normal));	
-		    bill.add(new Paragraph(Settings.i18n().tr("Bill date")  + ": " +  MyBillDate , normal));
-			addEmptyLine(bill, 2);
+			 
+			/* BUG: Nur wenn für jede Zeile ein Object erzeugt wird, klappt es mit der Rechtsausrichtung,
+			 * war mal anders, hier der ursprüngliche Code
+			
+			Paragraph billData = new Paragraph();
+			billData.add(new Paragraph(Settings.i18n().tr("Bill"), subHeadline));
+			billData.add(new Paragraph(Settings.i18n().tr("Bill number") + ": " + billnumber, normal));
+			billData.add(new Paragraph(Settings.i18n().tr("Customer number") + ": " + customerID, normal));	
+		    billData.add(new Paragraph(Settings.i18n().tr("Bill date")  + ": " +  MyBillDate , normal));
+			addEmptyLine(billData, 2);
 			
 			// We add one empty line
-			addEmptyLine(bill, 2);
+			addEmptyLine(billData, 2);
+			billData.setAlignment(Element.ALIGN_RIGHT);
 			
 			// writing 
-			document.add(bill);
+			document.add(billData);
+			
+			ENDE BUG */ 
+			
+			// Rechnungsnummer, Rechnungsdatum 
+			Paragraph p1 = new Paragraph(Settings.i18n().tr("Bill"), subHeadline);
+		    p1.setAlignment(Element.ALIGN_RIGHT);
+		    document.add(p1);
+		    
+			Paragraph p2 = new Paragraph(Settings.i18n().tr("Bill number") + ": " + billnumber, normal);
+		    p2.setAlignment(Element.ALIGN_RIGHT);
+		    document.add(p2);
+				
+			Paragraph p3 = new Paragraph(Settings.i18n().tr("Customer number") + ": " + customerID, normal);
+		    p3.setAlignment(Element.ALIGN_RIGHT);
+		    document.add(p3);
+				
+			Paragraph p4 = new Paragraph(Settings.i18n().tr("Bill date")  + ": " +  MyBillDate , normal);
+		    p4.setAlignment(Element.ALIGN_RIGHT);
+		    document.add(p4);
+				
 			
 			// Kundendaten
 			Paragraph cust = new Paragraph(); 
@@ -594,7 +628,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 		    PdfPTable table = new PdfPTable(6);
 
 			table.setWidthPercentage(100);
-			table.setTotalWidth(new float[]{ 30,40,40,230,70,80 });
+			table.setTotalWidth(new float[]{ 30,40,40,230,70,110 });
 		    table.setLockedWidth(true);
   			
 			PdfPCell c1 = new PdfPCell(new Phrase("Pos", chapterBold));
@@ -653,7 +687,10 @@ public class BillImpl extends AbstractDBObject implements Bill
 		  		// Menge
 		  		posQuantity = t.getQuantity();
 		  		
-		  		// String posQuantityString = Settings.i18n().tr(posQuantityStr, new NumberFormatter(Settings.DECIMALFORMAT).toString());
+		  		String posQuantityString = String.valueOf(posQuantity);
+		  		System.out.println("Zeile: " + "668");
+		  		System.out.println(posQuantityString);
+
 		  		
 		  		// Einheit
 		  		posUnit 	= t.getUnit();
@@ -674,7 +711,6 @@ public class BillImpl extends AbstractDBObject implements Bill
 	  			// Zwischensumme (brutto)
 		  		posTotal		+= Double.parseDouble(t.getAmount() + " ");
 		  		posTotalStr		= posTotal + " ";		  		
-		  		posSubtotalStr	= posTotalStr + " ";
 		  		
 		  		
 		  		// Mehrwertsteuer (gesamt)
@@ -735,50 +771,56 @@ public class BillImpl extends AbstractDBObject implements Bill
 			
 			document.add(table);
 
-			
-			// Zwischensumme (brutto)
+			// Zwischensumme
+			Paragraph p_subtotal = new Paragraph(Settings.i18n().tr("Subtotal")+ ": " + MyCF.format(posTotal), chapterBoldUnderline);
+			p_subtotal.setAlignment(Element.ALIGN_RIGHT);
+			document.add(p_subtotal);
+						
+			// Gesamtsumme
+			Paragraph p_amount = new Paragraph(Settings.i18n().tr("Amount gross")+ ": " + MyCF.format(posTotal), chapterBold);
+			p_amount.setAlignment(Element.ALIGN_RIGHT);
+			document.add(p_amount);
+						
+			// unterstrichen
+			Paragraph p_underline = new Paragraph(Settings.i18n().tr("========================="), chapterBold);
+			p_underline.setAlignment(Element.ALIGN_RIGHT);
+			document.add(p_underline);
+						
+						
+			  // Zwischensumme (brutto)
 			Paragraph space = new Paragraph();
 			addEmptyLine(space, 2);
 			space.setAlignment(Element.ALIGN_RIGHT);
 			
-			
-			// c1 = new PdfPCell(new Phrase(Settings.i18n().tr("Description"), chapterBold));
 
 			// space.add(new Paragraph("Zwischensumme (brutto):  " +  posSubtotalStr + " €", chapterBoldUnderline));
-			space.add(new Paragraph(new Phrase(Settings.i18n().tr("Subtotal")+ ": " + MyCF.format(posTotal), chapterBoldUnderline)));
-			// space.add(new Paragraph("__________________________" , chapterBold));
+			// space.add((new Phrase(Settings.i18n().tr("Subtotal")+ ": " + MyCF.format(posTotal), chapterBoldUnderline)));
+			// space.add(new Paragraph(new Phrase(Settings.i18n().tr("Amount gross")+ ": " + MyCF.format(posTotal), chapterBold)));
+			// space.add(new Paragraph("=========================" , chapterBold));
+			document.add(space);
 			
-
-			// 	
-			// CurrencyFormatter  MyCF = new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT);
-	
+			// Rechnungskommentar: Zahlweise und allg. Beschreibung(en) 
+			// unterstrichen
+			Paragraph p_billcomment = new Paragraph(Settings.i18n().tr(billcomment), chapterBold);
+			// p_billcomment.setAlignment(Element.ALIGN_RIGHT);
+			document.add(p_billcomment);
 			
-			space.add(new Paragraph("Gesamtbetrag (brutto):  " + MyCF.format(posTotal), chapterBold));
-
-			space.add(new Paragraph("=========================" , chapterBold));
-			addEmptyLine(space, 2);
-			
-			// Zahlweise und allg. Beschreibung(en)
-			space.add(new Paragraph(billcomment, smallFont ));
-			// 19% Mehrwertsteuer
-			addEmptyLine(space, 1);
 			
 			document.add(space);
 			
 			
-			Paragraph Tax = new Paragraph();
-    		// Tax.add(new Paragraph("mandatorVat: " + mandatorVat, normal));
+			Paragraph P_Tax = new Paragraph(Settings.i18n().tr("Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird Umsatzsteuer nicht berechnet!"), chapterBold);
+			// P_Tax.setAlignment(Element.ALIGN_RIGHT);
+			
+			// Tax.add(new Paragraph("mandatorVat: " + mandatorVat, normal));
    		 	
 	    	// Steuer oder nicht 
 		    if (mandatorVat.equals("not")) { 
-				Tax.add(new Paragraph("Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird Umsatzsteuer nicht berechnet!", chapterBold));
+				document.add(P_Tax);
 		    } else {
-				Tax.add(new Paragraph("Else will nix", chapterBold));
-		    	
+				document.add(new Paragraph("Else will nix", chapterBold));		    
 		    };
-			addEmptyLine(Tax, 3);
 
-			document.add(Tax);
 			
 			// Start FOOTER , Daten des Mandanten
 			// add text at an absolute position
@@ -813,7 +855,8 @@ public class BillImpl extends AbstractDBObject implements Bill
             cb.setTextMatrix(350, 40);
             cb.showText(mandatorBankname);
             cb.setTextMatrix(350, 50);
-            cb.showText(Settings.i18n().tr("Bank"+" @ "+" € "));
+            // cb.showText(Settings.i18n().tr("Bank"+" @ "+" € "));
+            cb.showText(Settings.i18n().tr("Bank"));
             
             // cb.setTextMatrix(480, 10);
             // cb.showText("BLZ: 29152300");
@@ -843,7 +886,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	      document.close();
 	      file.close();
 	  	} catch (Exception e) {
-			throw new ApplicationException(Settings.i18n().tr("error while printingaaqwqwqwaa the bill from serverBillImpl.java "),e);
+			throw new ApplicationException(Settings.i18n().tr("error while printing the bill in /home/gm/ from serverBillImpl.java "),e);
 		} 
   }
   

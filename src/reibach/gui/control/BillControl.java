@@ -142,8 +142,8 @@ public class BillControl extends AbstractControl
 
 
 	/**
-	 * Returns a the field to choose the project.
-	 * @return the project.
+	 * Returns a the field to choose the mandator.
+	 * @return the mandator.
 	 * @throws RemoteException
 	 */
 	public Input getMandator() throws RemoteException
@@ -266,12 +266,13 @@ public class BillControl extends AbstractControl
 	  return effortSummary;
 
     double effort = getBill().getEfforts();
-    // double sum =  getBill().getPrice();
+    double sum =  getBill().getPrice();
 
     effortSummary = new LabelInput(Settings.DECIMALFORMAT.format(effort));
     effortSummary.setName(Settings.i18n().tr("Efforts"));
-    // effortSummary.setComment(Settings.i18n().tr("{0} [{1} Hours]",Settings.CURRENCY,Settings.DECIMALFORMAT.format(effort)));
-   //  effortSummary.setComment(Settings.i18n().tr(" {1} $",Settings.CURRENCY,Settings.DECIMALFORMAT.format(effort)));
+//     effortSummary.setComment(Settings.i18n().tr("{0} [{1} Hours]",Settings.CURRENCY,Settings.DECIMALFORMAT.format(sum)));
+    effortSummary.setComment("sdsd" + sum);
+    // effortSummary.setComment(Settings.i18n().tr(" {1} $",Settings.CURRENCY,Settings.DECIMALFORMAT.format(effort)));
 	return effortSummary;
   }
 
@@ -302,7 +303,7 @@ public class BillControl extends AbstractControl
     // billList.addColumn(Settings.i18n().tr("Name of bill"),"name"); // "name" is the field name from the sql table.
     billList.addColumn(Settings.i18n().tr("Bill number"),"id"); // "id" is the field id from the sql table.
     billList.addColumn(Settings.i18n().tr("Customer"),"customer_id"); // "name" is the field name from the sql table.
-    // billList.addColumn(Settings.i18n().tr("Mandator"),"mandator_id"); // "name" is the field name from the sql table.
+    billList.addColumn(Settings.i18n().tr("Mandator"),"mandator_id"); // "name" is the field name from the sql table.
 
     // 6) the following fields are a date fields. So we add a date formatter. 
     billList.addColumn(Settings.i18n().tr("Bill date"),"billdate",new DateFormatter(Settings.DATEFORMAT));
@@ -372,8 +373,8 @@ public String getPositionListPdf() throws RemoteException
 		positionList.addColumn(Settings.i18n().tr("Unit"),"unit");
 		positionList.addColumn(Settings.i18n().tr("Price per unit net"),"price", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
 		
-		// ASteuer nur anzeigen,m wenn 
-		positionList.addColumn(Settings.i18n().tr("Tax 19%"),"tax", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
+		// 2DO: Steuer nur anzeigen, wenn gesetzt ist
+		// positionList.addColumn(Settings.i18n().tr("Tax 19%"),"tax", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));
 		
 		
 		positionList.addColumn(Settings.i18n().tr("Amount net"),"amount", new CurrencyFormatter(Settings.CURRENCY,Settings.DECIMALFORMAT));

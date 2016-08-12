@@ -4,12 +4,12 @@ import reibach.gui.action.BillDelete;
 import reibach.gui.action.BillPrintPdf;
 import reibach.gui.action.PositionDetail;
 import reibach.gui.control.BillControl;
-import reibach.io.AboutPdf;
-import reibach.rmi.Position;
+// import reibach.io.AboutPdf;
+// import reibach.rmi.Position;
 import de.willuhn.jameica.gui.AbstractView;
 import de.willuhn.jameica.gui.Action;
 import de.willuhn.jameica.gui.GUI;
-import de.willuhn.jameica.gui.input.DecimalInput;
+// import de.willuhn.jameica.gui.input.DecimalInput;
 import de.willuhn.jameica.gui.internal.buttons.Back;
 import de.willuhn.jameica.gui.parts.ButtonArea;
 import de.willuhn.jameica.gui.util.ColumnLayout;
@@ -36,6 +36,7 @@ public class BillDetail extends AbstractView
     // instanciate controller
     final BillControl control = new BillControl(this);
 
+    
     // control.getBillsID().paint(this.getParent());
     Container c = new SimpleContainer(getParent());
 
@@ -52,6 +53,17 @@ public class BillDetail extends AbstractView
 
     left.addInput(control.getStatus());
     left.addInput(control.getMandator());
+    
+    // Autor, Eigenschaften des Dokumentes   
+    
+    String myMandator = control.getMandator().toString();
+    if (myMandator == "federa") {
+		System.out.println("federa: " + "58");    
+    } else {
+		System.out.println("federa: " + "58" + control.getMandator());    
+		System.out.println("federa: " + "58" + myMandator);    
+    }
+    
     left.addInput(control.getCustomer());
     left.addInput(control.getBillDate());
     
@@ -60,8 +72,14 @@ public class BillDetail extends AbstractView
     right.addHeadline(Settings.i18n().tr("Description"));
     right.addInput(control.getDescription());
     
+    /* 
+    c.addHeadline(Settings.i18n().tr("Summar"));
     c.addHeadline(Settings.i18n().tr("Summary"));
-	//c.addInput(control.getEffortSummary());
+    c.addHeadline(Settings.i18n().tr("Zipcode"));
+    c.addHeadline(Settings.i18n().tr("zulu"));
+    */
+    
+    //c.addInput(control.getEffortSummary());
 	c.addInput(control.getEffortSummary());
 
     // add some buttons

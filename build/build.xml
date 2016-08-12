@@ -57,10 +57,8 @@
 
 		<path id="compilepath">
 			<pathelement path="${define.compilepath}" />			
-
-						<pathelement location="iText-5.0.6.jar" />
-			<!-- 
-			<pathelement location="lib/itextpdf-5.1.2.jar" />		//-->
+			<pathelement location="iText-5.0.6.jar" />
+			<!-- <pathelement location="itextpdf-5.5.9.jar" /> //--> 
       <fileset dir="." >
         <include name="${lib.dir}/**/*.jar" if="havelib"/>
       </fileset>

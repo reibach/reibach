@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 
 import reibach.Settings;
 import reibach.rmi.Article;
+import reibach.rmi.Mandator;
 
 import de.willuhn.datasource.db.AbstractDBObject;
 import de.willuhn.datasource.rmi.DBIterator;
@@ -132,6 +133,34 @@ public class ArticleImpl extends AbstractDBObject implements Article
   	setAttribute("comment",comment);
   }
 
+  
+  /**
+   * @see reibach.rmi.Bill#getMandator
+   */
+  public Mandator getMandator() throws RemoteException
+  {
+  	// Yes, we can cast this directly to Mandator, because getForeignObject(String)
+  	// contains the mapping for this attribute.
+  	try
+  	{
+			return (Mandator) getAttribute("mandator_id");
+  	}
+  	catch (ObjectNotFoundException e)
+  	{
+  		return null;
+  	}
+  }
+
+	/**
+	 * @see reibach.rmi.Bill#setMandator(java.lang.String)
+	 */
+	public void setMandator(Mandator mandator) throws RemoteException
+	{
+  // Please use setField(<fieldname>,<value>) to store the data into the right field.
+  	setAttribute("mandator_id",mandator);
+	}
+
+  
 	/**
 	 * @see reibach.rmi.Bill#getPrice()
 	 */

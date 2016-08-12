@@ -50,8 +50,8 @@ public class REIBACH extends AbstractPlugin
 		if (Application.inClientMode())
 			return;
 
-    try {
-
+		try {
+			
 			// Let's create an embedded Database
 			PluginResources res = Application.getPluginLoader().getPlugin(REIBACH.class).getResources();
 			Manifest mf = Application.getPluginLoader().getManifest(REIBACH.class);
