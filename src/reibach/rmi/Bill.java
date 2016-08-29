@@ -29,8 +29,8 @@ public interface Bill extends DBObject
 	  public double getPrice() throws RemoteException;
 	  public void setPrice(double price) throws RemoteException;
 	  
-	  public double getStatus() throws RemoteException;
-	  public void setStatus(double status) throws RemoteException;
+	  public Double getStatus() throws RemoteException;
+	  public void setStatus(Double status) throws RemoteException;
 	  
 	  public String getEmail() throws RemoteException;
 	  

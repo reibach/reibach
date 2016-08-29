@@ -54,8 +54,8 @@ public class PositionDetail extends AbstractView
 		// add some buttons
 		ButtonArea buttons = new ButtonArea();
 
-    buttons.addButton(new Back());
-		buttons.addButton(Settings.i18n().tr("Delete"), new PositionDelete(),control.getCurrentObject());
+		buttons.addButton(new Back());
+    	buttons.addButton(Settings.i18n().tr("Delete"), new PositionDelete(),control.getCurrentObject());
 		buttons.addButton(Settings.i18n().tr("Store"),  new Action()
 		{
 			public void handleAction(Object context) throws ApplicationException

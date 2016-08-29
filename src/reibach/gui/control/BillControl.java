@@ -158,21 +158,6 @@ public class BillControl extends AbstractControl
 	}
 
 	
-	/**
-	 * Returns a the field to choose the project.
-	 * @return the project.
-	 * @throws RemoteException
-	 */
-	public Input getStatus() throws RemoteException
-	{
-		if (status != null)
-			return status;
-		
-		status = new CheckboxInput(false);
-		status.setName(Settings.i18n().tr("Paid yes/no"));
-		// status.setStatus(true);
-		return status;
-	}
 
   
   /**
@@ -253,7 +238,22 @@ public class BillControl extends AbstractControl
     return billDate;
   }
 
- 
+ 	/**
+	 * Returns a the field to choose the status.
+	 * @return the status.
+	 * @throws RemoteException
+	 */
+	public Input getStatus() throws RemoteException
+	{
+		if (status != null)
+			return status;
+		
+		status = new CheckboxInput(false);
+		status.setName(Settings.i18n().tr("Paid yes/no"));
+		// status.setStatus(true);
+		return status;
+	}
+
 
 	/**
 	 * Returns a text label that contains the summary of all efforts in this bill.

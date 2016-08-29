@@ -346,7 +346,7 @@ public Input getMobil() throws RemoteException
 			try
 			{
 				t.store();
-      Application.getMessagingFactory().sendMessage(new StatusBarMessage(Settings.i18n().tr("Customer stored successfully"),StatusBarMessage.TYPE_SUCCESS));
+		        Application.getMessagingFactory().sendMessage(new StatusBarMessage(Settings.i18n().tr("Customer stored successfully"),StatusBarMessage.TYPE_SUCCESS));
 			}
 			catch (ApplicationException e)
 			{

@@ -28,11 +28,11 @@ public class CustomerList extends AbstractView
    */
   public void bind() throws Exception {
 
-	// Die Exception fliegt nur bei RMI-Kommunikation mit fehlendem RMI-Server
-    //   I18N i18n = Application.getPluginLoader().getPlugin(REIBACH.class).getResources().getI18N();
-    //   String host = Application.getServiceFactory().getLookupHost(REIBACH.class,"database");
-    //  int    port = Application.getServiceFactory().getLookupPort(REIBACH.class,"database");
-    //  String msg = i18n.tr("Hibiscus-Server \"{0}\" nicht erreichbar", (host + ":" + port));
+		// Die Exception fliegt nur bei RMI-Kommunikation mit fehlendem RMI-Server
+	    //   I18N i18n = Application.getPluginLoader().getPlugin(REIBACH.class).getResources().getI18N();
+	    //   String host = Application.getServiceFactory().getLookupHost(REIBACH.class,"database");
+	    //  int    port = Application.getServiceFactory().getLookupPort(REIBACH.class,"database");
+	    //  String msg = i18n.tr("Hibiscus-Server \"{0}\" nicht erreichbar", (host + ":" + port));
 	  
 		GUI.getView().setTitle(Settings.i18n().tr("Existing customers"));
 		CustomerControl control = new CustomerControl(this);

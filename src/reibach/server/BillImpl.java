@@ -273,7 +273,7 @@ public class BillImpl extends AbstractDBObject implements Bill
 	/**
 	 * @see reibach.rmi.Bill#getStatus()
 	 */
-	public double getStatus() throws RemoteException
+	public Double getStatus() throws RemoteException
 	{
 	    // AbstractDBObject will create a java.lang.Double.
 	    // We only have to cast it.
@@ -805,6 +805,13 @@ public class BillImpl extends AbstractDBObject implements Bill
 			// p_billcomment.setAlignment(Element.ALIGN_RIGHT);
 			document.add(p_billcomment);
 			
+			// Der Rechnungsbetrag ist ohne Abzug fällig innerhalb von 10 Tagen nach Erhalt der Rechnung.
+			// unterstrichen
+			// Paragraph p_paylimit = new Paragraph(Settings.i18n().tr("Der Rechnungsbetrag ist ohne Abzug fällig innerhalb von 10 Tagen nach Erhalt der Rechnung."), chapterBold);
+			// p_billcomment.setAlignment(Element.ALIGN_RIGHT);
+			// document.add(p_paylimit);
+						
+			
 			
 			document.add(space);
 			
@@ -821,7 +828,8 @@ public class BillImpl extends AbstractDBObject implements Bill
 				document.add(new Paragraph("Else will nix", chapterBold));		    
 		    };
 
-			
+		    
+		    
 			// Start FOOTER , Daten des Mandanten
 			// add text at an absolute position
 			PdfContentByte cb = writer.getDirectContent();
@@ -964,4 +972,10 @@ public class BillImpl extends AbstractDBObject implements Bill
 
     return super.getAttribute(fieldName);
   }
+
+@Override
+public void setStatus(Double status) throws RemoteException {
+	// TODO Automatisch generierter Methodenstub
+	
+}
 }

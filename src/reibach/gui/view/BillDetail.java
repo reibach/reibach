@@ -51,6 +51,9 @@ public class BillDetail extends AbstractView
     String bill_id = control.getBill().getID();
     left.addHeadline(Settings.i18n().tr("Bill number") + ": " + bill_id);
 
+    Double status = control.getBill().getStatus();
+    left.addHeadline(Settings.i18n().tr("Bill status") + ": " + status);
+
     left.addInput(control.getStatus());
     left.addInput(control.getMandator());
     
