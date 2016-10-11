@@ -183,7 +183,7 @@ public double getQuantity() throws RemoteException
 }
 
 /**
- * @see reibach.rmi.Bill#setPrice(double)
+ * @see reibach.rmi.Bill#setQuantity(double)
  */
 public void setQuantity(double quantity) throws RemoteException
 {

@@ -214,7 +214,7 @@ public class ArticleImpl extends AbstractDBObject implements Article
     // you can get the Database Service also via:
     // DBService service = this.getService();
     
-    // 3) We create the task list using getList(Class)
+    // 3) We create the article list using getList(Class)
     DBIterator articles = service.createList(Article.class);
         
     return articles;

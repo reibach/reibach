@@ -806,17 +806,17 @@ public class BillImpl extends AbstractDBObject implements Bill
 			document.add(p_billcomment);
 			
 			// addEmptyLine(space, 2);
-			document.add(space);
+			document.add(space); 
 
 			// Der Rechnungsbetrag ist ohne Abzug fällig innerhalb von 10 Tagen nach Erhalt der Rechnung.
 			// unterstrichen
-			Paragraph p_paylimit = new Paragraph(Settings.i18n().tr("Der Rechnungsbetrag ist ohne Abzug fällig innerhalb von 10 Tagen nach Erhalt der Rechnung."), chapterBold);
+			Paragraph p_paylimit = new Paragraph(Settings.i18n().tr("Payable without deduction"), chapterBold);
 			// p_paylimit.setAlignment(Element.ALIGN_RIGHT);
 			document.add(p_paylimit);			
 			
 			document.add(space);			
 			
-			Paragraph P_Tax = new Paragraph(Settings.i18n().tr("Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird Umsatzsteuer nicht berechnet!"), chapterBold);
+			Paragraph P_Tax = new Paragraph(Settings.i18n().tr("Tax Exemption"), chapterBold);
 			// P_Tax.setAlignment(Element.ALIGN_RIGHT);
 			
 			// Tax.add(new Paragraph("mandatorVat: " + mandatorVat, normal));
