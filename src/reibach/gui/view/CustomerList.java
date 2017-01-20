@@ -49,6 +49,9 @@ public class CustomerList extends AbstractView
 		
 		buttons.paint(getParent());
 		
+	    // left.addInput(control.getMandator());
+
+		
   }
 }
 
