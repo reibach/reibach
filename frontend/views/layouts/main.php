@@ -24,32 +24,31 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-
 <div class="wrap">
+
     <?php
     NavBar::begin([
-        'brandLabel' => 'Reibach',
+        'brandLabel' => Html::img('@web/images/reibach-logo-40x40.png', ['alt'=>'Reibach']).'Reibach',
+        //'brandLabel' => ,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'User', 'url' => ['/user/index']],
-        ['label' => 'Mandator', 'url' => ['/mandator/index']],
-        ['label' => 'Customer', 'url' => ['/customer/index']],
-        ['label' => 'Bill', 'url' => ['/bill/index']],
-		['label' => 'Position', 'url' => ['/position/index']],
-		['label' => 'Article', 'url' => ['/article/index']],
-		['label' => 'Position', 'url' => ['/position/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-       
+        ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
+        ['label' => Yii::t('app', 'User'), 'url' => ['/user/index']],
+        ['label' => Yii::t('app', 'Mandator'), 'url' => ['/mandator/index']],
+        ['label' => Yii::t('app', 'Customer'), 'url' => ['/customer/index']],
+        ['label' => Yii::t('app', 'Bill'), 'url' => ['/bill/index']],
+		['label' => Yii::t('app', 'Position'), 'url' => ['/position/index']],
+		['label' => Yii::t('app', 'Article'), 'url' => ['/article/index']],
+        //['label' => Yii::t('app', 'About'), 'url' => ['/site/about']],
+        //['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact']],       
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

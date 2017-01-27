@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\form\BillForm;
 use Yii;
 use frontend\models\Bill;
 use frontend\models\BillSearch;
@@ -61,24 +62,38 @@ class BillController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    //public function actionCreate()
+    //{
+        //$model = new Bill();
+
+        //if ($model->load(Yii::$app->request->post())) {
+            //$model->created_at = time();
+			//$model->updated_at = time();			
+			
+			//if ($model->save()) {
+				//return $this->redirect(['view', 'id' => $model->id]);
+			//} 
+			
+		//} else {
+			//return $this->render('create', [
+				//'model' => $model,
+			//]);
+		//}
+	//}
+
     public function actionCreate()
     {
-        $model = new Bill();
-
-        if ($model->load(Yii::$app->request->post())) {
-            $model->created_at = time();
-			$model->updated_at = time();			
-			
-			if ($model->save()) {
-				return $this->redirect(['view', 'id' => $model->id]);
-			} 
-			
-		} else {
-			return $this->render('create', [
-				'model' => $model,
-			]);
-		}
-	}
+        $model = new BillForm();
+        $model->bill = new Bill;
+        $model->bill->loadDefaultValues();
+        $model->setAttributes(Yii::$app->request->post());
+        
+        if (Yii::$app->request->post() && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', 'Bill has been created.');
+            return $this->redirect(['update', 'id' => $model->bill->id]);
+        }
+        return $this->render('create', ['model' => $model]);
+    }
 
 	
     /**
@@ -87,22 +102,32 @@ class BillController extends Controller
      * @param integer $id
      * @return mixed
      */
+    //public function actionUpdate($id)
+    //{
+        //$model = $this->findModel($id);
 
-
+        //if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect(['view', 'id' => $model->id]);
+        //} else {
+            //return $this->render('update', [
+                //'model' => $model,
+            //]);
+        //}
+    //}
 
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        $model = new BillForm();
+        $model->bill = $this->findModel($id);
+        $model->setAttributes(Yii::$app->request->post());
+        
+        if (Yii::$app->request->post() && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', 'Bill has been updated.');
+            return $this->redirect(['update', 'id' => $model->bill->id]);
         }
+        return $this->render('update', ['model' => $model]);
     }
-
+    
     /**
      * Deletes an existing Bill model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -130,5 +155,6 @@ class BillController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+        throw new HttpException(404, 'The requested page does not exist.');
     }
 }

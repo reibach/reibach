@@ -3,6 +3,7 @@ namespace frontend\models\form;
 
 use frontend\models\Bill;
 use frontend\models\Position;
+use frontend\models\Customer;
 use Yii;
 use yii\base\Model;
 use yii\widgets\ActiveForm;
@@ -16,7 +17,13 @@ class BillForm extends Model
     {
         return [
             [['Bill'], 'required'],
-            [['Positions'], 'safe'],
+            [['Positions'], 'safe'],      
+            [['customer_id'], 'required'],
+            [['customer_id', 'created_at', 'updated_at'], 'integer'],
+            [['description'], 'string'],
+            [['price', 'status'], 'number'],
+            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
+
         ];
     }
 
@@ -129,6 +136,8 @@ class BillForm extends Model
     {
         $models = [
             'Bill' => $this->bill,
+            'Customer' => $this->customer,
+            
         ];
         foreach ($this->positions as $id => $position) {
             $models['Position.' . $id] = $this->positions[$id];

@@ -2,50 +2,57 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Reibach ... to make a big haul.';
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1>Yo, </h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead"><?php echo Yii::t('app','This is Reibach'); ?></p>
+        <p class="lead">... to make a big haul</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+<!--
+        <p><img src="<?= yii\helpers\Url::to('@web/images/reibach-logo-460x460.png') ?>" /></p>
+-->
     </div>
 
     <div class="body-content">
 
         <div class="row">
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>Was ist Reibach?</h2>
+					<p>Reibach ist ein einfaches Rechnungsprogramm welches nur eine Registrierung benötigt, um 
+					lauffähig zu sein. Nach Eingabe der Grunddaten kann die erste Rechnung binnen Sekunden 
+					erstellt werden.  
+					</p>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
 
+<!--
                 <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+-->
             </div>
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>Für wen ist Reibach?</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <p>Reibach richtet sich an alle Personen, Firmen, Freischaffende oder Institutionen die Rechnungen stellen. 
+                
+                </p>
 
+<!--
                 <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+-->
             </div>
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>Warum kostet das nichts</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
+                <p>Reibach ist nicht umsonst, wer es nutzt, muss Werbung machen (Wasserzeichen) oder sich freikaufen. 
+                Das Lizensmodell wird noch ausgearbeitet, Spenden sind jetzt schon erwünscht. (Beratungs-)Dienstleistungen
+                werden erbracht und in Rechnung gestellt.  
+				</p>
+<!--
                 <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+-->
             </div>
         </div>
 
