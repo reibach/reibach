@@ -12,6 +12,7 @@ class BillForm extends Model
 {
     private $_bill;
     private $_positions;
+    private $_customers;
 
     public function rules()
     {
@@ -135,14 +136,14 @@ class BillForm extends Model
     private function getAllModels()
     {
         $models = [
-            'Bill' => $this->bill,
-            'Customer' => $this->customer,
-            
+            'Bill' => $this->bill,            
         ];
         foreach ($this->positions as $id => $position) {
             $models['Position.' . $id] = $this->positions[$id];
         }
         return $models;
     }
+    
+    
 }
 

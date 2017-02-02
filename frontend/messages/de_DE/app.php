@@ -50,6 +50,7 @@ return [
     'Mandator' => 'Mandant',
     'Mandators' => 'Mandanten',
     'Name' => 'Name',
+    'New Position' => 'Neue Position',
     'Password Hash' => 'Passwort',
     'Password Reset Token' => 'Passwort zur Wiederherstellung',
     'Positions' => 'Positionen',

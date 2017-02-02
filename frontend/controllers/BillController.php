@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use frontend\models\form\BillForm;
 use Yii;
 use frontend\models\Bill;
+use frontend\models\Position;
 use frontend\models\BillSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -65,8 +66,12 @@ class BillController extends Controller
     //public function actionCreate()
     //{
         //$model = new Bill();
+        //$modelPosition = new Position();
+        //$model->position = new Position();
+        //$model->position->loadDefaultValues();
 
-        //if ($model->load(Yii::$app->request->post())) {
+
+        //if ($model->load(Yii::$app->request->post()) && $modelPosition->load(Yii::$app->request->post()) && $model->save() && $modelPosition->save()) {
             //$model->created_at = time();
 			//$model->updated_at = time();			
 			
@@ -77,6 +82,8 @@ class BillController extends Controller
 		//} else {
 			//return $this->render('create', [
 				//'model' => $model,
+				//'modelPosition' => $modelPosition,
+				
 			//]);
 		//}
 	//}
@@ -84,13 +91,27 @@ class BillController extends Controller
     public function actionCreate()
     {
         $model = new BillForm();
+        //$model->position = new Position;
         $model->bill = new Bill;
+        
         $model->bill->loadDefaultValues();
         $model->setAttributes(Yii::$app->request->post());
         
-        if (Yii::$app->request->post() && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', 'Bill has been created.');
-            return $this->redirect(['update', 'id' => $model->bill->id]);
+
+        //if ($model->bill->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post()) && $model->bill->save() && $model->save()) {
+
+		// erst die Rechnung speichern, dann die RechnungsID übergeben und die Position(en) speichern, sofern schon vorhanden  
+        //if (Yii::$app->request->post() && $model->bill->save() ){
+        if (Yii::$app->request->post() && $model->bill->save() ){
+			$model->savePositions();
+        //if (Yii::$app->request->post() && $model->save() ){
+			//echo $model->bill->id;
+			//exit;
+			//$model->position->save($model->bill->id);
+			//$model->bill_id = $model->bill->id;
+			
+            Yii::$app->getSession()->setFlash('success', 'Bill has been created.'.$model->bill->id);
+            //return $this->redirect(['update', 'id' => $model->bill->id]);
         }
         return $this->render('create', ['model' => $model]);
     }
@@ -102,31 +123,32 @@ class BillController extends Controller
      * @param integer $id
      * @return mixed
      */
-    //public function actionUpdate($id)
-    //{
-        //$model = $this->findModel($id);
-
-        //if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->id]);
-        //} else {
-            //return $this->render('update', [
-                //'model' => $model,
-            //]);
-        //}
-    //}
-
     public function actionUpdate($id)
     {
-        $model = new BillForm();
-        $model->bill = $this->findModel($id);
-        $model->setAttributes(Yii::$app->request->post());
-        
-        if (Yii::$app->request->post() && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', 'Bill has been updated.');
-            return $this->redirect(['update', 'id' => $model->bill->id]);
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }
-        return $this->render('update', ['model' => $model]);
     }
+
+    //public function actionUpdate($id)
+    //{
+        //$model = new BillForm();
+        //$model->bill = $this->findModel($id);
+        
+        //$model->setAttributes(Yii::$app->request->post());
+        
+        //if (Yii::$app->request->post() && $model->save()) {
+            //Yii::$app->getSession()->setFlash('success', 'Bill has been updated.');
+            //return $this->redirect(['update', 'id' => $model->bill->id]);
+        //}
+        //return $this->render('update', ['model' => $model]);
+    //}
     
     /**
      * Deletes an existing Bill model.

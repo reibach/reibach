@@ -13,48 +13,35 @@ use frontend\models\Position;
 
 <div class="bill-form">
 	
-	####################################################################
-	#
-	#
-	#
-	<?php $form = ActiveForm::begin([
-        'enableClientValidation' => false, 
-        // TODO get this working with client validation
+<?php $form = ActiveForm::begin([
+        'enableClientValidation' => false, // TODO get this working with client validation
     ]); ?>
 
     <?= $model->errorSummary($form); ?>
-	#
-	#
-	#
-	#
-	####################################################################
-	
 
     <fieldset>
-        <legend>Bill</legend>
+        <legend><?= Yii::t('app','Customer'); ?></legend>
 
     <?= $form->field($model->bill, 'customer_id')->dropDownList(
 		ArrayHelper::map(Customer::find()->all(),'id','id'),
-		['prompt'=>'Select Customer']
-		
+		['prompt'=>Yii::t('app','Select Customer')]	
     ) ?>
     </fieldset>
+   
 
-    <fieldset>
-        <legend>Positions
-            <?php
-            // new position button
-            echo Html::a('New Position', 'javascript:void(0);', [
-              'id' => 'bill-new-position-button', 
-              'class' => 'pull-right btn btn-default btn-xs'
-            ])
-            ?>
-        </legend>
-        
-   <?php echo Yii::t('app','This is Reibach'); ?>
-        <?php
-        
-        // position table
+	<fieldset>
+	<legend><?= Yii::t('app','Positions'); ?>
+		<?php
+		// new position button
+		echo Html::a(Yii::t('app','New Position'), 'javascript:void(0);', [
+		  'id' => 'bill-new-position-button', 
+		  'class' => 'pull-right btn btn-default btn-xs'
+		])
+		?>
+	</legend>
+	
+		<?php     
+	    // position table
         $position = new Position();
         $position->loadDefaultValues();
         echo '<table id="bill-positions" class="table table-condensed table-bordered">';
@@ -64,16 +51,17 @@ use frontend\models\Position;
         echo '<th>' . $position->getAttributeLabel(Yii::t('app','pos_num')) . '</th>';
         echo '<th>' . $position->getAttributeLabel(Yii::t('app','quantity')) . '</th>';
         echo '<th>' . $position->getAttributeLabel(Yii::t('app','unit')) . '</th>';
-        echo '<th>' . $position->getAttributeLabel(Yii::t('app','comment')) . '</th>';
-        echo '<th>' . $position->getAttributeLabel(Yii::t('app','price')) . '</th>';
-        echo '<th>' . $position->getAttributeLabel(Yii::t('app','tax')) . '</th>';
-        echo '<th>' . $position->getAttributeLabel(Yii::t('app','amount')) . '</th>';
+        //echo '<th>' . $position->getAttributeLabel(Yii::t('app','comment')) . '</th>';
+        //echo '<th>' . $position->getAttributeLabel(Yii::t('app','price')) . '</th>';
+        //echo '<th>' . $position->getAttributeLabel(Yii::t('app','tax')) . '</th>';
+        //echo '<th>' . $position->getAttributeLabel(Yii::t('app','amount')) . '</th>';
         echo '<td>&nbsp;</td>';
         echo '</tr>';
         echo '</thead>';
         echo '</tbody>';
         
-       // existing positions fields
+        
+        // existing positions fields
         foreach ($model->positions as $key => $_position) {
           echo '<tr>';
           echo $this->render('_form-bill-position', [
@@ -83,6 +71,7 @@ use frontend\models\Position;
           ]);
           echo '</tr>';
         }
+        
         
         // new position fields
         echo '<tr id="bill-new-position-block" style="display: none;">';
@@ -94,9 +83,10 @@ use frontend\models\Position;
         echo '</tr>';
         echo '</tbody>';
         echo '</table>';
+
         
-        // register JS assets required for widgets
-	//\zhuravljov\widgets\DatePickerAsset::register($this);
+         // register JS assets required for widgets
+		//\zhuravljov\widgets\DatePickerAsset::register($this);
         ?>
         <?php ob_start(); // output buffer the javascript to register later ?>
         <script>
@@ -142,6 +132,8 @@ use frontend\models\Position;
 
     </fieldset>
 
+
+ 
     <?= Html::submitButton('Save'); ?>
     <?php ActiveForm::end(); ?>
 

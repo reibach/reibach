@@ -22,7 +22,9 @@ $this->title = 'Reibach ... to make a big haul.';
         <div class="row">
             <div class="col-lg-4">
                 <h2>Was ist Reibach?</h2>
-					<p>Reibach ist ein einfaches Rechnungsprogramm welches nur eine Registrierung benötigt, um 
+					<p>
+						<?php echo "Spreache: ".Yii::$app->language; ?> 
+						Reibach ist ein einfaches Rechnungsprogramm welches nur eine Registrierung benötigt, um 
 					lauffähig zu sein. Nach Eingabe der Grunddaten kann die erste Rechnung binnen Sekunden 
 					erstellt werden.  
 					</p>

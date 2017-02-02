@@ -9,6 +9,12 @@ use yii\helpers\Html;
     ])->label(false) ?>
 </td>
 <td>
+    <?= $form->field($position, 'name')->textInput([
+        'id' => "Positions_{$key}_name",
+        'name' => "Positions[$key][name]",
+    ])->label(false) ?>
+</td>
+<td>
     <?= $form->field($position, 'quantity')->textInput([
         'id' => "Positions_{$key}_quantity",
         'name' => "Positions[$key][quantity]",
