@@ -20,6 +20,6 @@ return [
 
 	'gii' => [
 		'class' => 'yii\gii\Module',
-		'allowedIPs' => ['127.0.0.1', '::1', '172.22.119.*', '192.168.178.20'] // adjust this to your needs
+		'allowedIPs' => ['*'] // adjust this to your needs
 	],
 ];

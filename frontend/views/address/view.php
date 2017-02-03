@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Mandator */
+/* @var $model frontend\models\Address */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['index']];
+$this->title = $model->title;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Addresses'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="mandator-view">
+<div class="address-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -28,10 +28,26 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            //'id',
-            'user_id',
-            'address_id',
-            'fullName',
+            'id',
+            'address_type',
+            'title',
+            'company',
+            'prename',
+            'lastname',
+            'zipcode',
+            'place',
+            'address1',
+            'address2',
+            'state',
+            'phone_privat',
+            'phone_business',
+            'phone_mobile',
+            'email:email',
+            'fax',
+            'create_time',
+            'create_user_id',
+            'update_time',
+            'update_user_id',
         ],
     ]) ?>
 

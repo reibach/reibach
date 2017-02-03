@@ -95,23 +95,16 @@ class BillController extends Controller
         $model->bill = new Bill;
         
         $model->bill->loadDefaultValues();
-        $model->setAttributes(Yii::$app->request->post());
-        
+        $model->setAttributes(Yii::$app->request->post());        
 
         //if ($model->bill->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post()) && $model->bill->save() && $model->save()) {
 
 		// erst die Rechnung speichern, dann die RechnungsID übergeben und die Position(en) speichern, sofern schon vorhanden  
-        //if (Yii::$app->request->post() && $model->bill->save() ){
-        if (Yii::$app->request->post() && $model->bill->save() ){
+        if (Yii::$app->request->post() && $model->bill->save()) {
 			$model->savePositions();
-        //if (Yii::$app->request->post() && $model->save() ){
-			//echo $model->bill->id;
-			//exit;
-			//$model->position->save($model->bill->id);
-			//$model->bill_id = $model->bill->id;
 			
             Yii::$app->getSession()->setFlash('success', 'Bill has been created.'.$model->bill->id);
-            //return $this->redirect(['update', 'id' => $model->bill->id]);
+            return $this->redirect(['update', 'id' => $model->bill->id]);
         }
         return $this->render('create', ['model' => $model]);
     }

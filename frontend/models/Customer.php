@@ -12,6 +12,7 @@ use Yii;
  *
  * @property Bill[] $bills
  * @property Mandator $mandator
+ * @property CustomerAddress[] $customerAddresses
  */
 class Customer extends \yii\db\ActiveRecord
 {
@@ -46,7 +47,15 @@ class Customer extends \yii\db\ActiveRecord
         ];
     }
 
-   /**
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBills()
+    {
+        return $this->hasMany(Bill::className(), ['customer_id' => 'id']);
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getMandator()
@@ -57,8 +66,8 @@ class Customer extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getBills()
+    public function getCustomerAddresses()
     {
-        return $this->hasMany(Bill::className(), ['customer_id' => 'id']);
+        return $this->hasMany(CustomerAddress::className(), ['customer_id' => 'id']);
     }
 }
