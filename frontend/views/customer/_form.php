@@ -16,7 +16,7 @@ use frontend\models\Mandator;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($customer, 'mandator_id')->dropDownList(
-		ArrayHelper::map(Mandator::find()->all(),'id','id'),
+		ArrayHelper::map(Mandator::find()->all(),'id','fullName'),
 		['prompt'=>'Select Mandator']
 		
     ) ?>

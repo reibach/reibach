@@ -23,7 +23,7 @@ use frontend\models\Position;
         <legend><?= Yii::t('app','Customer'); ?></legend>
 
     <?= $form->field($model->bill, 'customer_id')->dropDownList(
-		ArrayHelper::map(Customer::find()->all(),'id','id'),
+		ArrayHelper::map(Customer::find()->all(),'id','fullName'),
 		['prompt'=>Yii::t('app','Select Customer')]	
     ) ?>
     </fieldset>
