@@ -10,7 +10,8 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'language'=>'de_DE', // german
+    //'language'=>'nds_NDS', // german
+    'language'=>'nds_NDS', // plattdütsch
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
@@ -43,7 +44,14 @@ return [
             //'rules' => [
             //],
         //],
-        
+         // Override the urlManager component
+        'urlManager' => [
+            'class' => 'codemix\localeurls\UrlManager',
+
+            // List all supported languages here
+            // Make sure, you include your app's default language.
+            'languages' => ['en-*','de_DE', 'nds_NDS'],
+        ]
     ],
     'params' => $params,
 ];

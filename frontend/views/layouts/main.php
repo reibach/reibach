@@ -9,6 +9,11 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+//use pceuropa\languageSelection\LanguageSelection;
+
+//use pceuropa\LanguageSelection\LanguageSelection;
+//use pceuropa\yii2-language-selection-widget\LanguageSelection;
+
 
 AppAsset::register($this);
 ?>
@@ -24,6 +29,16 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
+
+<?php
+//LanguageSelection::widget([
+	//'language' => ['pl', 'en', 'fr', 'nl', 'de'],
+	//'languageParam' => 'language',
+	//'container' => 'div', // li for navbar, div for sidebar or footer example
+	//'classContainer' =>  'dropdown-toggle' // btn btn-default dropdown-toggle
+//])
+?>
+
 <div class="wrap">
 
     <?php
@@ -37,13 +52,14 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
-        ['label' => Yii::t('app', 'User'), 'url' => ['/user/index']],
-        ['label' => Yii::t('app', 'Mandator'), 'url' => ['/mandator/index']],
-        ['label' => Yii::t('app', 'Customer'), 'url' => ['/customer/index']],
-        ['label' => Yii::t('app', 'Bill'), 'url' => ['/bill/index']],
-		['label' => Yii::t('app', 'Position'), 'url' => ['/position/index']],
-		['label' => Yii::t('app', 'Address'), 'url' => ['/address/index']],
-		['label' => Yii::t('app', 'Article'), 'url' => ['/article/index']],
+        ['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']],
+        ['label' => Yii::t('app', 'Mandators'), 'url' => ['/mandator/index']],
+        ['label' => Yii::t('app', 'Customers'), 'url' => ['/customer/index']],
+        //['label' => Yii::t('app', 'CustomerAddresses'), 'url' => ['/customer-address/index']],
+        ['label' => Yii::t('app', 'Bills'), 'url' => ['/bill/index']],
+		['label' => Yii::t('app', 'Positions'), 'url' => ['/position/index']],
+		['label' => Yii::t('app', 'Addresses'), 'url' => ['/address/index']],
+		//['label' => Yii::t('app', 'Articles'), 'url' => ['/article/index']],
         //['label' => Yii::t('app', 'About'), 'url' => ['/site/about']],
         //['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact']],       
     ];

@@ -52,7 +52,7 @@ class Mandator extends \yii\db\ActiveRecord
             'user_id' => Yii::t('app', 'User ID'),
             'address_id' => Yii::t('app', 'Address ID'),
             'prename' => Yii::t('app', 'prename'),
-			//'fullName'=>Yii::t('app', 'Full Name')
+			'fullName'=>Yii::t('app', 'Full Name')
         ];
     }
 

@@ -7,11 +7,12 @@ use Yii;
 /**
  * This is the model class for table "customer_address".
  *
+ * @property integer $id
  * @property integer $customer_id
  * @property integer $address_id
  *
- * @property Address $address
  * @property Customer $customer
+ * @property Address $address
  */
 class CustomerAddress extends \yii\db\ActiveRecord
 {
@@ -31,8 +32,8 @@ class CustomerAddress extends \yii\db\ActiveRecord
         return [
             [['customer_id', 'address_id'], 'required'],
             [['customer_id', 'address_id'], 'integer'],
-            [['address_id'], 'exist', 'skipOnError' => true, 'targetClass' => Address::className(), 'targetAttribute' => ['address_id' => 'id']],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
+            [['address_id'], 'exist', 'skipOnError' => true, 'targetClass' => Address::className(), 'targetAttribute' => ['address_id' => 'id']],
         ];
     }
 
@@ -42,6 +43,7 @@ class CustomerAddress extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => Yii::t('app', 'ID'),
             'customer_id' => Yii::t('app', 'Customer ID'),
             'address_id' => Yii::t('app', 'Address ID'),
         ];
@@ -50,16 +52,16 @@ class CustomerAddress extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAddress()
+    public function getCustomer()
     {
-        return $this->hasOne(Address::className(), ['id' => 'address_id']);
+        return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCustomer()
+    public function getAddress()
     {
-        return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+        return $this->hasOne(Address::className(), ['id' => 'address_id']);
     }
 }

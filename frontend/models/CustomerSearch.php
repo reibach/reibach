@@ -12,13 +12,17 @@ use frontend\models\Customer;
  */
 class CustomerSearch extends Customer
 {
+	public $fullName;
+
+	
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'mandator_id'], 'integer'],
+            [['id', 'mandator_id', 'address_id'], 'integer'],
+            [['fullName'], 'save'],
         ];
     }
 
@@ -48,7 +52,42 @@ class CustomerSearch extends Customer
             'query' => $query,
         ]);
 
-        $this->load($params);
+		/**
+		 * Setup your sorting attributes
+		 * Note: This is setup before the $this->load($params) 
+		 * statement below
+		 */
+		 $dataProvider->setSort([
+			'attributes'=>[
+				'id',
+				'fullName'=>[
+					'asc'=>['prename'=>SORT_ASC, 'lastname'=>SORT_ASC],
+					'desc'=>['prename'=>SORT_DESC, 'lastname'=>SORT_DESC],
+					'label'=>'Full Name',
+					'default'=>SORT_ASC
+				],
+			]
+		]);
+		
+		//$this->load($params);
+        if (!($this->load($params) && $this->validate())) {
+			/**
+			 * The following line will allow eager loading with country data 
+			 * to enable sorting by country on initial loading of the grid.
+			 */ 
+			$query->joinWith(['address']);
+			return $dataProvider;
+		}
+    
+		$query->andFilterWhere(['id' => $this->id]);
+		$query->andFilterWhere(['like', 'prename', $this->prename]);
+		$query->andFilterWhere(['like', 'lastname', $this->lastname]);
+		$query->andFilterWhere(['address_id' => $this->address_id]);
+		    
+		// filter by person full name
+		$query->andWhere('first_name LIKE "%' . $this->fullName . '%" ' .
+			'OR last_name LIKE "%' . $this->fullName . '%"'
+		);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -60,6 +99,7 @@ class CustomerSearch extends Customer
         $query->andFilterWhere([
             'id' => $this->id,
             'mandator_id' => $this->mandator_id,
+            'address_id' => $this->address_id,
         ]);
 
         return $dataProvider;

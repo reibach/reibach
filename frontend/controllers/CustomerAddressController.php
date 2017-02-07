@@ -2,19 +2,17 @@
 
 namespace frontend\controllers;
 
-use frontend\models\form\MandatorForm;
 use Yii;
-use frontend\models\Mandator;
-use frontend\models\Address;
-use frontend\models\MandatorSearch;
+use frontend\models\CustomerAddress;
+use frontend\models\CustomerAddressSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * MandatorController implements the CRUD actions for Mandator model.
+ * CustomerAddressController implements the CRUD actions for CustomerAddress model.
  */
-class MandatorController extends Controller
+class CustomerAddressController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +30,12 @@ class MandatorController extends Controller
     }
 
     /**
-     * Lists all Mandator models.
+     * Lists all CustomerAddress models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new MandatorSearch();
+        $searchModel = new CustomerAddressSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +45,7 @@ class MandatorController extends Controller
     }
 
     /**
-     * Displays a single Mandator model.
+     * Displays a single CustomerAddress model.
      * @param integer $id
      * @return mixed
      */
@@ -59,39 +57,25 @@ class MandatorController extends Controller
     }
 
     /**
-     * Creates a new Mandator model.
+     * Creates a new CustomerAddress model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-		
-		$model = new MandatorForm();
+        $model = new CustomerAddress();
 
-        $model->mandator = new Mandator();
-
-		$model->mandator->loadDefaultValues();
-        $model->setAttributes(Yii::$app->request->post());     
-
-        //$model->address = new Address();
-
-        //if ($model->load(Yii::$app->request->post()) && $modelAddress->load(Yii::$app->request->post()) && $model->save() && $modelAddress->save()) {
-		// erst die Addresse speichern, dann die AddressID übergeben und den Mandanten speichern  
-        if (Yii::$app->request->post() && $model->address->save()) {
-			//$model->save();
-
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                //'modelAddress' => $modelAddress,
-
             ]);
         }
     }
 
     /**
-     * Updates an existing Mandator model.
+     * Updates an existing CustomerAddress model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -110,7 +94,7 @@ class MandatorController extends Controller
     }
 
     /**
-     * Deletes an existing Mandator model.
+     * Deletes an existing CustomerAddress model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -123,15 +107,15 @@ class MandatorController extends Controller
     }
 
     /**
-     * Finds the Mandator model based on its primary key value.
+     * Finds the CustomerAddress model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Mandator the loaded model
+     * @return CustomerAddress the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Mandator::findOne($id)) !== null) {
+        if (($model = CustomerAddress::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4dedb543be49747aff66d49396d6659d",
+    "content-hash": "9134394da8dc0eed50fd3153d89d2343",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -280,6 +280,47 @@
             "time": "2016-09-14T20:40:20+00:00"
         },
         {
+            "name": "codemix/yii2-localeurls",
+            "version": "1.4.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codemix/yii2-localeurls.git",
+                "reference": "f080c39eec2e989173f3c10f3fba36f3043bdd2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codemix/yii2-localeurls/zipball/f080c39eec2e989173f3c10f3fba36f3043bdd2f",
+                "reference": "f080c39eec2e989173f3c10f3fba36f3043bdd2f",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "codemix\\localeurls\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Härtl",
+                    "email": "haertl.mike@gmail.com"
+                }
+            ],
+            "description": "Automatic locale/language management for URLs.",
+            "keywords": [
+                "i18n",
+                "locale",
+                "yii2"
+            ],
+            "time": "2017-01-09T12:26:05+00:00"
+        },
+        {
             "name": "ezyang/htmlpurifier",
             "version": "v4.8.0",
             "source": {
@@ -322,6 +363,48 @@
                 "html"
             ],
             "time": "2016-07-16T12:58:58+00:00"
+        },
+        {
+            "name": "pceuropa/yii2-language-selection-widget",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pceuropa/yii2-language-selection-widget.git",
+                "reference": "02b7c676014510d760acb07706ac124dd29d5d54"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pceuropa/yii2-language-selection-widget/zipball/02b7c676014510d760acb07706ac124dd29d5d54",
+                "reference": "02b7c676014510d760acb07706ac124dd29d5d54",
+                "shasum": ""
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "pceuropa\\language-selection\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rafal Marguzewicz",
+                    "email": "info@pceuropa.net",
+                    "homepage": "https://pceuropa.net/"
+                }
+            ],
+            "description": "Menu dropdown to select languages",
+            "homepage": "https://github.com/pceuropa/yii2-language-selection-widget.git",
+            "keywords": [
+                "bootstrap menu",
+                "dropmenu",
+                "extension",
+                "flag icons",
+                "yii2"
+            ],
+            "time": "2017-01-01T20:51:56+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

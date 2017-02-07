@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use frontend\models\Address;
 use frontend\models\Customer;
 use frontend\models\CustomerSearch;
 use yii\web\Controller;
@@ -63,13 +64,21 @@ class CustomerController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Customer();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $customer = new Customer();
+        $address = new Address();
+		$address->address_type = 'CUSTOMER';
+		// erst die Addresse speichern, dann die AddressID übergeben und dann den Kunden speichern  
+        if ($address->load(Yii::$app->request->post()) && $address->save()) {
+			// Address ID holen
+			$customer->load(Yii::$app->request->post());
+			$customer->address_id = $address->id;
+			//echo "Address-ID: ".$model->address_id;	
+			$customer->save();			
+			return $this->redirect(['view', 'id' => $customer->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'customer' => $customer,
+                'address' => $address,
             ]);
         }
     }
@@ -82,17 +91,39 @@ class CustomerController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+         $customer = Customer::findOne($id);
+        if (!$customer) {
+            throw new NotFoundHttpException("The customer was not found.");
         }
+        
+        $address = Address::findOne($customer->address_id);
+        
+        if (!$address) {
+            throw new NotFoundHttpException("The customer has no address.");
+        }
+        
+        //$customer->scenario = 'update';
+        //$address->scenario = 'update';
+        
+        if ($customer->load(Yii::$app->request->post()) && $address->load(Yii::$app->request->post())) {
+            $isValid = $customer->validate();
+            $isValid = $address->validate() && $isValid;
+            if ($isValid) {
+                $customer->save(false);
+                $address->save(false);
+                return $this->redirect(['customer/view', 'id' => $id]);
+            }
+        }
+        
+        return $this->render('update', [
+            'customer' => $customer,
+            'address' => $address,
+        ]);
     }
-
+        
+        
+        
+    
     /**
      * Deletes an existing Customer model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
