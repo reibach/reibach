@@ -1,6 +1,6 @@
 <?php
 namespace frontend\models;
-//use frontend\models\Position;
+use frontend\models\Customer;
 use Yii;
 
 //use yii\db\ActiveRecord;
@@ -38,6 +38,7 @@ class Bill extends \yii\db\ActiveRecord
         return [
             //[['customer_id'], 'required'],
             [['customer_id', 'created_at', 'updated_at'], 'integer'],
+            //[['description','fullName'], 'string'],
             [['description'], 'string'],
             [['price', 'status'], 'number'],
             //[['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
@@ -55,6 +56,7 @@ class Bill extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'customer_id' => Yii::t('app', 'Customer ID'),
+            //'fullName' => Yii::t('app', 'Full Name'),
             'description' => Yii::t('app', 'Description'),
             'price' => Yii::t('app', 'Price'),
             'status' => Yii::t('app', 'Status'),
@@ -62,6 +64,11 @@ class Bill extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
+
+	public function getFullName()
+	{
+		return $this->Customer->fullName;
+   	}
 
 
     /**

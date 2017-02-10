@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\Address;
 use frontend\models\Customer;
+use frontend\models\Mandator;
 use frontend\models\CustomerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -36,6 +37,9 @@ class CustomerController extends Controller
      */
     public function actionIndex()
     {
+
+   
+		
         $searchModel = new CustomerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -52,8 +56,17 @@ class CustomerController extends Controller
      */
     public function actionView($id)
     {
+		$customer = Customer::findOne($id);
+		// get the address_id of the mandator
+        $mandator_id = $customer->mandator_id;
+        $mandator = Mandator::findOne($mandator_id);
+		$address_mandator = Address::findOne($mandator->address_id);
+
+   
         return $this->render('view', [
             'model' => $this->findModel($id),
+            //'address' => $address,
+			'address_mandator' => $address_mandator,
         ]);
     }
 
@@ -79,6 +92,7 @@ class CustomerController extends Controller
             return $this->render('create', [
                 'customer' => $customer,
                 'address' => $address,
+
             ]);
         }
     }
@@ -92,11 +106,29 @@ class CustomerController extends Controller
     public function actionUpdate($id)
     {
          $customer = Customer::findOne($id);
+		// get the address_id of the mandator
+        $mandator_id = $customer->mandator_id;
+        $mandator = Mandator::findOne($mandator_id);
+         
         if (!$customer) {
             throw new NotFoundHttpException("The customer was not found.");
         }
         
+        if (!$mandator) {
+            throw new NotFoundHttpException("The mandator was not found: ".$mandator_id);
+        }
+        
+        //$mandator_address_id = Mandator::findOne($mandator_id->id);
+        //$address_mandator = Address::findOne($mandator_address_id->id);
+        
+        
         $address = Address::findOne($customer->address_id);
+        $address_mandator = Address::findOne($mandator->address_id);
+        
+        
+        if (!$address_mandator) {
+            throw new NotFoundHttpException("The Mandator has no address.");
+        }
         
         if (!$address) {
             throw new NotFoundHttpException("The customer has no address.");
@@ -118,6 +150,8 @@ class CustomerController extends Controller
         return $this->render('update', [
             'customer' => $customer,
             'address' => $address,
+            'address_customer' => $address_customer,
+            'address_mandator' => $address_mandator,
         ]);
     }
         

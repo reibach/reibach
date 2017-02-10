@@ -11,7 +11,7 @@ use frontend\models\Mandator;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="customer-form">
+<div class="customer-createForm">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -21,11 +21,10 @@ use frontend\models\Mandator;
     ) ?>
     
     
-	<!-- Mandant -->
-	<?= $form->field($address_mandator, Yii::t('app', 'fullName'))->textInput() ?>
+	
 	
 	<!-- Addressfelder-->
-	<?= $form->field($address, Yii::t('app', 'prename'))->textInput() ?>
+		<?= $form->field($address, Yii::t('app', 'prename'))->textInput() ?>
 	<?= $form->field($address, Yii::t('app', 'lastname'))->textInput() ?>
 	
 

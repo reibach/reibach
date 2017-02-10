@@ -25,6 +25,51 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <h1><?= Yii::t('app', 'Mandator') ?></h1>
+  <?= DetailView::widget([
+        'model' => $address_mandator,
+        'attributes' => [
+            'prename',
+            'lastname',
+            'address1',
+            'zipcode',
+            'place',
+            'phone_privat',
+            'email:email',
+        ],
+    ]) 
+?>
+
+
+    <h1><?= Yii::t('app', 'Customer') ?></h1>
+<!--
+    <?= DetailView::widget([
+        'model' => $customer,
+        'attributes' => [
+            'id',
+            'mandator_id',
+            'fullName',
+        ],
+    ]) 
+?>
+-->
+  <?= DetailView::widget([
+        'model' => $address_customer,
+        'attributes' => [
+            //'id',
+            'prename',
+            'lastname',
+            'address1',
+            'zipcode',
+            'place',
+            'phone_privat',
+            'email:email',
+        ],
+    ]) 
+?>
+
+
+    <h1><?= Yii::t('app', 'Bill') ?></h1>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -36,6 +81,30 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at',
             'updated_at',
         ],
-    ]) ?>
-
+    ]) 
+?>
+    <h1><?= Yii::t('app', 'Positions') ?></h1>
+    <?= DetailView::widget([
+        'model' => $positions,
+        'attributes' => [
+            'id',
+            'bill_id',
+            'name',
+            'pos_num',
+            'quantity',
+        ],
+    ]) 
+?>
+<?php 
+	/**
+	 * THE VIEW BUTTON
+	 */
+	 $desc = Yii::t('app', 'Print PDF');
+	 echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> '.$desc, ['/bill/report', 'id' => $model->id], [
+		'class'=>'btn btn-danger', 
+		'target'=>'_blank', 
+		'data-toggle'=>'tooltip', 
+		'title'=>'Will open the generated PDF file in a new window'
+	]);
+?>
 </div>

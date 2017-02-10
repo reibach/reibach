@@ -1,4 +1,5 @@
 <?php
+use kartik\mpdf\Pdf;
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/../../common/config/params-local.php'),
@@ -10,10 +11,24 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    //'language'=>'nds_NDS', // german
-    'language'=>'nds_NDS', // plattdütsch
+    'language'=>'de_DE', // german
+    //'language'=>'nds_NDS', // plattdütsch
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+    
+    
+    
+    'pdf' => [
+        'class' => Pdf::classname(),
+        'format' => Pdf::FORMAT_A4,
+        'orientation' => Pdf::ORIENT_PORTRAIT,
+        'destination' => Pdf::DEST_BROWSER,
+        // refer settings section for all configuration options
+    ],
+    
+    
+    
+		
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
@@ -52,6 +67,8 @@ return [
             // Make sure, you include your app's default language.
             'languages' => ['en-*','de_DE', 'nds_NDS'],
         ]
+        
+        
     ],
     'params' => $params,
 ];

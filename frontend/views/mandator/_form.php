@@ -18,27 +18,16 @@ use frontend\models\Address;
         'enableClientValidation' => false, // TODO get this working with client validation
     ]); ?>
 
-    <?= $model->errorSummary($form); ?>
 
-
-    <?= $form->field($model->mandator, 'user_id')->dropDownList(
+    <?= $form->field($model, 'user_id')->dropDownList(
 		ArrayHelper::map(User::find()->all(),'id','username'),
 		['prompt'=>'Select User']		
     ) ?>
 
 <fieldset>
 	<legend><?= Yii::t('app','Address'); ?>
-	<?php 
-	$address = new Address();
-	$address->loadDefaultValues();
-	echo '<th>' . $address->getAttributeLabel(Yii::t('app','name')) . '</th>';
-	?>
-
-
-	<?= $form->field($address, 'name')->textInput() ?>
-	<?= $form->field($address, 'unit')->textInput() ?>
-
-
+	<?= $form->field($address, Yii::t('app', 'prename'))->textInput() ?>
+	<?= $form->field($address, Yii::t('app', 'lastname'))->textInput() ?>
 	</legend>
 	
 </fieldset>

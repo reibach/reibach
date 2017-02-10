@@ -3,6 +3,8 @@ body {
     height: 100%;
 }
 
+.watermark { position: fixed; bottom: 0px; right: 0px; width: 180px; height: 180px; opacity: 0.1; }
+
 .wrap {
     min-height: 100%;
     height: auto;

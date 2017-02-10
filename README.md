@@ -12,7 +12,23 @@ More Infos and DemoSite will come soon....
 2DOs:
 
 
-- Sprachgenerator starten und dokumentieren
+  - Mandanten fullName anzeigen in Kunden/index
+
+
+Daten für eine Rechnung:
+
+Mandant: 
+Kunde:
+
+Rechnung:
+Positionen:
+
+
+  * Infos solleten ausgeblendet werden können
+  
+
+
+### Sprachgenerator starten und dokumentieren
   
 
 root@reibach-dev:/var/www/html/reibach# php yii message/extract  @frontend/config/i18n.php
@@ -45,6 +61,12 @@ Rechnung --> bearbeiten:
 
 
 Anmerkungen, unsortiert:
+
+PDF-Generierung
+http://demos.krajee.com/mpdf#settings
+
+--
+
 
 Amount  - die Menge
 Quantity  - die Anzahl

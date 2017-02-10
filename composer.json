@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "yiisoft/yii2-jui": "^2.0",
         "pceuropa/yii2-language-selection-widget": "^1.0",
-        "codemix/yii2-localeurls": "^1.4"
+        "codemix/yii2-localeurls": "^1.4",
+        "kartik-v/yii2-mpdf": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

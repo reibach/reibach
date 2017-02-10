@@ -24,12 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+	<p>AddressMandator: <?= $address_mandator->fullName; ?></p>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            'id',            
             'mandator_id',
+            'fullName',
         ],
     ]) ?>
 

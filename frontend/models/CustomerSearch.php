@@ -13,6 +13,7 @@ use frontend\models\Customer;
 class CustomerSearch extends Customer
 {
 	public $fullName;
+	public $fullMandatorName;
 
 	
     /**

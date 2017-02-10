@@ -100,13 +100,34 @@ class MandatorController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+		$mandator = Mandator::findOne($id);
+		// get the address_id of the mandator
+        
+        if (!$mandator) {
+            throw new NotFoundHttpException("The mandator was not found: ".$mandator_id);
         }
+        
+        //$mandator_address_id = Mandator::findOne($mandator_id->id);
+        //$address_mandator = Address::findOne($mandator_address_id->id);
+        
+        
+        $address = Address::findOne($mandator->address_id);
+     
+
+        if ($mandator->load(Yii::$app->request->post()) && $address->load(Yii::$app->request->post())) {
+            $isValid = $mandator->validate();
+            $isValid = $address->validate() && $isValid;
+            if ($isValid) {
+                $mandator->save(false);
+                $address->save(false);
+                return $this->redirect(['mandator/view', 'id' => $id]);
+            }
+        }
+        
+        return $this->render('update', [
+            'mandator' => $mandator,
+            'address' => $address,
+        ]);
     }
 
     /**

@@ -5,11 +5,15 @@ namespace frontend\controllers;
 use frontend\models\form\BillForm;
 use Yii;
 use frontend\models\Bill;
+use frontend\models\Address;
+use frontend\models\Mandator;
+use frontend\models\Customer;
 use frontend\models\Position;
 use frontend\models\BillSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\mpdf\Pdf;
 
 /**
  * BillController implements the CRUD actions for Bill model.
@@ -53,8 +57,41 @@ class BillController extends Controller
      */
     public function actionView($id)
     {
+		
+		$bill = Bill::findOne($id);
+		//Daten für eine Rechnung zusammenbauen:
+		//Kunde:
+		// get Customer 
+		$customer = Customer::findOne($bill->customer_id);
+		$address_customer = Address::findOne($customer->address_id);
+
+
+		//Mandant: 
+		// get Mandator 
+		
+		// get the address_id of the mandator
+        $mandator_id = $customer->mandator_id;
+        $mandator = Mandator::findOne($mandator_id);
+		$address_mandator = Address::findOne($mandator->address_id);
+
+		//Rechnung:
+		//Positionen:
+		$positions = Position::findAll($id);
+		
+		
+
+		// get the address_id of the mandator
+		
+		
+	
+		
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'customer' => $customer,
+            'address_mandator' => $address_mandator,
+            'address_customer' => $address_customer,
+            'positions' => $positions,
+
         ]);
     }
 
@@ -116,32 +153,32 @@ class BillController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
-
     //public function actionUpdate($id)
     //{
-        //$model = new BillForm();
-        //$model->bill = $this->findModel($id);
-        
-        //$model->setAttributes(Yii::$app->request->post());
-        
-        //if (Yii::$app->request->post() && $model->save()) {
-            //Yii::$app->getSession()->setFlash('success', 'Bill has been updated.');
-            //return $this->redirect(['update', 'id' => $model->bill->id]);
+        //$model = $this->findModel($id);
+
+        //if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect(['view', 'id' => $model->id]);
+        //} else {
+            //return $this->render('update', [
+                //'model' => $model,
+            //]);
         //}
-        //return $this->render('update', ['model' => $model]);
     //}
+
+    public function actionUpdate($id)
+    {
+        $model = new BillForm();
+        $model->bill = $this->findModel($id);
+        
+        $model->setAttributes(Yii::$app->request->post());
+        
+        if (Yii::$app->request->post() && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', 'Bill has been updated.');
+            return $this->redirect(['update', 'id' => $model->bill->id]);
+        }
+        return $this->render('update', ['model' => $model]);
+    }
     
     /**
      * Deletes an existing Bill model.
@@ -172,4 +209,86 @@ class BillController extends Controller
         }
         throw new HttpException(404, 'The requested page does not exist.');
     }
+    
+    
+    public function actionReport($id) {
+		
+		
+		//$content =  $this->render('view', [
+            //'model' => $this->findModel($id),
+        //]);
+        //$model = $this->findModel($id);
+
+		// get your HTML raw content without any layouts or scripts
+		$content = $this->renderPartial('_reportView', [
+            'model' => $this->findModel($id),
+        ]);
+
+
+		// setup kartik\mpdf\Pdf component
+		$pdf = new Pdf([
+			// set to use core fonts only
+			'mode' => Pdf::MODE_UTF8, 
+			// A4 paper format
+			'format' => Pdf::FORMAT_A4, 
+			// portrait orientation
+			'orientation' => Pdf::ORIENT_PORTRAIT, 
+			// stream to browser inline
+			'destination' => Pdf::DEST_BROWSER, 
+			// your html content input
+			'content' => $content,  
+			// format content from your own css file if needed or use the
+			// enhanced bootstrap css built by Krajee for mPDF formatting 
+			'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+			// any css to be embedded if required
+			'cssInline' => '.kv-heading-1{font-size:18px}', 
+			 // set mPDF properties on the fly
+			'options' => ['title' => Yii::t('app', 'Bill')],
+			 // call mPDF methods on the fly
+			'methods' => [ 
+				'SetHeader'=>[Yii::t('app', 'Bill')], 
+				'SetFooter'=>['{PAGENO}'],
+				'WriteHtml' => ['REIBACH'],
+				'setWatermarkText' => ['Reibach'],
+			]
+		]);
+		
+		
+		//'methods' => [ 
+				//'SetHeader' => [Yii::t('app', 'Bill')], 
+				//'SetFooter' => ['{PAGENO}'],
+				//'setWatermarkText' => ['Reibach']
+				//'SetWaterMarkImage'=>['http://172.22.119.118/reibach/frontend/web/images/reibach-logo-460x460_33.png'],
+				//'showWatermarkImage'=>['true'],
+				 
+			//]
+		//]);
+		
+		//$pdf->setWatermarkText('BLABLA', 1);
+		//$pdf->showWatermarkText = true;
+		//$pdf->setWatermarkImage('watermark.png');
+		//$pdf->watermarkImageAlpha = 0.5;
+		//$pdf->howWatermarkImage = true;
+
+
+		// return the pdf output as per the destination setting
+		return $pdf->render(); 
+	}
+
+	// Privacy statement output demo
+	public function actionMpdfDemo1() {
+		$pdf = new Pdf([
+			'mode' => Pdf::MODE_CORE, // leaner size using standard fonts
+			'content' => $this->renderPartial('privacy'),
+			'options' => [
+				'title' => 'Privacy Policy - Krajee.com',
+				'subject' => 'Generating PDF files via yii2-mpdf extension has never been easy'
+			],
+			'methods' => [
+				'SetHeader' => ['Generated By: Krajee Pdf Component||Generated On: ' . date("r")],
+				'SetFooter' => ['|Page {PAGENO}|'],
+			]
+		]);
+		return $pdf->render();
+	}
 }
