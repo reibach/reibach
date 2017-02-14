@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
+
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Bill */
@@ -84,17 +86,30 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) 
 ?>
     <h1><?= Yii::t('app', 'Positions') ?></h1>
-    <?= DetailView::widget([
-        'model' => $positions,
-        'attributes' => [
+
+
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            //['class' => 'yii\grid\SerialColumn'],
+
             'id',
             'bill_id',
             'name',
             'pos_num',
             'quantity',
+            // 'unit',
+            // 'comment:ntext',
+            // 'price',
+            // 'tax',
+            // 'amount',
+
+            //['class' => 'yii\grid\ActionColumn'],
         ],
-    ]) 
-?>
+    ]); ?>
+        
 <?php 
 	/**
 	 * THE VIEW BUTTON

@@ -10,6 +10,7 @@ use frontend\models\Mandator;
 use frontend\models\Customer;
 use frontend\models\Position;
 use frontend\models\BillSearch;
+use frontend\models\PositionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -50,6 +51,51 @@ class BillController extends Controller
         ]);
     }
 
+
+	public function actionList()
+    {
+		$id = 82;
+		$bill = Bill::findOne($id);
+		//Daten für eine Rechnung zusammenbauen:
+		//Kunde:
+		// get Customer 
+		$customer = Customer::findOne($bill->customer_id);
+		$address_customer = Address::findOne($customer->address_id);
+
+
+		//Mandant: 
+		// get Mandator 
+		
+		// get the address_id of the mandator
+        $mandator_id = $customer->mandator_id;
+        $mandator = Mandator::findOne($mandator_id);
+		$address_mandator = Address::findOne($mandator->address_id);
+
+		//Rechnung:
+		//Positionen:
+		
+		//get all positions of a bill
+		//print_r($bill->id);
+		//$positions = Bill::getBillPositions($id);
+		
+		//echo "<p>&nbsp;</p>";
+		
+		//print_r($positions);
+
+		$searchModel = new PositionSearch();
+        $dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);
+		
+        //$dataProvider = new ActiveDataProvider([
+            //'query' => Position::find()->where(['bill_id' => $id])->orderBy('id DESC'),
+            //'pagination' => [
+                //'pageSize' => 10,
+            //],
+        //]);
+
+        $this->view->title = 'Position List';
+        return $this->render('list', ['listDataProvider' => $dataProvider]);
+    }
+
     /**
      * Displays a single Bill model.
      * @param integer $id
@@ -78,25 +124,31 @@ class BillController extends Controller
 		//Positionen:
 		
 		//get all positions of a bill
-		$positions = Position::findAll($id);
+		//print_r($bill->id);
+		//$positions = Bill::getBillPositions($id);
 		
-		foreach ($positions as $key => $value) {
-			echo "Key: $key; Value: $value<br />\n";
-		}
-		print_r($positions);
+		//echo "<p>&nbsp;</p>";
 		
+		//print_r($positions);
 
-		// get the address_id of the mandator
-		
-	
-	
-		
+		$searchModel = new PositionSearch();
+        $dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);
+        
+        
+		//foreach ($positions as $key => $value) {
+			//echo "Key: $key; Value: $value<br />\n";
+		//}
+		//print_r($positions);
+		//exit;
+
         return $this->render('view', [
             'model' => $this->findModel($id),
             'customer' => $customer,
             'address_mandator' => $address_mandator,
             'address_customer' => $address_customer,
-            'positions' => $positions,
+            //'positions' => $positions,
+             'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
 
         ]);
     }
@@ -106,31 +158,6 @@ class BillController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    //public function actionCreate()
-    //{
-        //$model = new Bill();
-        //$modelPosition = new Position();
-        //$model->position = new Position();
-        //$model->position->loadDefaultValues();
-
-
-        //if ($model->load(Yii::$app->request->post()) && $modelPosition->load(Yii::$app->request->post()) && $model->save() && $modelPosition->save()) {
-            //$model->created_at = time();
-			//$model->updated_at = time();			
-			
-			//if ($model->save()) {
-				//return $this->redirect(['view', 'id' => $model->id]);
-			//} 
-			
-		//} else {
-			//return $this->render('create', [
-				//'model' => $model,
-				//'modelPosition' => $modelPosition,
-				
-			//]);
-		//}
-	//}
-
     public function actionCreate()
     {
         $model = new BillForm();
@@ -176,19 +203,6 @@ class BillController extends Controller
         return $this->render('update', ['model' => $model]);
     }
     
-    //public function actionUpdate($id)
-    //{
-        //$model = $this->findModel($id);
-
-        //if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->id]);
-        //} else {
-            //return $this->render('update', [
-                //'model' => $model,
-            //]);
-        //}
-    //}
-
     /**
      * Deletes an existing Bill model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -222,15 +236,54 @@ class BillController extends Controller
     
     public function actionReport($id) {
 		
+		$bill = Bill::findOne($id);
+		//Daten für eine Rechnung zusammenbauen:
+		//Kunde:
+		// get Customer 
+		$customer = Customer::findOne($bill->customer_id);
+		$address_customer = Address::findOne($customer->address_id);
+
+
+		//Mandant: 
+		// get Mandator 
+		
+		// get the address_id of the mandator
+        $mandator_id = $customer->mandator_id;
+        $mandator = Mandator::findOne($mandator_id);
+		$address_mandator = Address::findOne($mandator->address_id);
+
+		//Rechnung:
+		//Positionen:
+		
+		//get all positions of a bill
+		//print_r($bill->id);
+		//$positions = Bill::getBillPositions($id);
+		
+		//echo "<p>&nbsp;</p>";
+		
+		//print_r($positions);
+
+		$searchModel = new PositionSearch();
+        $dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);
+        
+
 		
 		//$content =  $this->render('view', [
             //'model' => $this->findModel($id),
         //]);
         //$model = $this->findModel($id);
+        
 
 		// get your HTML raw content without any layouts or scripts
 		$content = $this->renderPartial('_reportView', [
             'model' => $this->findModel($id),
+            'customer' => $customer,
+            'address_mandator' => $address_mandator,
+            'address_customer' => $address_customer,
+            //'positions' => $positions,
+             'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+
         ]);
 
 

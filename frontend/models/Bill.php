@@ -86,4 +86,5 @@ class Bill extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Position::className(), ['bill_id' => 'id']);
     }
+    
 }
