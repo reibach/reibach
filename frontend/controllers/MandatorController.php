@@ -10,6 +10,7 @@ use frontend\models\MandatorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * MandatorController implements the CRUD actions for Mandator model.
@@ -19,13 +20,30 @@ class MandatorController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
+	public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create', 'delete', 'index', 'update', 'view'],
+                'rules' => [
+                    [
+                        'actions' => ['signup'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['create', 'delete', 'index', 'update', 'view'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    //'logout' => ['post'],
                 ],
             ],
         ];

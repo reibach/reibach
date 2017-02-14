@@ -2,17 +2,17 @@
 
 namespace frontend\models;
 
-use \yii\db\ActiveRecord;;
+use Yii;
 
 /**
  * This is the model class for table "position".
  *
  * @property integer $id
  * @property integer $bill_id
+ * @property string $name
  * @property string $pos_num
  * @property double $quantity
  * @property string $unit
- * @property string $name
  * @property string $comment
  * @property double $price
  * @property double $tax
@@ -20,7 +20,7 @@ use \yii\db\ActiveRecord;;
  *
  * @property Bill $bill
  */
-class Position extends ActiveRecord
+class Position extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -36,14 +36,14 @@ class Position extends ActiveRecord
     public function rules()
     {
         return [
-            //[['bill_id', 'name'], 'required'],
-            //[['bill_id'], 'integer'],
-            //[['quantity', 'price', 'tax', 'amount'], 'number'],
-            //[['comment'], 'string'],
-            //[['pos_num'], 'string', 'max' => 20],
-            //[['unit'], 'string', 'max' => 10],
-            //[['name'], 'string', 'max' => 255],
-            //[['bill_id'], 'exist', 'skipOnError' => true, 'targetClass' => Bill::className(), 'targetAttribute' => ['bill_id' => 'id']],
+            [['bill_id', 'name'], 'required'],
+            [['bill_id'], 'integer'],
+            [['quantity', 'price', 'tax', 'amount'], 'number'],
+            [['comment'], 'string'],
+            [['name'], 'string', 'max' => 255],
+            [['pos_num'], 'string', 'max' => 2],
+            [['unit'], 'string', 'max' => 10],
+            [['bill_id'], 'exist', 'skipOnError' => true, 'targetClass' => Bill::className(), 'targetAttribute' => ['bill_id' => 'id']],
         ];
     }
 
@@ -53,16 +53,16 @@ class Position extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'bill_id' => 'Bill ID',
-            'pos_num' => 'Pos Num',
-            'quantity' => 'Quantity',
-            'unit' => 'Unit',
-            'name' => 'Name',
-            'comment' => 'Comment',
-            'price' => 'Price',
-            'tax' => 'Tax',
-            'amount' => 'Amount',
+            'id' => Yii::t('app', 'ID'),
+            'bill_id' => Yii::t('app', 'Bill ID'),
+            'name' => Yii::t('app', 'Name'),
+            'pos_num' => Yii::t('app', 'Pos Num'),
+            'quantity' => Yii::t('app', 'Quantity'),
+            'unit' => Yii::t('app', 'Unit'),
+            'comment' => Yii::t('app', 'Comment'),
+            'price' => Yii::t('app', 'Price'),
+            'tax' => Yii::t('app', 'Tax'),
+            'amount' => Yii::t('app', 'Amount'),
         ];
     }
 

@@ -76,13 +76,19 @@ class BillController extends Controller
 
 		//Rechnung:
 		//Positionen:
+		
+		//get all positions of a bill
 		$positions = Position::findAll($id);
 		
+		foreach ($positions as $key => $value) {
+			echo "Key: $key; Value: $value<br />\n";
+		}
+		print_r($positions);
 		
 
 		// get the address_id of the mandator
 		
-		
+	
 	
 		
         return $this->render('view', [
@@ -147,12 +153,29 @@ class BillController extends Controller
     }
 
 	
+
     /**
      * Updates an existing Bill model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
+    public function actionUpdate($id)
+    {
+        $model = new BillForm();
+        $model->bill = $this->findModel($id);
+       
+        $model->setAttributes(Yii::$app->request->post());
+        
+        if (Yii::$app->request->post() && $model->bill->save()) {
+			$model->savePositions();
+			
+            Yii::$app->getSession()->setFlash('success', 'Bill has been updated.');
+            return $this->redirect(['update', 'id' => $model->bill->id]);
+        }
+        return $this->render('update', ['model' => $model]);
+    }
+    
     //public function actionUpdate($id)
     //{
         //$model = $this->findModel($id);
@@ -166,20 +189,6 @@ class BillController extends Controller
         //}
     //}
 
-    public function actionUpdate($id)
-    {
-        $model = new BillForm();
-        $model->bill = $this->findModel($id);
-        
-        $model->setAttributes(Yii::$app->request->post());
-        
-        if (Yii::$app->request->post() && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', 'Bill has been updated.');
-            return $this->redirect(['update', 'id' => $model->bill->id]);
-        }
-        return $this->render('update', ['model' => $model]);
-    }
-    
     /**
      * Deletes an existing Bill model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

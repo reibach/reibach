@@ -9,18 +9,42 @@ Project now based on yii2, Java sucks
 More Infos and DemoSite will come soon....
 
 
+
+
+
+
 2DOs:
 
+### Abo-und/oder Lizenzsystem zur ABrechnung entwickeln
 
-  - Mandanten fullName anzeigen in Kunden/index
+
+### Installation eines RBAC-Systems 
+siehe auch: 
+http://www.yiiframework.com/doc-2.0/guide-security-authorization.html
+
+
+### Aufteilung backend / frontend
+
+backend:
+  - Userverwaltung
+  - Mandantenverwaltung
+  - Abo und Lizenzverwaltung
+  
+frontend: 
+
 
 
 Daten für eine Rechnung:
 
 Mandant: 
-Kunde:
+
+
+# Kunde:
+Auswählen oder neu anlegen
+
 
 Rechnung:
+
 Positionen:
 
 
@@ -49,12 +73,6 @@ gesetzt wird das Ganze in:
 Schalter mit Fahnen geht noch nicht, siehe:
 https://pceuropa.net/yii2-extensions/yii2-language-selection-widget?language=fr
 https://github.com/codemix/yii2-localeurls
-
---
-
-
-Rechnung --> bearbeiten:
-  - statt KundenID fullName anzeigen
 
 
 --
