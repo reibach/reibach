@@ -142,6 +142,16 @@ class SiteController extends Controller
     }
 
     /**
+     * Displays imprint page.
+     *
+     * @return mixed
+     */
+    public function actionImprint()
+    {
+        return $this->render('imprint');
+    }
+
+    /**
      * Signs user up.
      *
      * @return mixed

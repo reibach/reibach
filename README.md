@@ -9,11 +9,29 @@ Project now based on yii2, Java sucks
 More Infos and DemoSite will come soon....
 
 
+Aktuelle ProduktivAddresse:
+https://reibach.federa.de/
+
+Es wird geduzt
+
+knaakenkerl - sensenmann
+
 
 
 
 
 2DOs:
+
+  - Default Sprache hochdeutsch hart verdrahten
+  - Sprachauswahl mit Fahnen
+  - Dokwiki anlegen
+  - Link zum Git
+  - Datenschutzerklärung
+  - Haftung
+  
+  
+  
+   
 
 ### Abo-und/oder Lizenzsystem zur ABrechnung entwickeln
 
@@ -79,6 +97,17 @@ https://github.com/codemix/yii2-localeurls
 
 
 Anmerkungen, unsortiert:
+--
+Logging aktivieren:
+in /var/www/html/reibach/frontend/config/main-local.php
+
+  allowedIPs' => ['127.0.0.1', '*','::1'] // adjust this to your needs
+  //'allowedIPs' => ['127.0.0.1'] // adjust this to your needs
+
+
+--
+
+--
 
 PDF-Generierung
 http://demos.krajee.com/mpdf#settings
@@ -103,4 +132,25 @@ FRAGE: Wie kann das im Codegenerator gehandhabt werden???
 
 --
 
+BUGS
 
+Translator geht nicht:
+
+in /var/www/html/reibach/frontend/views/site/signup.php
+
+
+<?= $form->field($model, Yii::t('app', 'password'))->passwordInput() ?> --> NOK
+
+<?= $form->field($model, $passwd)->passwordInput() ?> OK, aber ohne Übersetzung:
+                
+
+<?= $form->field($model, Yii::t('app', 'username'))->textInput(['autofocus' => true]) ?>
+
+
+sobald uebersetzt in /var/www/html/reibach/frontend/messages/de_DE/app.php
+	'username' => 'Benutzername',
+	
+FEHLER: 	Unknown Property
+Es ist ein interner Serverfehler aufgetreten. 
+                
+                

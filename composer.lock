@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a0b8f83f2207484cb04e517d2a1fc7e1",
+    "content-hash": "e1000b217075ebb0fa3bb1e188f822a8",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -476,22 +476,22 @@
         },
         {
             "name": "pceuropa/yii2-language-selection-widget",
-            "version": "1.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pceuropa/yii2-language-selection-widget.git",
-                "reference": "02b7c676014510d760acb07706ac124dd29d5d54"
+                "reference": "4136c23e0e0adae1c766025beff3fa642150df14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pceuropa/yii2-language-selection-widget/zipball/02b7c676014510d760acb07706ac124dd29d5d54",
-                "reference": "02b7c676014510d760acb07706ac124dd29d5d54",
+                "url": "https://api.github.com/repos/pceuropa/yii2-language-selection-widget/zipball/4136c23e0e0adae1c766025beff3fa642150df14",
+                "reference": "4136c23e0e0adae1c766025beff3fa642150df14",
                 "shasum": ""
             },
             "type": "yii2-extension",
             "autoload": {
                 "psr-4": {
-                    "pceuropa\\language-selection\\": ""
+                    "pceuropa\\languageSelection\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -514,7 +514,7 @@
                 "flag icons",
                 "yii2"
             ],
-            "time": "2017-01-01T20:51:56+00:00"
+            "time": "2017-01-01 22:17:30"
         },
         {
             "name": "setasign/fpdi",
@@ -3287,6 +3287,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "pceuropa/yii2-language-selection-widget": 20,
         "kartik-v/yii2-mpdf": 20
     },
     "prefer-stable": false,
