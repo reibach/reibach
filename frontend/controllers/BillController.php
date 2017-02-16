@@ -245,35 +245,19 @@ class BillController extends Controller
 
 
 		//Mandant: 
-		// get Mandator 
-		
+		// get Mandator 		
 		// get the address_id of the mandator
         $mandator_id = $customer->mandator_id;
         $mandator = Mandator::findOne($mandator_id);
 		$address_mandator = Address::findOne($mandator->address_id);
 
 		//Rechnung:
-		//Positionen:
-		
+		//Positionen:		
 		//get all positions of a bill
-		//print_r($bill->id);
-		//$positions = Bill::getBillPositions($id);
-		
-		//echo "<p>&nbsp;</p>";
-		
-		//print_r($positions);
-
 		$searchModel = new PositionSearch();
         $dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);
-        
-
-		
-		//$content =  $this->render('view', [
-            //'model' => $this->findModel($id),
-        //]);
-        //$model = $this->findModel($id);
-        
-
+		$listDataProvider = $dataProvider;
+        			
 		// get your HTML raw content without any layouts or scripts
 		$content = $this->renderPartial('_reportView', [
             'model' => $this->findModel($id),
@@ -283,7 +267,7 @@ class BillController extends Controller
             //'positions' => $positions,
              'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-
+            'listDataProvider' => $dataProvider,
         ]);
 
 
@@ -310,7 +294,7 @@ class BillController extends Controller
 			'methods' => [ 
 				'SetHeader'=>[Yii::t('app', 'Bill')], 
 				'SetFooter'=>['{PAGENO}'],
-				'WriteHtml' => ['REIBACH'],
+				//'WriteHtml' => ['REIBACH'],
 				'setWatermarkText' => ['Reibach'],
 			]
 		]);

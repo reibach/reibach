@@ -98,6 +98,12 @@ https://github.com/codemix/yii2-localeurls
 
 Anmerkungen, unsortiert:
 --
+ListView in PDFs
+
+http://www.codevoila.com/post/4/yii2-listview-example
+
+
+--
 Logging aktivieren:
 in /var/www/html/reibach/frontend/config/main-local.php
 
