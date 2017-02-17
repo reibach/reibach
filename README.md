@@ -16,12 +16,17 @@ Es wird geduzt
 
 knaakenkerl - sensenmann
 
+Live spielen:
+1. Debugger ausstellen
 
 
 
 
 2DOs:
 
+  - Deployment
+  - Bei Userergistrierung automatisch einen Mandanten anlegen
+  - Schalter zur Sprachauswahl bauen
   - Default Sprache hochdeutsch hart verdrahten
   - Sprachauswahl mit Fahnen
   - Dokwiki anlegen
@@ -104,7 +109,7 @@ http://www.codevoila.com/post/4/yii2-listview-example
 
 
 --
-Logging aktivieren:
+### Debugger / Logging aktivieren:
 in /var/www/html/reibach/frontend/config/main-local.php
 
   allowedIPs' => ['127.0.0.1', '*','::1'] // adjust this to your needs
