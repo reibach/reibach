@@ -7,14 +7,23 @@ $this->title = 'Reibach ... to make a big haul.';
 <div class="site-index">
 
     <div class="jumbotron">
+<!--
         <h1>Yo, </h1>
 
+		
         <p class="lead"><?php echo Yii::t('app','This is Reibach'); ?></p>
       
+-->
 
+<h3>Willkommen,</h3>
+<h4>zu Reibach, dem Online-Rechnungsprogramm</h4>
 
+<p>Lege  <a href="">hier</a> gleich los oder informiere dich vorab.  </p>
+<!--
         <p><img src="<?= yii\helpers\Url::to('@web/images/reibach-logo-200x200.png') ?>" />
-          <br>... to make a big haul</p>
+        <br>... to make a big haul</p>
+-->
+          
     </div>
 
     <div class="body-content">
@@ -23,7 +32,7 @@ $this->title = 'Reibach ... to make a big haul.';
             <div class="col-lg-4">
                 <h2>Was ist Reibach?</h2>
 					<p>
-					Reibach ist ein einfaches Rechnungsprogramm welches nur eine Registrierung benötigt, um 
+					Reibach ist ein einfaches Rechnungsprogramm, welches nur eine Registrierung benötigt, um 
 					lauffähig zu sein. Nach Eingabe der Grunddaten kann die erste Rechnung binnen Sekunden 
 					erstellt werden.  
 					</p>
@@ -52,7 +61,7 @@ $this->title = 'Reibach ... to make a big haul.';
 
                 <p>Reibach ist nicht umsonst, wer es nutzt, muss Werbung machen (Wasserzeichen) oder sich freikaufen. 
                 Das Lizensmodell wird noch ausgearbeitet, Spenden sind jetzt schon erwünscht. (Beratungs-)Dienstleistungen
-                werden erbracht und in Rechnung gestellt.  
+                werden erbracht und  - natürlich mit Reibach - in Rechnung gestellt.  
 				</p>
 <!--
                 <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>

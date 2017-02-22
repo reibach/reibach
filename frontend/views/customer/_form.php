@@ -25,8 +25,8 @@ use frontend\models\Mandator;
 	<?= $form->field($address_mandator, Yii::t('app', 'fullName'))->textInput() ?>
 	
 	<!-- Addressfelder-->
-	<?= $form->field($address, Yii::t('app', 'prename'))->textInput() ?>
-	<?= $form->field($address, Yii::t('app', 'lastname'))->textInput() ?>
+	<?= $form->field($address, 'prename')->textInput() ?>
+	<?= $form->field($address, 'lastname')->textInput() ?>
 	
 
     <div class="form-group">

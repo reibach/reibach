@@ -65,7 +65,7 @@ return [
 
             // List all supported languages here
             // Make sure, you include your app's default language.
-            'languages' => ['en-*','de_DE', 'nds_NDS'],
+            'languages' => ['de_DE', 'nds_NDS'],
         ]
         
         

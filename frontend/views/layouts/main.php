@@ -34,7 +34,8 @@ AppAsset::register($this);
 
     <?php
     NavBar::begin([
-        'brandLabel' => Html::img('@web/images/reibach-logo-40x40.png', ['alt'=>'Reibach']).'Reibach',
+        //'brandLabel' => Html::img('@web/images/reibach-logo-40x40.png', ['alt'=>'Reibach']).'Reibach',
+        'brandLabel' => 'Reibach',
         //'brandLabel' => ,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
@@ -68,7 +69,7 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
-            //$menuItems[] = ['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']];
+            $menuItems[] = ['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']];
 		
     }
     echo Nav::widget([

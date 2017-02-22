@@ -28,6 +28,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'updated_at')->textInput() ?>
 
+    <?= $form->field($model, 'abo_start')->textInput() ?>
+
+    <?= $form->field($model, 'abo_end')->textInput() ?>
+
+    <?= $form->field($model, 'abo_turn')->textInput() ?>
+
+    <?= $form->field($model, 'abo_type')->dropDownList([ 'STANDARD' => 'STANDARD', 'PROFI' => 'PROFI', 'LIFETIME' => 'LIFETIME', ], ['prompt' => '']) ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

@@ -83,31 +83,26 @@ class MandatorController extends Controller
      */
     public function actionCreate()
     {
-		
-		$model = new MandatorForm();
-
-        $model->mandator = new Mandator();
-
-		$model->mandator->loadDefaultValues();
-        $model->setAttributes(Yii::$app->request->post());     
-
-        //$model->address = new Address();
-
-        //if ($model->load(Yii::$app->request->post()) && $modelAddress->load(Yii::$app->request->post()) && $model->save() && $modelAddress->save()) {
-		// erst die Addresse speichern, dann die AddressID übergeben und den Mandanten speichern  
-        if (Yii::$app->request->post() && $model->address->save()) {
-			//$model->save();
-
-            return $this->redirect(['view', 'id' => $model->id]);
+		$mandator = new Mandator();
+		$address = new Address();
+    
+        if ($address->load(Yii::$app->request->post()) && $address->save()) {
+			// Address ID holen
+			$mandator->load(Yii::$app->request->post());
+			$mandator->address_id = $address->id;
+			//echo "Address-ID: ".$model->address_id;	
+			$mandator->save();			
+			return $this->redirect(['view', 'id' => $mandator->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
-                //'modelAddress' => $modelAddress,
+                'mandator' => $mandator,
+                'address' => $address,
 
             ]);
         }
     }
-
+    
+    	
     /**
      * Updates an existing Mandator model.
      * If update is successful, the browser will be redirected to the 'view' page.

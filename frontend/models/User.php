@@ -16,6 +16,10 @@ use Yii;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ * @property integer $abo_start
+ * @property integer $abo_end
+ * @property integer $abo_turn
+ * @property string $abo_type
  *
  * @property Mandator[] $mandators
  */
@@ -35,8 +39,9 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
+            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at', 'abo_start', 'abo_end', 'abo_turn', 'abo_type'], 'required'],
+            [['status', 'created_at', 'updated_at', 'abo_start', 'abo_end', 'abo_turn'], 'integer'],
+            [['abo_type'], 'string'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
@@ -60,6 +65,10 @@ class User extends \yii\db\ActiveRecord
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'abo_start' => Yii::t('app', 'Abo Start'),
+            'abo_end' => Yii::t('app', 'Abo End'),
+            'abo_turn' => Yii::t('app', 'Abo Turn'),
+            'abo_type' => Yii::t('app', 'Abo Type'),
         ];
     }
 

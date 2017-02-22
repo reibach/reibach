@@ -37,6 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             'created_at',
             'updated_at',
+            'abo_start',
+            'abo_end',
+            'abo_turn',
+            'abo_type',
         ],
     ]) ?>
 
