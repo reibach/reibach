@@ -3,10 +3,10 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Address;
-use frontend\models\Customer;
-use frontend\models\Mandator;
-use frontend\models\CustomerSearch;
+use backend\models\Address;
+use backend\models\Customer;
+use backend\models\Mandator;
+use backend\models\CustomerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -150,7 +150,7 @@ class CustomerController extends Controller
         return $this->render('update', [
             'customer' => $customer,
             'address' => $address,
-            'address_customer' => $address_customer,
+            //'address_customer' => $address_customer,
             'address_mandator' => $address_mandator,
         ]);
     }

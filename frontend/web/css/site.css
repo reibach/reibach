@@ -3,8 +3,6 @@ body {
     height: 100%;
 }
 
-.watermark { position: fixed; bottom: 0px; right: 0px; width: 180px; height: 180px; opacity: 0.1; }
-
 .wrap {
     min-height: 100%;
     height: auto;
@@ -51,11 +49,11 @@ a.asc:after, a.desc:after {
 }
 
 a.asc:after {
-    content: "\e151";
+    content: /*"\e113"*/ "\e151";
 }
 
 a.desc:after {
-    content: "\e152";
+    content: /*"\e114"*/ "\e152";
 }
 
 .sort-numerical a.asc:after {
@@ -74,13 +72,8 @@ a.desc:after {
     content: "\e156";
 }
 
-.grid-view td {
+.grid-view th {
     white-space: nowrap;
-}
-
-.grid-view .filters input,
-.grid-view .filters select {
-    min-width: 50px;
 }
 
 .hint-block {
@@ -95,28 +88,4 @@ a.desc:after {
     border-left: 3px solid #eed3d7;
     padding: 10px 20px;
     margin: 0 0 15px 0;
-}
-
-/* align the logout "link" (button in form) of the navbar */
-.nav li > form > button.logout {
-    padding: 15px;
-    border: none;
-}
-
-@media(max-width:767px) {
-    .nav li > form > button.logout {
-        display:block;
-        text-align: left;
-        width: 100%;
-        padding: 10px 15px;
-    }
-}
-
-.nav > li > form > button.logout:focus,
-.nav > li > form > button.logout:hover {
-    text-decoration: none;
-}
-
-.nav > li > form > button.logout:focus {
-    outline: none;
 }

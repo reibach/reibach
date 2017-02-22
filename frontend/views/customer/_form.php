@@ -3,11 +3,11 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use frontend\models\Mandator;
-//use frontend\models\Address;
+use backend\models\Mandator;
+//use backend\models\Address;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Customer */
+/* @var $model backend\models\Customer */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -15,15 +15,13 @@ use frontend\models\Mandator;
 
     <?php $form = ActiveForm::begin(); ?>
 
+	<!-- Mandant -->
     <?= $form->field($customer, 'mandator_id')->dropDownList(
 		ArrayHelper::map(Mandator::find()->all(),'id','fullName'),
 		['prompt'=>'Select Mandator']		
     ) ?>
     
-    
-	<!-- Mandant -->
-	<?= $form->field($address_mandator, Yii::t('app', 'fullName'))->textInput() ?>
-	
+   	
 	<!-- Addressfelder-->
 	<?= $form->field($address, 'prename')->textInput() ?>
 	<?= $form->field($address, 'lastname')->textInput() ?>
