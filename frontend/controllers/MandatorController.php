@@ -2,11 +2,11 @@
 
 namespace frontend\controllers;
 
-use backend\models\form\MandatorForm;
+use frontend\models\form\MandatorForm;
 use Yii;
-use backend\models\Mandator;
-use backend\models\Address;
-use backend\models\MandatorSearch;
+use frontend\models\Mandator;
+use frontend\models\Address;
+use frontend\models\MandatorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

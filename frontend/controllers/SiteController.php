@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\Mandator;
 
 /**
  * Site controller
@@ -161,7 +162,9 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
+				//createMandator('user_id' -> Yii::$app->getUser())
                 if (Yii::$app->getUser()->login($user)) {
+					
                     return $this->goHome();
                 }
             }

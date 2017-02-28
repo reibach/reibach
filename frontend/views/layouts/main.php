@@ -69,7 +69,7 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
-            $menuItems[] = ['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']];
+            //$menuItems[] = ['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']];
 		
     }
     echo Nav::widget([

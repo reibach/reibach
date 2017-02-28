@@ -24,6 +24,7 @@ Live spielen:
 
 2DOs:
 
+  - Schritt-für-Schritt-Anleitung
   - Deployment
   - Bei Userergistrierung automatisch einen Mandanten anlegen
   - Schalter zur Sprachauswahl bauen
@@ -35,8 +36,16 @@ Live spielen:
   - Haftung
   
   
-  
-   
+### Schritt-für-Schritt-Anleitung
+
+Erstes Erklärvideo soll folgenden Inhalt haben:
+1. Registrieren  
+2. Anmelden
+3. Passwort zurücksetzen
+
+
+
+Gruss Vati    
 
 ### Abo-und/oder Lizenzsystem zur ABrechnung entwickeln
 
@@ -97,7 +106,7 @@ Schalter mit Fahnen geht noch nicht, siehe:
 https://pceuropa.net/yii2-extensions/yii2-language-selection-widget?language=fr
 https://github.com/codemix/yii2-localeurls
 
-
+https://reibach.federa.de/index.php/de_DE
 --
 
 

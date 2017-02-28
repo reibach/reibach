@@ -3,10 +3,10 @@
 namespace frontend\controllers;
 
 use Yii;
-use backend\models\Address;
-use backend\models\Customer;
-use backend\models\Mandator;
-use backend\models\CustomerSearch;
+use frontend\models\Address;
+use frontend\models\Customer;
+use frontend\models\Mandator;
+use frontend\models\CustomerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

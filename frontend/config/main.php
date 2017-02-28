@@ -11,6 +11,8 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language'=>'de_DE', // german
+	//'language'=>'nds_NDS', // plattdütsch
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'user' => [
