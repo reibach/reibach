@@ -50,6 +50,15 @@ Gruss Vati
 ### Abo-und/oder Lizenzsystem zur ABrechnung entwickeln
 
 
+#### Lizenzsystem #### 
+STANDARD:
+
+
+PROFI:
+  * mehrere Mandanten
+
+
+
 ### Installation eines RBAC-Systems 
 siehe auch: 
 http://www.yiiframework.com/doc-2.0/guide-security-authorization.html

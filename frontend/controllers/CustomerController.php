@@ -37,9 +37,6 @@ class CustomerController extends Controller
      */
     public function actionIndex()
     {
-
-   
-		
         $searchModel = new CustomerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

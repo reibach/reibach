@@ -42,8 +42,10 @@ class MandatorSearch extends Mandator
      */
     public function search($params)
     {
-        $query = Mandator::find();
-
+        $query = Mandator::find()
+		->where(['user_id' => Yii::$app->user->id]);
+		
+		
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

@@ -13,6 +13,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use frontend\models\Mandator;
+use frontend\models\Address;
 
 /**
  * Site controller
@@ -152,6 +153,7 @@ class SiteController extends Controller
         return $this->render('imprint');
     }
 
+
     /**
      * Signs user up.
      *
@@ -159,21 +161,39 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
-        $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-				//createMandator('user_id' -> Yii::$app->getUser())
-                if (Yii::$app->getUser()->login($user)) {
-					
-                    return $this->goHome();
-                }
-            }
-        }
+        $address = new Address();
+		$address->address_type = 'MANDATOR';
 
+        $mandator = new Mandator();
+        $model = new SignupForm();
+
+		//user speichern
+		if ($model->load(Yii::$app->request->post())) {
+			if ($user = $model->signup()) {
+				$address->save();
+				$mandator->address_id = $address->id;														
+				$mandator->user_id = $user['id'];
+				$mandator->save();
+			
+				//print "<p>TEST</p>";
+				//print $mandator->user_id;
+				//print "<p>TEST</p>";
+				//exit;
+				//erst die Addresse speichern, dann die AddressID übergeben und dann den Kunden speichern  
+				//if ($address->load(Yii::$app->request->post()) && $address->save()) {
+			}
+		}
+			//if (getUser->login($user)) {
+		
+		//return $this->goHome();
+	//}
+	//}
         return $this->render('signup', [
             'model' => $model,
         ]);
-    }
+    	
+	}	
+
 
     /**
      * Requests password reset.

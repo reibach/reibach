@@ -64,8 +64,16 @@ class UserController extends Controller
     public function actionCreate()
     {
         $model = new User();
+        $mandator = new Mandator();
+        
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			$mandator->user-id = $model->id;
+			print "<p>TEST</p>";
+			print $mandator->user-id;
+			print "<p>TEST</p>";
+			exit;
+			$mandator->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

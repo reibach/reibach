@@ -4,33 +4,36 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use frontend\models\Mandator;
-//use backend\models\Address;
+use frontend\models\User;
+use frontend\models\Article;
+use frontend\models\Address;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Customer */
+/* @var $model frontend\models\Mandator */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="customer-form">
+<div class="mandator-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin([
+        'enableClientValidation' => false, // TODO get this working with client validation
+    ]); ?>
 
-	<!-- Mandant -->
-    <?= $form->field($customer, 'mandator_id')->dropDownList(
-		ArrayHelper::map(Mandator::find()->all(),'id','fullName'),
-		['prompt'=>'Select Mandator']		
-    ) ?>
-    
-   	
-	<!-- Addressfelder-->
+
+<fieldset>
+	<legend><?= Yii::t('app','Address'); ?>
 	<?= $form->field($address, 'prename')->textInput() ?>
 	<?= $form->field($address, 'lastname')->textInput() ?>
-	
+	</legend>	
+</fieldset>
 
+
+
+
+    
     <div class="form-group">
-        <?= Html::submitButton($customer->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $customer->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
-
+    <?= Html::submitButton('Save'); ?>
     <?php ActiveForm::end(); ?>
 
 </div>

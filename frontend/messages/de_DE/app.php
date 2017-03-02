@@ -109,6 +109,7 @@ return [
 	'Update' => 'Bearbeiten',
 	'Update Time' => 'Bearbeitet am',
 	'Update User ID' => 'Bearbeitet von',
+	'Update Mandator: ' => 'Bearbeite Mandant:',
 	'Update {modelClass}: ' => 'Bearbeite {modelClass}:',
 	'Updated At' => 'Bearbeitet am',
 	'User ID' => 'Benutzer ID',

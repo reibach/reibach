@@ -34,6 +34,7 @@ class MandatorController extends Controller
                     ],
                     [
                         'actions' => ['create', 'delete', 'index', 'update', 'view'],
+                        //'actions' => ['delete', 'index', 'update', 'view'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -85,6 +86,7 @@ class MandatorController extends Controller
     {
 		$mandator = new Mandator();
 		$address = new Address();
+		$mandator->user_id = Yii::$app->user->id;
     
         if ($address->load(Yii::$app->request->post()) && $address->save()) {
 			// Address ID holen
@@ -112,31 +114,15 @@ class MandatorController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
 		$mandator = Mandator::findOne($id);
-		// get the address_id of the mandator
-        
-        if (!$mandator) {
-            throw new NotFoundHttpException("The mandator was not found: ".$mandator_id);
-        }
-        
-        //$mandator_address_id = Mandator::findOne($mandator_id->id);
-        //$address_mandator = Address::findOne($mandator_address_id->id);
-        
-        
-        $address = Address::findOne($mandator->address_id);
-     
 
-        if ($mandator->load(Yii::$app->request->post()) && $address->load(Yii::$app->request->post())) {
-            $isValid = $mandator->validate();
-            $isValid = $address->validate() && $isValid;
-            if ($isValid) {
-                $mandator->save(false);
-                $address->save(false);
-                return $this->redirect(['mandator/view', 'id' => $id]);
-            }
+		// get the address_id of the mandator
+        $address = Address::findOne($mandator->address_id);
+
+        if ($address->load(Yii::$app->request->post()) && $address->save()) {
+			$mandator->save();
+            return $this->redirect(['mandator/view', 'id' => $id]);
         }
-        
         return $this->render('update', [
             'mandator' => $mandator,
             'address' => $address,
