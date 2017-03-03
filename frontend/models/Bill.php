@@ -9,6 +9,7 @@ use Yii;
  * This is the model class for table "bill".
  *
  * @property integer $id
+ * @property integer $mandator_id
  * @property integer $customer_id
  * @property string $description
  * @property double $price
@@ -37,7 +38,7 @@ class Bill extends \yii\db\ActiveRecord
     {
         return [
             //[['customer_id'], 'required'],
-            [['customer_id', 'created_at', 'updated_at'], 'integer'],
+            [['customer_id','mandator_id', 'created_at', 'updated_at'], 'integer'],
             //[['description','fullName'], 'string'],
             [['description'], 'string'],
             [['price', 'status'], 'number'],
@@ -56,6 +57,7 @@ class Bill extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'customer_id' => Yii::t('app', 'Customer ID'),
+            'mandator_id' => Yii::t('app', 'Mandator ID'),
             //'fullName' => Yii::t('app', 'Full Name'),
             'description' => Yii::t('app', 'Description'),
             'price' => Yii::t('app', 'Price'),

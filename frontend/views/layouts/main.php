@@ -42,10 +42,10 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-	$menuItems[] = ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']];
+	//$menuItems[] = ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']];
 	//$menuItems[] = ['label' => Yii::t('app', 'About'), 'url' => ['/site/about']];
-	$menuItems[] = ['label' => Yii::t('app', 'Imprint'), 'url' => ['/site/imprint']];
-	$menuItems[] = ['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact']];  
+	//$menuItems[] = ['label' => Yii::t('app', 'Imprint'), 'url' => ['/site/imprint']];
+	//$menuItems[] = ['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact']];  
           
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
@@ -90,8 +90,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Reibach <?= date('Y') ?></p>
-
+        <p class="pull-left">&copy; Reibach <?= date('Y') ?>&nbsp;
+		<?= Html::a(Yii::t('app', 'Imprint'), ['/site/imprint', ''], ['class' => 'profile-link']) ?>&nbsp;
+		<?= Html::a(Yii::t('app', 'Contact'), ['/site/contact', ''], ['class' => 'profile-link']) ?></p>
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>

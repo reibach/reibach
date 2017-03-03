@@ -75,6 +75,8 @@ class CustomerController extends Controller
     public function actionCreate()
     {
         $customer = new Customer();
+       
+        
         $address = new Address();
 		$address->address_type = 'CUSTOMER';
 		// erst die Addresse speichern, dann die AddressID übergeben und dann den Kunden speichern  
@@ -82,7 +84,17 @@ class CustomerController extends Controller
 			// Address ID holen
 			$customer->load(Yii::$app->request->post());
 			$customer->address_id = $address->id;
-			//echo "Address-ID: ".$model->address_id;	
+		
+		
+			$session = Yii::$app->session;
+			$mandator_active = $session->get('mandator_active');
+		
+			// wenn kein mandant ausgewählt ist, Abbruch
+			if ($mandator_active == '') {
+				print "ERROR: kein Mandant!!";
+				exit;
+			}
+			$customer->mandator_id = $mandator_active;
 			$customer->save();			
 			return $this->redirect(['view', 'id' => $customer->id]);
         } else {

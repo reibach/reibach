@@ -52,6 +52,9 @@ class BillController extends Controller
     }
 
 
+
+
+/*******************
 	public function actionList()
     {
 		$id = 82;
@@ -95,6 +98,9 @@ class BillController extends Controller
         $this->view->title = 'Position List';
         return $this->render('list', ['listDataProvider' => $dataProvider]);
     }
+
+******************/
+
 
     /**
      * Displays a single Bill model.
@@ -166,6 +172,16 @@ class BillController extends Controller
         
         $model->bill->loadDefaultValues();
         $model->setAttributes(Yii::$app->request->post());        
+
+			$session = Yii::$app->session;
+			$mandator_active = $session->get('mandator_active');
+		
+			// wenn kein mandant ausgewählt ist, Abbruch
+			if ($mandator_active == '') {
+				print "ERROR: kein Mandant!!";
+				exit;
+			}
+		$model->bill->mandator_id = $mandator_active;
 
         //if ($model->bill->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post()) && $model->bill->save() && $model->save()) {
 

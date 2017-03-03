@@ -173,25 +173,16 @@ class SiteController extends Controller
 				$address->save();
 				$mandator->address_id = $address->id;														
 				$mandator->user_id = $user['id'];
-				$mandator->save();
-			
-				//print "<p>TEST</p>";
-				//print $mandator->user_id;
-				//print "<p>TEST</p>";
-				//exit;
-				//erst die Addresse speichern, dann die AddressID übergeben und dann den Kunden speichern  
-				//if ($address->load(Yii::$app->request->post()) && $address->save()) {
+				$mandator->save();			
+				
+				if (Yii::$app->getUser()->login($user)) {
+					return $this->goHome();
+				}
 			}
-		}
-			//if (getUser->login($user)) {
-		
-		//return $this->goHome();
-	//}
-	//}
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
-    	
+		}	
+		return $this->render('signup', [
+			'model' => $model,
+		]);
 	}	
 
 

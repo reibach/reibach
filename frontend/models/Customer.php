@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $mandator_id
  * @property integer $address_id
+ * @property integer $customer_number 
  *
  * @property Bill[] $bills
  * @property Address $address
@@ -33,7 +34,7 @@ class Customer extends \yii\db\ActiveRecord
     {
         return [
             [['mandator_id', 'address_id'], 'required'],
-            [['mandator_id', 'address_id'], 'integer'],
+            [['mandator_id', 'address_id', 'customer_number'], 'integer'],
             [['address_id'], 'exist', 'skipOnError' => true, 'targetClass' => Address::className(), 'targetAttribute' => ['address_id' => 'id']],
             [['mandator_id'], 'exist', 'skipOnError' => true, 'targetClass' => Mandator::className(), 'targetAttribute' => ['mandator_id' => 'id']],
         ];
@@ -49,6 +50,7 @@ class Customer extends \yii\db\ActiveRecord
             'mandator_id' => Yii::t('app', 'Mandator ID'),
             'address_id' => Yii::t('app', 'Address ID'),
             'fullName'=>Yii::t('app', 'Full Name'),
+            'customer_number' => Yii::t('app', 'Customer Number'),
         ];
     }
 

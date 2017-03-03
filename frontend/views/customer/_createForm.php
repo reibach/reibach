@@ -13,15 +13,9 @@ use backend\models\Mandator;
 
 <div class="customer-createForm">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(); ?>    	
 
-    <?= $form->field($customer, 'mandator_id')->dropDownList(
-		ArrayHelper::map(Mandator::find()->all(),'id','fullName'),
-		['prompt'=>'Select Mandator']		
-    ) ?>
-    
-    
-	
+	<?= $form->field($customer, 'customer_number')->textInput() ?>
 	
 	<!-- Addressfelder-->
 		<?= $form->field($address, 'prename')->textInput() ?>

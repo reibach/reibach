@@ -24,6 +24,7 @@ Live spielen:
 
 2DOs:
 
+  - Schnellstart (QuickStartGuide)
   - Schritt-für-Schritt-Anleitung
   - Deployment
   - Bei Userergistrierung automatisch einen Mandanten anlegen
@@ -43,9 +44,7 @@ Erstes Erklärvideo soll folgenden Inhalt haben:
 2. Anmelden
 3. Passwort zurücksetzen
 
-
-
-Gruss Vati    
+  
 
 ### Abo-und/oder Lizenzsystem zur ABrechnung entwickeln
 
