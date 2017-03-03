@@ -34,12 +34,14 @@ AppAsset::register($this);
 
     <?php
     NavBar::begin([
-        //'brandLabel' => Html::img('@web/images/reibach-logo-40x40.png', ['alt'=>'Reibach']).'Reibach',
-        'brandLabel' => 'Reibach',
+        //'brandLabel' => Html::img('@web/images/reibach-logo114.png', ['alt'=>'Reibach']).'Reibach',
+        'brandLabel' => Html::img('@web/images/logo_weiss_120_ohne.png', ['alt'=>'Reibach']),
+        //'brandLabel' => 'Reibach',
         //'brandLabel' => ,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            //'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'my-navbar navbar-fixed-top',
         ],
     ]);
 	//$menuItems[] = ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']];
@@ -56,7 +58,7 @@ AppAsset::register($this);
 		//$menuItems[] = ['label' => Yii::t('app', 'CustomerAddresses'), 'url' => ['/customer-address/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Bills'), 'url' => ['/bill/index']];
 		//$menuItems[] = ['label' => Yii::t('app', 'Positions'), 'url' => ['/position/index']];
-		$menuItems[] = ['label' => Yii::t('app', 'Addresses'), 'url' => ['/address/index']];
+		//$menuItems[] = ['label' => Yii::t('app', 'Addresses'), 'url' => ['/address/index']];
 		//$menuItems[] = ['label' => Yii::t('app', 'Articles'), 'url' => ['/article/index']];
 		//$menuItems[] = ['label' => Yii::t('app', 'About'), 'url' => ['/site/about']];
 		//$menuItems[] = ['label' => Yii::t('app', 'Imprint'), 'url' => ['/site/imprint']];

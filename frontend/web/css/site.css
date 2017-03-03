@@ -3,6 +3,67 @@ body {
     height: 100%;
 }
 
+.nav li.active a, .nav li.active a:hover  {
+    background-color: #08D;
+    color: white;
+}
+
+.my-navbar {
+	background-color: #121254;
+	border-color: #080808;
+	color: #ffffff;
+}
+
+.my-navbar :hover,
+.my-navbar :focus {
+  color: #000000;
+  background-color: transparent;
+}
+.my-navbar  {
+  color: #FFFFFF;
+}
+.my-navbar  > li > a {
+  color: #FFFFFF;
+}
+.my-navbar  > li > a:hover,
+.my-navbar  > li > a:focus {
+  color: #fff;
+  background-color: transparent;
+}
+.my-navbar  > .active > a,
+.my-navbar  > .active > a:hover,
+.my-navbar  > .active > a:focus {
+  color: #fff;
+  background-color: #080808;
+}
+.my-navbar  > .disabled > a,
+.my-navbar  > .disabled > a:hover,
+.my-navbar  > .disabled > a:focus {
+  color: #FFFFFF;
+  background-color: transparent;
+}
+.my-navbar .navbar-toggle {
+  border-color: #101010;
+}
+.my-navbar .navbar-toggle:hover,
+.my-navbar .navbar-toggle:focus {
+  background-color: #101010;
+}
+.my-navbar .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+.my-navbar .navbar-collapse,
+.my-navbar .navbar-form {
+  border-color: #101010;
+}
+.my-navbar  > .open > a,
+.my-navbar  > .open > a:hover,
+.my-navbar  > .open > a:focus {
+  color: #fff;
+  background-color: #101010;
+}
+
+
 .wrap {
     min-height: 100%;
     height: auto;

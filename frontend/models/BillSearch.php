@@ -49,14 +49,6 @@ class BillSearch extends Bill
 		$session = Yii::$app->session;
 		$mandator_active = $session->get('mandator_active');
 		
-		// wenn kein mandant ausgewählt ist, Abbruch
-		if ($mandator_active == '') {
-			print "ERROR: kein Mandant!!";
-			exit;
-		}
-		
-        //$query = Bill::find();
-
 		$query = Bill::find()
 			->where(['mandator_id' => $mandator_active]);
         

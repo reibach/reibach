@@ -42,6 +42,17 @@ class BillController extends Controller
      */
     public function actionIndex()
     {
+		
+		$session = Yii::$app->session;
+		$mandator_active = $session->get('mandator_active');
+		
+		// wenn kein mandant ausgewählt ist, Abbruch
+		if ($mandator_active == '') {
+			Yii::$app->session->setFlash('error', 'No Mandator selected. Please select one.');
+			//return $this->redirect('/mandator/index');
+			$this->redirect(array('mandator/index'));
+		}
+
         $searchModel = new BillSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -178,8 +189,9 @@ class BillController extends Controller
 		
 			// wenn kein mandant ausgewählt ist, Abbruch
 			if ($mandator_active == '') {
-				print "ERROR: kein Mandant!!";
-				exit;
+				Yii::$app->session->setFlash('error', 'No Mandator.');
+				//print "ERROR: kein Mandant!!";
+				//exit;
 			}
 		$model->bill->mandator_id = $mandator_active;
 

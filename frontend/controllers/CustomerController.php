@@ -37,6 +37,16 @@ class CustomerController extends Controller
      */
     public function actionIndex()
     {
+		$session = Yii::$app->session;
+		$mandator_active = $session->get('mandator_active');
+		
+		// wenn kein mandant ausgewählt ist, Abbruch
+		if ($mandator_active == '') {
+			Yii::$app->session->setFlash('error', 'No Mandator selected. Please select one.');
+			//return $this->redirect('/mandator/index');
+			$this->redirect(array('mandator/index'));
+		}
+
         $searchModel = new CustomerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

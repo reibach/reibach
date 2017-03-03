@@ -48,11 +48,6 @@ class CustomerSearch extends Customer
 		$session = Yii::$app->session;
 		$mandator_active = $session->get('mandator_active');
 		
-		// wenn kein mandant ausgewählt ist, Abbruch
-		if ($mandator_active == '') {
-			print "ERROR: kein Mandant!!";
-			exit;
-		}
 
         $query = Customer::find()
 			->where(['mandator_id' => $mandator_active]);
