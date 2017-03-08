@@ -135,11 +135,7 @@ class CustomerController extends Controller
         
         if (!$mandator) {
             throw new NotFoundHttpException("The mandator was not found: ".$mandator_id);
-        }
-        
-        //$mandator_address_id = Mandator::findOne($mandator_id->id);
-        //$address_mandator = Address::findOne($mandator_address_id->id);
-        
+        }        
         
         $address = Address::findOne($customer->address_id);
         $address_mandator = Address::findOne($mandator->address_id);
@@ -155,21 +151,15 @@ class CustomerController extends Controller
         
         //$customer->scenario = 'update';
         //$address->scenario = 'update';
-        
-        if ($customer->load(Yii::$app->request->post()) && $address->load(Yii::$app->request->post())) {
-            $isValid = $customer->validate();
-            $isValid = $address->validate() && $isValid;
-            if ($isValid) {
-                $customer->save(false);
-                $address->save(false);
-                return $this->redirect(['customer/view', 'id' => $id]);
-            }
+
+        if ($address->load(Yii::$app->request->post()) && $address->save()) {
+			$customer->save();
+            return $this->redirect(['customer/view', 'id' => $id]);
         }
         
         return $this->render('update', [
             'customer' => $customer,
             'address' => $address,
-            //'address_customer' => $address_customer,
             'address_mandator' => $address_mandator,
         ]);
     }

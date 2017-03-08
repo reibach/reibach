@@ -31,9 +31,9 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'place') ?>
 
-    <?php // echo $form->field($model, 'address1') ?>
+    <?php // echo $form->field($model, 'street') ?>
 
-    <?php // echo $form->field($model, 'address2') ?>
+    <?php // echo $form->field($model, 'housenumber') ?>
 
     <?php // echo $form->field($model, 'state') ?>
 

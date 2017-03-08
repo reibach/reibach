@@ -12,14 +12,6 @@ More Infos and DemoSite will come soon....
 Aktuelle ProduktivAddresse:
 https://reibach.federa.de/
 
-Es wird geduzt
-
-knaakenkerl - sensenmann
-
-Live spielen:
-1. Debugger ausstellen
-
-
 
 
 2DOs:
@@ -27,20 +19,17 @@ Live spielen:
   - Schnellstart (QuickStartGuide)
   - Schritt-für-Schritt-Anleitung
   - Deployment
-  - Bei Userergistrierung automatisch einen Mandanten anlegen
   - Schalter zur Sprachauswahl bauen
   - Default Sprache hochdeutsch hart verdrahten
   - Sprachauswahl mit Fahnen
   - Dokwiki anlegen
   - Link zum Git
-  - Datenschutzerklärung
-  - Haftung
   
   
 ### Schritt-für-Schritt-Anleitung
 
 Erstes Erklärvideo soll folgenden Inhalt haben:
-1. Registrieren  
+1. Registrieren inklusive AGB bestätigen
 2. Anmelden
 3. Passwort zurücksetzen
 
@@ -88,13 +77,12 @@ Rechnung:
 Positionen:
 
 
-  * Infos solleten ausgeblendet werden können
+  * Infos sollten ausgeblendet werden können
   
 
 
 ### Sprachgenerator starten und dokumentieren
   
-
 root@reibach-dev:/var/www/html/reibach# php yii message/extract  @frontend/config/i18n.php
 
 generiert: /var/www/html/reibach/frontend/messages/

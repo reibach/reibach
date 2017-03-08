@@ -61,7 +61,7 @@ class MandatorController extends Controller
 
 		// wenn kein mandant ausgewählt ist, Abbruch
 		if ($mandator_active == '') {
-			Yii::$app->session->setFlash('error', 'No Mandator selected. Please select one.');
+			Yii::$app->session->setFlash('error', 'No Mandator selected. Please select or create one.');
 			//return $this->redirect('/mandator/index');
 			//$this->redirect(array('mandator/index'));
 		}

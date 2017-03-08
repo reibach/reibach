@@ -15,8 +15,8 @@ use Yii;
  * @property string $lastname
  * @property string $zipcode
  * @property string $place
- * @property string $address1
- * @property string $address2
+ * @property string $street
+ * @property string $housenumber 
  * @property string $state
  * @property string $phone_privat
  * @property string $phone_business
@@ -28,6 +28,7 @@ use Yii;
  * @property string $update_time
  * @property integer $update_user_id
  *
+ * @property Customer[] $customers 
  * @property CustomerAddress[] $customerAddresses
  * @property Mandator[] $mandators
  */
@@ -47,12 +48,12 @@ class Address extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            //[['address_type', 'title', 'company', 'prename', 'lastname', 'zipcode', 'place', 'address1', 'address2', 'state', 'phone_privat', 'phone_business', 'phone_mobile', 'email', 'fax', 'create_user_id', 'update_user_id'], 'required'],
+			//[['address_type', 'title', 'company', 'prename', 'lastname', 'zipcode', 'place', 'street', 'housenumber', 'state', 'phone_privat', 'phone_business', 'phone_mobile', 'email', 'fax', 'create_user_id', 'update_user_id'], 'required'],
             [['address_type'], 'string'],
             [['create_time', 'update_time'], 'safe'],
             [['create_user_id', 'update_user_id'], 'integer'],
             [['title', 'company', 'prename', 'lastname', 'state', 'phone_privat', 'phone_business', 'phone_mobile', 'fax'], 'string', 'max' => 100],
-            [['zipcode', 'place', 'address1', 'address2', 'email'], 'string', 'max' => 255],
+            [['zipcode', 'place', 'street', 'housenumber', 'email'], 'string', 'max' => 255],
         ];
     }
 
@@ -78,9 +79,9 @@ class Address extends \yii\db\ActiveRecord
 			'fullName'=>Yii::t('app', 'Full Name'),
             'zipcode' => Yii::t('app', 'Zipcode'),
             'place' => Yii::t('app', 'Place'),
-            'address1' => Yii::t('app', 'Address1'),
-            'address2' => Yii::t('app', 'Address2'),
-            'state' => Yii::t('app', 'State'),
+            'street' => Yii::t('app', 'Street'),
+		    'housenumber' => Yii::t('app', 'Housenumber'),
+		    'state' => Yii::t('app', 'State'),
             'phone_privat' => Yii::t('app', 'Phone Privat'),
             'phone_business' => Yii::t('app', 'Phone Business'),
             'phone_mobile' => Yii::t('app', 'Phone Mobile'),
@@ -92,6 +93,15 @@ class Address extends \yii\db\ActiveRecord
             'update_user_id' => Yii::t('app', 'Update User ID'),
         ];
     }
+
+	/** 
+	* @return \yii\db\ActiveQuery 
+	*/ 
+	public function getCustomers() 
+	{ 
+	   return $this->hasMany(Customer::className(), ['address_id' => 'id']); 
+	}
+		
 
     /**
      * @return \yii\db\ActiveQuery

@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "user".
  *
  * @property integer $id
+ * @property integer $agb
  * @property string $username
  * @property string $auth_key
  * @property string $password_hash
@@ -39,8 +40,8 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at', 'abo_start', 'abo_end', 'abo_turn', 'abo_type'], 'required'],
-            [['status', 'created_at', 'updated_at', 'abo_start', 'abo_end', 'abo_turn'], 'integer'],
+            [['agb', 'username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at', 'abo_start', 'abo_end', 'abo_turn', 'abo_type'], 'required'],
+            [['agb', 'status', 'created_at', 'updated_at', 'abo_start', 'abo_end', 'abo_turn'], 'integer'],
             [['abo_type'], 'string'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
@@ -57,6 +58,7 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'agb' => Yii::t('app', 'Agb'),
             'username' => Yii::t('app', 'Username'),
             'auth_key' => Yii::t('app', 'Auth Key'),
             'password_hash' => Yii::t('app', 'Password Hash'),

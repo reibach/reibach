@@ -12,6 +12,8 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $agb;
+    
 
 
     /**
@@ -20,6 +22,12 @@ class SignupForm extends Model
     public function rules()
     {
         return [
+            //['agb', 'trim'],
+            ['agb', 'required', 'requiredValue' => 1, 'message' => 'Please check our terms and conditions.'],
+            //['agb', 'required'],
+            [['agb'], 'integer'],
+
+
             ['username', 'trim'],
             ['username', 'required'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
@@ -48,8 +56,8 @@ class SignupForm extends Model
         }
         
         $user = new User();
-        //$user->id = $this->id;
         $user->username = $this->username;
+        $user->agb = $this->agb;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();

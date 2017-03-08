@@ -13,11 +13,31 @@ use backend\models\Mandator;
 
 <div class="customer-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin([
+        'enableClientValidation' => false, // TODO get this working with client validation
+    ]); ?>
 
-	<!-- Addressfelder-->
-	<?= $form->field($address, 'prename')->textInput() ?>
-	<?= $form->field($address, 'lastname')->textInput() ?>
+
+<fieldset>
+	<legend>
+	<?= Yii::t('app','Please fill out this form...'); ?>	
+	<?= $form->field($address, 'company')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($address, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($address, 'prename')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($address, 'lastname')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($address, 'zipcode')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($address, 'place')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($address, 'street')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($address, 'housenumber')->textInput(['maxlength' => true]) ?>    
+	<?= $form->field($address, 'state')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($address, 'phone_privat')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($address, 'phone_business')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($address, 'phone_mobile')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($address, 'email')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($address, 'fax')->textInput(['maxlength' => true]) ?>
+	</legend>	
+</fieldset>
+
 	
 
     <div class="form-group">

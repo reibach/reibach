@@ -23,6 +23,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'email') ?>
 
 	            <?= $form->field($model, 'password')->passwordInput() ?>
+	            
+				<?= $form->field($model, 'agb')->checkbox(); ?>
+	            <p class="small">
+				<?= Yii::t('app', 'At registration the customer must provide the required information and agree with the general terms and conditions.') ?>&nbsp;
+				<?= Html::a(Yii::t('app', 'GTC'), ['/site/gtc', ''], ['class' => 'profile-link']) ?>&nbsp;
+				</p>
 
                 <div class="form-group">
                     <?= Html::submitButton(Yii::t('app','Signup'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
@@ -32,6 +38,4 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
-
-
 

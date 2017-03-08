@@ -28,7 +28,8 @@ use yii\widgets\ListView;
 <p></p>
 
 <?= $address_mandator->prename ?> <?= $address_mandator->lastname ?><br>
-<?= $address_mandator->address1 ?><br>
+<?= $address_mandator->street ?><br>
+<?= $address_mandator->housenumber ?><br>
 <?= $address_mandator->zipcode." ".$address_mandator->place ?>
 
       </td>
@@ -58,7 +59,7 @@ use yii\widgets\ListView;
 		  
 		  <!-- Kunde -->
 		<?= $address_customer->prename ?> <?= $address_customer->lastname ?><br>
-		<?= $address_customer->address1 ?><br>
+		<?= $address_customer->street ?>&nbsp;<?= $address_customer->housenumber ?><br>
 		<?= $address_customer->zipcode." ".$address_customer->place ?>
 
       </td>

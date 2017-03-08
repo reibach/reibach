@@ -22,7 +22,7 @@ class AddressSearch extends Address
     {
         return [
             [['id', 'create_user_id', 'update_user_id'], 'integer'],
-            [['address_type', 'title', 'company', 'prename', 'lastname', 'fullName', 'zipcode', 'place', 'address1', 'address2', 'state', 'phone_privat', 'phone_business', 'phone_mobile', 'email', 'fax', 'create_time', 'update_time'], 'safe'],
+             [['address_type', 'title', 'company', 'prename', 'lastname', 'zipcode', 'place', 'street', 'housenumber', 'state', 'phone_privat', 'phone_business', 'phone_mobile', 'email', 'fax', 'create_time', 'update_time'], 'safe'],
         ];
     }
 
@@ -95,8 +95,8 @@ class AddressSearch extends Address
             ->andFilterWhere(['like', 'lastname', $this->lastname])
             ->andFilterWhere(['like', 'zipcode', $this->zipcode])
             ->andFilterWhere(['like', 'place', $this->place])
-            ->andFilterWhere(['like', 'address1', $this->address1])
-            ->andFilterWhere(['like', 'address2', $this->address2])
+            ->andFilterWhere(['like', 'street', $this->street])
+		    ->andFilterWhere(['like', 'housenumber', $this->housenumber])
             ->andFilterWhere(['like', 'state', $this->state])
             ->andFilterWhere(['like', 'phone_privat', $this->phone_privat])
             ->andFilterWhere(['like', 'phone_business', $this->phone_business])

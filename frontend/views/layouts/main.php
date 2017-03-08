@@ -94,6 +94,9 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; Reibach <?= date('Y') ?>&nbsp;
 		<?= Html::a(Yii::t('app', 'Imprint'), ['/site/imprint', ''], ['class' => 'profile-link']) ?>&nbsp;
+		<?= Html::a(Yii::t('app', 'Disclaimer'), ['/site/disclaimer', ''], ['class' => 'profile-link']) ?>&nbsp;
+		<?= Html::a(Yii::t('app', 'Privacy Policy'), ['/site/privacypolicy', ''], ['class' => 'profile-link']) ?>&nbsp;
+		<?= Html::a(Yii::t('app', 'GTC'), ['/site/gtc', ''], ['class' => 'profile-link']) ?>&nbsp;
 		<?= Html::a(Yii::t('app', 'Contact'), ['/site/contact', ''], ['class' => 'profile-link']) ?></p>
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

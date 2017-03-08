@@ -63,16 +63,24 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
-        $model = new User();
+        $user = new User();
         $mandator = new Mandator();
+        $address = new address();
         
+        // als erstes Addresse anlegen
+        if ($address->load(Yii::$app->request->post()) && $address->save()) {
+			// Address ID holen
+			$mandator->load(Yii::$app->request->post());
+			$mandator->address_id = $address->id;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			$mandator->user-id = $model->id;
-			print "<p>TEST</p>";
-			print $mandator->user-id;
-			print "<p>TEST</p>";
-			exit;
+
+
+        //if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			//$mandator->user-id = $model->id;
+			//print "<p>TEST</p>";
+			//print $mandator->user-id;
+			//print "<p>TEST</p>";
+			//exit;
 			$mandator->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
