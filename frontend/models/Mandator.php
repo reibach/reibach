@@ -56,6 +56,36 @@ class Mandator extends \yii\db\ActiveRecord
         ];
     }
 
+
+	/*********
+	// Standard-Mandanten laden
+	public function getDefaultMandator()
+	{
+		$mandator = new Mandator();
+		//$session = Yii::$app->session;
+		//$mandator_active = $session->get('mandator_active');
+		
+		$query = Mandator::find()->andWhere(['user_id' => Yii::$app->user->id]);
+
+        foreach ($query->all() as $act_man) {
+            print "<p></p>";
+            print $act_man;
+            print "<p></p>";
+        }        
+        return true;
+		//return $this->address->fullName;
+   	}
+	****/
+
+	 /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDefaultMandator($id)
+    {
+        return $this->hasOne(Mandator::className(), ['id' => $id]);
+    }
+	
+	// Vor- und Nachname zusammensetzen
 	public function getFullName()
 	{
 		return $this->address->fullName;
@@ -92,5 +122,7 @@ class Mandator extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+    
+    
 
 }

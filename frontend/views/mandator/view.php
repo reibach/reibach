@@ -10,6 +10,7 @@ $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
+
 $session = Yii::$app->session;
 $mandator_active = $session->set('mandator_active', $model->id);
 

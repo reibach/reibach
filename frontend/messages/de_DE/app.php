@@ -110,6 +110,7 @@ return [
 	'Mandator ID' => 'Mandanten ID',
 	'Mandators' => 'Mandanten',
 	'New Position' => 'Neue Position',
+	'No Mandator selected. Please select or create one.' => 'Bitte einen Mandanten auswaehlen.',
 	'Password Hash' => 'Passwort',
 	'Password Reset Token' => 'Passwort zur Wiederherstellung',
 	'Phone Business' => 'Telefon geschäftlich',
