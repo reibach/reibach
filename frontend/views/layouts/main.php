@@ -10,10 +10,22 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 //use pceuropa\languageSelection\LanguageSelection;
+use cinghie\cookieconsent\widgets\CookieWidget;
+
 
 
 AppAsset::register($this);
 ?>
+
+<?= CookieWidget::widget([ 
+        'message' => Yii::t('app', 'This website uses cookies to ensure you get the best experience on our website.'),
+        'dismiss' => Yii::t('app', 'Got It'),
+        'learnMore' => Yii::t('app','More info'),
+        'link' => 'https://reibach.federa.de/index.php?r=site%2Fprivacypolicy&1=',
+        'theme' => 'dark-bottom'
+]); 
+?>
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">

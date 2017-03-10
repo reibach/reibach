@@ -21,7 +21,8 @@
         "yiisoft/yii2-jui": "^2.0",
         "pceuropa/yii2-language-selection-widget": "dev-master",
         "codemix/yii2-localeurls": "^1.4",
-        "kartik-v/yii2-mpdf": "dev-master"
+        "kartik-v/yii2-mpdf": "dev-master",
+        "cinghie/yii2-cookie-consent": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

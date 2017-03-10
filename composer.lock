@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e1000b217075ebb0fa3bb1e188f822a8",
+    "content-hash": "1c79e54c06040106370f11a5a76b1132",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -53,6 +53,41 @@
                 "mobile-first",
                 "responsive",
                 "web"
+            ]
+        },
+        {
+            "name": "bower-asset/cookieconsent2",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/insites/cookieconsent.git",
+                "reference": "973eb0a951de60d403ccc7107796cec06964af00"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/insites/cookieconsent/zipball/973eb0a951de60d403ccc7107796cec06964af00",
+                "reference": "973eb0a951de60d403ccc7107796cec06964af00",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "cookieconsent.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Insites' cookie consent plugin v2",
+            "keywords": [
+                "cookie",
+                "cookieconsent",
+                "law"
             ]
         },
         {
@@ -285,6 +320,52 @@
                 "markdown-extra"
             ],
             "time": "2016-09-14T20:40:20+00:00"
+        },
+        {
+            "name": "cinghie/yii2-cookie-consent",
+            "version": "v1.4.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cinghie/yii2-cookie-consent.git",
+                "reference": "71aee9adf172287b7f2869044402389915315d81"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cinghie/yii2-cookie-consent/zipball/71aee9adf172287b7f2869044402389915315d81",
+                "reference": "71aee9adf172287b7f2869044402389915315d81",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/cookieconsent2": "2.0.*",
+                "yiisoft/yii2": "2.0.*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "cinghie\\cookieconsent\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Gogodigital.it",
+                    "email": "info@gogodigital.it",
+                    "homepage": "http://www.gogodigital.it/"
+                }
+            ],
+            "description": "Yii2 Cookie Consent to alerting users about the use of cookies on your Yii2 website.",
+            "homepage": "https://github.com/cinghie/yii2-cookie-consent",
+            "keywords": [
+                "cookie",
+                "cookie consent",
+                "cookie law",
+                "eu cookie consent",
+                "yii2"
+            ],
+            "time": "2017-01-04T00:25:10+00:00"
         },
         {
             "name": "codemix/yii2-localeurls",

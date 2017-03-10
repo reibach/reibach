@@ -16,6 +16,9 @@ https://reibach.federa.de/
 
 2DOs:
 
+  - SSL - Zertifikat DF: 1.99 / mntl. 
+  - Newsletter einbauen
+  - Nutzung Cookies bestätigen, Verweis auf Datenschutz
   - Schnellstart (QuickStartGuide)
   - Schritt-für-Schritt-Anleitung
   - Deployment
@@ -25,6 +28,10 @@ https://reibach.federa.de/
   - Dokwiki anlegen
   - Link zum Git
   
+
+Privacy Policy - Datenschutzbestimmungen
+Disclaimer - Haftungsausschluss
+GTC ( General Terms & Conditions) - AGBs
   
 ### Schritt-für-Schritt-Anleitung
 

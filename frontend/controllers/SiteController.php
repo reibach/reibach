@@ -197,6 +197,15 @@ class SiteController extends Controller
         return $this->render('quickstart');
     }
     /**
+     * Displays GTC page.
+     *
+     * @return mixed
+     */
+    public function actionGtc()
+    {
+        return $this->render('gtc');
+    }
+    /**
      * Displays disclaimer page.
      *
      * @return mixed
