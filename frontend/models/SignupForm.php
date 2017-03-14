@@ -1,6 +1,7 @@
 <?php
 namespace frontend\models;
 
+use Yii;
 use yii\base\Model;
 use common\models\User;
 
@@ -23,7 +24,7 @@ class SignupForm extends Model
     {
         return [
             //['agb', 'trim'],
-            ['agb', 'required', 'requiredValue' => 1, 'message' => 'Please check our terms and conditions.'],
+            ['agb', 'required', 'requiredValue' => 1, 'message' => Yii::t('app','Please check our terms and conditions.')],
             //['agb', 'required'],
             [['agb'], 'integer'],
 

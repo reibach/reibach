@@ -188,15 +188,6 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays Quickstart page.
-     *
-     * @return mixed
-     */
-    public function actionQuickstart()
-    {
-        return $this->render('quickstart');
-    }
-    /**
      * Displays GTC page.
      *
      * @return mixed
@@ -234,6 +225,16 @@ class SiteController extends Controller
     }
 
     /**
+     * Displays quickstart page.
+     *
+     * @return mixed
+     */
+    public function actionQuickstart()
+    {
+        return $this->render('quickstart');
+    }
+
+    /**
      * Displays imprint page.
      *
      * @return mixed
@@ -261,9 +262,9 @@ class SiteController extends Controller
 		if ($model->load(Yii::$app->request->post())) {
 			if ($user = $model->signup()) {
 				$address->save();
-				print "<p>AID: </p>";
-				print $address->id;
-				print "<p>&nbsp;AID</p>";
+				//print "<p>AddressID: </p>";
+				//print $address->id;
+				//print "<p>&nbsp;AddressID</p>";
 				$mandator->address_id = $address->id;	
 																	
 				$mandator->user_id = $user['id'];

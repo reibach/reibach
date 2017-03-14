@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 
@@ -18,12 +19,16 @@ $this->title = 'Reibach ... to make a big haul.';
 <h3>Willkommen,</h3>
 <h4>zu Reibach, dem Online-Rechnungsprogramm</h4>
 
-<p>Lege  <a href="">hier</a> gleich los oder informiere dich vorab.  </p>
-<!--
-        <p><img src="<?= yii\helpers\Url::to('@web/images/reibach-logo-200x200.png') ?>" />
-        <br>... to make a big haul</p>
--->
-          
+<p>Lege <?= Html::a(Yii::t('app', 'Hier'), ['/site/signup', ''], ['class' => 'profile-link']) ?> gleich los oder informiere 
+<?= Html::a(Yii::t('app', 'QuickStart'), ['/site/quickstart', ''], ['class' => 'profile-link']) ?> dich vorab.  </p>
+        <p><img src="<?= yii\helpers\Url::to('@web/images/quickstartguide.png') ?>" width="400"/></p>
+        
+        
+
+<p></p>
+		&nbsp;
+
+
     </div>
 
     <div class="body-content">

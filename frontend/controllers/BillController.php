@@ -48,7 +48,7 @@ class BillController extends Controller
 		
 		// wenn kein mandant ausgewählt ist, Abbruch
 		if ($mandator_active == '') {
-			Yii::$app->session->setFlash('error', 'No Mandator selected. Please select one.');
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator selected. Please select one.'));
 			//return $this->redirect('/mandator/index');
 			$this->redirect(array('mandator/index'));
 		}
@@ -189,7 +189,7 @@ class BillController extends Controller
 		
 			// wenn kein mandant ausgewählt ist, Abbruch
 			if ($mandator_active == '') {
-				Yii::$app->session->setFlash('error', 'No Mandator.');
+				Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator.'));
 				//print "ERROR: kein Mandant!!";
 				//exit;
 			}
@@ -201,7 +201,7 @@ class BillController extends Controller
         if (Yii::$app->request->post() && $model->bill->save()) {
 			$model->savePositions();
 			
-            Yii::$app->getSession()->setFlash('success', 'Bill has been created.'.$model->bill->id);
+            Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Bill has been created: '.$model->bill->id));
             return $this->redirect(['update', 'id' => $model->bill->id]);
         }
         return $this->render('create', ['model' => $model]);
@@ -225,7 +225,7 @@ class BillController extends Controller
         if (Yii::$app->request->post() && $model->bill->save()) {
 			$model->savePositions();
 			
-            Yii::$app->getSession()->setFlash('success', 'Bill has been updated.');
+            Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Bill has been updated.'));
             return $this->redirect(['update', 'id' => $model->bill->id]);
         }
         return $this->render('update', ['model' => $model]);

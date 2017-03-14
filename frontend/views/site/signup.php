@@ -18,16 +18,16 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
+
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
                 <?= $form->field($model, 'email') ?>
 
 	            <?= $form->field($model, 'password')->passwordInput() ?>
 	            
-				<?= $form->field($model, 'agb')->checkbox(); ?>
+				<?= $form->field($model, 'agb')->checkbox(); Html::a(Yii::t('app', 'GTC'), ['/site/gtc', ''], ['class' => 'profile-link']); ?>
 	            <p class="small">
-				<?= Yii::t('app', 'At registration the customer must provide the required information and agree with the general terms and conditions.') ?>&nbsp;
-				<?= Html::a(Yii::t('app', 'GTC'), ['/site/gtc', ''], ['class' => 'profile-link']) ?>&nbsp;
+				<?= Html::a(Yii::t('app', 'General Terms & Conditions'), ['/site/gtc', ''], ['class' => 'profile-link']) ?>&nbsp;
 				</p>
 
                 <div class="form-group">

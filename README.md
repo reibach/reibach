@@ -40,7 +40,25 @@ Erstes Erklärvideo soll folgenden Inhalt haben:
 2. Anmelden
 3. Passwort zurücksetzen
 
-  
+
+
+Schnellstart (QuickStartGuide)
+1. Registrieren:
+  - Benutzername
+  - Passwort 
+  - AGBs bestätigen
+   
+   
+2. Mandant (Rechnungssteller, deine Firma) bearbeiten 
+
+3. Kunde (Rechnungsempfänger) anlegen
+
+4. Rechnung erstellen
+
+
+
+
+
 
 ### Abo-und/oder Lizenzsystem zur ABrechnung entwickeln
 
