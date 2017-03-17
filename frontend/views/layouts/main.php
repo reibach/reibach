@@ -12,10 +12,10 @@ use common\widgets\Alert;
 //use pceuropa\languageSelection\LanguageSelection;
 use cinghie\cookieconsent\widgets\CookieWidget;
 
-
-
+ 
 AppAsset::register($this);
 ?>
+<link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/reibach.ico" type="image/x-icon" />
 
 <?= CookieWidget::widget([ 
         'message' => Yii::t('app', 'This website uses cookies to ensure you get the best experience on our website.'),

@@ -22,14 +22,14 @@ use Yii;
  */
 class Bill extends \yii\db\ActiveRecord
 {
-	
-    /**
+	/**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'bill';
     }
+
 
     /**
      * @inheritdoc

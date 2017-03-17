@@ -52,6 +52,7 @@ class BillSearch extends Bill
 		$query = Bill::find()
 			->where(['mandator_id' => $mandator_active]);
         
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

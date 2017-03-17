@@ -27,7 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <h1><?= Yii::t('app', 'Mandator') ?></h1>
+    <h3><?= Yii::t('app', 'Mandator') ?>:&nbsp;
+	<?= $address_mandator['prename'], $address_mandator['lastname'] ?>
+	</h3>
+<!--
   <?= DetailView::widget([
         'model' => $address_mandator,
         'attributes' => [
@@ -42,9 +45,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) 
 ?>
+-->
 
 
-    <h1><?= Yii::t('app', 'Customer') ?></h1>
+    <h3><?= Yii::t('app', 'Customer') ?>:&nbsp;
+    <?= $customer['fullName'] ?>
+    </h3>
+
+
 <!--
     <?= DetailView::widget([
         'model' => $customer,
@@ -54,8 +62,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'fullName',
         ],
     ]) 
-?>
+	?>
 -->
+
+
+<!--
   <?= DetailView::widget([
         'model' => $address_customer,
         'attributes' => [
@@ -71,6 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) 
 ?>
+-->
 
 
     <h1><?= Yii::t('app', 'Bill') ?></h1>

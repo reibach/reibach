@@ -12,7 +12,7 @@ use yii\widgets\ListView;
 
 
 <link rel="stylesheet" href="rv.css" type="text/css"></head><body>
-<p><img src="<?= yii\helpers\Url::to('@web/images/reibach-logo-460x460_33.png') ?>"  width="5%"/></p>
+<p><img src="<?= yii\helpers\Url::to('@web/images/logo50.png') ?>"  width="20%"/></p>
 
 <table style="text-align: left; width: 1048px; height: 542px; background-color: rgb(238, 238, 238);" border="2" cellpadding="0" cellspacing="0">
 

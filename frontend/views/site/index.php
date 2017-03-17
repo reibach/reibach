@@ -19,8 +19,8 @@ $this->title = 'Reibach ... to make a big haul.';
 <h3>Willkommen,</h3>
 <h4>zu Reibach, dem Online-Rechnungsprogramm</h4>
 
-<p>Lege <?= Html::a(Yii::t('app', 'Hier'), ['/site/signup', ''], ['class' => 'profile-link']) ?> gleich los oder informiere 
-<?= Html::a(Yii::t('app', 'QuickStart'), ['/site/quickstart', ''], ['class' => 'profile-link']) ?> dich vorab.  </p>
+<p>Lege <?= Html::a(Yii::t('app', 'Hier'), ['/site/signup', ''], ['class' => 'profile-link']) ?> gleich los oder informiere dich vorab:
+<?= Html::a(Yii::t('app', 'QuickStart'), ['/site/quickstart', ''], ['class' => 'profile-link']) ?>   </p>
         <p><img src="<?= yii\helpers\Url::to('@web/images/quickstartguide.png') ?>" width="400"/></p>
         
         

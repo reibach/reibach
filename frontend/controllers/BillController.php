@@ -59,6 +59,7 @@ class BillController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'mandator_active' => $mandator_active,
         ]);
     }
 
