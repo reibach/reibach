@@ -11,12 +11,11 @@ use Yii;
  * @property integer $bill_id
  * @property string $name
  * @property string $pos_num
- * @property double $quantity
+ * @property string $quantity
  * @property string $unit
  * @property string $comment
- * @property double $price
- * @property double $tax
- * @property double $amount
+ * @property string $price
+ * @property string $tax
  *
  * @property Bill $bill
  */
@@ -38,7 +37,7 @@ class Position extends \yii\db\ActiveRecord
         return [
             [['bill_id', 'name'], 'required'],
             [['bill_id'], 'integer'],
-            [['quantity', 'price', 'tax', 'amount'], 'number'],
+            [['quantity', 'price', 'tax'], 'number'],
             [['comment'], 'string'],
             [['name'], 'string', 'max' => 255],
             [['pos_num'], 'string', 'max' => 2],
@@ -62,7 +61,6 @@ class Position extends \yii\db\ActiveRecord
             'comment' => Yii::t('app', 'Comment'),
             'price' => Yii::t('app', 'Price'),
             'tax' => Yii::t('app', 'Tax'),
-            'amount' => Yii::t('app', 'Amount'),
         ];
     }
 

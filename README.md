@@ -16,6 +16,11 @@ https://reibach.federa.de/
 
 2DOs:
 
+  - Rechnung:index: KundenID muss fullname werden 
+  
+  - Rechnung:view: KundenID muss fullname werden 
+  
+  
   - SSL - Zertifikat DF: 1.99 / mntl. 
   - Newsletter einbauen
   - Nutzung Cookies bestätigen, Verweis auf Datenschutz

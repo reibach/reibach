@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'customer_id',
+            //'customer_id',
             'description:ntext',
             'price',
             'status',
@@ -101,25 +101,27 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
     <h1><?= Yii::t('app', 'Positions') ?></h1>
 
-
+<?php
+//Yii::$app->formatter->locale = 'de-DE';
+//echo Yii::$app->formatter->asDecimal('23.55'); // output: 1. Januar 2014
+?>
 
     <?= GridView::widget([
+		//Yii::$app->formatter->locale = 'de-DE',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'bill_id',
-            'name',
             'pos_num',
-            'quantity',
-            // 'unit',
+            //'id',
+            //'bill_id',
+            'name',
+             'unit',
+            'quantity:decimal',
+            'price:decimal',
             // 'comment:ntext',
-            // 'price',
-            // 'tax',
-            // 'amount',
-
+             //Yii::$app->formatter->asDecimal('price'),
+             'tax:decimal',
             //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
@@ -135,5 +137,12 @@ $this->params['breadcrumbs'][] = $this->title;
 		'data-toggle'=>'tooltip', 
 		'title'=>'Will open the generated PDF file in a new window'
 	]);
+	$this->registerJs("        
+    $(document).ready(function() {
+        $(document).on('keyup', 'input', function(e){
+            $(this).val($(this).val().replace(/[,]/g, '.'));
+        });
+    });
+");
 ?>
 </div>

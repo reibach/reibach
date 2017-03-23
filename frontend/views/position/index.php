@@ -33,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'comment:ntext',
             // 'price',
             // 'tax',
-            // 'amount',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

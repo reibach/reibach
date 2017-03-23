@@ -23,17 +23,16 @@ use frontend\models\Bill;
 
     <?= $form->field($model, 'pos_num')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'quantity')->textInput() ?>
+    <?= $form->field($model, 'quantity')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'unit')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'price')->textInput() ?>
+	<?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+   
+    <?= $form->field($model, 'tax')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'tax')->textInput() ?>
-
-    <?= $form->field($model, 'amount')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

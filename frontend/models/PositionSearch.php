@@ -20,7 +20,7 @@ class PositionSearch extends Position
         return [
             [['id', 'bill_id'], 'integer'],
             [['name', 'pos_num', 'unit', 'comment'], 'safe'],
-            [['quantity', 'price', 'tax', 'amount'], 'number'],
+            [['quantity', 'price', 'tax'], 'number'],
         ];
     }
 
@@ -65,7 +65,6 @@ class PositionSearch extends Position
             'quantity' => $this->quantity,
             'price' => $this->price,
             'tax' => $this->tax,
-            'amount' => $this->amount,
         ]);
 
         $query->andFilterWhere(['like', 'bill_id', $this->bill_id])
@@ -109,7 +108,6 @@ class PositionSearch extends Position
             'quantity' => $this->quantity,
             'price' => $this->price,
             'tax' => $this->tax,
-            'amount' => $this->amount,
         ]);
 
         $query->andFilterWhere(['like', 'bill_id', $id])

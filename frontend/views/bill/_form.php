@@ -62,7 +62,6 @@ use frontend\models\Position;
         echo '<th>' . $position->getAttributeLabel(Yii::t('app','comment')) . '</th>';
         echo '<th>' . $position->getAttributeLabel(Yii::t('app','price')) . '</th>';
         echo '<th>' . $position->getAttributeLabel(Yii::t('app','tax')) . '</th>';
-        echo '<th>' . $position->getAttributeLabel(Yii::t('app','amount')) . '</th>';
         //echo '<td>&nbsp;</td>';
         echo '</tr>';
         echo '</thead>';
@@ -143,7 +142,17 @@ use frontend\models\Position;
 
  
     <?= Html::submitButton('Save'); ?>
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); 
+    
+	$this->registerJs("        
+    $(document).ready(function() {
+        $(document).on('keyup', 'input', function(e){
+            $(this).val($(this).val().replace(/[,]/g, '.'));
+        });
+    });
+	");
+
+    ?>
 
         
 
