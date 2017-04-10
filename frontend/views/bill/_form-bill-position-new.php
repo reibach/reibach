@@ -18,7 +18,6 @@ use yii\helpers\Html;
     <?= $form->field($position, 'quantity')->textInput([
         'id' => "Positions_{$key}_quantity",
         'name' => "Positions[$key][quantity]",
-        'value' => Yii::$app->formatter->asDecimal($position['quantity']),
     ])->label(false) ?>
 </td>
 <td>
@@ -37,14 +36,12 @@ use yii\helpers\Html;
     <?= $form->field($position, 'price')->textInput([
         'id' => "Positions_{$key}_price",
         'name' => "Positions[$key][price]",
-        'value' => Yii::$app->formatter->asDecimal($position['price']),
     ])->label(false) ?>
 </td>
 <td>
     <?= $form->field($position, 'tax')->textInput([
         'id' => "Positions_{$key}_tax",
         'name' => "Positions[$key][tax]",
-        'value' => Yii::$app->formatter->asDecimal($position['tax']),
     ])->label(false) ?>
 </td>
 <td>

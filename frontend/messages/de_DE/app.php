@@ -126,6 +126,8 @@ return [
 	'Phone Mobile' => 'Telefon Mobil',
 	'Phone Privat' => 'Telefon privat',
 	'Place' => 'Ort',
+	'Please fix the following errors for:' => 'Bitte behebe folgende Fehler für:',
+	'Please fix the following errors:' => 'Bitte behebe folgende Fehler:',
 	'Please check our terms and conditions.' => 'Bitte beachte unsere Allgemeinen Geschaeftsbedingungen.', 
 	'Please fill out the following fields to login:' => 'Bitte fülle die folgenden Felder aus, um dich anzumelden. :',
 	'Please fill out the following fields to signup:' => 'Bitte fülle die folgenden Felder aus, um dich zu registrieren',

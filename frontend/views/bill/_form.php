@@ -32,8 +32,8 @@ use frontend\models\Position;
 		ArrayHelper::map(Customer::find()
 		->where(['mandator_id' => $mandator_active])
 		->all(),'id','fullName'),
-		['prompt'=>Yii::t('app','Select Customer')]	
-    ) ?>
+		['prompt'=>Yii::t('app','Select Customer')])
+		->label(false) ?>
     </fieldset>
    
 
@@ -82,10 +82,11 @@ use frontend\models\Position;
         
         // new position fields
         echo '<tr id="bill-new-position-block" style="display: none;">';
-        echo $this->render('_form-bill-position', [
+        echo $this->render('_form-bill-position-new', [
             'key' => '__id__',
             'form' => $form,
             'position' => $position,
+            
         ]);
         echo '</tr>';
         echo '</tbody>';

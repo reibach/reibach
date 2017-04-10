@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
+Yii::$app->formatter->locale = 'de-DE';
+
 
 
 /* @var $this yii\web\View */
@@ -14,7 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="bill-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+        <h1><?= Yii::t('app', 'Bill').": &nbsp;".Html::encode($this->title) ?></h1>
+
 
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -27,9 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <h3><?= Yii::t('app', 'Mandator') ?>:&nbsp;
+    <h4><?= Yii::t('app', 'Mandator') ?>:&nbsp;
 	<?= $address_mandator['prename'], $address_mandator['lastname'] ?>
-	</h3>
+	</h4>
 <!--
   <?= DetailView::widget([
         'model' => $address_mandator,
@@ -48,9 +51,9 @@ $this->params['breadcrumbs'][] = $this->title;
 -->
 
 
-    <h3><?= Yii::t('app', 'Customer') ?>:&nbsp;
+    <h4><?= Yii::t('app', 'Customer') ?>:&nbsp;
     <?= $customer['fullName'] ?>
-    </h3>
+    </h4>
 
 
 <!--
@@ -85,17 +88,16 @@ $this->params['breadcrumbs'][] = $this->title;
 -->
 
 
-    <h1><?= Yii::t('app', 'Bill') ?></h1>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             //'customer_id',
-            'description:ntext',
-            'price',
-            'status',
-            'created_at',
-            'updated_at',
+            //'description:ntext',
+            //'price',
+            //'status',
+            //'created_at',
+            //'updated_at',
         ],
     ]) 
 ?>
@@ -105,6 +107,11 @@ $this->params['breadcrumbs'][] = $this->title;
 //Yii::$app->formatter->locale = 'de-DE';
 //echo Yii::$app->formatter->asDecimal('23.55'); // output: 1. Januar 2014
 ?>
+<?php
+
+// <?= //$this->price = yii::$app->formatter->asDecimal($this->price,2); ?>
+
+
 
     <?= GridView::widget([
 		//Yii::$app->formatter->locale = 'de-DE',
@@ -137,12 +144,5 @@ $this->params['breadcrumbs'][] = $this->title;
 		'data-toggle'=>'tooltip', 
 		'title'=>'Will open the generated PDF file in a new window'
 	]);
-	$this->registerJs("        
-    $(document).ready(function() {
-        $(document).on('keyup', 'input', function(e){
-            $(this).val($(this).val().replace(/[,]/g, '.'));
-        });
-    });
-");
 ?>
 </div>

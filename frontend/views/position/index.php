@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+Yii::$app->formatter->locale = 'de-DE';
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\PositionSearch */
@@ -28,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'bill_id',
             'name',
             'pos_num',
-            'quantity',
+            'quantity:decimal',
             // 'unit',
             // 'comment:ntext',
             // 'price',

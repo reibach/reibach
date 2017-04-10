@@ -37,15 +37,15 @@ class Bill extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            //[['customer_id'], 'required'],
-            [['customer_id','mandator_id', 'created_at', 'updated_at'], 'integer'],
+            //[['status', 'customer_id', 'price', 'description'], 'required'],
+            [['customer_id'], 'required'],
+            //[['customer_id','mandator_id', 'created_at', 'updated_at'], 'integer'],
             //[['description','fullName'], 'string'],
-            [['description'], 'string'],
-            [['price', 'status'], 'number'],
+            //[['description'], 'string'],
+            //[['price', 'status'], 'number'],
+            //[[ 'status'], 'number'],
             //[['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
-            [['positions'], 'safe'],
-            
-            
+            //[['positions'], 'safe'],            
         ];
     }
 
@@ -56,8 +56,8 @@ class Bill extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'customer_id' => Yii::t('app', 'Customer ID'),
-            'mandator_id' => Yii::t('app', 'Mandator ID'),
+            'customer_id' => Yii::t('app', 'Customer'),
+            'mandator_id' => Yii::t('app', 'Mandator'),
             //'fullName' => Yii::t('app', 'Full Name'),
             'description' => Yii::t('app', 'Description'),
             'price' => Yii::t('app', 'Price'),

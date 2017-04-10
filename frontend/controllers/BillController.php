@@ -121,6 +121,17 @@ class BillController extends Controller
      */
     public function actionView($id)
     {
+
+		$session = Yii::$app->session;
+		$mandator_active = $session->get('mandator_active');
+		
+		// wenn kein mandant ausgewählt ist, Abbruch
+		if ($mandator_active == '') {
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator selected. Please select one.'));
+			//return $this->redirect('/mandator/index');
+			$this->redirect(array('mandator/index'));
+		}
+
 		
 		$bill = Bill::findOne($id);
 		//Daten für eine Rechnung zusammenbauen:
@@ -178,6 +189,16 @@ class BillController extends Controller
      */
     public function actionCreate()
     {
+		$session = Yii::$app->session;
+		$mandator_active = $session->get('mandator_active');
+
+		// wenn kein mandant ausgewählt ist, Abbruch
+		if ($mandator_active == '') {
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator.'));
+			//print "ERROR: kein Mandant!!";
+			//exit;
+		}
+
         $model = new BillForm();
         //$model->position = new Position;
         $model->bill = new Bill;
@@ -185,22 +206,14 @@ class BillController extends Controller
         $model->bill->loadDefaultValues();
         $model->setAttributes(Yii::$app->request->post());        
 
-			$session = Yii::$app->session;
-			$mandator_active = $session->get('mandator_active');
 		
-			// wenn kein mandant ausgewählt ist, Abbruch
-			if ($mandator_active == '') {
-				Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator.'));
-				//print "ERROR: kein Mandant!!";
-				//exit;
-			}
 		$model->bill->mandator_id = $mandator_active;
 
         //if ($model->bill->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post()) && $model->bill->save() && $model->save()) {
 
 		// erst die Rechnung speichern, dann die RechnungsID übergeben und die Position(en) speichern, sofern schon vorhanden  
-        if (Yii::$app->request->post() && $model->bill->save()) {
-			$model->savePositions();
+        if (Yii::$app->request->post() && $model->save()) {
+			// $model->savePositions();
 			
             Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Bill has been created: '.$model->bill->id));
             return $this->redirect(['update', 'id' => $model->bill->id]);
@@ -218,16 +231,25 @@ class BillController extends Controller
      */
     public function actionUpdate($id)
     {
+		$session = Yii::$app->session;
+		$mandator_active = $session->get('mandator_active');
+		
+		// wenn kein mandant ausgewählt ist, Abbruch
+		if ($mandator_active == '') {
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator selected. Please select one.'));
+			//return $this->redirect('/mandator/index');
+			$this->redirect(array('mandator/index'));
+		}
+
         $model = new BillForm();
-        $model->bill = $this->findModel($id);
-       
+        $model->bill = $this->findModel($id);       
         $model->setAttributes(Yii::$app->request->post());
         
-        if (Yii::$app->request->post() && $model->bill->save()) {
-			$model->savePositions();
+        if (Yii::$app->request->post() && $model->save()) {
+			 // $model->savePositions();
 			
             Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Bill has been updated.'));
-            return $this->redirect(['update', 'id' => $model->bill->id]);
+            return $this->redirect(['view', 'id' => $model->bill->id]);
         }
         return $this->render('update', ['model' => $model]);
     }

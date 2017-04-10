@@ -19,12 +19,17 @@ class BillForm extends Model
         return [
             [['Bill'], 'required'],
             [['Positions'], 'safe'],      
-            [['customer_id'], 'required'],
-            [['customer_id', 'created_at', 'updated_at'], 'integer'],
-            [['description'], 'string'],
-            [['price', 'status'], 'number'],
-            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
-
+            //[['customer_id'], 'required'],
+            //[['status', 'customer_id', 'price', 'description'], 'required'],
+            //[['customer_id', 'created_at', 'updated_at'], 'integer'],
+            //[[], 'string'],
+            //[['price', 'status'], 'number'],
+            //[['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
+           
+            //['price', 'filter', 'filter' => function ($value) {$value = str_replace(',', '.', $value); return $value; }],
+            //['quantity', 'filter', 'filter' => function ($value) {$value = str_replace(',', '.', $value); return $value; }],
+            //['tax', 'filter', 'filter' => function ($value) {$value = str_replace(',', '.', $value); return $value; }],
+        
         ];
     }
 
@@ -125,7 +130,9 @@ class BillForm extends Model
         $errorLists = [];
         foreach ($this->getAllModels() as $id => $model) {
             $errorList = $form->errorSummary($model, [
-              'header' => '<p>Please fix the following errors for <b>' . $id . '</b></p>',
+              // 'header' => '<p>Please fix the following errors for: <b>' . $id . '</b></p>',
+              //'header' => '<p>'.Yii::t('app', 'Please fix the following errors for:').' <b> ' . $id . '</b></p>',
+              'header' => '<p>'.Yii::t('app', 'Please fix the following errors:').'</p>',
             ]);
             $errorList = str_replace('<li></li>', '', $errorList); // remove the empty error
             $errorLists[] = $errorList;

@@ -35,14 +35,19 @@ class Position extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['bill_id', 'name'], 'required'],
+            //[['bill_id', 'name'], 'required'],
+		//[['bill_id', 'name', 'quantity'], 'required'],
+            [[ 'name', 'quantity'], 'required'],
             [['bill_id'], 'integer'],
-            [['quantity', 'price', 'tax'], 'number'],
+            //[['quantity', 'price', 'tax'], 'number'],
             [['comment'], 'string'],
             [['name'], 'string', 'max' => 255],
             [['pos_num'], 'string', 'max' => 2],
             [['unit'], 'string', 'max' => 10],
             [['bill_id'], 'exist', 'skipOnError' => true, 'targetClass' => Bill::className(), 'targetAttribute' => ['bill_id' => 'id']],
+            ['price', 'filter', 'filter' => function ($value) {$value = str_replace(',', '.', $value); return $value; }],
+            ['quantity', 'filter', 'filter' => function ($value) {$value = str_replace(',', '.', $value); return $value; }],
+            ['tax', 'filter', 'filter' => function ($value) {$value = str_replace(',', '.', $value); return $value; }],
         ];
     }
 

@@ -15,10 +15,13 @@ use yii\helpers\Html;
     ])->label(false) ?>
 </td>
 <td>
-    <?= $form->field($position, 'quantity')->textInput([
-        'id' => "Positions_{$key}_quantity",
-        'name' => "Positions[$key][quantity]",
-    ])->label(false) ?>
+    <?= $form->field($position, 'quantity', ['inputOptions' => [
+		'id' => "Positions_{$key}_quantity", 
+		'name' => "Positions[$key][quantity]", 
+		'value' => Yii::$app->formatter->asDecimal($position['quantity']),
+		'class' => 'form-control'
+		]])
+		->label(false) ?>
 </td>
 <td>
     <?= $form->field($position, 'unit')->textInput([
@@ -33,22 +36,20 @@ use yii\helpers\Html;
     ])->label(false) ?>
 </td>
 <td>
-    <?= $form->field($position, 'price')->textInput([
-        'id' => "Positions_{$key}_price",
-        'name' => "Positions[$key][price]",
-    ])->label(false) ?>
+    <?= $form->field($position, 'price', ['inputOptions' => [
+		'id' => "Positions_{$key}_price", 
+		'name' => "Positions[$key][price]", 
+		'value' => Yii::$app->formatter->asDecimal($position['price']),
+		'class' => 'form-control'
+		]])->label(false) ?>
 </td>
 <td>
-    <?= $form->field($position, 'tax')->textInput([
-        'id' => "Positions_{$key}_tax",
-        'name' => "Positions[$key][tax]",
-    ])->label(false) ?>
-</td>
-<td>
-    <?= $form->field($position, 'amount')->textInput([
-        'id' => "Positions_{$key}_amount",
-        'name' => "Positions[$key][amount]",
-    ])->label(false) ?>
+    <?= $form->field($position, 'tax', ['inputOptions' => [
+		'id' => "Positions_{$key}_tax", 
+		'name' => "Positions[$key][tax]", 
+		'value' => Yii::$app->formatter->asDecimal($position['tax']),
+		'class' => 'form-control'
+		]])->label(false) ?>
 </td>
 <td>
     <?= Html::a((Yii::t('app','Remove')) ." 	". $key, 'javascript:void(0);', [

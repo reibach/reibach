@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+Yii::$app->formatter->locale = 'de-DE';
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Position */
@@ -30,13 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'bill_id',
-            'name',
             'pos_num',
-            'quantity',
+            'name',
             'unit',
+            'quantity:decimal',
             'comment:ntext',
-            'price',
-            'tax',
+            'price:decimal',
+            'tax:decimal',
         ],
     ]) ?>
 
