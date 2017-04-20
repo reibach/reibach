@@ -51,6 +51,7 @@ class Customer extends \yii\db\ActiveRecord
             'address_id' => Yii::t('app', 'Address ID'),
             'fullName'=>Yii::t('app', 'Full Name'),
             'customer_number' => Yii::t('app', 'Customer Number'),
+           	'orderAmount' => Yii::t('app', 'Order Amount'),
         ];
     }
 
@@ -90,4 +91,12 @@ class Customer extends \yii\db\ActiveRecord
     {
         return $this->hasMany(CustomerAddress::className(), ['customer_id' => 'id']);
     }
+
+	/**
+	* Order amount for customer 
+	*/
+	public function getOrderAmount()
+	{
+		return $this->hasMany(Order::className(), ['customer_id' => 'id'])->sum('amount');
+	}
 }

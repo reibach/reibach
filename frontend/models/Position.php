@@ -15,7 +15,7 @@ use Yii;
  * @property string $unit
  * @property string $comment
  * @property string $price
- * @property string $tax
+ * @property string $taxrate
  *
  * @property Bill $bill
  */
@@ -39,7 +39,7 @@ class Position extends \yii\db\ActiveRecord
 		//[['bill_id', 'name', 'quantity'], 'required'],
             [[ 'name', 'quantity'], 'required'],
             [['bill_id'], 'integer'],
-            //[['quantity', 'price', 'tax'], 'number'],
+            //[['quantity', 'price', 'taxrate'], 'number'],
             [['comment'], 'string'],
             [['name'], 'string', 'max' => 255],
             [['pos_num'], 'string', 'max' => 2],
@@ -47,7 +47,7 @@ class Position extends \yii\db\ActiveRecord
             [['bill_id'], 'exist', 'skipOnError' => true, 'targetClass' => Bill::className(), 'targetAttribute' => ['bill_id' => 'id']],
             ['price', 'filter', 'filter' => function ($value) {$value = str_replace(',', '.', $value); return $value; }],
             ['quantity', 'filter', 'filter' => function ($value) {$value = str_replace(',', '.', $value); return $value; }],
-            ['tax', 'filter', 'filter' => function ($value) {$value = str_replace(',', '.', $value); return $value; }],
+            ['taxrate', 'filter', 'filter' => function ($value) {$value = str_replace(',', '.', $value); return $value; }],
         ];
     }
 
@@ -65,7 +65,8 @@ class Position extends \yii\db\ActiveRecord
             'unit' => Yii::t('app', 'Unit'),
             'comment' => Yii::t('app', 'Comment'),
             'price' => Yii::t('app', 'Price'),
-            'tax' => Yii::t('app', 'Tax'),
+            'totalPosPrice' => Yii::t('app', 'TotalPosPrice'),
+            'taxrate' => Yii::t('app', 'Taxrate'),
         ];
     }
 
@@ -76,4 +77,30 @@ class Position extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Bill::className(), ['id' => 'bill_id']);
     }
+    
+     /* Getter for TotalBillPrice 
+  * ist die Summe der Preise * Anzahl zu Steuersatz aller EinzelPositionen  einer Rechnung
+  * */
+	public function getBillTotal() {
+		// alle Positionen einer Rechnungen ermitteln 
+		
+		// und den Positionspreis errechnen und speichern
+		
+		// die Summe aller Positionspreise ist der Rechnungspreis
+		
+		
+		// steuersatz umrechnen
+		//$tax = $this->tax / 100;
+		//$tax = $tax + 1; 
+		return $this->quantity * $this->price * $tax;
+	}
+
+    
+   /* Getter for TotalPrice */
+	public function getTotalPosPrice() {
+		// steuersatz umrechnen
+		$taxrate = $this->taxrate / 100;
+		$taxrate = $taxrate + 1; 
+		return $this->quantity * $this->price * $taxrate;
+	}
 }

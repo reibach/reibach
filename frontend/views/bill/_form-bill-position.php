@@ -41,10 +41,10 @@ use yii\helpers\Html;
     ])->label(false) ?>
 </td>
 <td>
-    <?= $form->field($position, 'tax')->textInput([
-        'id' => "Positions_{$key}_tax",
-        'name' => "Positions[$key][tax]",
-        'value' => Yii::$app->formatter->asDecimal($position['tax']),
+    <?= $form->field($position, 'taxrate')->textInput([
+        'id' => "Positions_{$key}_taxrate",
+        'name' => "Positions[$key][taxrate]",
+        'value' => Yii::$app->formatter->asDecimal($position['taxrate']),
     ])->label(false) ?>
 </td>
 <td>

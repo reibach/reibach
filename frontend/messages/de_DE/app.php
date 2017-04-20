@@ -173,5 +173,7 @@ return [
 	'quantity' => 'Anzahl',
 	'reset it' => 'setze es zurück.',
 	'tax' => 'Steuer',
+	'taxrate' => 'Steuersatz',
+	'Taxrate' => 'Steuersatz',
 	'unit' => 'Einheit',
 ];

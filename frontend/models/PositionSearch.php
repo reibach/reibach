@@ -12,6 +12,9 @@ use frontend\models\Position;
  */
 class PositionSearch extends Position
 {
+	/* your calculated attribute */
+	public $totalPrice;
+	
     /**
      * @inheritdoc
      */
@@ -20,7 +23,7 @@ class PositionSearch extends Position
         return [
             [['id', 'bill_id'], 'integer'],
             [['name', 'pos_num', 'unit', 'comment'], 'safe'],
-            [['quantity', 'price', 'tax'], 'number'],
+            [['quantity', 'price', 'taxrate'], 'number'],
         ];
     }
 
@@ -64,7 +67,7 @@ class PositionSearch extends Position
             'bill_id' => $this->bill_id,
             'quantity' => $this->quantity,
             'price' => $this->price,
-            'tax' => $this->tax,
+            'taxrate' => $this->taxrate,
         ]);
 
         $query->andFilterWhere(['like', 'bill_id', $this->bill_id])
@@ -72,6 +75,8 @@ class PositionSearch extends Position
             ->andFilterWhere(['like', 'pos_num', $this->pos_num])
             ->andFilterWhere(['like', 'unit', $this->unit])
             ->andFilterWhere(['like', 'comment', $this->comment]);
+
+		
 
         return $dataProvider;
     }
@@ -107,7 +112,7 @@ class PositionSearch extends Position
             'bill_id' => $this->bill_id,
             'quantity' => $this->quantity,
             'price' => $this->price,
-            'tax' => $this->tax,
+            'taxrate' => $this->taxrate,
         ]);
 
         $query->andFilterWhere(['like', 'bill_id', $id])

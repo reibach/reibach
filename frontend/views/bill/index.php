@@ -23,17 +23,41 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'customer_id',
             'description:ntext',
-            'price',
             'status',
+            'positionPrice',
+            //'billTotal',
             //'fullName's,
             // 'created_at',
             // 'updated_at',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>
+
+<?php
+/***
+// Gesamtpreis aller Rechungspositionen ermitteln und ausgeben
+$this->title = isset($dataProvider->models[0]->name) ? $dataProvider->models[0]->name : 'empty result';
+$myTotalPosPrice = array();
+
+foreach( $dataProvider->models as $myModel){
+			
+	$taxrate = $myModel->taxrate / 100;
+	$taxrate = $taxrate + 1; 		
+	$myTotalPosPrice[] =  $myModel->quantity * $myModel->price * $taxrate;
+			
+} 
+
+//Yii::$app->formatter->asDecimal($model->bill['price'])
+//echo "sum(a) = " . array_sum($myTotalPosPrice) . "\n";
+//echo "sum(a) = " . round(array_sum($myTotalPosPrice), 2) . "\n";
+//echo "sum(a) = " . Yii::$app->formatter->asDecimal(round(array_sum($myTotalPosPrice), 2)) . "\n";
+$billTotal = Yii::$app->formatter->asDecimal(round(array_sum($myTotalPosPrice), 2)) . "\n";
+echo "<h3>Gesamtpreis: ".$billTotal."</h3>"
+
+
+***/
+?>

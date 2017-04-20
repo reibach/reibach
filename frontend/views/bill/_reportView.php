@@ -71,7 +71,7 @@ use yii\widgets\ListView;
 		  
       <!-- Rechnungsdaten--> 
 		Rechnungsnummer:<span style="font-weight: bold;"><?= $model->id ?></span><br>
-		Kundennummer:<span style="font-weight: bold;"><?= $model->id ?></span><br>
+		Kundennummer:<span style="font-weight: bold;"><?= $model->customer_id ?></span><br>
 		Rechnungsdatum:<span style="font-weight: bold;"><?= $model->updated_at ?></span><br>
       </td>
     </tr>
@@ -142,10 +142,14 @@ use yii\widgets\ListView;
             <h4>Gesamtpreis</h4>
             </td>
             <td style="vertical-align: top; border:1px solid #BFBFBF; width: 100px; text-align: right;">
-				<h4>540,- &#8364;</h4>
+				<h4><?php
+				
+				
+				  echo "540,- &#8364;"
+                ?>
+                </h4>
             </td>
-          </tr>
-          
+          </tr>          
         </tbody>
       </table>
       <br>

@@ -14,6 +14,7 @@ class CustomerSearch extends Customer
 {
 	public $fullName;
 	public $fullMandatorName;
+	public $orderAmount;
 
 	
     /**
@@ -24,6 +25,7 @@ class CustomerSearch extends Customer
         return [
             [['id', 'mandator_id', 'address_id'], 'integer'],
             [['fullName'], 'save'],
+            [['orderAmount'], 'safe']
         ];
     }
 
@@ -47,33 +49,54 @@ class CustomerSearch extends Customer
     {
 		$session = Yii::$app->session;
 		$mandator_active = $session->get('mandator_active');
-		
 
         $query = Customer::find()
-			->where(['mandator_id' => $mandator_active]);
-				
+			->where(['mandator_id' => $mandator_active]);				
+
+		$subQuery = Order::find()
+			->select('customer_id, SUM(amount) as order_amount')
+			->groupBy('customer_id');
+		//$query->leftJoin(['orderSum' => $subQuery], 'orderSum.customer_id = id');
 
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
+
 		/**
 		 * Setup your sorting attributes
 		 * Note: This is setup before the $this->load($params) 
 		 * statement below
 		 */
-		 $dataProvider->setSort([
-			'attributes'=>[
-				'id',
-				'fullName'=>[
-					'asc'=>['prename'=>SORT_ASC, 'lastname'=>SORT_ASC],
-					'desc'=>['prename'=>SORT_DESC, 'lastname'=>SORT_DESC],
-					'label'=>'Full Name',
-					'default'=>SORT_ASC
-				],
-			]
-		]);
+		 //$dataProvider->setSort([
+			//'attributes' => [
+				//'id',
+				//'name',
+				//'orderAmount' => [
+					//'asc' => ['orderSum.order_amount' => SORT_ASC],
+					//'desc' => ['orderSum.order_amount' => SORT_DESC],
+					//'label' => 'Order Name'
+				//]
+			//]
+		//]);        
+
+		/**
+		 * Setup your sorting attributes
+		 * Note: This is setup before the $this->load($params) 
+		 * statement below
+		 */
+		 //$dataProvider->setSort([
+			//'attributes'=>[
+				//'id',
+				//'fullName'=>[
+					//'asc'=>['prename'=>SORT_ASC, 'lastname'=>SORT_ASC],
+					//'desc'=>['prename'=>SORT_DESC, 'lastname'=>SORT_DESC],
+					//'label'=>'Full Name',
+					//'default'=>SORT_ASC
+				//],
+			//]
+		//]);
 		
 		//$this->load($params);
         if (!($this->load($params) && $this->validate())) {
@@ -107,6 +130,9 @@ class CustomerSearch extends Customer
             'mandator_id' => $this->mandator_id,
             'address_id' => $this->address_id,
         ]);
+
+		// filter by order amount
+		//$query->andWhere(['orderSum.order_amount' => $this->orderAmount]);
 
         return $dataProvider;
     }

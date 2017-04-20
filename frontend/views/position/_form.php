@@ -25,7 +25,7 @@ use frontend\models\Bill;
     <?= $form->field($model, 'unit')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
 	<?= $form->field($model, 'price', ['inputOptions' => ['value' => Yii::$app->formatter->asDecimal($model['price']), 'class' => 'form-control']]) ?>
-    <?= $form->field($model, 'tax', ['inputOptions' => ['value' => Yii::$app->formatter->asDecimal($model['tax']), 'class' => 'form-control']]) ?>
+    <?= $form->field($model, 'taxrate', ['inputOptions' => ['value' => Yii::$app->formatter->asDecimal($model['taxrate']), 'class' => 'form-control']]) ?>
     
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

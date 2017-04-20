@@ -12,6 +12,8 @@ use frontend\models\Bill;
  */
 class BillSearch extends Bill
 {
+	/* your calculated attribute */
+	public $positionPrice;
 	public $fullName;
 
     /**
@@ -23,7 +25,7 @@ class BillSearch extends Bill
             [['id', 'customer_id', 'created_at', 'updated_at'], 'integer'],
             //[['description', 'fullName'], 'safe'],
             [['description'], 'safe'],
-            [['price', 'status'], 'number'],
+            [['positionPrice'], 'safe'],
         ];
     }
 
@@ -54,10 +56,35 @@ class BillSearch extends Bill
         
 
         // add conditions that should always apply here
-
+		 $subQuery = Position::find()
+			->select('bill_id, SUM(price), quantity as position_price')
+			->groupBy('bill_id');
+		$query->leftJoin(['positionSum' => $subQuery], 'positionSum.bill_id = id');
+        
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        
+         /**
+		 * Setup your sorting attributes
+		 * Note: This is setup before the $this->load($params) 
+		 * statement below
+		 */
+		 $dataProvider->setSort([
+			'attributes' => [
+				'id',
+				'name',
+				'positionPrice' => [
+					'asc' => ['positionSum.position_price' => SORT_ASC],
+					'desc' => ['positionSum.position_price' => SORT_DESC],
+					'label' => 'Position Name'
+				]
+			]
+		]);        
+
+		if (!($this->load($params) && $this->validate())) {
+			return $dataProvider;
+		}
 
 		/**
 		 * Setup your sorting attributes
@@ -77,7 +104,7 @@ class BillSearch extends Bill
 		//]);
 		
 
-		$this->load($params);
+		//$this->load($params);
         //if (!($this->load($params) && $this->validate())) {
 			/**
 			 * The following line will allow eager loading with country data 
@@ -98,17 +125,16 @@ class BillSearch extends Bill
 		//);
 
 
-        if (!$this->validate()) {
+        //if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
-            return $dataProvider;
-        }
+            //return $dataProvider;
+        //}
 
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'customer_id' => $this->customer_id,
-            'price' => $this->price,
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
@@ -116,6 +142,10 @@ class BillSearch extends Bill
 
         $query->andFilterWhere(['like', 'description', $this->description]);
 
+		// filter by position price
+		$query->andWhere(['positionSum.position_price' => $this->positionPrice]);
+ 
+        
         return $dataProvider;
     }
 }

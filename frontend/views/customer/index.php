@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'mandator_id',            
 			'address_id',
 			'fullName',
+			'orderAmount',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

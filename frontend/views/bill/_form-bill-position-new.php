@@ -39,9 +39,9 @@ use yii\helpers\Html;
     ])->label(false) ?>
 </td>
 <td>
-    <?= $form->field($position, 'tax')->textInput([
-        'id' => "Positions_{$key}_tax",
-        'name' => "Positions[$key][tax]",
+    <?= $form->field($position, 'taxrate')->textInput([
+        'id' => "Positions_{$key}_taxrate",
+        'name' => "Positions[$key][taxrate]",
     ])->label(false) ?>
 </td>
 <td>

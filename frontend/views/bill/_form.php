@@ -61,7 +61,7 @@ use frontend\models\Position;
         echo '<th>' . $position->getAttributeLabel(Yii::t('app','unit')) . '</th>';
         echo '<th>' . $position->getAttributeLabel(Yii::t('app','comment')) . '</th>';
         echo '<th>' . $position->getAttributeLabel(Yii::t('app','price')) . '</th>';
-        echo '<th>' . $position->getAttributeLabel(Yii::t('app','tax')) . '</th>';
+        echo '<th>' . $position->getAttributeLabel(Yii::t('app','taxrate')) . '</th>';
         //echo '<td>&nbsp;</td>';
         echo '</tr>';
         echo '</thead>';

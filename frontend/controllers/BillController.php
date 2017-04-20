@@ -53,6 +53,12 @@ class BillController extends Controller
 			$this->redirect(array('mandator/index'));
 		}
 
+		// get Customer FullName		 
+		$bill = Bill::find();
+		
+		//$customer = Customer::findOne($bill->customer_id);
+		//$address_customer = Address::findOne($customer->address_id);
+
         $searchModel = new BillSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -60,6 +66,7 @@ class BillController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'mandator_active' => $mandator_active,
+            //'customer' => $customer,
         ]);
     }
 
@@ -154,7 +161,7 @@ class BillController extends Controller
 		
 		//get all positions of a bill
 		//print_r($bill->id);
-		//$positions = Bill::getBillPositions($id);
+		//$positions = Bill::getPositions($id);
 		
 		//echo "<p>&nbsp;</p>";
 		
@@ -176,7 +183,7 @@ class BillController extends Controller
             'address_mandator' => $address_mandator,
             'address_customer' => $address_customer,
             //'positions' => $positions,
-             'searchModel' => $searchModel,
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
 
         ]);

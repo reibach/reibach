@@ -67,9 +67,10 @@ AppAsset::register($this);
     } else {
 		$menuItems[] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['/mandator/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Customers'), 'url' => ['/customer/index']];
+		$menuItems[] = ['label' => Yii::t('app', 'Orders'), 'url' => ['/order/index']];
 		//$menuItems[] = ['label' => Yii::t('app', 'CustomerAddresses'), 'url' => ['/customer-address/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Bills'), 'url' => ['/bill/index']];
-		//$menuItems[] = ['label' => Yii::t('app', 'Positions'), 'url' => ['/position/index']];
+		$menuItems[] = ['label' => Yii::t('app', 'Positions'), 'url' => ['/position/index']];
 		//$menuItems[] = ['label' => Yii::t('app', 'Addresses'), 'url' => ['/address/index']];
 		//$menuItems[] = ['label' => Yii::t('app', 'Articles'), 'url' => ['/article/index']];
 		//$menuItems[] = ['label' => Yii::t('app', 'About'), 'url' => ['/site/about']];

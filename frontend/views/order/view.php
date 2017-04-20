@@ -2,16 +2,15 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-Yii::$app->formatter->locale = 'de-DE';
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Position */
+/* @var $model frontend\models\Order */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Positions'), 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="position-view">
+<div class="order-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,14 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'bill_id',
-            'pos_num',
-            'name',
-            'unit',
-            'quantity:decimal',
-            'comment:ntext',
-            'price:decimal',
-            'taxrate:decimal',
+            'created_on',
+            'details',
+            'amount',
+            'customer_id',
         ],
     ]) ?>
 
