@@ -42,22 +42,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'fax')->textInput(['maxlength' => true]) ?>
 
-	<?= $form->field($model, 'bank_name')->textInput(['maxlength' => true]) ?> 
-		 
-	<?= $form->field($model, 'bank_account')->textInput(['maxlength' => true]) ?> 
-
-	<?= $form->field($model, 'bank_codenumber')->textInput(['maxlength' => true]) ?> 
-
-	<?= $form->field($model, 'iban')->textInput(['maxlength' => true]) ?> 
-
-	<?= $form->field($model, 'bic')->textInput(['maxlength' => true]) ?> 
-
-	<?= $form->field($model, 'tax_office')->textInput(['maxlength' => true]) ?> 
-
-	<?= $form->field($model, 'tax_number')->textInput(['maxlength' => true]) ?> 
-
-	<?= $form->field($model, 'vat_number')->textInput(['maxlength' => true]) ?> 
-
     <?= $form->field($model, 'create_time')->textInput() ?>
 
     <?= $form->field($model, 'create_user_id')->textInput() ?>

@@ -24,8 +24,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'company') ?>
 
     <?= $form->field($model, 'prename') ?>
-    
-    
 
     <?php // echo $form->field($model, 'lastname') ?>
 
@@ -48,24 +46,6 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'email') ?>
 
     <?php // echo $form->field($model, 'fax') ?>
-
-	<?php // echo $form->field($model, 'bank_name') ?> 
-		 
-	<?php // echo $form->field($model, 'bank_account') ?> 
-
-	<?php // echo $form->field($model, 'bank_codenumber') ?> 
-
-	<?php // echo $form->field($model, 'iban') ?> 
-
-	<?php // echo $form->field($model, 'bic') ?> 
-
-	<?php // echo $form->field($model, 'tax_office') ?> 
-
-	<?php // echo $form->field($model, 'tax_number') ?> 
-
-	<?php // echo $form->field($model, 'vat_number') ?> 
-
-	<?php // echo $form->field($model, 'create_time') ?>
 
     <?php // echo $form->field($model, 'create_time') ?>
 

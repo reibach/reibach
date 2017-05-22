@@ -101,7 +101,6 @@ class MandatorSearch extends Mandator
             'id' => $this->id,
             'user_id' => $this->user_id,
             'address_id' => $this->address_id,
-            'taxable' => $this->taxable,
         ]);
 
         return $dataProvider;

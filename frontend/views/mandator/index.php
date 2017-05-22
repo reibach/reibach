@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			//'user_id',
 			//'address_id',
 			'fullName',
+			'taxable',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

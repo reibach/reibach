@@ -24,7 +24,7 @@ return [
 	'Address ID' => '',
 	'Agb' => 'Agb',
 	'At registration the customer must provide the required information and agree with the general terms and conditions.' => 'Bitte bestaetige die AGBs...',
-	'Bill has been created: ' => 'Die Rechnung wurde erstellt:',
+	'Bill has been created:' => 'Die Rechnung wurde erstellt:',
 	'Bill has been updated.' => 'Die Rechnung wurde bearbeitet:',
 	'Check your email for further instructions.' => 'Bitte überprüfe deine EMail-Eingang für weitere An',
 	'Country Name' => 'Land',

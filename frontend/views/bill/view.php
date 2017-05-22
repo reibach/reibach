@@ -33,6 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h4><?= Yii::t('app', 'Mandator') ?>:&nbsp;
 	<?= $address_mandator['prename'], $address_mandator['lastname'] ?>
 	</h4>
+	<?= $address_mandator['fullName'] ?>
+	</h4>
 
 
     <h4><?= Yii::t('app', 'Customer') ?>:&nbsp;
@@ -49,9 +51,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 // <?= //$this->price = yii::$app->formatter->asDecimal($this->price,2); ?>
-
-
-
     <?= GridView::widget([
 		//Yii::$app->formatter->locale = 'de-DE',
         'dataProvider' => $dataProvider,
@@ -87,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->title = isset($dataProvider->models[0]->name) ? $dataProvider->models[0]->name : 'empty result';
 $myTotalPosPrice = array();
 
-foreach( $dataProvider->models as $myModel){
+foreach($dataProvider->models as $myModel){
 			
 	$taxrate = $myModel->taxrate / 100;
 	$taxrate = $taxrate + 1; 		

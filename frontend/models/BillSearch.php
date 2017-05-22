@@ -15,6 +15,7 @@ class BillSearch extends Bill
 	/* your calculated attribute */
 	public $positionPrice;
 	public $fullName;
+	public $billPrice;
 
     /**
      * @inheritdoc
@@ -23,8 +24,8 @@ class BillSearch extends Bill
     {
         return [
             [['id', 'customer_id', 'created_at', 'updated_at'], 'integer'],
-            //[['description', 'fullName'], 'safe'],
-            [['description'], 'safe'],
+            [['description', 'fullName'], 'safe'],
+            //[['description'], 'safe'],
             [['positionPrice'], 'safe'],
         ];
     }

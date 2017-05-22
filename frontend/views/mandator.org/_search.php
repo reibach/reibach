@@ -20,7 +20,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'user_id') ?>
 
     <?= $form->field($model, 'address_id') ?>
-    <?= $form->field($model, 'taxable') ?> 
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

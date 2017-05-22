@@ -186,13 +186,17 @@ use yii\widgets\ListView;
             <td style="vertical-align: top;"><br>
       </td>
 	<td class="footer" style="vertical-align: top; width: 250px; border:1px solid #BFBFBF;">
-            <div>federa<span class="footer"></span><span class="footer"></span><span class="footer"></span></div>
+            <div><?= $address_mandator->company ?><span class="footer"></span><span class="footer"></span><span class="footer"></span></div>
             <div>
-Sibylle Schmels</div>
+<?= $address_mandator->fullName ?><br>
+</div>
+            <div><?= $address_mandator->street ?>&nbsp;
+<?= $address_mandator->housenumber ?><br>
+</div>
             <div>
-An der Strasse 4</div>
-            <div>
-12345 Ort</div>
+<?= $address_mandator->zipcode ?>&nbsp;
+<?= $address_mandator->place ?>
+</div>
 
             </td>
             <td style="vertical-align: top; width: 50px; border:1px solid #BFBFBF;">
@@ -201,9 +205,9 @@ An der Strasse 4</div>
 
             </td>
             <td style="vertical-align: top; width: 250px; border:1px solid #BFBFBF;">
-            <div>Tel </div>
-            <div>Fax</div>
-            <div>EMAIL</div>
+            <div><?= $address_mandator->tel ?> </div>
+            <div><?= $address_mandator->fax ?></div>
+            <div><?= $address_mandator->email ?></div>
             <div>WEB</div>
 
             </td>

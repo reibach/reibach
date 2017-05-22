@@ -13,7 +13,7 @@ use frontend\models\Position;
 class PositionSearch extends Position
 {
 	/* your calculated attribute */
-	public $totalPrice;
+	//public $totalPrice;
 	
     /**
      * @inheritdoc

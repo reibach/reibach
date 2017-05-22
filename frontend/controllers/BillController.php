@@ -59,6 +59,16 @@ class BillController extends Controller
 		//$customer = Customer::findOne($bill->customer_id);
 		//$address_customer = Address::findOne($customer->address_id);
 
+
+		//$searchModelPos = new PositionSearch();
+        //$dataProviderPos = $searchModelPos->searchBillPos(Yii::$app->request->queryParams, $id).-;        
+        
+        //return $this->render('_indexview', [
+            //'searchModel' => $searchModelPos,
+            //'dataProvider' => $dataProviderPos,
+
+        //]);
+
         $searchModel = new BillSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -66,60 +76,10 @@ class BillController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'mandator_active' => $mandator_active,
+            'bill' => $bill,
             //'customer' => $customer,
         ]);
     }
-
-
-
-
-/*******************
-	public function actionList()
-    {
-		$id = 82;
-		$bill = Bill::findOne($id);
-		//Daten für eine Rechnung zusammenbauen:
-		//Kunde:
-		// get Customer 
-		$customer = Customer::findOne($bill->customer_id);
-		$address_customer = Address::findOne($customer->address_id);
-
-
-		//Mandant: 
-		// get Mandator 
-		
-		// get the address_id of the mandator
-        $mandator_id = $customer->mandator_id;
-        $mandator = Mandator::findOne($mandator_id);
-		$address_mandator = Address::findOne($mandator->address_id);
-
-		//Rechnung:
-		//Positionen:
-		
-		//get all positions of a bill
-		//print_r($bill->id);
-		//$positions = Bill::getBillPositions($id);
-		
-		//echo "<p>&nbsp;</p>";
-		
-		//print_r($positions);
-
-		$searchModel = new PositionSearch();
-        $dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);
-		
-        //$dataProvider = new ActiveDataProvider([
-            //'query' => Position::find()->where(['bill_id' => $id])->orderBy('id DESC'),
-            //'pagination' => [
-                //'pageSize' => 10,
-            //],
-        //]);
-
-        $this->view->title = 'Position List';
-        return $this->render('list', ['listDataProvider' => $dataProvider]);
-    }
-
-******************/
-
 
     /**
      * Displays a single Bill model.
@@ -128,7 +88,6 @@ class BillController extends Controller
      */
     public function actionView($id)
     {
-
 		$session = Yii::$app->session;
 		$mandator_active = $session->get('mandator_active');
 		
@@ -138,15 +97,14 @@ class BillController extends Controller
 			//return $this->redirect('/mandator/index');
 			$this->redirect(array('mandator/index'));
 		}
-
 		
 		$bill = Bill::findOne($id);
-		//Daten für eine Rechnung zusammenbauen:
+		//Daten für eine Rechnung zusammenbauen:		
+		
 		//Kunde:
 		// get Customer 
 		$customer = Customer::findOne($bill->customer_id);
 		$address_customer = Address::findOne($customer->address_id);
-
 
 		//Mandant: 
 		// get Mandator 
@@ -156,27 +114,9 @@ class BillController extends Controller
         $mandator = Mandator::findOne($mandator_id);
 		$address_mandator = Address::findOne($mandator->address_id);
 
-		//Rechnung:
-		//Positionen:
-		
-		//get all positions of a bill
-		//print_r($bill->id);
-		//$positions = Bill::getPositions($id);
-		
-		//echo "<p>&nbsp;</p>";
-		
-		//print_r($positions);
-
 		$searchModel = new PositionSearch();
-        $dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);
+        $dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);        
         
-        
-		//foreach ($positions as $key => $value) {
-			//echo "Key: $key; Value: $value<br />\n";
-		//}
-		//print_r($positions);
-		//exit;
-
         return $this->render('view', [
             'model' => $this->findModel($id),
             'customer' => $customer,
@@ -185,7 +125,6 @@ class BillController extends Controller
             //'positions' => $positions,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-
         ]);
     }
 
@@ -396,3 +335,53 @@ class BillController extends Controller
 		return $pdf->render();
 	}
 }
+
+
+
+
+/*******************
+	public function actionList()
+    {
+		$id = 82;
+		$bill = Bill::findOne($id);
+		//Daten für eine Rechnung zusammenbauen:
+		//Kunde:
+		// get Customer 
+		$customer = Customer::findOne($bill->customer_id);
+		$address_customer = Address::findOne($customer->address_id);
+
+
+		//Mandant: 
+		// get Mandator 
+		
+		// get the address_id of the mandator
+        $mandator_id = $customer->mandator_id;
+        $mandator = Mandator::findOne($mandator_id);
+		$address_mandator = Address::findOne($mandator->address_id);
+
+		//Rechnung:
+		//Positionen:
+		
+		//get all positions of a bill
+		//print_r($bill->id);
+		//$positions = Bill::getBillPositions($id);
+		
+		//echo "<p>&nbsp;</p>";
+		
+		//print_r($positions);
+
+		$searchModel = new PositionSearch();
+        $dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);
+		
+        //$dataProvider = new ActiveDataProvider([
+            //'query' => Position::find()->where(['bill_id' => $id])->orderBy('id DESC'),
+            //'pagination' => [
+                //'pageSize' => 10,
+            //],
+        //]);
+
+        $this->view->title = 'Position List';
+        return $this->render('list', ['listDataProvider' => $dataProvider]);
+    }
+
+******************/
