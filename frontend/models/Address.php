@@ -56,7 +56,7 @@ class Address extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['address_type', 'title', 'company', 'prename', 'lastname', 'zipcode', 'place', 'street', 'housenumber', 'state', 'phone_privat', 'phone_business', 'phone_mobile', 'email', 'fax', 'bank_name', 'bank_account', 'bank_codenumber', 'iban', 'bic', 'tax_office', 'tax_number', 'vat_number', 'create_user_id', 'update_user_id'], 'required'],
+            //[['address_type', 'title', 'company', 'prename', 'lastname', 'zipcode', 'place', 'street', 'housenumber', 'state', 'phone_privat', 'phone_business', 'phone_mobile', 'email', 'internet','fax', 'bank_name', 'bank_account', 'bank_codenumber', 'iban', 'bic', 'tax_office', 'tax_number', 'vat_number', 'create_user_id', 'update_user_id'], 'required'],
             [['address_type'], 'string'],
             [['create_time', 'update_time'], 'safe'],
             [['create_user_id', 'update_user_id'], 'integer'],

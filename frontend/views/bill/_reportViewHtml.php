@@ -9,26 +9,17 @@ use yii\widgets\ListView;
 /* @var $model frontend\models\Bill */
 ?>
 
+
 <!--
-LOGO darf nur bei gueltiger Lizenz entfernt werden!
+<p><img src="<?= yii\helpers\Url::to('@web/images/logo50.png') ?>"  width="20%"/></p>
 -->
-<div style="
-	position:absolute; 
-	bottom: 10; 
-	left: 44px;
-	width: 100px;
-	height: 30px;
-	background-color: #FFFFFF;">
-<p><img src="<?= yii\helpers\Url::to('@web/images/logo50.png') ?>"  /></p>
-</div>
 
-
-<table style="text-align: left; width: 1048px; height: 2096x; background-color: #FFFFFF;" border="2" cellpadding="0" cellspacing="0">
+<table style="text-align: left; width: 1048px; height: 542px; background-color: #FFFFFF;" border="2" cellpadding="0" cellspacing="0">
 	<tbody>
     <tr>
       <td style="vertical-align: top;">
 		<!-- Mandant -->
-		<h4 style="font: italic 36px Arial, sans-serif;"><?= $address_mandator->company ?></h4>
+				<h4 style="font: italic 36px Arial, sans-serif;"><?= $address_mandator->company ?></h4>
 		<div class="bill-view" style="font: italic 24px Arial, sans-serif;">
 			<?= $address_mandator->prename ?> <?= $address_mandator->lastname ?><br>
 			<?= $address_mandator->street."&nbsp;".$address_mandator->housenumber ?><br>
@@ -38,15 +29,15 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
       </td>
       <td style="vertical-align: top;"><br>
       </td>
-      <td style="vertical-align: top;  text-align: right;"><br>
+      <td style="vertical-align: top;  text-align: right;"><h4 style="text-align: right;">Rechnung</h4>
       </td>
     </tr>
     <tr>
-      <td colspan="5"><br><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+      <td colspan="5"><br>
       </td>
     </tr>
 	<tr>
-      <td style="vertical-align: top; font: 24px Arial, sans-serif;">
+      <td style="vertical-align: top;">
 		<!-- Kunde -->
 		<?= $address_customer->prename ?> <?= $address_customer->lastname ?><br>
 		<?= $address_customer->street ?>&nbsp;<?= $address_customer->housenumber ?><br>
@@ -56,7 +47,7 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
       </td>
       <td style="vertical-align: top;"><br>
       </td>
-      <td style="vertical-align: top; font: 24px Arial, sans-serif; text-align: right;">		  
+      <td style="vertical-align: top; text-align: right;">		  
       <!-- Rechnungsdaten--> 
 		<?= Yii::t('app', 'Bill Number') ?>:&nbsp;<b><?= $model->id ?></b><br>
 		<?= Yii::t('app', 'Customer Number') ?>:&nbsp;:<b><?= $model->customer_id ?></b><br>
@@ -64,35 +55,35 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
       </td>
     </tr>
     <tr>
-      <td colspan="5"><br><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+      <td colspan="5"><br>
       </td>
     </tr>
     <tr>
-      <td colspan="5" rowspan="1" style="vertical-align: top; font: 24px Arial, sans-serif; border:0px solid #BFBFBF; padding-left: 5px;">
+      <td colspan="5" rowspan="1" style="vertical-align: top;">
  
  
-      <?= Yii::t('app', 'Positions') ?><p>&nbsp;</p>
+      <h3><?= Yii::t('app', 'Positions') ?></h3>
       
-      <table width=1048 style="text-align: left; width: 1048px; border:0px solid #BFBFBF;" cellpadding="0" cellspacing="0">
+ <table width=1048 style="text-align: left; width: 1048px; border:1px solid #BFBFBF;" cellpadding="0" cellspacing="0">
         <tbody>
           <tr>
-            <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 100px; border:1px solid #BFBFBF; padding-left: 5px;">
-            <?=  Yii::t('app', 'Pos Num') ?>
+            <td style="vertical-align: top; width: 50px; border:1px solid #BFBFBF;">
+            <h4><?=  Yii::t('app', 'Pos Num') ?></h4>
             </td>
-            <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 500px;border:1px solid #BFBFBF; padding-left: 5px;">
-            <?=  Yii::t('app', 'Name') ?>
+            <td style="vertical-align: top; width: 600px;border:1px solid #BFBFBF;">
+            <h4><?=  Yii::t('app', 'Name') ?></h4>
             </td>
-            <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 75px;border:1px solid #BFBFBF; padding-left: 5px; padding-right: 5px;">
-            <?=  Yii::t('app', 'Unit') ?>
+            <td style="vertical-align: top; width: 100px;border:1px solid #BFBFBF;">
+            <h4><?=  Yii::t('app', 'Unit') ?></h4>
             </td>
-            <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 75px;border:1px solid #BFBFBF;text-align: right; padding-left: 5px; padding-right: 5px;">
-            <?=  Yii::t('app', 'Quantity') ?>
+            <td style="vertical-align: top; width: 100px;border:1px solid #BFBFBF;text-align: right;">
+            <h4><?=  Yii::t('app', 'Quantity') ?></h4>
             </td>
-            <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 100px;border:1px solid #BFBFBF;text-align: right;padding-right: 5px;">
-            <?=  Yii::t('app', 'Unit Price') ?> &#8364;
+            <td style="vertical-align: top; width: 100px;border:1px solid #BFBFBF;text-align: right;">
+            <h4><?=  Yii::t('app', 'Unit Price') ?> &#8364;</h4>
             </td>
-            <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 150px; border:1px solid #BFBFBF; text-align: right; white-space: nowrap; padding-right: 5px; padding-left: 5px;">
-            <?=  Yii::t('app', 'Total Price') ?> &#8364;
+            <td style="vertical-align: top; width: 98px; text-align: right;">
+            <h4><?=  Yii::t('app', 'Total Price') ?> &#8364;</h4>
             </td>
           </tr>
 			<?= 
@@ -125,7 +116,7 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
 			$billTotal = Yii::$app->formatter->asDecimal(round(array_sum($myTotalPosPrice), 2)) . "\n";
 			?>
           <tr>
-			<td colspan="6" style="vertical-align: top; width: 50px;border:0px solid #BFBFBF;"><p>&nbsp;</p><p>&nbsp;</p></td>
+			<td colspan="6" style="vertical-align: top; width: 50px;border:1px solid #BFBFBF;">&nbsp;</td>
 		  </tr>
           <tr>
 			<td colspan="4" style="vertical-align: top; width: 50px;border:0px solid #BFBFBF;">&nbsp;</td>
@@ -145,65 +136,71 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
       </td>
     </tr>
     <tr>
-      <td colspan="6">&nbsp;<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+      <td colspan="6">&nbsp;
       </td>
     </tr>
 	<tr>
-		<td colspan="6"  style="vertical-align: top; font: 24px Arial, sans-serif; text-align: center;"><?=  Yii::t('app', 'The invoice amount is due without deduction within 10 days after receipt of the invoice.') ?><br>
+		<td colspan="6"  style="vertical-align: top; text-align: center;"><?=  Yii::t('app', 'The invoice amount is due without deduction within 10 days after receipt of the invoice.') ?><br>
 		<br>
 		<br>
 		</td>
 	</tr>
-    <tr>
-      <td colspan="6">&nbsp;<p>&nbsp;</p><p>&nbsp;</p>
-      </td>
-    </tr>
 	<tr>
-		<td colspan="6"  style="vertical-align: top; font: 24px Arial, sans-serif; text-align: center;"><?=  Yii::t('app', 'The value added tax is not calculated as a small business in the sense of § 19 (1) UStG!') ?><br>
+		<td colspan="6"  style="vertical-align: top; text-align: center;"><?=  Yii::t('app', 'The value added tax is not calculated as a small business in the sense of § 19 (1) UStG!') ?><br>
 		<br>
 		<br>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="6"  style="vertical-align: top;"><br>
+			<br>
+			<hr style="align: left; width: 1048px; height: 3px; margin: 0 auto; color: #BFBFBF; background: #BFBFBF;">
+			<br>
 		</td>
 	</tr>
   </tbody>
 </table>
 <br>&nbsp;
 
-<div style="position:absolute; bottom: 50;">
-<table style="text-align: left; width: 678px;">
+<div style="position:relativ;    bottom: 50;    width: 95%;">
+<table style="text-align: left; width: 1048px; " border="0" cellpadding="0" cellspacing="0" background-color: #FFFFFF;>
         <tbody>
           <tr>
-			<td style="vertical-align: top; white-space: nowrap; width: 150px; font: 10px Arial, sans-serif; white-space: nowrap;">
+            <td style="vertical-align: top;">
+			</td>
+			<td style="vertical-align: top; white-space: nowrap;" width: 250px;>
 				<div><b><?= $address_mandator->company ?></b></div>
 				<div><?= $address_mandator->fullName ?></div>
 				<div></nbr><?= $address_mandator->street ?>&nbsp;<?= $address_mandator->housenumber ?></div>
 				<div><?= $address_mandator->zipcode ?>&nbsp; <?= $address_mandator->place ?></div>
 			</td>
-			<td style="vertical-align: top; width: 10px;">&nbsp;
-			</td>
-		            <td style="vertical-align: top; width: 150px; font: 10px Arial, sans-serif; white-space: nowrap;">
+            <td style="vertical-align: top; width: 50px; border:0px solid;">
+				<div></div>
+            </td>
+            <td style="vertical-align: top; width: 250px; border:0px solid;">
 				<div><?=  Yii::t('app', 'Phone').": " .$address_mandator->phone_business ?> </div>
 				<div><?= Yii::t('app', 'Fax').": " .$address_mandator->fax ?></div>
 				<div><?= Yii::t('app', 'Email').": " .$address_mandator->email ?></div>
 				<div><?= Yii::t('app', 'Internet').": " .$address_mandator->email ?></div>
             </td>
-          <td style="vertical-align: top; width: 10px; white-space: nowrap;">
-				&nbsp;
+            <td style="vertical-align: top; width: 50px; border:0px; white-space: nowrap;">
+				<div></div>
             </td>
-            <td style="vertical-align: top; width: 150px; font: 10px Arial, sans-serif; white-space: nowrap;">
+            <td style="vertical-align: top; width: 250px; border:0px solid; white-space: nowrap;">
 				<div><?= Yii::t('app', 'Bank Name').": " .$address_mandator->bank_name ?></div>
 				<div><?= Yii::t('app', 'Iban').": " .$address_mandator->iban ?></div>
 				<div><?= Yii::t('app', 'BIC').": " .$address_mandator->bic ?></div>
 				</td>
-            <td style="vertical-align: top; width: 10px; white-space: nowrap;">
-				&nbsp;
-            </td><td style="vertical-align: top; width: 118px; border:0px solid; font: 10px Arial, sans-serif; white-space: nowrap;">
+            <td style="vertical-align: top; width: 50px; border:0px solid; white-space: nowrap;">
+				<div></div>
+            </td><td style="vertical-align: top; width: 250px; border:0px solid;white-space: nowrap;">
 				<div><?= Yii::t('app', 'Tax Office').": " .$address_mandator->tax_office ?></div>
 				<div><?= Yii::t('app', 'Tax Number').": " .$address_mandator->tax_number ?></div>
 <!--
 				<div><?= Yii::t('app', 'Vat Number').": " .$address_mandator->vat_number ?></div>
 -->
 				</td>
-			</tr>	
+          </tr>          
         </tbody>            
 </table>
 </div>

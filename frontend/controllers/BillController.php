@@ -318,6 +318,45 @@ class BillController extends Controller
 		return $pdf->render(); 
 	}
 
+    public function actionReporthtml($id) {
+		
+		$bill = Bill::findOne($id);
+		//Daten für eine Rechnung zusammenbauen:
+		//Kunde:
+		// get Customer 
+		$customer = Customer::findOne($bill->customer_id);
+		$address_customer = Address::findOne($customer->address_id);
+
+
+		//Mandant: 
+		// get Mandator 		
+		// get the address_id of the mandator
+        $mandator_id = $customer->mandator_id;
+        $mandator = Mandator::findOne($mandator_id);
+		$address_mandator = Address::findOne($mandator->address_id);
+
+		//Rechnung:
+		//Positionen:		
+		//get all positions of a bill
+		$searchModel = new PositionSearch();
+        $dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);
+		$listDataProvider = $dataProvider;
+        			
+		// get your HTML raw content without any layouts or scripts
+		return $this->render('_reportViewHtml', [
+            'model' => $this->findModel($id),
+            'customer' => $customer,
+            'address_mandator' => $address_mandator,
+            'address_customer' => $address_customer,
+            //'positions' => $positions,
+             'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'listDataProvider' => $dataProvider,
+        ]);
+	
+	//return $this->render('update', ['model' => $model]);
+	}
+
 	// Privacy statement output demo
 	public function actionMpdfDemo1() {
 		$pdf = new Pdf([

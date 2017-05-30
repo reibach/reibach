@@ -109,7 +109,6 @@ class MandatorController extends Controller
             return $this->render('create', [
                 'mandator' => $mandator,
                 'address' => $address,
-
             ]);
         }
     }

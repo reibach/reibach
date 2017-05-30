@@ -48,8 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
 //echo Yii::$app->formatter->asDecimal('23.55'); // output: 1. Januar 2014
 ?>
 <?php
-
-
 // <?= //$this->price = yii::$app->formatter->asDecimal($this->price,2); ?>
     <?= GridView::widget([
 		//Yii::$app->formatter->locale = 'de-DE',
@@ -119,4 +117,18 @@ echo "<h3>Gesamtpreis: ".$billTotal."</h3>"
 		'title'=>'Will open the generated PDF file in a new window'
 	]);
 ?>
+
+<?php 
+	/**
+	 * THE Html VIEW BUTTON
+	 */
+	 $desc = Yii::t('app', 'Print PDF-Preview');
+	 echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> '.$desc, ['/bill/reporthtml', 'id' => $model->id], [
+		'class'=>'btn btn-danger', 
+		'target'=>'_blank', 
+		'data-toggle'=>'tooltip', 
+		'title'=>'Will open the generated PDF file in a new window'
+	]);
+?>
+
 </div>
