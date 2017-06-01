@@ -39,6 +39,9 @@ class Position extends \yii\db\ActiveRecord
 		//[['bill_id', 'name', 'quantity'], 'required'],
             [[ 'name', 'quantity'], 'required'],
             [['bill_id'], 'integer'],
+            
+            [['taxrate'], 'number', 'max'=>0],
+            
             //[['quantity', 'price', 'taxrate'], 'number'],
             [['comment'], 'string'],
             [['name'], 'string', 'max' => 255],

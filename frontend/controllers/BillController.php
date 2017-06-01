@@ -50,7 +50,8 @@ class BillController extends Controller
 		if ($mandator_active == '') {
 			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator selected. Please select one.'));
 			//return $this->redirect('/mandator/index');
-			$this->redirect(array('mandator/index'));
+			//$this->redirect(array('mandator/index'));
+			$this->redirect(array('site/logout'));
 		}
 
 		// get Customer FullName		 

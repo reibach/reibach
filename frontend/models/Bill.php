@@ -121,16 +121,51 @@ class Bill extends \yii\db\ActiveRecord
 	}
 
 
+
+
  /* Getter for TotalBillPrice 
   * ist die Summe aller EinzelPositionen  
   * */
-	public function getBillTotal() {
+
+function getBillTotal($id) {
+
+	// Gesamtpreis der Positionen der jeweiligen Rechnung ermitteln und aufsummieren		
+	$searchModel = new PositionSearch();
+	$dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);        
+
+	foreach($dataProvider->models as $myModel){				
+		$taxrate = $myModel->taxrate / 100;
+		$taxrate = $taxrate + 1; 		
+		$myTotalPosPrice[] =  $myModel->quantity * $myModel->price * $taxrate;			
+	} 
+
+	$billTotal = round(array_sum($myTotalPosPrice), 2);
+	//$billTotal = round($myTotalPosPrice, 2);
+	//return $myTotalPosPrice;	
+	//print_r($myTotalPosPrice);	
+	
+	$billPrice[] =  $billTotal;
+	
+	//echo "<p>EEESSEEET</p>";
+
+
+	$billPrice = $billTotal = Yii::$app->formatter->asDecimal(round(array_sum($billPrice), 2));
+	//echo "<p>getbillTotal Gesamtpreis ALLER Positionen: <b>".$billPrice."</b></p>";
+
+	return $billPrice;
+}	
+
+
+ /* Getter for TotalBillPrice 
+  * ist die Summe aller EinzelPositionen  
+  * */
+	//public function getBillTotal() {
 		// steuersatz umrechnen
 		//$tax = $this->tax / 100;
 		//$tax = $tax + 1; 
 
-		return $this->quantity * $this->price * $tax;
-	}
+		//return $this->quantity * $this->price * $tax;
+	//}
 
     /**
 	* Position Price for bill 

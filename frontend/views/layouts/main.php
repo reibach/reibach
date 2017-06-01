@@ -41,10 +41,14 @@ AppAsset::register($this);
 
 
 <div class="wrap">
-<div class="wrap">
 
 
-    <?php
+<?php
+
+$session = Yii::$app->session;
+$mandator_active = $session->get('mandator_active');
+echo "mandator_active:".$mandator_active;
+
     NavBar::begin([
         //'brandLabel' => Html::img('@web/images/reibach-logo114.png', ['alt'=>'Reibach']).'Reibach',
         'brandLabel' => Html::img('@web/images/logo_weiss_120_ohne.png', ['alt'=>'Reibach']),
@@ -65,6 +69,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
         $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
+		$menuItems[] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['/mandator/view', 'id'=>$mandator_active]];
 		//$menuItems[] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['/mandator/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Customers'), 'url' => ['/customer/index']];
 		//$menuItems[] = ['label' => Yii::t('app', 'Orders'), 'url' => ['/order/index']];
@@ -77,7 +82,7 @@ AppAsset::register($this);
 		//$menuItems[] = ['label' => Yii::t('app', 'Imprint'), 'url' => ['/site/imprint']];
 		//$menuItems[] = ['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact']];  
         $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
+            . Html::beginForm(['/site/logout'], 'get')
             . Html::submitButton(
                 'Logout (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']

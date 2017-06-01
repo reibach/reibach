@@ -67,6 +67,8 @@ use frontend\models\Position;
         echo '</thead>';
         echo '</tbody>';
         
+        //print_r($model->positions);
+        //print_r($_positions);
         
         // existing positions fields
         foreach ($model->positions as $key => $_position) {

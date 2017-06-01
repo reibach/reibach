@@ -7,7 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model frontend\models\Mandator */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['index']];
+// Index wird ausgeblendet, bis MehrMandantenfähigkeit eingebaut ist
+//$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 
