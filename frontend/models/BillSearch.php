@@ -26,6 +26,8 @@ class BillSearch extends Bill
             [['id', 'customer_id', 'created_at', 'updated_at'], 'integer'],
             [['description', 'fullName'], 'safe'],
             //[['description'], 'safe'],
+            //[['description', 'created_at', 'updated_at'], 'safe'],
+            [['description', 'created_at'], 'safe'],
             [['positionPrice'], 'safe'],
         ];
     }

@@ -20,6 +20,17 @@ class CustomerAddressController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create','delete','index','view','update'],
+                'rules' => [
+                    [
+                        'actions' => ['create','delete','index','view','update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -28,6 +39,7 @@ class CustomerAddressController extends Controller
             ],
         ];
     }
+
 
     /**
      * Lists all CustomerAddress models.

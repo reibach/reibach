@@ -15,6 +15,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use kartik\mpdf\Pdf;
+use yii\filters\AccessControl;
+
 
 /**
  * BillController implements the CRUD actions for Bill model.
@@ -27,6 +29,17 @@ class BillController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create','delete','index','report','reporthtml','view','update'],
+                'rules' => [
+                    [
+                        'actions' => ['create','delete','index','report','reporthtml','view','update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -45,13 +58,15 @@ class BillController extends Controller
 		
 		$session = Yii::$app->session;
 		$mandator_active = $session->get('mandator_active');
+		print_r($mandator_active);
+		echo "TESTME";
 		
 		// wenn kein mandant ausgewählt ist, Abbruch
 		if ($mandator_active == '') {
 			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator selected. Please select one.'));
 			//return $this->redirect('/mandator/index');
 			//$this->redirect(array('mandator/index'));
-			$this->redirect(array('site/logout'));
+			$this->redirect(array('site/login'));
 		}
 
 		// get Customer FullName		 

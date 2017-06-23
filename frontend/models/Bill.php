@@ -61,6 +61,7 @@ class Bill extends \yii\db\ActiveRecord
             'description' => Yii::t('app', 'Description'),
             'price' => Yii::t('app', 'Price'),
   			'positionPrice' => Yii::t('app', 'Position Price'),
+  			'totalPosPrice' => Yii::t('app', 'Total'),
 			'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),

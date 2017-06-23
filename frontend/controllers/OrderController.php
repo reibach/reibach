@@ -20,6 +20,17 @@ class OrderController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create','delete','index','view','update'],
+                'rules' => [
+                    [
+                        'actions' => ['create','delete','index','view','update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

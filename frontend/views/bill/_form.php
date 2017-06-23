@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use frontend\models\Customer;
 use frontend\models\Position;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Bill */
@@ -22,6 +23,8 @@ use frontend\models\Position;
     <fieldset>
         <legend><?= Yii::t('app','Customer'); ?></legend>
 
+
+
 	<?php 
 			
 		$session = Yii::$app->session;
@@ -36,6 +39,22 @@ use frontend\models\Position;
 		->label(false) ?>
     </fieldset>
    
+	<?php
+        echo $form->field($model->bill, 'created_at')->widget(DatePicker::className(), [
+            'language' => 'de',
+            'inline' => false,
+            'dateFormat' => 'dd.MM.yyyy',
+            'clientOptions' => [
+                'showAnim'=>'slideDown',
+                'yearRange' => '2017:2022',
+                'changeMonth'=> true,
+                'changeYear'=> true,
+                'autoSize'=>true,
+                'showOn'=> "button",
+                'buttonText' => 'Kalender',
+            ]
+        ]);
+    ?>
 
 	<fieldset>
 	<legend><?= Yii::t('app','Positions'); ?>

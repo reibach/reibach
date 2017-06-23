@@ -28,18 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <h4><?= Yii::t('app', 'Mandator') ?>:&nbsp;
-	<?= $address_mandator['prename'], $address_mandator['lastname'] ?>
-	</h4>
-	<?= $address_mandator['fullName'] ?>
-	</h4>
+    <h4><?= Yii::t('app', 'Mandator') ?>:&nbsp;	<?= $address_mandator['fullName'] ?></h4>
 
 
-    <h4><?= Yii::t('app', 'Customer') ?>:&nbsp;
-    <?= $customer['fullName'] ?>
-    </h4>
+    <h4><?= Yii::t('app', 'Customer') ?>:&nbsp; <?= $customer['fullName'] ?></h4>
 
     <h1><?= Yii::t('app', 'Positions') ?></h1>
+    <h1><?= $model->created_at ?></h1>
+    <h1><?= $model->updated_at ?></h1>
 
 <?php
 //Yii::$app->formatter->locale = 'de-DE';
@@ -95,7 +91,7 @@ foreach($dataProvider->models as $myModel){
 //echo "sum(a) = " . round(array_sum($myTotalPosPrice), 2) . "\n";
 //echo "sum(a) = " . Yii::$app->formatter->asDecimal(round(array_sum($myTotalPosPrice), 2)) . "\n";
 $billTotal = Yii::$app->formatter->asDecimal(round(array_sum($myTotalPosPrice), 2)) . "\n";
-echo "<h3>Gesamtpreis: ".$billTotal."</h3>"
+echo "<div align=\"right\"><h3>".Yii::t('app', 'Invoice Amount')." : ".$billTotal."</h3></div>"
 
 
 
@@ -112,7 +108,7 @@ echo "<h3>Gesamtpreis: ".$billTotal."</h3>"
 		'class'=>'btn btn-danger', 
 		'target'=>'_blank', 
 		'data-toggle'=>'tooltip', 
-		'title'=>'Will open the generated PDF file in a new window'
+		'title'=>Yii::t('app', 'Will open the generated PDF file in a new window'),
 	]);
 ?>
 
@@ -125,7 +121,7 @@ echo "<h3>Gesamtpreis: ".$billTotal."</h3>"
 		'class'=>'btn btn-danger', 
 		'target'=>'_blank', 
 		'data-toggle'=>'tooltip', 
-		'title'=>'Will open the generated PDF file in a new window'
+		'title'=>Yii::t('app', 'Creates a Pdf preview'),
 	]);
 ?>
 

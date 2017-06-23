@@ -17,8 +17,18 @@ return [
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
+			'enableSession' => true,
+			'authTimeout' => 300, // 5 min
+			'loginUrl' => ['site/login'],
         ],
+        
+        //'session' => [
+        //'class' => 'yii\web\Session',
+        //'cookieParams' => ['httponly' => true, 'lifetime' => 20],
+        //'timeout' => 20, //session expire
+        //'useCookies' => true,
+    //],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

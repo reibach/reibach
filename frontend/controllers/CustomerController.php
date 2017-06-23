@@ -10,6 +10,8 @@ use frontend\models\CustomerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+
 
 /**
  * CustomerController implements the CRUD actions for Customer model.
@@ -22,6 +24,17 @@ class CustomerController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create','delete','index','view','update'],
+                'rules' => [
+                    [
+                        'actions' => ['create','delete','index','view','update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -31,6 +44,8 @@ class CustomerController extends Controller
         ];
     }
 
+
+
     /**
      * Lists all Customer models.
      * @return mixed
@@ -38,14 +53,38 @@ class CustomerController extends Controller
     public function actionIndex()
     {
 		$session = Yii::$app->session;
-		$mandator_active = $session->get('mandator_active');
-		
-		// wenn kein mandant ausgewählt ist, Abbruch
-		if ($mandator_active == '') {
-			Yii::$app->session->setFlash('error', 'No Mandator selected. Please select one.');
-			//return $this->redirect('/mandator/index');
-			$this->redirect(array('mandator/index'));
+		if ($session->has('mandator_active')) {
+			print "<p>mandator_active</p>:".$session->get('mandator_active');
+			$mandator_active = $session->get('mandator_active');
+	
 		}
+		// check if a session is already open
+		//if ($session->isActive) {
+			//print "Session is active<br>";
+			//print_r($session);
+			//print "<p>----</p>";
+
+			// destroys all data registered to a session.
+			//$session->destroy();
+			//print "<p>mandator_active</p>:".$session->get('mandator_active');
+
+			// close a session
+			//$session->close();
+			//print "Session is closed<br>";
+			//print "<p>----</p>";
+			//print "<p>mandator_active</p>:".$session->get('mandator_active');
+			
+		//} else {
+			//print "Session is NOT active<br>";
+		//}	
+			
+
+		// wenn kein mandant ausgewählt ist, Abbruch
+		//if ($mandator_active == '') {
+			//Yii::$app->session->setFlash('error', 'No Mandator selected. Please select one.');
+			//return $this->redirect('/mandator/index');
+			//$this->redirect(array('mandator/index'));
+		//}
 
         $searchModel = new CustomerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

@@ -84,25 +84,66 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+		
+		
+		//$user = User::findOne($id);
+		//Daten für eine Rechnung zusammenbauen:
+		//Kunde:
+		// get Customer 
+		//$mandator = Customer::findOne($user->customer_id);
+		
+		
+		 //$mandator = Mandator::findOne(19);
+		
+		
+        //if (!Yii::$app->user->isGuest) {
+            //return $this->goHome();
+        //}
+
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
 
-			$user_id = Yii::$app->user->id;
-			
-			$mandator_active = Mandator::find()
-				->where('user_id = :user_id', [':user_id' => $user_id])
-				->one();
-			
-			// Start der Session
-			$session = Yii::$app->session;
-			$mandator_active = $session->set('mandator_active', $mandator_active['id']);
+		
+		//$user_id=1;
+		$user_id = Yii::$app->user->id;
+        //print "<p>USR...............</p>";
+		//print $user_id;
+        //print "<p>...................USR</p>";
+		
+		
+		$mandator_active = Mandator::find()
+	    ->where('user_id = :user_id', [':user_id' => $user_id])
+	    ->one();
+		
+		
+		$session = Yii::$app->session;
+		$mandator_active = $session->set('mandator_active', $mandator_active['id']);
 
-            //return $this->render('index', [
-                //'model' => $model,                
-            //]);   
-            return $this->goHome();
-          
-            //return $this->goBack();
+		    //print "<p>MAN</p>";
+            //print_r($mandator_active);
+            //print "<p>DANT</p>";
+            //print Yii::$app->user->id;
+            //print "<p>LLLLL</p>";
+            //print $mandator_active['id'];
+            //print "<p>uuuuu</p>";
+            
+			//exit;
+		
+		
+		//$userid = Yii::$app->user->id;
+		
+		
+        //$mandator_active = Mandator::findOne()
+			//->where('user_id > :user_id', [':user_id' => $userid]);
+		
+
+            // DefaultMandanten holen
+            //$mandator_active = getDefaultMandator();
+			//$mandator->user_id = Yii::$app->user->id;		
+			//$mandator_active = $mandator->getDefaultMandator(Yii::$app->user->id);
+
+        
+            return $this->goBack();
         } else {
             return $this->render('login', [
                 'model' => $model,                
@@ -120,8 +161,7 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        //return $this->goHome();
-        return $this->render('index');
+        return $this->goHome();
     }
 
     /**

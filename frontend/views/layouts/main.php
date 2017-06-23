@@ -26,6 +26,8 @@ AppAsset::register($this);
 ]); 
 ?>
 
+
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -47,7 +49,9 @@ AppAsset::register($this);
 
 $session = Yii::$app->session;
 $mandator_active = $session->get('mandator_active');
-echo "mandator_active:".$mandator_active;
+//echo "mandator_active:".$mandator_active;
+
+
 
     NavBar::begin([
         //'brandLabel' => Html::img('@web/images/reibach-logo114.png', ['alt'=>'Reibach']).'Reibach',

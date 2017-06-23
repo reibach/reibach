@@ -9,7 +9,11 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('app', 'Customers');
 $this->params['breadcrumbs'][] = $this->title;
+
+	
 ?>
+
+
 <div class="customer-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -28,10 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'id',
-            'mandator_id',            
-			'address_id',
+            //'mandator_id',            
+			//'address_id',
 			'fullName',
-			'orderAmount',
+			//'orderAmount',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

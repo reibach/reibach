@@ -22,7 +22,7 @@ use frontend\models\Address;
 <fieldset>
 	<legend>
 	<?= Yii::t('app','Please fill out this form...'); ?>	
-	<?= $form->field($mandator, 'taxable')->textInput() ?> 
+	<?php // echo $form->field($mandator, 'taxable')->textInput() ?> 
 	<?= $form->field($address, 'company')->textInput(['maxlength' => true]) ?>
     <?= $form->field($address, 'title')->textInput(['maxlength' => true]) ?>
     <?= $form->field($address, 'prename')->textInput(['maxlength' => true]) ?>

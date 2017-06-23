@@ -17,24 +17,19 @@ use yii\filters\AccessControl;
  */
 class MandatorController extends Controller
 {
+
     /**
      * @inheritdoc
      */
-	public function behaviors()
+    public function behaviors()
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create', 'delete', 'index', 'update', 'view'],
+                'only' => ['create','delete','index','view','update'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['create', 'delete', 'index', 'update', 'view'],
-                        //'actions' => ['delete', 'index', 'update', 'view'],
+                        'actions' => ['create','delete','index','view','update'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -44,11 +39,11 @@ class MandatorController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
-                    //'logout' => ['post'],
                 ],
             ],
         ];
     }
+
 
     /**
      * Lists all Mandator models.
