@@ -41,6 +41,7 @@ return [
 	'Bank Name' => 'Bank',
 	'Bill' => 'Rechnung',
 	'Bill Date' => 'Rechnungsdatum',
+	'Billing Date' => 'Rechnungsdatum',
 	'Bill has been created:' => 'Die Rechnung wurde erstellt:',
 	'Bill has been updated.' => 'Die Rechnung wurde bearbeitet:',
 	'Bill ID' => 'Rechnungs ID',

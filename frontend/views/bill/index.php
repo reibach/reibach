@@ -55,6 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             //'customer_id',
             'fullName',
+            'billing_date',
             //'description:ntext',
             //'status',
             //['value' => function ($data) {return $data->getbillTotal(ArrayHelper::getValue('', ''));}, 'label' => 'Toootal'],
@@ -64,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'billTotal',
             //'fullName's,
             // 'created_at',
-            // 'updated_at',
+             //'updated_at',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

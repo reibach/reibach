@@ -33,9 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h4><?= Yii::t('app', 'Customer') ?>:&nbsp; <?= $customer['fullName'] ?></h4>
 
+    <h3><?= Yii::t('app', 'Billing Date') ?>:&nbsp; <?= $model->billing_date ?></h3>
+
     <h1><?= Yii::t('app', 'Positions') ?></h1>
-    <h1><?= $model->created_at ?></h1>
-    <h1><?= $model->updated_at ?></h1>
 
 <?php
 //Yii::$app->formatter->locale = 'de-DE';

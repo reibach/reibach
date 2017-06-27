@@ -194,17 +194,18 @@ class CustomerController extends Controller
         //$address->scenario = 'update';
 
         if ($address->load(Yii::$app->request->post()) && $address->save()) {
-			$customer->save();
+			if ($customer->load(Yii::$app->request->post()) && $customer->save()) {
+				$customer->save();
+			}
             return $this->redirect(['customer/view', 'id' => $id]);
-        }
-        
-        return $this->render('update', [
-            'customer' => $customer,
-            'address' => $address,
-            'address_mandator' => $address_mandator,
-        ]);
-    }
-        
+        } else {		
+			return $this->render('update', [
+				'customer' => $customer,
+				'address' => $address,
+				'address_mandator' => $address_mandator,
+			]);
+		}
+    }    
         
         
     

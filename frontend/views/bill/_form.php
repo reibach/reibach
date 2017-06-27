@@ -21,7 +21,7 @@ use yii\jui\DatePicker;
     <?= $model->errorSummary($form); ?>
 
     <fieldset>
-        <legend><?= Yii::t('app','Customer'); ?></legend>
+        <legend><?= Yii::t('app','Customer'); ?>AAA</legend>
 
 
 
@@ -40,22 +40,36 @@ use yii\jui\DatePicker;
     </fieldset>
    
 	<?php
-        echo $form->field($model->bill, 'created_at')->widget(DatePicker::className(), [
-            'language' => 'de',
-            'inline' => false,
-            'dateFormat' => 'dd.MM.yyyy',
-            'clientOptions' => [
-                'showAnim'=>'slideDown',
-                'yearRange' => '2017:2022',
-                'changeMonth'=> true,
-                'changeYear'=> true,
-                'autoSize'=>true,
-                'showOn'=> "button",
-                'buttonText' => 'Kalender',
-            ]
-        ]);
+        //echo $form->field($model->bill, 'updated_at')->widget(DatePicker::className(), [
+            //'language' => 'de',
+            //'inline' => false,
+            //'dateFormat' => 'dd.MM.yyyy',
+            //'clientOptions' => [
+                //'showAnim'=>'slideDown',
+                //'yearRange' => '2017:2022',
+                //'changeMonth'=> true,
+                //'changeYear'=> true,
+                //'autoSize'=>true,
+                //'showOn'=> "button",
+                //'buttonText' => 'Kalender',
+            //]
+        //]);
+
     ?>
 
+<p><?= Yii::t('app', 'Billing Date') ?></p>
+
+<?php 
+	echo DatePicker::widget([
+    'model' => $model->bill,
+    'attribute' => 'billing_date',
+    'language' => 'de',
+    //'dateFormat' => 'dd.MM.yyyy',
+    'dateFormat' => 'yyyy-MM-dd',
+    //'saveFormat' => 'php:Y-m-d'
+]);
+
+?>
 	<fieldset>
 	<legend><?= Yii::t('app','Positions'); ?>
 		<?php

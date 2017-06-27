@@ -15,8 +15,8 @@ use Yii;
  * @property string $password_reset_token
  * @property string $email
  * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
+ * @property string $created_at
+ * @property string $updated_at
  * @property integer $abo_start
  * @property integer $abo_end
  * @property integer $abo_turn
@@ -41,7 +41,8 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             [['agb', 'username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at', 'abo_start', 'abo_end', 'abo_turn', 'abo_type'], 'required'],
-            [['agb', 'status', 'created_at', 'updated_at', 'abo_start', 'abo_end', 'abo_turn'], 'integer'],
+            [['agb', 'status', 'abo_start', 'abo_end', 'abo_turn'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'], 
             [['abo_type'], 'string'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],

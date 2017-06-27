@@ -15,7 +15,7 @@ use Yii;
  * @property double $status
  * @property integer $created_at
  * @property integer $updated_at
- *
+ * @property string $billing_date
  * @property Customer $customer
  * @property Position[] $positions
  */
@@ -37,8 +37,9 @@ class Bill extends \yii\db\ActiveRecord
     {
         return [
             //[['status', 'customer_id', 'description'], 'required'],
-            [['customer_id'], 'required'],
+            [['customer_id', 'billing_date'], 'required'],
             //[['customer_id','mandator_id', 'created_at', 'updated_at'], 'integer'],
+             [['billing_date'], 'safe'], 
             //[['description','fullName'], 'string'],
             //[['description'], 'string'],
             //[['status'], 'number'],
@@ -63,6 +64,7 @@ class Bill extends \yii\db\ActiveRecord
   			'positionPrice' => Yii::t('app', 'Position Price'),
   			'totalPosPrice' => Yii::t('app', 'Total'),
 			'status' => Yii::t('app', 'Status'),
+			'billing_date' => Yii::t('app', 'Billing Date'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];

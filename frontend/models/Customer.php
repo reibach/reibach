@@ -10,8 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $mandator_id
  * @property integer $address_id
- * @property integer $customer_number 
- *
+ * @property string $customer_number 
  * @property Bill[] $bills
  * @property Address $address
  * @property Mandator $mandator
@@ -34,7 +33,8 @@ class Customer extends \yii\db\ActiveRecord
     {
         return [
             [['mandator_id', 'address_id'], 'required'],
-            [['mandator_id', 'address_id', 'customer_number'], 'integer'],
+            [['mandator_id', 'address_id' ], 'integer'],
+            [['customer_number'], 'safe'], 
             [['address_id'], 'exist', 'skipOnError' => true, 'targetClass' => Address::className(), 'targetAttribute' => ['address_id' => 'id']],
             [['mandator_id'], 'exist', 'skipOnError' => true, 'targetClass' => Mandator::className(), 'targetAttribute' => ['mandator_id' => 'id']],
         ];
