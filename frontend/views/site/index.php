@@ -24,7 +24,10 @@ $this->title = 'Reibach ... to make a big haul.';
 
 <p>Lege <?= Html::a(Yii::t('app', 'Hier'), ['/site/signup', ''], ['class' => 'profile-link']) ?> gleich los oder informiere dich vorab:
 <?= Html::a(Yii::t('app', 'QuickStart'), ['/site/quickstart', ''], ['class' => 'profile-link']) ?>   </p>
-        <p><img src="<?= yii\helpers\Url::to('@web/images/quickstartguide.png') ?>" width="400"/></p>
+
+
+        <p><a href="index.php?r=site%2Fquickstart"><img src="<?= yii\helpers\Url::to('@web/images/quickstartguide.png') ?>" width="400"/></a></p>
+  
         <p>Alle weiteren Informationen finden sich im <a class="btn btn-default" href="https://doku.federa.de/" target="_new">Wiki</a></p>
         
 

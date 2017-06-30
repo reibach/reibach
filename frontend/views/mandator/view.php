@@ -35,11 +35,27 @@ $mandator_active = $session->set('mandator_active', $model->id);
         'model' => $model,
         'attributes' => [
             //'id',
-            'user_id',
-            'address_id',
+            //'user_id',
+            //'address_id',
             'fullName',
-            'taxable',
+            //'taxable',
+            //'b_id',
+            //'c_id',
+        ],
+    ]) ?>
+
+    <?= DetailView::widget([
+        'model' => $address,
+        'attributes' => [
+            //'id',
+            'street',
+            'housenumber',
+            'zipcode',
+            'place',
+           
         ],
     ]) ?>
 
 </div>
+    
+    

@@ -77,8 +77,15 @@ class MandatorController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+		$mandator = Mandator::findOne($id);
+		
+		// get the address_id of the mandator
+        $address = Address::findOne($mandator->address_id);
+        
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'address' => $address,
         ]);
     }
 

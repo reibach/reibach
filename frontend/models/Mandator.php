@@ -34,8 +34,8 @@ class Mandator extends \yii\db\ActiveRecord
         return [
             //[['user_id', 'address_id'], 'required'],
             [['user_id'], 'required'],
-            [['user_id', 'address_id', 'taxable'], 'integer'],
-		    [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['user_id', 'address_id', 'taxable', 'b_id', 'c_id'], 'integer'],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['address_id'], 'exist', 'skipOnError' => true, 'targetClass' => Address::className(), 'targetAttribute' => ['address_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -55,6 +55,8 @@ class Mandator extends \yii\db\ActiveRecord
             'prename' => Yii::t('app', 'prename'),
 			'fullName'=>Yii::t('app', 'Full Name'),
 			'taxable' => Yii::t('app', 'Taxable'),
+			'b_id' => Yii::t('app', 'B ID'),
+		    'c_id' => Yii::t('app', 'C ID'),
         ];
     }
 

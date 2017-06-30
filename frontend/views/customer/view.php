@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Customer */
 
-$this->title = $model->id;
+$this->title = Yii::t('app', 'Customer').": ".$model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Customers'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -24,14 +24,29 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+<!--
 	<p>AddressMandator: <?= $address_mandator->fullName; ?></p>
+-->
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'customer_number',            
-            'mandator_id',
+            //'customer_number',            
+            //'mandator_id',
             'fullName',
         ],
     ]) ?>
+
+    <?= DetailView::widget([
+        'model' => $address,
+        'attributes' => [
+            //'id',
+            'street',
+            'housenumber',
+            'zipcode',
+            'place',
+           
+        ],
+    ]) ?>
+
 
 </div>

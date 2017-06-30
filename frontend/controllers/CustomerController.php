@@ -106,14 +106,18 @@ class CustomerController extends Controller
     {
 		$customer = Customer::findOne($id);
 		// get the address_id of the mandator
+        
         $mandator_id = $customer->mandator_id;
         $mandator = Mandator::findOne($mandator_id);
+		
+		
 		$address_mandator = Address::findOne($mandator->address_id);
+		$address = Address::findOne($customer->address_id);
 
    
         return $this->render('view', [
             'model' => $this->findModel($id),
-            //'address' => $address,
+            'address' => $address,
 			'address_mandator' => $address_mandator,
         ]);
     }

@@ -21,7 +21,9 @@ use backend\models\Mandator;
 <fieldset>
 	<legend>
 	<?= Yii::t('app','Please fill out this form...'); ?>	
+	<?php /* eigene Kundennummer wird ausgeblended
 	<?= $form->field($customer, 'customer_number')->textInput(['maxlength' => true]) ?>
+	*/ ?>
 	<?= $form->field($address, 'company')->textInput(['maxlength' => true]) ?>
     <?= $form->field($address, 'title')->textInput(['maxlength' => true]) ?>
     <?= $form->field($address, 'prename')->textInput(['maxlength' => true]) ?>

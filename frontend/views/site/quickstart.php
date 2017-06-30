@@ -12,7 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
  <p><img src="<?= yii\helpers\Url::to('@web/images/quickstartguide.png') ?>" width="1024"/></p>
 
+<!--
     <p><?= Yii::t('app', 'Lore ipsum...') ?></p>
 
     <code><?= __FILE__ ?></code>
+-->
 </div>

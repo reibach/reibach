@@ -22,7 +22,14 @@ use frontend\models\Address;
 <fieldset>
 	<legend>
 	<?= Yii::t('app','Please fill out this form...'); ?>	
-	<?php // echo $form->field($mandator, 'taxable')->textInput() ?> 
+	<?php 
+	/* Steuerpflicht, eigene Rechungs und Kundennummer werden z.Zt. noch ausgeblended
+	<?= // $form->field($mandator, 'taxable')->textInput() ?> 
+	<?= // $form->field($mandator, 'b_id')->checkBox(['label' => Yii::t('app', 'Own accounting numbers (not unique)'), 'value' => "1"]); ?>
+	<?= // $form->field($mandator, 'c_id')->checkBox(['label' => Yii::t('app', 'Own customer numbers (not unique)'), 'value' => "1"]); ?>
+	*/
+	?>
+	
 	<?= $form->field($address, 'company')->textInput(['maxlength' => true]) ?>
     <?= $form->field($address, 'title')->textInput(['maxlength' => true]) ?>
     <?= $form->field($address, 'prename')->textInput(['maxlength' => true]) ?>

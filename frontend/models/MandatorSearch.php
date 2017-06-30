@@ -19,7 +19,8 @@ class MandatorSearch extends Mandator
     public function rules()
     {
         return [
-            [['id', 'user_id', 'address_id'], 'integer'],
+            //[['id', 'user_id', 'address_id'], 'integer'],
+            [['id', 'user_id', 'address_id', 'taxable', 'b_id', 'c_id'], 'integer'],
             [['fullName'], 'save'],
         ];
     }
@@ -102,6 +103,8 @@ class MandatorSearch extends Mandator
             'user_id' => $this->user_id,
             'address_id' => $this->address_id,
             'taxable' => $this->taxable,
+            'b_id' => $this->b_id, 
+		    'c_id' => $this->c_id, 
         ]);
 
         return $dataProvider;

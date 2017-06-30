@@ -51,7 +51,7 @@ use yii\widgets\ListView;
       <!-- Rechnungsdaten--> 
 		<?= Yii::t('app', 'Bill Number') ?>:&nbsp;<b><?= $model->id ?></b><br>
 		<?= Yii::t('app', 'Customer Number') ?>:&nbsp;:<b><?= $model->customer_id ?></b><br>
-		<?= Yii::t('app', 'Bill Date') ?>:&nbsp;:<b><?= $model->updated_at ?></b><br>
+		<?= Yii::t('app', 'Bill Date') ?>:&nbsp;:<b><?= $model->billing_date ?></b><br>
       </td>
     </tr>
     <tr>
