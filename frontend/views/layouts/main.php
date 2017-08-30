@@ -60,8 +60,8 @@ $mandator_active = $session->get('mandator_active');
         //'brandLabel' => ,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            //'class' => 'navbar-inverse navbar-fixed-top',
-            'class' => 'my-navbar navbar-fixed-top',
+            'class' => 'navbar-inverse navbar-fixed-top',
+            //'class' => 'my-navbar navbar-fixed-top',
         ],
     ]);
 	//$menuItems[] = ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']];

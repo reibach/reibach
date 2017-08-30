@@ -21,7 +21,7 @@ use yii\jui\DatePicker;
     <?= $model->errorSummary($form); ?>
 
     <fieldset>
-        <legend><?= Yii::t('app','Customer'); ?>AAA</legend>
+        <legend><?= Yii::t('app','Customers'); ?></legend>
 
 
 

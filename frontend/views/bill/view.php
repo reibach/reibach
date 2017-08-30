@@ -125,4 +125,17 @@ echo "<div align=\"right\"><h3>".Yii::t('app', 'Invoice Amount')." : ".$billTota
 	]);
 ?>
 
+<?php 
+	/**
+	 * THE SAVEPDF BUTTON
+	 */
+	 $desc = Yii::t('app', 'Save PDF');
+	 echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> '.$desc, ['/bill/reportfile', 'id' => $model->id], [
+		'class'=>'btn btn-danger', 
+		'target'=>'_blank', 
+		'data-toggle'=>'tooltip', 
+		'title'=>Yii::t('app', 'Saves the PDF to the Filesystem'),
+	]);
+?>
+
 </div>

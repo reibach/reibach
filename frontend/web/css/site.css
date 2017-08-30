@@ -3,6 +3,19 @@ body {
     height: 100%;
 }
 
+
+a:link {
+    color: #23527C;
+    font-size: 18px;
+	font-weight: 200;
+/*
+	background-color: #ECECEC;
+*/
+}
+
+.navbar-inverse {
+  background-color: #121254;
+}
 .nav li.active a, .nav li.active a:hover  {
     background-color: #08D;
     color: white;

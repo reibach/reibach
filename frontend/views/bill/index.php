@@ -71,10 +71,26 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 </div>
 
-
 <?php
-   //print_r($dataProvider);
-    //print_r($searchModel);
+
+
+// Gesamtpreis aller Rechnungen nur bei schon vorhandenen/r Rechnung/en moeglich 
+$billExist = 0;
+
+//print_r($dataProvider);
+//print_r($searchModel);
+//print_r($dataProvider->bill_id);
+
+
+
+if ($billExist == 0) {
+	print "ID ist NIX"; 
+} else {
+	print "ID ist: ".$billExist; 
+
+
+//print_r($dataProvider);
+//print_r($searchModel);
 
 
 //print_r($dataProvider->models[0]->id);
@@ -163,4 +179,6 @@ foreach ($dataProvider->models as $key => $value) {
 //print_r($dataProvider->models[0]->customer_id);
 
 
+}
 ?>
+

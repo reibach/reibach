@@ -22,8 +22,12 @@ $this->title = 'Reibach ... to make a big haul.';
 <h3>Willkommen,</h3>
 <h4>zu Reibach, dem Online-Rechnungsprogramm</h4>
 
-<p>Lege <?= Html::a(Yii::t('app', 'Hier'), ['/site/signup', ''], ['class' => 'profile-link']) ?> gleich los oder informiere dich vorab:
-<?= Html::a(Yii::t('app', 'QuickStart'), ['/site/quickstart', ''], ['class' => 'profile-link']) ?>   </p>
+<p>Lege <?= Html::a(Yii::t('app', 'Hier'), ['/site/signup', ''], ['class' => 'profile-link']) ?> gleich los oder starte das
+        <a class="btn btn-default" href="https://reibach-rechnung.de/demo/" target="_new">Demo</a></p>
+
+<p>Benutzername: demo <br>
+Passwort: demodemo
+</p>
 
 
         <p><a href="index.php?r=site%2Fquickstart"><img src="<?= yii\helpers\Url::to('@web/images/quickstartguide.png') ?>" width="400"/></a></p>

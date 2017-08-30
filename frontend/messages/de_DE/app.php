@@ -147,6 +147,7 @@ return [
 	'reset it' => 'setze es zurück.',
 	'Reset password' => 'Passwort zurücksetzen',
 	'Residing Country' => 'Herkunftsland',
+	'Saves the PDF to the Filesystem' => 'Speichert das PDF auf dem Dateisystem',
 	'Search' => 'Suche',
 	'Select Customer' => 'Kunde auswählen',
 	'send' => 'senden',
