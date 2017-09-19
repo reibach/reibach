@@ -19,10 +19,8 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
 	width: 100px;
 	height: 30px;
 	background-color: #FFFFFF;">
-<p><img src="<?= yii\helpers\Url::to('@web/images/logo50.png') ?>"  /></p>
+	<p> <?= Html::img('@web/images/logo50.png', ['alt'=>'Reibach', 'width' => '100']) ?> </p>
 </div>
-
-
 <table style="text-align: left; width: 1048px; height: 2096x; background-color: #FFFFFF;" border="2" cellpadding="0" cellspacing="0">
 	<tbody>
     <tr>

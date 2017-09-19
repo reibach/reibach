@@ -9,10 +9,18 @@ use yii\widgets\ListView;
 /* @var $model frontend\models\Bill */
 ?>
 
-
 <!--
-<p><img src="<?= yii\helpers\Url::to('@web/images/logo50.png') ?>"  width="20%"/></p>
+LOGO darf nur bei gueltiger Lizenz entfernt werden!
 -->
+<div style="
+	position:absolute; 
+	bottom: 10; 
+	left: 44px;
+	width: 100px;
+	height: 30px;
+	background-color: #FFFFFF;">
+</div>
+
 
 <table style="text-align: left; width: 1048px; height: 542px; background-color: #FFFFFF;" border="2" cellpadding="0" cellspacing="0">
 	<tbody>
@@ -155,6 +163,8 @@ use yii\widgets\ListView;
 		<td colspan="6"  style="vertical-align: top;"><br>
 			<br>
 			<hr style="align: left; width: 1048px; height: 3px; margin: 0 auto; color: #BFBFBF; background: #BFBFBF;">
+			<p> <?= Html::img('@web/images/logo50.png', ['alt'=>'Reibach', 'width' => '100']) ?> </p>
+
 			<br>
 		</td>
 	</tr>
@@ -178,7 +188,7 @@ use yii\widgets\ListView;
 				<div></div>
             </td>
             <td style="vertical-align: top; width: 250px; border:0px solid;">
-				<div><?=  Yii::t('app', 'Phone').": " .$address_mandator->phone_business ?> </div>
+				<div><?= Yii::t('app', 'Phone').": " .$address_mandator->phone_business ?> </div>
 				<div><?= Yii::t('app', 'Fax').": " .$address_mandator->fax ?></div>
 				<div><?= Yii::t('app', 'Email').": " .$address_mandator->email ?></div>
 				<div><?= Yii::t('app', 'Internet').": " .$address_mandator->email ?></div>
