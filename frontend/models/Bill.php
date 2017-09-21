@@ -41,7 +41,7 @@ class Bill extends \yii\db\ActiveRecord
             //[['customer_id','mandator_id', 'created_at', 'updated_at'], 'integer'],
              [['billing_date'], 'safe'], 
             //[['description','fullName'], 'string'],
-            //[['description'], 'string'],
+            [['description'], 'string'],
             //[['status'], 'number'],
             //[[ 'status'], 'number'],
             //[['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],

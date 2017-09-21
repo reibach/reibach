@@ -67,6 +67,11 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
     </tr>
     <tr>
       <td colspan="5" rowspan="1" style="vertical-align: top; font: 24px Arial, sans-serif; border:0px solid #BFBFBF; padding-left: 5px;">
+		<?= $model->description ?>
+	</td>
+	</tr>
+    <tr>
+      <td colspan="5" rowspan="1" style="vertical-align: top; font: 24px Arial, sans-serif; border:0px solid #BFBFBF; padding-left: 5px;">
  
  
       <?= Yii::t('app', 'Positions') ?><p>&nbsp;</p>

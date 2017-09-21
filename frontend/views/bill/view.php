@@ -35,7 +35,28 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h3><?= Yii::t('app', 'Billing Date') ?>:&nbsp; <?= $model->billing_date ?></h3>
 
+    <h3><?= Yii::t('app', 'Description') ?>:&nbsp; <?= $model->description ?></h3>
+
+<!--
+     <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'id',
+            'customer_id',
+            'mandator_id',
+            //'name:ntext',
+            'description:ntext',
+            //'price',
+            'status',
+            //'billdate',
+        ],
+    ]) ?>
+-->
+
+
     <h1><?= Yii::t('app', 'Positions') ?></h1>
+    
+    
 
 <?php
 //Yii::$app->formatter->locale = 'de-DE';

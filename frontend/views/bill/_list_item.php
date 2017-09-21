@@ -4,7 +4,9 @@
 use yii\helpers\Html;
 
 
+
 $pos_sum = $model['price'] * $model['quantity'];
+$pos_sum = yii::$app->formatter->asDecimal($pos_sum,2);
 ?>
 
 
