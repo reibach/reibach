@@ -104,8 +104,6 @@ function getData() {
 
 
 
-
-
 foreach($dataProvider->models as $myModel){
 			
 	// alle IDs der Rechnungen dieses Mandanten ausgeben		

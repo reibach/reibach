@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use frontend\models\form\BillForm;
+use frontend\models\form\BillEMailForm;
 use Yii;
 use frontend\models\Bill;
 use frontend\models\Address;
@@ -191,6 +192,73 @@ class BillController extends Controller
      * @param integer $id
      * @return mixed
      */
+    public function actionMailfile($id)
+    {
+		$session = Yii::$app->session;
+		$mandator_active = $session->get('mandator_active');
+		
+	
+		$bill = Bill::findOne($id);
+		
+		// get Customer 
+		$customer = Customer::findOne($bill->customer_id);
+		$address_customer = Address::findOne($customer->address_id);
+		
+		// wenn kein mandant ausgewählt ist, Abbruch
+		if ($mandator_active == '') {
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator selected. Please select one.'));
+			//return $this->redirect('/mandator/index');
+			$this->redirect(array('mandator/index'));
+		}
+
+        $model = new BillEMailForm();
+        $model->bill = $this->findModel($id);       
+        $model->setAttributes(Yii::$app->request->post());
+        
+        if (Yii::$app->request->post() && $model->save()) {
+			 // $model->savePositions();
+			
+            Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Bill has been updated.'));
+            return $this->redirect(['view', 'id' => $model->bill->id]);
+        }
+        return $this->render('mailfile', [
+			'model' => $model,
+			'customer' => $customer,
+		]);
+    }
+    
+
+    /**
+     * Displays contact page.
+     *
+     * @return mixed
+     */
+    public function actionContact()
+    {
+        $model = new ContactForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+                Yii::$app->session->setFlash('success', Yii::t('app','Thank you for contacting us. We will respond to you as soon as possible.'));
+            } else {
+                Yii::$app->session->setFlash('error', Yii::t('app', 'There was an error sending email.'));
+            }
+
+            return $this->refresh();
+        } else {
+            return $this->render('contact', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+
+
+    /**
+     * Updates an existing Bill model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionUpdate($id)
     {
 		$session = Yii::$app->session;
@@ -283,6 +351,11 @@ class BillController extends Controller
             'listDataProvider' => $dataProvider,
         ]);
 
+		$filename =  '/var/www/html/reibach/frontend/web/bills/MAN'.$mandator_id.'/R_'.$id.'.pdf';
+			
+		// delete old pdf-file	
+		if (file_exists($filename)) 
+				unlink($filename);
 
 		// setup kartik\mpdf\Pdf component
 		$pdf = new Pdf([
@@ -294,7 +367,11 @@ class BillController extends Controller
 			'orientation' => Pdf::ORIENT_PORTRAIT, 
 			// stream to browser inline
 			
-			'filename' => '/tmp/R_'.$id.'.pdf',      
+			
+			
+			'filename' => $filename,      
+			//'filename' => '/bills/MAN'.$mandator_id.'/R_'.$id.'.pdf',      
+			//'filename' => '/tmp/R_'.$id.'.pdf',      
 			
 			//'destination' => Pdf::DEST_BROWSER, 
 			//'destination' => Pdf::DEST_DOWNLOAD, 
@@ -308,7 +385,7 @@ class BillController extends Controller
 			'cssInline' => '.kv-heading-1{font-size:18px}', 
 			 // set mPDF properties on the fly
 			'options' => ['title' => Yii::t('app', 'Bill')],
-			 // call mPDF methods on the fly
+			 // call mPDF methods on the flyx
 			'methods' => [ 
 				'SetHeader'=>[Yii::t('app', 'Bill')], 
 				'SetFooter'=>['{PAGENO}'],
@@ -318,7 +395,25 @@ class BillController extends Controller
 		]);
 
 		// return the pdf output as per the destination setting
-		return $pdf->render(); 
+		$pdf->render();
+		
+		if (file_exists($filename)) {
+		
+			Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Bill has been Saved.'));
+		} else {
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'Bill could not been Saved.'));	
+	
+		}
+			return $this->render('view', [
+				'model' => $this->findModel($id),
+				'customer' => $customer,
+				'address_mandator' => $address_mandator,
+				'address_customer' => $address_customer,
+				//'positions' => $positions,
+				'searchModel' => $searchModel,
+				'dataProvider' => $dataProvider,
+			]);
+		
 	}
     
     public function actionReport($id) {
@@ -413,6 +508,52 @@ class BillController extends Controller
 		// return the pdf output as per the destination setting
 		return $pdf->render(); 
 	}
+
+	
+	/***
+	
+    public function actionMailfile($id) {
+		
+		// 
+		
+		$bill = Bill::findOne($id);
+		//Daten für eine Rechnung zusammenbauen:
+		//Kunde:
+		// get Customer 
+		$customer = Customer::findOne($bill->customer_id);
+		$address_customer = Address::findOne($customer->address_id);
+
+
+		//Mandant: 
+		// get Mandator 		
+		// get the address_id of the mandator
+        $mandator_id = $customer->mandator_id;
+        $mandator = Mandator::findOne($mandator_id);
+		$address_mandator = Address::findOne($mandator->address_id);
+
+		//Rechnung:
+		//Positionen:		
+		//get all positions of a bill
+		$searchModel = new PositionSearch();
+        $dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);
+		$listDataProvider = $dataProvider;
+        			
+		// get your HTML raw content without any layouts or scripts
+		return $this->render('_formEMail', [
+            'model' => $this->findModel($id),
+            'customer' => $customer,
+            'address_mandator' => $address_mandator,
+            'address_customer' => $address_customer,
+            //'positions' => $positions,
+             'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'listDataProvider' => $dataProvider,
+        ]);
+	
+	//return $this->render('update', ['model' => $model]);
+	}
+
+	***/
 
     public function actionReporthtml($id) {
 		

@@ -50,6 +50,7 @@ class Customer extends \yii\db\ActiveRecord
             'mandator_id' => Yii::t('app', 'Mandator ID'),
             'address_id' => Yii::t('app', 'Address ID'),
             'fullName'=>Yii::t('app', 'Full Name'),
+            'email'=>Yii::t('app', 'EMail'),            
             'customer_number' => Yii::t('app', 'Customer Number'),
            	'orderAmount' => Yii::t('app', 'Order Amount'),
         ];
@@ -58,6 +59,11 @@ class Customer extends \yii\db\ActiveRecord
 	public function getFullName()
 	{
 		return $this->address->fullName;
+   	}
+
+	public function getEmail()
+	{
+		return $this->address->email;
    	}
 
     /**

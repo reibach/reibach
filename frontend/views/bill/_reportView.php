@@ -71,6 +71,10 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
 	</td>
 	</tr>
     <tr>
+      <td colspan="5"><br><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+      </td>
+    </tr>
+    <tr>
       <td colspan="5" rowspan="1" style="vertical-align: top; font: 24px Arial, sans-serif; border:0px solid #BFBFBF; padding-left: 5px;">
  
  

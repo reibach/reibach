@@ -44,7 +44,7 @@ use backend\models\Mandator;
 	
 
     <div class="form-group">
-        <?= Html::submitButton($customer->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $customer->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($customer->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Save'), ['class' => $customer->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
