@@ -161,12 +161,25 @@ echo "<div align=\"right\"><h3>".Yii::t('app', 'Invoice Amount')." : ".$billTota
 
 <?php 
 	/**
+	 * THE SEND BUTTON
+	 */
+	 $desc = Yii::t('app', 'Send Bill as EMail');
+	 echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> '.$desc, ['/bill/send', 'id' => $model->id], [
+		'class'=>'btn btn-danger', 
+		'target'=>'_self', 
+		'data-toggle'=>'tooltip', 
+		'title'=>Yii::t('app', 'Send the Bill to the EMailaddress of the Customer, if set'),
+	]);
+?>
+
+<?php 
+	/**
 	 * THE SENDPDF BUTTON
 	 */
 	 $desc = Yii::t('app', 'Send PDF as EMail');
 	 echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> '.$desc, ['/bill/mailfile', 'id' => $model->id], [
 		'class'=>'btn btn-danger', 
-		'target'=>'_blank', 
+		'target'=>'_self', 
 		'data-toggle'=>'tooltip', 
 		'title'=>Yii::t('app', 'Send the PDF to the EMailaddress of the Customer, if set'),
 	]);

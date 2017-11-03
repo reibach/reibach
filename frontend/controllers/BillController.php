@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use frontend\models\form\BillForm;
 use frontend\models\form\BillEMailForm;
+use frontend\models\SendForm;
 use Yii;
 use frontend\models\Bill;
 use frontend\models\Address;
@@ -185,6 +186,78 @@ class BillController extends Controller
     }
 
 	
+	
+	/**
+     * Displays contact page.
+     *
+     * @return mixed
+     */
+    public function actionContact()
+    {
+        $model = new ContactForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+                Yii::$app->session->setFlash('success', Yii::t('app','Thank you for contacting us. We will respond to you as soon as possible.'));
+            } else {
+                Yii::$app->session->setFlash('error', Yii::t('app', 'There was an error sending email.'));
+            }
+
+            return $this->refresh();
+        } else {
+            return $this->render('contact', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+
+    /**
+     * Displays send page.
+     *
+     * @return mixed
+     */
+    public function actionSend($id)
+    {
+
+        $model = new SendForm();
+
+        //$model->bill = $this->findModel($id);       
+        $bill = Bill::findOne($id);   
+		//print_r($bill);
+		//exit;	
+        $model->setAttributes(Yii::$app->request->post());
+        
+        $billfile =  '/var/www/html/reibach/frontend/web/bills/MAN'.$bill['mandator_id'].'/R_'.$bill->id.'.pdf'; 
+        
+		// get Mandator 
+		$mandator = Mandator::findOne($bill->mandator_id);
+		//$mandator_address = Mandator::findOne($andator->address_id);
+        
+		
+		// get Customer 
+		$customer = Customer::findOne($bill->customer_id);
+		$customer_address = Address::findOne($customer->address_id);
+        
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail($billfile)) {
+                Yii::$app->session->setFlash('success', Yii::t('app','Thank you for contacting us. We will respond to you as soon as possible.'));
+            } else {
+                Yii::$app->session->setFlash('error', Yii::t('app', 'There was an error sending email.'));
+            }
+
+            return $this->refresh();
+        } else {
+            return $this->render('send', [
+                'model' 			=> $model,
+                'bill'  			=> $bill,
+                'mandator'			=> $mandator,
+       			'customer' 			=> $customer,
+       			'customer_address' 	=> $customer_address,
+            ]);
+        }
+    }
+
 
     /**
      * Updates an existing Bill model.
@@ -215,29 +288,12 @@ class BillController extends Controller
         $model->bill = $this->findModel($id);       
         $model->setAttributes(Yii::$app->request->post());
         
-        if (Yii::$app->request->post() && $model->save()) {
-			 // $model->savePositions();
-			
-            Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Bill has been updated.'));
-            return $this->redirect(['view', 'id' => $model->bill->id]);
-        }
-        return $this->render('mailfile', [
-			'model' => $model,
-			'customer' => $customer,
-		]);
-    }
-    
-
-    /**
-     * Displays contact page.
-     *
-     * @return mixed
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+        $filename =  '/var/www/html/reibach/frontend/web/bills/MAN'.$customer['mandator_id'].'/R_'.$model->bill->id.'.pdf';
+        
+         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            //if ($model->sendEmail()) {
+            if ($model->sendEmail($filename)) {
+	
                 Yii::$app->session->setFlash('success', Yii::t('app','Thank you for contacting us. We will respond to you as soon as possible.'));
             } else {
                 Yii::$app->session->setFlash('error', Yii::t('app', 'There was an error sending email.'));
@@ -245,14 +301,27 @@ class BillController extends Controller
 
             return $this->refresh();
         } else {
-            return $this->render('contact', [
-                'model' => $model,
-            ]);
+        return $this->render('mailfile', [
+			'model' => $model,
+			'customer' => $customer,
+			'filename' => $filename
+			
+			]);
         }
+        
+        
+        
+        
+        //if (Yii::$app->request->post() && $model->save()) {
+			 // $model->savePositions();
+			
+            //Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Bill has been updated.'));
+            //return $this->redirect(['view', 'id' => $model->bill->id]);
+        //}
     }
+    
 
-
-
+ 
     /**
      * Updates an existing Bill model.
      * If update is successful, the browser will be redirected to the 'view' page.

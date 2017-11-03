@@ -8,7 +8,7 @@ use yii\base\Model;
 /**
  * ContactForm is the model behind the contact form.
  */
-class ContactForm extends Model
+class SendForm extends Model
 {
     public $name;
     public $email;
@@ -48,14 +48,18 @@ class ContactForm extends Model
      * @param string $email the target email address
      * @return bool whether the email was sent
      */
-    public function sendEmail($email)
+    public function sendEmail($billfile)
     {
+		
+		if (!isset($billfile))
+			$billfile = "";
+			
         return Yii::$app->mailer->compose()
-            ->setTo($email)
+            ->setTo($this->email)
             ->setFrom([$this->email => $this->name])
             ->setSubject($this->subject)
             ->setTextBody($this->body)
-            ->attach('/tmp/R_90.pdf')
+            ->attach($billfile)
             ->send();
     }
 }

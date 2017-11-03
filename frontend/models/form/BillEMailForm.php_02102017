@@ -164,18 +164,15 @@ class BillEMailForm extends Model
      * @param string $email the target email address
      * @return bool whether the email was sent
      */
-    public function sendEmail($filename)
+    public function sendEmail()
     {
-		if (!isset($filename))
-			$filename = "";
 		$email = 'guenter@federa.de';
         return Yii::$app->mailer->compose()
             ->setTo($email)
-            //->setFrom([$this->email => $this->name])
-            ->setFrom(["guenter@federa.de"])
+            ->setFrom([$this->email => $this->name])
             ->setSubject($this->subject)
             ->setTextBody($this->body)
-            ->attach($filename)
+            ->attach('/tmp/R_109.pdf')
             ->send();
     }
 

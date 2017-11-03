@@ -30,6 +30,8 @@ use frontend\models\Address;
 	*/
 	?>
 	
+	<?= $form->field($mandator, 'signature')->textInput(['maxlength' => true]) ?>
+
 	<?= $form->field($address, 'company')->textInput(['maxlength' => true]) ?>
     <?= $form->field($address, 'title')->textInput(['maxlength' => true]) ?>
     <?= $form->field($address, 'prename')->textInput(['maxlength' => true]) ?>

@@ -12,13 +12,17 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Bills'), 'url' => ['
 $this->params['breadcrumbs'][] = ['label' => $model->bill->id, 'url' => ['view', 'id' => $model->bill->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Mailfile');
 ?>
+
+<?php $filename =  '/var/www/html/reibach/frontend/web/bills/MAN'.$customer['mandator_id'].'/R_'.$model->bill->id.'.pdf'; ?>
+
 <div class="bill-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_formEMail', [
         'model' => $model,
-        'customer' => $customer,        
+        'customer' => $customer,      
+        'filename' => $filename  
     ]) ?>
 
 </div>

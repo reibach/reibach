@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $user_id
  * @property integer $address_id
+ * @property text $signatiure
  *
  * @property Article[] $articles
  * @property Customer[] $customers
@@ -57,6 +58,8 @@ class Mandator extends \yii\db\ActiveRecord
 			'taxable' => Yii::t('app', 'Taxable'),
 			'b_id' => Yii::t('app', 'B ID'),
 		    'c_id' => Yii::t('app', 'C ID'),
+		    'signature' => Yii::t('app', 'Signature'),
+		    
         ];
     }
 

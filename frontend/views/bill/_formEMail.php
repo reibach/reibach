@@ -16,9 +16,8 @@ use yii\captcha\Captcha;
 
 <div class="bill-form">
 	
-<?php $form = ActiveForm::begin([
-        'enableClientValidation' => false, // TODO get this working with client validation
-    ]); ?>
+
+ <?php $form = ActiveForm::begin(['id' => 'mailfile-form']); ?>
 
     <?= $model->errorSummary($form); ?>
 
@@ -31,9 +30,12 @@ use yii\captcha\Captcha;
 
     <div class="row">
         <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+<?php 
 
-			<?= $form->field($customer, 'email')->textInput(['maxlength' => true]) ?>
+echo  "Rechnungsdatei: ".$filename;
+?>
+
+				<?= $form->field($customer, 'email')->textInput(['maxlength' => true]) ?>
     
 				<?php
 				if (empty($model[ 'subject']))

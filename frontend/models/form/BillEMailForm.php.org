@@ -158,27 +158,25 @@ class BillEMailForm extends Model
         return $models;
     }
     
-        /**
+     /**
      * Sends an email to the specified email address using the information collected by this model.
      *
      * @param string $email the target email address
      * @return bool whether the email was sent
      */
-    public function sendEmail($filename)
+    public function sendEmail($email)
     {
-		if (!isset($filename))
-			$filename = "";
-		$email = 'guenter@federa.de';
+		//$filename =  '/var/www/html/reibach/frontend/web/bills/MAN'.$mandator_id.'/R_'.$id.'.pdf';
+
         return Yii::$app->mailer->compose()
             ->setTo($email)
-            //->setFrom([$this->email => $this->name])
-            ->setFrom(["guenter@federa.de"])
+            ->setFrom([$this->email => $this->name])
             ->setSubject($this->subject)
             ->setTextBody($this->body)
-            ->attach($filename)
+            //->attachContent($path, ['fileName' => 'Invoice #'.$model->number.'.pdf',   'contentType' => 'application/pdf'])
+            ->attach('/tmp/R_109.pdf')
             ->send();
     }
 
-    
 }
 
