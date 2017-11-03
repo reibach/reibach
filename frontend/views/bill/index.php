@@ -83,11 +83,11 @@ $billExist = 0;
 
 
 
-if ($billExist == 0) {
-	print "ID ist NIX"; 
-} else {
-	print "ID ist: ".$billExist; 
-
+//if ($billExist == 0) {
+	//print "ID ist NIX"; 
+//} else {
+	//print "ID ist: ".$billExist; 
+//}
 
 //print_r($dataProvider);
 //print_r($searchModel);
@@ -177,6 +177,6 @@ foreach ($dataProvider->models as $key => $value) {
 //print_r($dataProvider->models[0]->customer_id);
 
 
-}
+
 ?>
 

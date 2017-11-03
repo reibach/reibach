@@ -218,17 +218,22 @@ class BillController extends Controller
      */
     public function actionSend($id)
     {
-
         $model = new SendForm();
 
-        //$model->bill = $this->findModel($id);       
         $bill = Bill::findOne($id);   
-		//print_r($bill);
-		//exit;	
+
         $model->setAttributes(Yii::$app->request->post());
         
+		// Rechnungsdatei, muss existieren
         $billfile =  '/var/www/html/reibach/frontend/web/bills/MAN'.$bill['mandator_id'].'/R_'.$bill->id.'.pdf'; 
-        
+		if (!file_exists($billfile))	
+		{
+			Yii::$app->session->setFlash('error', Yii::t('app', 'File does not exist').': R_'.$bill->id.'.pdf. '.Yii::t('app', 'Please save the bill before sending.'));
+            
+             return $this->redirect(['view',  'id' => $id]);
+              //return $this->redirect(['view', 'id' => $model->bill->id])
+ 		}
+		
 		// get Mandator 
 		$mandator = Mandator::findOne($bill->mandator_id);
 		//$mandator_address = Mandator::findOne($andator->address_id);
@@ -241,7 +246,7 @@ class BillController extends Controller
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail($billfile)) {
-                Yii::$app->session->setFlash('success', Yii::t('app','Thank you for contacting us. We will respond to you as soon as possible.'));
+                Yii::$app->session->setFlash('success', Yii::t('app','The bill has been sent by email.'));
             } else {
                 Yii::$app->session->setFlash('error', Yii::t('app', 'There was an error sending email.'));
             }
@@ -258,68 +263,6 @@ class BillController extends Controller
         }
     }
 
-
-    /**
-     * Updates an existing Bill model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionMailfile($id)
-    {
-		$session = Yii::$app->session;
-		$mandator_active = $session->get('mandator_active');
-		
-	
-		$bill = Bill::findOne($id);
-		
-		// get Customer 
-		$customer = Customer::findOne($bill->customer_id);
-		$address_customer = Address::findOne($customer->address_id);
-		
-		// wenn kein mandant ausgewählt ist, Abbruch
-		if ($mandator_active == '') {
-			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator selected. Please select one.'));
-			//return $this->redirect('/mandator/index');
-			$this->redirect(array('mandator/index'));
-		}
-
-        $model = new BillEMailForm();
-        $model->bill = $this->findModel($id);       
-        $model->setAttributes(Yii::$app->request->post());
-        
-        $filename =  '/var/www/html/reibach/frontend/web/bills/MAN'.$customer['mandator_id'].'/R_'.$model->bill->id.'.pdf';
-        
-         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            //if ($model->sendEmail()) {
-            if ($model->sendEmail($filename)) {
-	
-                Yii::$app->session->setFlash('success', Yii::t('app','Thank you for contacting us. We will respond to you as soon as possible.'));
-            } else {
-                Yii::$app->session->setFlash('error', Yii::t('app', 'There was an error sending email.'));
-            }
-
-            return $this->refresh();
-        } else {
-        return $this->render('mailfile', [
-			'model' => $model,
-			'customer' => $customer,
-			'filename' => $filename
-			
-			]);
-        }
-        
-        
-        
-        
-        //if (Yii::$app->request->post() && $model->save()) {
-			 // $model->savePositions();
-			
-            //Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Bill has been updated.'));
-            //return $this->redirect(['view', 'id' => $model->bill->id]);
-        //}
-    }
-    
 
  
     /**
@@ -468,9 +411,9 @@ class BillController extends Controller
 		
 		if (file_exists($filename)) {
 		
-			Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Bill has been Saved.'));
+			Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Bill has been saved.'));
 		} else {
-			Yii::$app->session->setFlash('error',  Yii::t('app', 'Bill could not been Saved.'));	
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'Bill could not been saved.'));	
 	
 		}
 			return $this->render('view', [

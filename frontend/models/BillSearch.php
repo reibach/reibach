@@ -74,6 +74,7 @@ class BillSearch extends Bill
 		 * statement below
 		 */
 		 $dataProvider->setSort([
+			'defaultOrder' => ['id'=>SORT_DESC],
 			'attributes' => [
 				'id',
 				'name',
@@ -81,7 +82,7 @@ class BillSearch extends Bill
 					'asc' => ['positionSum.position_price' => SORT_ASC],
 					'desc' => ['positionSum.position_price' => SORT_DESC],
 					'label' => 'Position Name'
-				]
+				],
 			]
 		]);        
 

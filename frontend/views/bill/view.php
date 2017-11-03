@@ -29,12 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <h4><?= Yii::t('app', 'Mandator') ?>:&nbsp;	<?= $address_mandator['fullName'] ?></h4>
-
-
     <h4><?= Yii::t('app', 'Customer') ?>:&nbsp; <?= $customer['fullName'] ?></h4>
-
     <h3><?= Yii::t('app', 'Billing Date') ?>:&nbsp; <?= $model->billing_date ?></h3>
-
     <h3><?= Yii::t('app', 'Description') ?>:&nbsp; <?= $model->description ?></h3>
 
 <!--
@@ -150,12 +146,12 @@ echo "<div align=\"right\"><h3>".Yii::t('app', 'Invoice Amount')." : ".$billTota
 	/**
 	 * THE SAVEPDF BUTTON
 	 */
-	 $desc = Yii::t('app', 'Save PDF');
+	 $desc = Yii::t('app', 'Save Bill');
 	 echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> '.$desc, ['/bill/reportfile', 'id' => $model->id], [
 		'class'=>'btn btn-danger', 
 		'target'=>'_self', 
 		'data-toggle'=>'tooltip', 
-		'title'=>Yii::t('app', 'Saves the PDF to the Filesystem'),
+		'title'=>Yii::t('app', 'Saves the Bill as PDF to the Filesystem'),
 	]);
 ?>
 
@@ -169,19 +165,6 @@ echo "<div align=\"right\"><h3>".Yii::t('app', 'Invoice Amount')." : ".$billTota
 		'target'=>'_self', 
 		'data-toggle'=>'tooltip', 
 		'title'=>Yii::t('app', 'Send the Bill to the EMailaddress of the Customer, if set'),
-	]);
-?>
-
-<?php 
-	/**
-	 * THE SENDPDF BUTTON
-	 */
-	 $desc = Yii::t('app', 'Send PDF as EMail');
-	 echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> '.$desc, ['/bill/mailfile', 'id' => $model->id], [
-		'class'=>'btn btn-danger', 
-		'target'=>'_self', 
-		'data-toggle'=>'tooltip', 
-		'title'=>Yii::t('app', 'Send the PDF to the EMailaddress of the Customer, if set'),
 	]);
 ?>
 
