@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Mandator */
+/* @var $model frontend\models\Mandator */
 
 $this->title = Yii::t('app', 'Create Mandator');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['index']];

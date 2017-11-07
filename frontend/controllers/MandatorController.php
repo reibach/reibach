@@ -106,6 +106,12 @@ class MandatorController extends Controller
 			$mandator->address_id = $address->id;
 			//echo "Address-ID: ".$model->address_id;	
 			$mandator->save();			
+			
+			// Verzeichnis erstellen, in dem die Rechungen gespeichert werden 
+			$billdir =  '/var/www/html/'.$mandator->mandator_name.'/frontend/web/bills/MAN'.$mandator->id;
+			if (!is_dir($billdir))
+				mkdir($billdir, 0777, true);
+			
 			return $this->redirect(['view', 'id' => $mandator->id]);
         } else {
             return $this->render('create', [
@@ -124,14 +130,21 @@ class MandatorController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-		$mandator = Mandator::findOne($id);
+        //$model = $this->findModel($id);
+		//$mandator = Mandator::findOne($id);
+        $mandator = $this->findModel($id);
 
 		// get the address_id of the mandator
         $address = Address::findOne($mandator->address_id);
 
         if ($address->load(Yii::$app->request->post()) && $address->save()) {
 			$mandator->save();
+			
+			// Verzeichnis erstellen, in dem die Rechungen gespeichert werden 
+			$billdir =  '/var/www/html/'.$mandator->mandator_name.'/frontend/web/bills/MAN'.$mandator->id;
+			if (!is_dir($billdir))
+				mkdir($billdir, 0777, true);
+			
             return $this->redirect(['mandator/view', 'id' => $id]);
         }
         return $this->render('update', [

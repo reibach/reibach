@@ -22,6 +22,7 @@ class MandatorSearch extends Mandator
             //[['id', 'user_id', 'address_id'], 'integer'],
             [['id', 'user_id', 'address_id', 'taxable', 'b_id', 'c_id'], 'integer'],
             [['fullName'], 'save'],
+            [['mandator_name', 'signature'], 'safe'],
         ];
     }
 
@@ -106,6 +107,9 @@ class MandatorSearch extends Mandator
             'b_id' => $this->b_id, 
 		    'c_id' => $this->c_id, 
         ]);
+
+      $query->andFilterWhere(['like', 'mandator_name', $this->mandator_name]) 
+		           ->andFilterWhere(['like', 'signature', $this->signature]); 
 
         return $dataProvider;
     }

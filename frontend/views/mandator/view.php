@@ -37,6 +37,7 @@ $mandator_active = $session->set('mandator_active', $model->id);
             //'id',
             //'user_id',
             //'address_id',
+            'mandator_name',
             'fullName',
             //'taxable',
             //'b_id',

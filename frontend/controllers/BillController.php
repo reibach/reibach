@@ -224,8 +224,15 @@ class BillController extends Controller
 
         $model->setAttributes(Yii::$app->request->post());
         
+        // get Mandator 
+		$mandator = Mandator::findOne($bill->mandator_id);
+		//$mandator_address = Mandator::findOne($andator->address_id);
+        
+        
 		// Rechnungsdatei, muss existieren
-        $billfile =  '/var/www/html/reibach/frontend/web/bills/MAN'.$bill['mandator_id'].'/R_'.$bill->id.'.pdf'; 
+		$billdir =  '/var/www/html/'.$mandator->mandator_name.'/frontend/web/bills/MAN'.$mandator->id;
+        $billfile =  $billdir.'/R_'.$bill->id.'.pdf'; 
+        
 		if (!file_exists($billfile))	
 		{
 			Yii::$app->session->setFlash('error', Yii::t('app', 'File does not exist').': R_'.$bill->id.'.pdf. '.Yii::t('app', 'Please save the bill before sending.'));
@@ -234,10 +241,7 @@ class BillController extends Controller
               //return $this->redirect(['view', 'id' => $model->bill->id])
  		}
 		
-		// get Mandator 
-		$mandator = Mandator::findOne($bill->mandator_id);
-		//$mandator_address = Mandator::findOne($andator->address_id);
-        
+		
 		
 		// get Customer 
 		$customer = Customer::findOne($bill->customer_id);
@@ -363,11 +367,16 @@ class BillController extends Controller
             'listDataProvider' => $dataProvider,
         ]);
 
-		$filename =  '/var/www/html/reibach/frontend/web/bills/MAN'.$mandator_id.'/R_'.$id.'.pdf';
+
+		// Rechnungsdatei
+		$billdir =  '/var/www/html/'.$mandator->mandator_name.'/frontend/web/bills/MAN'.$mandator->id;
+        $billfile =  $billdir.'/R_'.$id.'.pdf'; 
+
+		//$filename =  '/var/www/html/reibach/frontend/web/bills/MAN'.$mandator_id.'/R_'.$id.'.pdf';
 			
 		// delete old pdf-file	
-		if (file_exists($filename)) 
-				unlink($filename);
+		if (file_exists($billfile)) 
+				unlink($billfile);
 
 		// setup kartik\mpdf\Pdf component
 		$pdf = new Pdf([
@@ -381,10 +390,7 @@ class BillController extends Controller
 			
 			
 			
-			'filename' => $filename,      
-			//'filename' => '/bills/MAN'.$mandator_id.'/R_'.$id.'.pdf',      
-			//'filename' => '/tmp/R_'.$id.'.pdf',      
-			
+			'filename' => $billfile,
 			//'destination' => Pdf::DEST_BROWSER, 
 			//'destination' => Pdf::DEST_DOWNLOAD, 
 			'destination' => Pdf::DEST_FILE, 
@@ -409,7 +415,7 @@ class BillController extends Controller
 		// return the pdf output as per the destination setting
 		$pdf->render();
 		
-		if (file_exists($filename)) {
+		if (file_exists($billfile)) {
 		
 			Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Bill has been saved.'));
 		} else {
@@ -522,50 +528,6 @@ class BillController extends Controller
 	}
 
 	
-	/***
-	
-    public function actionMailfile($id) {
-		
-		// 
-		
-		$bill = Bill::findOne($id);
-		//Daten für eine Rechnung zusammenbauen:
-		//Kunde:
-		// get Customer 
-		$customer = Customer::findOne($bill->customer_id);
-		$address_customer = Address::findOne($customer->address_id);
-
-
-		//Mandant: 
-		// get Mandator 		
-		// get the address_id of the mandator
-        $mandator_id = $customer->mandator_id;
-        $mandator = Mandator::findOne($mandator_id);
-		$address_mandator = Address::findOne($mandator->address_id);
-
-		//Rechnung:
-		//Positionen:		
-		//get all positions of a bill
-		$searchModel = new PositionSearch();
-        $dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);
-		$listDataProvider = $dataProvider;
-        			
-		// get your HTML raw content without any layouts or scripts
-		return $this->render('_formEMail', [
-            'model' => $this->findModel($id),
-            'customer' => $customer,
-            'address_mandator' => $address_mandator,
-            'address_customer' => $address_customer,
-            //'positions' => $positions,
-             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'listDataProvider' => $dataProvider,
-        ]);
-	
-	//return $this->render('update', ['model' => $model]);
-	}
-
-	***/
 
     public function actionReporthtml($id) {
 		

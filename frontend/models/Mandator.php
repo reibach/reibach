@@ -8,9 +8,10 @@ use Yii;
  * This is the model class for table "mandator".
  *
  * @property integer $id
+ * @property string $mandatorname
  * @property integer $user_id
  * @property integer $address_id
- * @property text $signatiure
+ * @property text $signature
  *
  * @property Article[] $articles
  * @property Customer[] $customers
@@ -34,11 +35,12 @@ class Mandator extends \yii\db\ActiveRecord
     {
         return [
             //[['user_id', 'address_id'], 'required'],
-            [['user_id'], 'required'],
+            [['user_id', 'mandator_name'], 'required'],
             [['user_id', 'address_id', 'taxable', 'b_id', 'c_id'], 'integer'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['address_id'], 'exist', 'skipOnError' => true, 'targetClass' => Address::className(), 'targetAttribute' => ['address_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['mandator_name'], 'string', 'max' => 150], 
         ];
     }
 
@@ -51,6 +53,7 @@ class Mandator extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'mandator_name' => Yii::t('app', 'Mandator Name'), 
             'user_id' => Yii::t('app', 'User ID'),
             'address_id' => Yii::t('app', 'Address ID'),
             'prename' => Yii::t('app', 'prename'),
