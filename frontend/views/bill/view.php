@@ -120,7 +120,7 @@ echo "<div align=\"right\"><h3>".Yii::t('app', 'Invoice Amount')." : ".$billTota
 	/**
 	 * THE VIEW BUTTON
 	 */
-	 $desc = Yii::t('app', 'Print PDF');
+	 $desc = Yii::t('app', 'Print');
 	 echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> '.$desc, ['/bill/report', 'id' => $model->id], [
 		'class'=>'btn btn-danger', 
 		'target'=>'_blank', 
@@ -133,7 +133,7 @@ echo "<div align=\"right\"><h3>".Yii::t('app', 'Invoice Amount')." : ".$billTota
 	/**
 	 * THE Html VIEW BUTTON
 	 */
-	 $desc = Yii::t('app', 'Print PDF-Preview');
+	 $desc = Yii::t('app', 'Preview');
 	 echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> '.$desc, ['/bill/reporthtml', 'id' => $model->id], [
 		'class'=>'btn btn-danger', 
 		'target'=>'_blank', 
@@ -146,7 +146,7 @@ echo "<div align=\"right\"><h3>".Yii::t('app', 'Invoice Amount')." : ".$billTota
 	/**
 	 * THE SAVEPDF BUTTON
 	 */
-	 $desc = Yii::t('app', 'Save Bill');
+	 $desc = Yii::t('app', 'Save');
 	 echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> '.$desc, ['/bill/reportfile', 'id' => $model->id], [
 		'class'=>'btn btn-danger', 
 		'target'=>'_self', 
@@ -159,7 +159,7 @@ echo "<div align=\"right\"><h3>".Yii::t('app', 'Invoice Amount')." : ".$billTota
 	/**
 	 * THE SEND BUTTON
 	 */
-	 $desc = Yii::t('app', 'Send Bill as EMail');
+	 $desc = Yii::t('app', 'EMail');
 	 echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> '.$desc, ['/bill/send', 'id' => $model->id], [
 		'class'=>'btn btn-danger', 
 		'target'=>'_self', 

@@ -55,7 +55,7 @@ class ContactForm extends Model
             ->setFrom([$this->email => $this->name])
             ->setSubject($this->subject)
             ->setTextBody($this->body)
-            ->attach('/tmp/R_90.pdf')
+            //->attach('/tmp/R_90.pdf')
             ->send();
     }
 }

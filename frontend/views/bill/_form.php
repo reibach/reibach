@@ -77,7 +77,7 @@ use yii\jui\DatePicker;
 	
 	<?= $form->field($model->bill, 'description')->textArea(['rows' => '4']) ?>
 	</legend>
-	</legend>fieldset>
+	</legend>
 		
 	<fieldset>
 	<legend><?= Yii::t('app','Positions'); ?>

@@ -2,7 +2,7 @@
 
 namespace frontend\controllers;
 
-use frontend\models\form\MandatorForm;
+//use frontend\models\form\MandatorForm;
 use Yii;
 use frontend\models\Mandator;
 use frontend\models\Address;
@@ -133,12 +133,14 @@ class MandatorController extends Controller
         //$model = $this->findModel($id);
 		//$mandator = Mandator::findOne($id);
         $mandator = $this->findModel($id);
-
 		// get the address_id of the mandator
         $address = Address::findOne($mandator->address_id);
 
         if ($address->load(Yii::$app->request->post()) && $address->save()) {
+			$mandator->load(Yii::$app->request->post());
 			$mandator->save();
+
+			
 			
 			// Verzeichnis erstellen, in dem die Rechungen gespeichert werden 
 			$billdir =  '/var/www/html/'.$mandator->mandator_name.'/frontend/web/bills/MAN'.$mandator->id;

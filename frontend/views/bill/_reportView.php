@@ -46,6 +46,7 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
 	<tr>
       <td style="vertical-align: top; font: 24px Arial, sans-serif;">
 		<!-- Kunde -->
+		<?= $address_customer->company ?> <br>
 		<?= $address_customer->prename ?> <?= $address_customer->lastname ?><br>
 		<?= $address_customer->street ?>&nbsp;<?= $address_customer->housenumber ?><br>
 		<?= $address_customer->zipcode." ".$address_customer->place ?>

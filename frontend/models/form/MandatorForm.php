@@ -22,7 +22,7 @@ class MandatorForm extends Model
         return [
             [['Mandator'], 'required'],
             [['Articles'], 'safe'],      
-            [['user_id'], 'required'],
+            [['user_id', 'mandator_name'], 'required'],
             [['user_id', 'created_at', 'updated_at'], 'integer'],
             [['description'], 'string'],
             [['price', 'status'], 'number'],

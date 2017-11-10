@@ -15,9 +15,9 @@ use frontend\models\Address;
 
 <div class="mandator-form">
 
-<?php $form = ActiveForm::begin([
-        'enableClientValidation' => false, // TODO get this working with client validation
-    ]); ?>
+
+<?php //$form = ActiveForm::begin(['enableClientValidation' => false, // TODO get this working with client validation]); ?>
+<?php $form = ActiveForm::begin(); ?>
 
 <fieldset>
 	<legend>
@@ -29,8 +29,7 @@ use frontend\models\Address;
 	<?= // $form->field($mandator, 'c_id')->checkBox(['label' => Yii::t('app', 'Own customer numbers (not unique)'), 'value' => "1"]); ?>
 	*/
 	?>
-	
-	<?= $form->field($mandator, 'signature')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($mandator, 'signature')->textarea(['rows' => 6]) ?>
     <?= $form->field($mandator, 'mandator_name')->textInput(['maxlength' => true]) ?>
 
 	<?= $form->field($address, 'company')->textInput(['maxlength' => true]) ?>
