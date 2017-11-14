@@ -53,7 +53,7 @@ class CustomerSearch extends Customer
         $query = Customer::find()
 			->where(['mandator_id' => $mandator_active]);				
 
-		$subQuery = Order::find()
+		$subQuery = Offer::find()
 			->select('customer_id, SUM(amount) as order_amount')
 			->groupBy('customer_id');
 		//$query->leftJoin(['orderSum' => $subQuery], 'orderSum.customer_id = id');

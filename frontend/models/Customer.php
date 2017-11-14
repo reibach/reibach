@@ -53,6 +53,7 @@ class Customer extends \yii\db\ActiveRecord
             'email'=>Yii::t('app', 'EMail'),            
             'customer_number' => Yii::t('app', 'Customer Number'),
            	'orderAmount' => Yii::t('app', 'Order Amount'),
+           	'offerAmount' => Yii::t('app', 'Offer Amount'),
         ];
     }
 
