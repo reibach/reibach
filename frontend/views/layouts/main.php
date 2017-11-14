@@ -76,7 +76,7 @@ $mandator_active = $session->get('mandator_active');
 		$menuItems[] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['/mandator/view', 'id'=>$mandator_active]];
 		//$menuItems[] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['/mandator/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Customers'), 'url' => ['/customer/index']];
-		//$menuItems[] = ['label' => Yii::t('app', 'Orders'), 'url' => ['/order/index']];
+		$menuItems[] = ['label' => Yii::t('app', 'Offers'), 'url' => ['/offer/index']];
 		//$menuItems[] = ['label' => Yii::t('app', 'CustomerAddresses'), 'url' => ['/customer-address/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Bills'), 'url' => ['/bill/index']];
 		//$menuItems[] = ['label' => Yii::t('app', 'Positions'), 'url' => ['/position/index']];
