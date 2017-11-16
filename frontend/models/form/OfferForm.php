@@ -1,31 +1,24 @@
 <?php
 namespace frontend\models\form;
 
-use frontend\models\Bill;
-use frontend\models\Position;
+use frontend\models\Offer;
+use frontend\models\Part;
 use frontend\models\Customer;
 use Yii;
 use yii\base\Model;
 use yii\widgets\ActiveForm;
 
-class BillEMailForm extends Model
+class OfferForm extends Model
 {
-    private $_bill;
-    private $_positions;
+    private $_offer;
+    private $_parts;
     private $_customers;
-    
-    public $name;
-    public $email;
-    public $subject;
-    public $body;
-    public $verifyCode;
-
 
     public function rules()
     {
         return [
-            [['Bill'], 'required'],
-            [['Positions'], 'safe'],      
+            [['Offer'], 'required'],
+            [['Parts'], 'safe'],      
             //[['customer_id'], 'required'],
             //[['status', 'customer_id', 'price', 'description'], 'required'],
             //[['customer_id', 'created_at', 'updated_at'], 'integer'],
@@ -54,11 +47,11 @@ class BillEMailForm extends Model
             return false;
         }
         $transaction = Yii::$app->db->beginTransaction();
-        if (!$this->bill->save()) {
+        if (!$this->offer->save()) {
             $transaction->rollBack();
             return false;
         }
-        if (!$this->savePositions()) {
+        if (!$this->saveParts()) {
             $transaction->rollBack();
             return false;
         }
@@ -66,68 +59,68 @@ class BillEMailForm extends Model
         return true;
     }
     
-    public function savePositions() 
+    public function saveParts() 
     {
         $keep = [];
-        foreach ($this->positions as $position) {
-            $position->bill_id = $this->bill->id;
-            if (!$position->save(false)) {
+        foreach ($this->parts as $part) {
+            $part->offer_id = $this->offer->id;
+            if (!$part->save(false)) {
                 return false;
             }
-            $keep[] = $position->id;
+            $keep[] = $part->id;
         }
-        $query = Position::find()->andWhere(['bill_id' => $this->bill->id]);
+        $query = Part::find()->andWhere(['offer_id' => $this->offer->id]);
         if ($keep) {
             $query->andWhere(['not in', 'id', $keep]);
         }
-        foreach ($query->all() as $position) {
-            $position->delete();
+        foreach ($query->all() as $part) {
+            $part->delete();
         }        
         return true;
     }
 
-    public function getBill()
+    public function getOffer()
     {
-        return $this->_bill;
+        return $this->_offer;
     }
 
-    public function setBill($bill)
+    public function setOffer($offer)
     {
-        if ($bill instanceof Bill) {
-            $this->_bill = $bill;
-        } else if (is_array($bill)) {
-            $this->_bill->setAttributes($bill);
+        if ($offer instanceof Offer) {
+            $this->_offer = $offer;
+        } else if (is_array($offer)) {
+            $this->_offer->setAttributes($offer);
         }
     }
 
-    public function getPositions()
+    public function getParts()
     {
-        if ($this->_positions === null) {
-            $this->_positions = $this->bill->isNewRecord ? [] : $this->bill->positions;
+        if ($this->_parts === null) {
+            $this->_parts = $this->offer->isNewRecord ? [] : $this->offer->parts;
         }
-        return $this->_positions;
+        return $this->_parts;
     }
 
-    private function getPosition($key)
+    private function getPart($key)
     {
-        $position = $key && strpos($key, 'new') === false ? Position::findOne($key) : false;
-        if (!$position) {
-            $position = new Position();
-            $position->loadDefaultValues();
+        $part = $key && strpos($key, 'new') === false ? Part::findOne($key) : false;
+        if (!$part) {
+            $part = new Part();
+            $part->loadDefaultValues();
         }
-        return $position;
+        return $part;
     }
 
-    public function setPositions($positions)
+    public function setParts($parts)
     {
-        unset($positions['__id__']); // remove the hidden "new Position" row
-        $this->_positions = [];
-        foreach ($positions as $key => $position) {
-            if (is_array($position)) {
-                $this->_positions[$key] = $this->getPosition($key);
-                $this->_positions[$key]->setAttributes($position);
-            } elseif ($position instanceof Position) {
-                $this->_positions[$position->id] = $position;
+        unset($parts['__id__']); // remove the hidden "new Position" row
+        $this->_parts = [];
+        foreach ($parts as $key => $part) {
+            if (is_array($part)) {
+                $this->_parts[$key] = $this->getPart($key);
+                $this->_parts[$key]->setAttributes($part);
+            } elseif ($part instanceof Part) {
+                $this->_parts[$part->id] = $part;
             }
         }
     }
@@ -150,32 +143,14 @@ class BillEMailForm extends Model
     private function getAllModels()
     {
         $models = [
-            'Bill' => $this->bill,            
+            'Offer' => $this->offer,            
         ];
-        foreach ($this->positions as $id => $position) {
-            $models['Position.' . $id] = $this->positions[$id];
+        foreach ($this->parts as $id => $part) {
+            $models['Part.' . $id] = $this->parts[$id];
         }
         return $models;
     }
     
-        /**
-     * Sends an email to the specified email address using the information collected by this model.
-     *
-     * @param string $email the target email address
-     * @return bool whether the email was sent
-     */
-    public function sendEmail()
-    {
-		$email = 'guenter@federa.de';
-        return Yii::$app->mailer->compose()
-            ->setTo($email)
-            ->setFrom([$this->email => $this->name])
-            ->setSubject($this->subject)
-            ->setTextBody($this->body)
-            ->attach('/tmp/R_109.pdf')
-            ->send();
-    }
-
     
 }
 

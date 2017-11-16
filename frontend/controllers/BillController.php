@@ -164,7 +164,6 @@ class BillController extends Controller
 		}
 
         $model = new BillForm();
-        //$model->position = new Position;
         $model->bill = new Bill;
         
         $model->bill->loadDefaultValues();

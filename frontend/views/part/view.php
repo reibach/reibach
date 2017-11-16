@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\OfferPosition */
+/* @var $model frontend\models\Part */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Offer Positions'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Parts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="offer-position-view">
+<div class="part-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,9 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'order_id',
+            'offer_id',
             'name',
-            'pos_num',
+            'part_num',
             'quantity',
             'unit',
             'comment:ntext',

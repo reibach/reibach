@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\OfferPosition;
-use frontend\models\OfferPositionSearch;
+use frontend\models\Part;
+use frontend\models\PartSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * OfferPositionController implements the CRUD actions for OfferPosition model.
+ * PartController implements the CRUD actions for Part model.
  */
-class OfferPositionController extends Controller
+class PartController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class OfferPositionController extends Controller
     }
 
     /**
-     * Lists all OfferPosition models.
+     * Lists all Part models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new OfferPositionSearch();
+        $searchModel = new PartSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class OfferPositionController extends Controller
     }
 
     /**
-     * Displays a single OfferPosition model.
+     * Displays a single Part model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +57,13 @@ class OfferPositionController extends Controller
     }
 
     /**
-     * Creates a new OfferPosition model.
+     * Creates a new Part model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new OfferPosition();
+        $model = new Part();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +75,7 @@ class OfferPositionController extends Controller
     }
 
     /**
-     * Updates an existing OfferPosition model.
+     * Updates an existing Part model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +94,7 @@ class OfferPositionController extends Controller
     }
 
     /**
-     * Deletes an existing OfferPosition model.
+     * Deletes an existing Part model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class OfferPositionController extends Controller
     }
 
     /**
-     * Finds the OfferPosition model based on its primary key value.
+     * Finds the Part model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return OfferPosition the loaded model
+     * @return Part the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = OfferPosition::findOne($id)) !== null) {
+        if (($model = Part::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

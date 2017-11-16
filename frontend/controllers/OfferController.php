@@ -2,12 +2,23 @@
 
 namespace frontend\controllers;
 
+use frontend\models\form\OfferForm;
+use frontend\models\form\OfferEMailForm;
+use frontend\models\SendForm;
 use Yii;
 use frontend\models\Offer;
+use frontend\models\Address;
+use frontend\models\Mandator;
+use frontend\models\Customer;
+use frontend\models\Part;
 use frontend\models\OfferSearch;
+use frontend\models\PartSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\mpdf\Pdf;
+use yii\filters\AccessControl;
+
 
 /**
  * OfferController implements the CRUD actions for Offer model.
@@ -35,14 +46,31 @@ class OfferController extends Controller
      */
     public function actionIndex()
     {
+		$session = Yii::$app->session;
+		$mandator_active = $session->get('mandator_active');
+		print_r($mandator_active);
+		echo "TESTME";
+		
+		$offer = Offer::find();
+		
+		// wenn kein mandant ausgewählt ist, Abbruch
+		if ($mandator_active == '') {
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator selected. Please select one.'));
+			//return $this->redirect('/mandator/index');
+			//$this->redirect(array('mandator/index'));
+			$this->redirect(array('site/login'));
+		}
         $searchModel = new OfferSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'mandator_active' => $mandator_active,
+            'offer' => $offer,
         ]);
     }
+
 
     /**
      * Displays a single Offer model.
@@ -51,27 +79,81 @@ class OfferController extends Controller
      */
     public function actionView($id)
     {
+		$session = Yii::$app->session;
+		$mandator_active = $session->get('mandator_active');
+		
+		// wenn kein mandant ausgewählt ist, Abbruch
+		if ($mandator_active == '') {
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator selected. Please select one.'));
+			//return $this->redirect('/mandator/index');
+			$this->redirect(array('mandator/index'));
+		}
+		
+		$offer = Offer::findOne($id);
+		//Daten für eine Rechnung zusammenbauen:		
+		
+		//Kunde:
+		// get Customer 
+		$customer = Customer::findOne($offer->customer_id);
+		$address_customer = Address::findOne($customer->address_id);
+
+		//Mandant: 
+		// get Mandator 
+		
+		// get the address_id of the mandator
+        $mandator_id = $customer->mandator_id;
+        $mandator = Mandator::findOne($mandator_id);
+		$address_mandator = Address::findOne($mandator->address_id);
+
+		$searchModel = new PartSearch();
+        $dataProvider = $searchModel->searchOfferPart(Yii::$app->request->queryParams, $id);        
+        
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'customer' => $customer,
+            'address_mandator' => $address_mandator,
+            'address_customer' => $address_customer,
+            //'parts' => $parts,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
-    /**
+
+   /**
      * Creates a new Offer model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Offer();
+		$session = Yii::$app->session;
+		$mandator_active = $session->get('mandator_active');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+		// wenn kein mandant ausgewählt ist, Abbruch
+		if ($mandator_active == '') {
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator.'));
+			//print "ERROR: kein Mandant!!";
+			//exit;
+		}
+
+        $model = new OfferForm();
+        $model->offer = new Offer;
+        
+        $model->offer->loadDefaultValues();
+        $model->setAttributes(Yii::$app->request->post());        
+
+		
+		$model->offer->mandator_id = $mandator_active;
+
+		// erst die Rechnung speichern, dann die RechnungsID übergeben und die Part(en) speichern, sofern schon vorhanden  
+        if (Yii::$app->request->post() && $model->save()) {
+			// $model->saveParts();
+			
+            Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Offer has been created: '.$model->offer->id));
+            return $this->redirect(['update', 'id' => $model->offer->id]);
         }
+        return $this->render('create', ['model' => $model]);
     }
 
     /**
@@ -82,15 +164,27 @@ class OfferController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+		$session = Yii::$app->session;
+		$mandator_active = $session->get('mandator_active');
+		
+		// wenn kein mandant ausgewählt ist, Abbruch
+		if ($mandator_active == '') {
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator selected. Please select one.'));
+			//return $this->redirect('/mandator/index');
+			$this->redirect(array('mandator/index'));
+		}
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        $model = new OfferForm();
+        $model->offer = $this->findModel($id);       
+        $model->setAttributes(Yii::$app->request->post());
+        
+        if (Yii::$app->request->post() && $model->save()) {
+			 // $model->saveParts();
+			
+            Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Offer has been updated.'));
+            return $this->redirect(['view', 'id' => $model->offer->id]);
         }
+        return $this->render('update', ['model' => $model]);
     }
 
     /**

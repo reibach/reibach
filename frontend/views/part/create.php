@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\OfferPosition */
+/* @var $model frontend\models\Part */
 
-$this->title = Yii::t('app', 'Create Offer Position');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Offer Positions'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Create Part');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Parts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="offer-position-create">
+<div class="part-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

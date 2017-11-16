@@ -1,6 +1,7 @@
 <?php
 
 namespace frontend\models;
+use frontend\models\Customer;
 
 use Yii;
 
@@ -19,7 +20,7 @@ use Yii;
  *
  * @property Customer $customer
  * @property Mandator $mandator
- * @property OfferPosition[] $offerPositions
+ * @property Part[] $parts
  */
 class Offer extends \yii\db\ActiveRecord
 {
@@ -31,20 +32,23 @@ class Offer extends \yii\db\ActiveRecord
         return 'offer';
     }
 
+
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['mandator_id', 'customer_id', 'offer_date', 'created_at', 'updated_at'], 'required'],
-            [['mandator_id', 'customer_id'], 'integer'],
-            [['description'], 'string'],
-            [['status'], 'number'],
-            [['offer_date', 'created_at', 'updated_at'], 'safe'],
-            [['offer_number'], 'string', 'max' => 150],
-            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
-            [['mandator_id'], 'exist', 'skipOnError' => true, 'targetClass' => Mandator::className(), 'targetAttribute' => ['mandator_id' => 'id']],
+            //[['mandator_id', 'customer_id', 'offer_date', 'created_at', 'updated_at'], 'required'],
+            [['customer_id', 'offer_date'], 'required'],
+            //[['mandator_id', 'customer_id'], 'integer'],
+            //[['description'], 'string'],
+            //[['status'], 'number'],
+            //[['offer_date', 'created_at', 'updated_at'], 'safe'],
+            //[['offer_number'], 'string', 'max' => 150],
+            //[['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
+            //[['mandator_id'], 'exist', 'skipOnError' => true, 'targetClass' => Mandator::className(), 'targetAttribute' => ['mandator_id' => 'id']],
         ];
     }
 
@@ -60,8 +64,8 @@ class Offer extends \yii\db\ActiveRecord
             'fullName' => Yii::t('app', 'Full Name'),
             'description' => Yii::t('app', 'Description'),
             'price' => Yii::t('app', 'Price'),
-  			'positionPrice' => Yii::t('app', 'Position Price'),
-  			'totalPosPrice' => Yii::t('app', 'Total'),
+  			'partPrice' => Yii::t('app', 'Part Price'),
+  			'totalPartPrice' => Yii::t('app', 'Total'),
             'status' => Yii::t('app', 'Status'),
             'offer_number' => Yii::t('app', 'Offer Number'),
             'offer_date' => Yii::t('app', 'Offer Date'),
@@ -93,19 +97,17 @@ class Offer extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getOfferPositions()
+    public function getParts()
     {
-        return $this->hasMany(OfferPosition::className(), ['order_id' => 'id']);
+        return $this->hasMany(Part::className(), ['offer_id' => 'id']);
     }
     
-    // ####################################
-    
         /**
-	* Position Price for bill 
+	* Part Price for bill 
 	*/
-	public function getPositionPrices()
+	public function getPartPrices()
 	{
-		return $this->hasMany(Position::className(), ['bill_id' => 'id'])->sum('price');
+		return $this->hasMany(Part::className(), ['bill_id' => 'id'])->sum('price');
 	}
 
     /**
@@ -129,26 +131,26 @@ class Offer extends \yii\db\ActiveRecord
 
 
 
- /* Getter for TotalBillPrice 
-  * ist die Summe aller EinzelPositionen  
+ /* Getter for TotalPartPrice 
+  * ist die Summe aller Einzelteile  
   * */
 
-function getBillTotal($id) {
+function getOfferTotal($id) {
 
-	// Gesamtpreis der Positionen der jeweiligen Rechnung ermitteln und aufsummieren		
-	$searchModel = new PositionSearch();
-	$dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);        
+	// Gesamtpreis der Angebotsteile des jeweiligen ANgebots ermitteln und aufsummieren		
+	$searchModel = new PartSearch();
+	$dataProvider = $searchModel->searchBillPart(Yii::$app->request->queryParams, $id);        
 
 	foreach($dataProvider->models as $myModel){				
 		$taxrate = $myModel->taxrate / 100;
 		$taxrate = $taxrate + 1; 		
-		$myTotalPosPrice[] =  $myModel->quantity * $myModel->price * $taxrate;			
+		$myTotalPartPrice[] =  $myModel->quantity * $myModel->price * $taxrate;			
 	} 
 
-	$billTotal = round(array_sum($myTotalPosPrice), 2);
-	//$billTotal = round($myTotalPosPrice, 2);
-	//return $myTotalPosPrice;	
-	//print_r($myTotalPosPrice);	
+	$billTotal = round(array_sum($myTotalPartPrice), 2);
+	//$billTotal = round($myTotalPartPrice, 2);
+	//return $myTotalPartPrice;	
+	//print_r($myTotalPartPrice);	
 	
 	$billPrice[] =  $billTotal;
 	
@@ -156,16 +158,16 @@ function getBillTotal($id) {
 
 
 	$billPrice = $billTotal = Yii::$app->formatter->asDecimal(round(array_sum($billPrice), 2));
-	//echo "<p>getbillTotal Gesamtpreis ALLER Positionen: <b>".$billPrice."</b></p>";
+	//echo "<p>getbillTotal Gesamtpreis ALLER Angebotsteile: <b>".$offerPrice."</b></p>";
 
 	return $billPrice;
 }	
 
 
- /* Getter for TotalBillPrice 
-  * ist die Summe aller EinzelPositionen  
+ /* Getter for TotalOfferPrice 
+  * ist die Summe aller EinzelParten  
   * */
-	//public function getBillTotal() {
+	//public function getOfferTotal() {
 		// steuersatz umrechnen
 		//$tax = $this->tax / 100;
 		//$tax = $tax + 1; 
@@ -174,32 +176,32 @@ function getBillTotal($id) {
 	//}
 
     /**
-	* Position Price for bill 
+	* Part Price for bill 
 	*/
-	public function getPositionPrice()
+	public function getPartPrice()
 	{
-		return $this->hasMany(Position::className(), ['bill_id' => 'id'])
+		return $this->hasMany(Part::className(), ['bill_id' => 'id'])
 			//->sum('quantity')
 			->sum('price');
 		}
 
-	public function getPositionPriceaaa()
+	public function getPartPriceaaa()
 	{
-		return $this->hasMany(Position::className(), ['bill_id' => 'id'])
+		return $this->hasMany(Part::className(), ['bill_id' => 'id'])
 			//->sum('quantity')
 			->sum('price');
 		}
 
 
-	public function getBillPriceMe() {
-		return $this->BillPrice;
+	public function getOfferPriceMe() {
+		return $this->OfferPrice;
 	}	
 	
 
-	public function getBillPrice() {
+	public function getOfferPrice() {
 
-		// Gesamtpreis der Positionen der jeweiligen Rechnung 
-		$myTotalPosPrice = array();
+		// Gesamtpreis der Parten der jeweiligen Rechnung 
+		$myTotalPartPrice = array();
 
 		// Gesamtpreis aller Rechnungen
 		$billPrice = array();
@@ -212,21 +214,21 @@ function getBillTotal($id) {
 			//print "<br>";
 			$id = $myModel->id;
 			
-			// Gesamtpreis der Positionen der jeweiligen Rechnung ermitteln und aufsummieren		
-			$searchModel = new PositionSearch();
-			$dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);        
+			// Gesamtpreis der Parten der jeweiligen Rechnung ermitteln und aufsummieren		
+			$searchModel = new PartSearch();
+			$dataProvider = $searchModel->searchOfferPart(Yii::$app->request->queryParams, $id);        
 
 			foreach($dataProvider->models as $myModel){				
 				$taxrate = $myModel->taxrate / 100;
 				$taxrate = $taxrate + 1; 		
-				$myTotalPosPrice[] =  $myModel->quantity * $myModel->price * $taxrate;			
-				//print_r($myTotalPosPrice);
+				$myTotalPartPrice[] =  $myModel->quantity * $myModel->price * $taxrate;			
+				//print_r($myTotalPartPrice);
 				//print "<br>";
 			} 
 
-			$billTotal = round(array_sum($myTotalPosPrice), 2);
-			//$billTotal = round($myTotalPosPrice, 2);
-			unset($myTotalPosPrice);
+			$billTotal = round(array_sum($myTotalPartPrice), 2);
+			//$billTotal = round($myTotalPartPrice, 2);
+			unset($myTotalPartPrice);
 			echo "<h3>Gesamtpreis der jeweiligen Rechnung mit ID: ".$id.": ".Yii::$app->formatter->asDecimal($billTotal)."</h3>";	
 			
 			$billPrice[] =  $billTotal;
