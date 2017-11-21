@@ -37,7 +37,7 @@ class Position extends \yii\db\ActiveRecord
         return [
             //[['bill_id', 'name'], 'required'],
 		//[['bill_id', 'name', 'quantity'], 'required'],
-            [[ 'name', 'quantity'], 'required'],
+            //[[ 'name', 'quantity'], 'required'],
             [['bill_id'], 'integer'],
             
             [['taxrate'], 'number', 'max'=>0],

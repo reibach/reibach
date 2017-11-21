@@ -125,7 +125,7 @@ foreach($dataProvider->models as $myModel){
 		//print "<br>";
 	} 
 
-	$billTotal = round(array_sum($myTotalPosPrice), 2);
+	//$billTotal = round(array_sum($myTotalPosPrice), 2);
 	//$billTotal = round($myTotalPosPrice, 2);
 	unset($myTotalPosPrice);
 
@@ -135,11 +135,11 @@ foreach($dataProvider->models as $myModel){
 	//echo "<h3>Gesamtpreis der jeweiligen Rechnung mit ID: ".$id.": ".Yii::$app->formatter->asDecimal($billTotal)."</h3>";	
 	// echo "Rechnungsnummer: ".$id."&nbsp; Kundenname: ".$customer_name."&nbsp;Rechnungsbetrag: <b>".Yii::$app->formatter->asDecimal($billTotal)."</b><br>";	
 	
-	$billPrice[] =  $billTotal;
+	//$billPrice[] =  $billTotal;
 } 
 
-$billPrice = $billTotal = Yii::$app->formatter->asDecimal(round(array_sum($billPrice), 2));
-echo "<p>Gesamtpreis ALLER Rechnungen: <b>".$billPrice."</b></p>";
+//$billPrice = $billTotal = Yii::$app->formatter->asDecimal(round(array_sum($billPrice), 2));
+//echo "<p>Gesamtpreis ALLER Rechnungen: <b>".$billPrice."</b></p>";
 
 
 

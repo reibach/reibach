@@ -3,6 +3,8 @@
 namespace frontend\controllers;
 
 use Yii;
+use frontend\models\Mandator;
+use frontend\models\Address;
 use frontend\models\User;
 use frontend\models\UserSearch;
 use yii\web\Controller;
@@ -75,6 +77,8 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
+		
+        $model = new User();
         $user = new User();
         $mandator = new Mandator();
         $address = new address();

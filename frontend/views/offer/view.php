@@ -40,4 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+ <?= Html::a(Yii::t('app', 'Mutate'), ['mutate', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+ <?= Html::a(Yii::t('app', 'Preview'), ['reporthtml', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+       
 </div>

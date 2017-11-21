@@ -78,6 +78,26 @@ class BillForm extends Model
         }        
         return true;
     }
+    
+    public function savePositionsId($id) 
+    {
+        $keep = [];
+        foreach ($this->positions as $position) {
+            $position->bill_id = $id;
+            if (!$position->save(false)) {
+                return false;
+            }
+            $keep[] = $position->id;
+        }
+        $query = Position::find()->andWhere(['bill_id' => $id]);
+        if ($keep) {
+            $query->andWhere(['not in', 'id', $keep]);
+        }
+        foreach ($query->all() as $position) {
+            $position->delete();
+        }        
+        return true;
+    }
 
     public function getBill()
     {

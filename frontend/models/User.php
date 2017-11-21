@@ -40,7 +40,7 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['agb', 'username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at', 'abo_start', 'abo_end', 'abo_turn', 'abo_type'], 'required'],
+            //[['agb', 'username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at', 'abo_start', 'abo_end', 'abo_turn', 'abo_type'], 'required'],
             [['agb', 'status', 'abo_start', 'abo_end', 'abo_turn'], 'integer'],
             [['created_at', 'updated_at'], 'safe'], 
             [['abo_type'], 'string'],

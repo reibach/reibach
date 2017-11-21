@@ -117,6 +117,8 @@ return [
 	'offer' => 'Angebot',
 	'Offers' => 'Angebote',
 	'offers' => 'Angebote',
+	'Offer has been updated.' => 'Angebot wurde aktualisiert.',
+	'Offer has been created:' => 'Angebot wurde erstellt:',
 	'Parent person identifier' => '',
 	'password' => 'Passwort',
 	'Password' => 'Passwort',
