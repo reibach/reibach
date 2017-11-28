@@ -9,25 +9,62 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
-//use pceuropa\languageSelection\LanguageSelection;
 use cinghie\cookieconsent\widgets\CookieWidget;
-
  
 AppAsset::register($this);
+
 ?>
 <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/reibach.ico" type="image/x-icon" />
 
-<?= CookieWidget::widget([ 
+<?= 
+CookieWidget::widget([ 
         'message' => Yii::t('app', 'This website uses cookies to ensure you get the best experience on our website.'),
         'dismiss' => Yii::t('app', 'Got It'),
         'learnMore' => Yii::t('app','More info'),
         'link' => 'https://rechnung-reibach.de/index.php?r=site%2Fprivacypolicy&1=',
         'theme' => 'dark-bottom'
 ]); 
+
 ?>
 
-
-
+<div style="
+		# background-color:lawngreen;
+		position: absolute;
+        right: 1em;
+        top: 50;
+        # width: 250px;
+	">
+<?= 
+	\modernkernel\flagiconcss\Flag::widget([
+	    'tag' => 'span', // flag tag
+		'country' => 'xx', // where xx is the ISO 3166-1-alpha-2 code of a country,
+		'squared' => false, // set to true if you want to have a squared version flag
+		'options' => [] // tag html options
+	]); 
+?>	
+	
+<?php
+//Yii::$app->language = 'de';
+ $languageItem = new cetver\LanguageSelector\items\DropDownLanguageItem([
+     'languages' => [
+         'en' => '<span class="flag-icon flag-icon-gb"></span> English',
+         'nd' => '<span class="flag-icon flag-icon-nd"></span> Plattd&uuml;tsch',
+         'de' => '<span class="flag-icon flag-icon-de"></span> Deutsch',
+     ],
+     'options' => ['encode' => false],
+ ]);
+ $languageItem = $languageItem->toArray();
+ $languageDropdownItems = \yii\helpers\ArrayHelper::remove($languageItem, 'items');
+ echo \yii\bootstrap\ButtonDropdown::widget([
+     'label' => $languageItem['label'],
+     'encodeLabel' => false,
+     'options' => ['class' => 'btn-default'],
+     'dropdown' => [
+         'items' => $languageDropdownItems
+     ]
+ ]);
+?>
+</div>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -79,7 +116,7 @@ $mandator_active = $session->get('mandator_active');
 		$menuItems[] = ['label' => Yii::t('app', 'Offers'), 'url' => ['/offer/index']];
 		//$menuItems[] = ['label' => Yii::t('app', 'CustomerAddresses'), 'url' => ['/customer-address/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Bills'), 'url' => ['/bill/index']];
-		$menuItems[] = ['label' => Yii::t('app', 'Positions'), 'url' => ['/position/index']];
+		//$menuItems[] = ['label' => Yii::t('app', 'Positions'), 'url' => ['/position/index']];
 		//$menuItems[] = ['label' => Yii::t('app', 'Addresses'), 'url' => ['/address/index']];
 		//$menuItems[] = ['label' => Yii::t('app', 'Articles'), 'url' => ['/article/index']];
 		//$menuItems[] = ['label' => Yii::t('app', 'About'), 'url' => ['/site/about']];

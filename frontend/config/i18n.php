@@ -16,7 +16,7 @@ return [
     //'sourcePath' => '@yii',
     'sourcePath' => __DIR__. DIRECTORY_SEPARATOR .'..',
     'messagePath' => '@frontend/messages',
-    'languages' => ['de_DE', 'nds_NDS'],
+    'languages' => ['nd', 'de'],
     'translator' => 'Yii::t',
     'sort' => false,
     'overwrite' => true,

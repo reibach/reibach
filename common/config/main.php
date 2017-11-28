@@ -1,19 +1,13 @@
 <?php
 return [
-	'language' => 'de_DE',
+    'aliases' => [
+        '@bower' => '@vendor/bower-asset',
+        '@npm'   => '@vendor/npm-asset',
+    ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-	 'components' => [
-		'i18n' => [
-			  'translations' => [
-                'frontend*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@common/messages',
-                ],
-                'backend*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@common/messages',
-                ],
-			],
-		],
-	],
-];	
+    'components' => [
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+        ],
+    ],
+];

@@ -80,7 +80,7 @@ use yii\jui\DatePicker;
 	</legend>
 		
 	<fieldset>
-	<legend><?= Yii::t('app','Parts'); ?>
+	<legend><?= Yii::t('app','Offer Parts'); ?>
 		<?php
 		// new part button
 		echo Html::a(Yii::t('app','New Part'), 'javascript:void(0);', [
@@ -151,12 +151,12 @@ use yii\jui\DatePicker;
                   .append('<tr>' + $('#offer-new-part-block').html().replace(/__id__/g, 'new' + part_k) + '</tr>');
                 
                 // datepicker on copied row
-                $('#Parts_new' + part_k + '_date_ordered').datepicker({
-                    "autoclose": true,
-                    "todayHighlight": true,
-                    "format": "yyyy-mm-dd",
-                    "orientation": "top left"
-                });
+                //$('#Parts_new' + part_k + '_date_ordered').datepicker({
+                    //"autoclose": true,
+                    //"todayHighlight": true,
+                    //"format": "yyyy-mm-dd",
+                    //"orientation": "top left"
+                //});
                 
             });
             

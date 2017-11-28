@@ -1,6 +1,6 @@
 <?php
 return [
-    'adminEmail' => 'gm@reibach-rechnung.de',
-    'supportEmail' => 'gm@reibach-rechnung.de',
+    'adminEmail' => 'admin@example.com',
+    'supportEmail' => 'support@example.com',
     'user.passwordResetTokenExpire' => 3600,
 ];

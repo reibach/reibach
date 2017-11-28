@@ -97,6 +97,7 @@ class Address extends \yii\db\ActiveRecord
             'phone_business' => Yii::t('app', 'Phone Business'),
             'phone_mobile' => Yii::t('app', 'Phone Mobile'),
             'email' => Yii::t('app', 'Email'),
+            'internet' => Yii::t('app', 'Internet'),
             'fax' => Yii::t('app', 'Fax'),
             'bank_name' => Yii::t('app', 'Bank Name'),
             'bank_account' => Yii::t('app', 'Bank Account'),
