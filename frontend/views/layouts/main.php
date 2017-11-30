@@ -35,11 +35,7 @@ CookieWidget::widget([
         # width: 250px;
 	">
 <?= 
-<<<<<<< HEAD
 	\powerkernel\flagiconcss\Flag::widget([
-=======
-	\modernkernel\flagiconcss\Flag::widget([
->>>>>>> ed511c9143c4679677ed09aaca9b0b7fd28874c4
 	    'tag' => 'span', // flag tag
 		'country' => 'xx', // where xx is the ISO 3166-1-alpha-2 code of a country,
 		'squared' => false, // set to true if you want to have a squared version flag
