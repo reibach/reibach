@@ -30,7 +30,7 @@ Passwort: demodemo
 </p>
 
 
-        <p><a href="index.php?r=site%2Fquickstart"><img src="<?= yii\helpers\Url::to('@web/images/quickstartguide.png') ?>" width="400"/></a></p>
+        <p><a href="index.php/site/quickstart?1="><img src="<?= yii\helpers\Url::to('@web/images/quickstartguide.png') ?>" width="400"/></a></p>
   
         <p>Alle weiteren Informationen finden sich im <a class="btn btn-default" href="https://doku.federa.de/" target="_new">Wiki</a></p>
         
@@ -75,9 +75,10 @@ Passwort: demodemo
                 <h2>Warum kostet das nichts?</h2>
 
                 <p>Reibach ist nicht umsonst, wer es nutzt, muss Werbung machen (Wasserzeichen) oder sich freikaufen. 
-                Das Lizensmodell wird noch ausgearbeitet, Spenden sind jetzt schon erwünscht. (Beratungs-)Dienstleistungen
+                Das Lizensmodell findet sich unter <?= Html::a(Yii::t('app', 'Abosystems'), ['/site/abosystem', ''], ['class' => 'abosystem-link']) ?>, Spenden sind jetzt schon erwünscht. (Beratungs-)Dienstleistungen
                 werden erbracht und  - natürlich mit Reibach - in Rechnung gestellt.  
 				</p>
+
 <!--
                 <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
 -->

@@ -295,7 +295,7 @@ class OfferController extends Controller
 			}
 		
 				Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Offer has been mutated.'));
-				return $this->redirect(['view', 'id' => $model->offer->id]);
+				return $this->redirect(['bill/view', 'id' => $bill_model->bill->id]);
     	}	
 	}
 

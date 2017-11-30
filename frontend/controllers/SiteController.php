@@ -204,6 +204,16 @@ class SiteController extends Controller
         return $this->render('imprint');
     }
 
+    /**
+     * Displays abo page.
+     *
+     * @return mixed
+     */
+    public function actionAbosystem()
+    {
+        return $this->render('abosystem');
+    }
+
 
   /**
      * Signs user up.

@@ -1,6 +1,6 @@
 <?php
 return [
-	'language' => 'de_DE',
+	'language' => 'de',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
 	 'components' => [
 		'i18n' => [

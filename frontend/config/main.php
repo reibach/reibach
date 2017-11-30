@@ -11,11 +11,20 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'language'=>'de_DE', // german'language'=>'de_DE', // german
+    'language'=>'de', // german'language'=>'de_DE', // german
     //'language'=>'de', // german'language'=>'de_DE', // german
 	//'language'=>'nds_NDS', // plattdütsch
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+    
+            // Override the urlManager component
+        'urlManager' => [
+            'class' => 'codemix\localeurls\UrlManager',
+
+            // List all supported languages here
+            // Make sure, you include your app's default language.
+            'languages' => ['de', 'nd', 'en'],
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => false,

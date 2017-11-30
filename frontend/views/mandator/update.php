@@ -9,14 +9,19 @@ use yii\helpers\Html;
     //'modelClass' => 'Mandator',
 //]) . $mandator->id;
 
-		$this->title = Yii::t('app', 'Update {modelClass}: ', [
-		   'modelClass' => 'Mandator',
-		]) . $mandator->id;
+		//$this->title = Yii::t('app', 'Update {modelClass}: ', [
+		   //'modelClass' => 'Mandator',
+		//]) . $mandator->id;
+		
+//$this->title = Yii::t('app', 'Mandator').": ".$mandator->mandator_name;
+//$this->params['breadcrumbs'][] = $this->title;
 
+$this->title = Yii::t('app', 'Mandator');
 
+	
 // Index wird ausgeblendet, bis MehrMandantenfähigkeit eingebaut ist
 //$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $mandator->id, 'url' => ['view', 'id' => $mandator->id]];
+$this->params['breadcrumbs'][] = ['label' => $mandator->mandator_name, 'url' => ['view', 'id' => $mandator->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="mandator-update">

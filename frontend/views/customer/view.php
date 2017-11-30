@@ -27,6 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--
 	<p>AddressMandator: <?= $address_mandator->fullName; ?></p>
 -->
+
+
+<!--
+	<p>TestStr: <?= $model->getTestString(); ?></p>
+-->
+
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

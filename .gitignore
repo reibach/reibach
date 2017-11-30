@@ -35,3 +35,6 @@ phpunit.phar
 /.vagrant
 
 /.git
+
+auth.json
+

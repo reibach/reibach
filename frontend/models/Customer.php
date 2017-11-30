@@ -62,6 +62,11 @@ class Customer extends \yii\db\ActiveRecord
 		return $this->address->fullName;
    	}
 
+	public function getTestString()
+	{
+		return "METOO";
+   	}
+
 	public function getEmail()
 	{
 		return $this->address->email;
