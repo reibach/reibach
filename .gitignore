@@ -20,6 +20,8 @@ Thumbs.db
 # composer vendor dir
 /vendor
 
+/frontend.org_27112017
+
 # composer itself is not needed
 composer.phar
 
@@ -33,8 +35,11 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
+<<<<<<< HEAD
 
 /.git
 
 auth.json
 
+=======
+>>>>>>> ed511c9143c4679677ed09aaca9b0b7fd28874c4

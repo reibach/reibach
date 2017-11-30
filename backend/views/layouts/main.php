@@ -3,10 +3,15 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+<<<<<<< HEAD
+=======
+use backend\assets\AppAsset;
+>>>>>>> ed511c9143c4679677ed09aaca9b0b7fd28874c4
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+<<<<<<< HEAD
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use cinghie\cookieconsent\widgets\CookieWidget;
@@ -65,11 +70,21 @@ CookieWidget::widget([
  ]);
 ?>
 </div>
+=======
+use common\widgets\Alert;
+
+AppAsset::register($this);
+?>
+>>>>>>> ed511c9143c4679677ed09aaca9b0b7fd28874c4
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
+<<<<<<< HEAD
+=======
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+>>>>>>> ed511c9143c4679677ed09aaca9b0b7fd28874c4
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -81,7 +96,11 @@ CookieWidget::widget([
 <div class="wrap">
     <?php
     NavBar::begin([
+<<<<<<< HEAD
         'brandLabel' => 'Reibach Backend',
+=======
+        'brandLabel' => Yii::$app->name,
+>>>>>>> ed511c9143c4679677ed09aaca9b0b7fd28874c4
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -93,10 +112,13 @@ CookieWidget::widget([
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+<<<<<<< HEAD
 		$menuItems[] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['/mandator/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'ABOs'), 'url' => ['/abo/index']];
 		
+=======
+>>>>>>> ed511c9143c4679677ed09aaca9b0b7fd28874c4
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
@@ -124,7 +146,11 @@ CookieWidget::widget([
 
 <footer class="footer">
     <div class="container">
+<<<<<<< HEAD
         <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+=======
+        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+>>>>>>> ed511c9143c4679677ed09aaca9b0b7fd28874c4
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

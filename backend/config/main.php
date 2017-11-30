@@ -1,9 +1,16 @@
 <?php
 $params = array_merge(
+<<<<<<< HEAD
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/../../common/config/params-local.php'),
     require(__DIR__ . '/params.php'),
     require(__DIR__ . '/params-local.php')
+=======
+    require __DIR__ . '/../../common/config/params.php',
+    require __DIR__ . '/../../common/config/params-local.php',
+    require __DIR__ . '/params.php',
+    require __DIR__ . '/params-local.php'
+>>>>>>> ed511c9143c4679677ed09aaca9b0b7fd28874c4
 );
 
 return [
