@@ -15,6 +15,12 @@ use frontend\models\ContactForm;
 use frontend\models\Mandator;
 use frontend\models\Address;
 
+
+
+use frontend\models\MandatorSearch;
+use yii\web\NotFoundHttpException;
+use kartik\form\ActiveForm;
+
 /**
  * Site controller
  */
@@ -215,6 +221,39 @@ class SiteController extends Controller
     }
 
 
+
+	// DELETEME
+   public function actionSignupNEW()
+    {
+		$model = new SignupForm();
+		$mandator = new Mandator();
+		$address = new Address();
+		//$mandator->user_id = Yii::$app->user->id;
+    
+        if ($address->load(Yii::$app->request->post()) && $address->save()) {
+			// Address ID holen
+			$mandator->load(Yii::$app->request->post());
+			$mandator->address_id = $address->id;
+			//echo "Address-ID: ".$model->address_id;	
+			$mandator->save();			
+			
+			// Verzeichnis erstellen, in dem die Rechungen gespeichert werden 
+			$billdir =  '/var/www/html/'.$dbName.'/MAN_'.$mandator->id;
+			
+			if (!is_dir($billdir))
+				mkdir($billdir, 0777, true);
+			
+			return $this->redirect(['view', 'id' => $mandator->id, 'model' => $model]);
+        } else {
+            return $this->render('signup', [
+                'mandator' => $mandator,
+                'address' => $address,
+                'model' => $model,
+            ]);
+        }
+    }
+    
+
   /**
      * Signs user up.
      *
@@ -229,29 +268,35 @@ class SiteController extends Controller
 			//exit;
 		//}	
 		
-        $address = new Address();
+		$address = new Address();
 		$address->address_type = 'MANDATOR';
 
         $mandator = new Mandator();
         $model = new SignupForm();
 
+
 		//user speichern
 		if ($model->load(Yii::$app->request->post())) {
 			if ($user = $model->signup()) {
-				$address->save();
-				//print "<p>AddressID: </p>";
-				//print $address->id;
-				//print "<p>&nbsp;AddressID</p>";
-				$mandator->address_id = $address->id;	
-																	
-				$mandator->user_id = $user['id'];
-				$mandator->save();			
 				
+				
+				$address->save();
+				$mandator->address_id = $address->id;	
+				print "<BR>AddressID: ".$mandator->address_id;
+
+				$mandator->user_id = $user['id'];
+				
+				print "<br>UserID: ".$mandator->user_id;
+				$mandator->save();		
+				print "<br>MandatorID: ".$mandator['id'];
+
 				if (Yii::$app->getUser()->login($user)) {
 					return $this->goHome();
 				}
 			}
+			
 		}	
+		//exit;
 		return $this->render('signup', [
 			'model' => $model,
 		]);

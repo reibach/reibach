@@ -22,6 +22,7 @@ use Yii;
  * @property string $phone_business
  * @property string $phone_mobile
  * @property string $email
+ * @property string $internet
  * @property string $fax
  * @property string $bank_name
  * @property string $bank_account
@@ -61,7 +62,7 @@ class Address extends \yii\db\ActiveRecord
             [['create_time', 'update_time'], 'safe'],
             [['create_user_id', 'update_user_id'], 'integer'],
             [['title', 'company', 'prename', 'lastname', 'state', 'phone_privat', 'phone_business', 'phone_mobile', 'fax'], 'string', 'max' => 100],
-            [['zipcode', 'place', 'street', 'housenumber', 'email'], 'string', 'max' => 255],
+            [['zipcode', 'place', 'street', 'housenumber', 'email', 'internet'], 'string', 'max' => 255],
             [['bank_name', 'bank_codenumber', 'iban', 'tax_office', 'tax_number', 'vat_number'], 'string', 'max' => 27],
             [['bank_account'], 'string', 'max' => 50],
             [['bic'], 'string', 'max' => 12],

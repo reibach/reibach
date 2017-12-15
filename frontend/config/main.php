@@ -13,10 +13,10 @@ return [
     'bootstrap' => ['log'],
     'language'=>'de', // german'language'=>'de_DE', // german
     //'language'=>'de', // german'language'=>'de_DE', // german
-	//'language'=>'nds_NDS', // plattdütsch
+        //'language'=>'nds_NDS', // plattdütsch
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
-    
+
             // Override the urlManager component
         'urlManager' => [
             'class' => 'codemix\localeurls\UrlManager',
@@ -28,11 +28,11 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => false,
-			'enableSession' => true,
-			'authTimeout' => 300, // 5 min
-			'loginUrl' => ['site/login'],
+                        'enableSession' => true,
+                        'authTimeout' => 300, // 5 min
+                        'loginUrl' => ['site/login'],
         ],
-        
+
         //'session' => [
         //'class' => 'yii\web\Session',
         //'cookieParams' => ['httponly' => true, 'lifetime' => 20],

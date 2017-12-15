@@ -51,6 +51,16 @@ class BillController extends Controller
         ];
     }
 
+
+    private function getDsnAttribute($name, $dsn)
+    {
+        if (preg_match('/' . $name . '=([^;]*)/', $dsn, $match)) {
+            return $match[1];
+        } else {
+            return null;
+        }
+    }
+
     /**
      * Lists all Bill models.
      * @return mixed
@@ -60,8 +70,8 @@ class BillController extends Controller
 		
 		$session = Yii::$app->session;
 		$mandator_active = $session->get('mandator_active');
-		print_r($mandator_active);
-		echo "TESTME";
+		//print_r($mandator_active);
+		//echo "TESTME";
 		
 		// wenn kein mandant ausgewählt ist, Abbruch
 		if ($mandator_active == '') {
@@ -227,11 +237,15 @@ class BillController extends Controller
 		$mandator = Mandator::findOne($bill->mandator_id);
 		//$mandator_address = Mandator::findOne($andator->address_id);
         
+		$db = Yii::$app->getDb();
+		$dbName = $this->getDsnAttribute('dbname', $db->dsn);
+		// Rechnungsverzeichnis
+		$billdir =  '/var/www/html/'.$dbName.'/MAN_'.$mandator->id;
+		// Rechnungsdatei
+        $billfile =  $billdir.'/R_'.$id.'.pdf'; 
         
-		// Rechnungsdatei, muss existieren
-		$billdir =  '/var/www/html/'.$mandator->mandator_name.'/frontend/web/bills/MAN'.$mandator->id;
-        $billfile =  $billdir.'/R_'.$bill->id.'.pdf'; 
-        
+
+		// Rechnungsdatei, muss existieren        
 		if (!file_exists($billfile))	
 		{
 			Yii::$app->session->setFlash('error', Yii::t('app', 'File does not exist').': R_'.$bill->id.'.pdf. '.Yii::t('app', 'Please save the bill before sending.'));
@@ -239,8 +253,7 @@ class BillController extends Controller
              return $this->redirect(['view',  'id' => $id]);
               //return $this->redirect(['view', 'id' => $model->bill->id])
  		}
-		
-		
+				
 		
 		// get Customer 
 		$customer = Customer::findOne($bill->customer_id);
@@ -366,14 +379,19 @@ class BillController extends Controller
             'listDataProvider' => $dataProvider,
         ]);
 
-
+		$db = Yii::$app->getDb();
+		$dbName = $this->getDsnAttribute('dbname', $db->dsn);
+		// Rechnungsverzeichnis
+		$billdir =  '/var/www/html/DB_'.$dbName.'/MAN_'.$mandator->id;
+		//print_r($billdir);
+		//exit;
+		if (!is_dir($billdir))
+			mkdir($billdir);
+		
 		// Rechnungsdatei
-		$billdir =  '/var/www/html/'.$mandator->mandator_name.'/frontend/web/bills/MAN'.$mandator->id;
         $billfile =  $billdir.'/R_'.$id.'.pdf'; 
-
-		//$filename =  '/var/www/html/reibach/frontend/web/bills/MAN'.$mandator_id.'/R_'.$id.'.pdf';
-			
-		// delete old pdf-file	
+        
+		//delete old pdf-file	
 		if (file_exists($billfile)) 
 				unlink($billfile);
 
@@ -386,8 +404,7 @@ class BillController extends Controller
 			// portrait orientation
 			'orientation' => Pdf::ORIENT_PORTRAIT, 
 			// stream to browser inline
-			
-			
+						
 			
 			'filename' => $billfile,
 			//'destination' => Pdf::DEST_BROWSER, 

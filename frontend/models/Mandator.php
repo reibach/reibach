@@ -38,7 +38,7 @@ class Mandator extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['mandator_name', 'user_id', 'address_id', 'signature'], 'required'],
+           //  [['mandator_name', 'user_id', 'address_id', 'signature'], 'required'],
             [['user_id', 'address_id', 'taxable', 'b_id', 'c_id'], 'integer'],
             [['signature'], 'string'],
             [['mandator_name'], 'string', 'max' => 150],

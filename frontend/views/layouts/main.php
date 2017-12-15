@@ -107,6 +107,7 @@ $mandator_active = $session->get('mandator_active');
 	//$menuItems[] = ['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact']];  
           
     if (Yii::$app->user->isGuest) {
+        $menuItems[] = ['label' => ''];
         $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
         $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {

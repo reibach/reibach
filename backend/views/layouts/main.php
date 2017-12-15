@@ -100,6 +100,7 @@ CookieWidget::widget([
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
 
+		$menuItems[] = ['label' => Yii::t('app', 'MUndators'), 'url' => ['/mundator/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['/mandator/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'ABOs'), 'url' => ['/abo/index']];

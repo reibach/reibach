@@ -50,7 +50,6 @@ class BillSearch extends Bill
      */
     public function search($params)
     {
-		
 		$session = Yii::$app->session;
 		$mandator_active = $session->get('mandator_active');
 		

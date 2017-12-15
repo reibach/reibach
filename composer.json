@@ -26,7 +26,8 @@
         "fxp/composer-asset-plugin": "^1.4",
         "cetver/yii2-language-selector": "^1.0",
         "kartik-v/yii2-widget-activeform": "@dev",
-        "powerkernel/yii2-flag-icon-css": "*"
+        "powerkernel/yii2-flag-icon-css": "*",
+        "cetver/yii2-language-url-manager": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

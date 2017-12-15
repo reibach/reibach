@@ -90,7 +90,16 @@ class MandatorController extends Controller
             'address' => $address,
         ]);
     }
-
+	
+	private function getDsnAttribute($name, $dsn)
+    {
+        if (preg_match('/' . $name . '=([^;]*)/', $dsn, $match)) {
+            return $match[1];
+        } else {
+            return null;
+        }
+    }
+	
     /**
      * Creates a new Mandator model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -110,7 +119,7 @@ class MandatorController extends Controller
 			$mandator->save();			
 			
 			// Verzeichnis erstellen, in dem die Rechungen gespeichert werden 
-			$billdir =  '/var/www/html/'.$mandator->mandator_name.'/frontend/web/bills/MAN'.$mandator->id;
+			$billdir =  '/var/www/html/'.$dbName.'/MAN_'.$mandator->id;
 			if (!is_dir($billdir))
 				mkdir($billdir, 0777, true);
 			

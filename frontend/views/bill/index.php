@@ -94,11 +94,19 @@ $billExist = 0;
 
 
 //print_r($dataProvider->models[0]->id);
-$myID = $dataProvider->models[0]->id;
-$data = '';
+
+
+
+if (isset($dataProvider->models[0]->id)) {
+	$myID = $dataProvider->models[0]->id;
+	$data = '';
+}
+
+
 function getData() {
 	return $data->getbillTotal($myID);
 }
+
 //print "TEST: ".$data;
 //print "TEST: ".$myID;
 

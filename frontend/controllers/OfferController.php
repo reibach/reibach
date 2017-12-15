@@ -55,8 +55,8 @@ class OfferController extends Controller
 		
 		$session = Yii::$app->session;
 		$mandator_active = $session->get('mandator_active');
-		print_r($mandator_active);
-		echo "TESTME";
+		//print_r($mandator_active);
+		//echo "TESTME";
 		
 		$offer = Offer::find();
 		
