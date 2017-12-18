@@ -51,15 +51,18 @@ class BillController extends Controller
         ];
     }
 
+		/**
+		 * ermittelt den Datenbanknamen.
+		 */
 
-    private function getDsnAttribute($name, $dsn)
-    {
-        if (preg_match('/' . $name . '=([^;]*)/', $dsn, $match)) {
-            return $match[1];
-        } else {
-            return null;
-        }
-    }
+		private function getDsnAttribute($name, $dsn)
+		{
+			if (preg_match('/' . $name . '=([^;]*)/', $dsn, $match)) {
+				return $match[1];
+			} else {
+				return null;
+			}
+		}
 
     /**
      * Lists all Bill models.
@@ -240,10 +243,13 @@ class BillController extends Controller
 		$db = Yii::$app->getDb();
 		$dbName = $this->getDsnAttribute('dbname', $db->dsn);
 		// Rechnungsverzeichnis
-		$billdir =  '/var/www/html/'.$dbName.'/MAN_'.$mandator->id;
+		$billdir =  '/var/www/html/DB_'.$dbName.'/MAN_'.$mandator->id;
 		// Rechnungsdatei
         $billfile =  $billdir.'/R_'.$id.'.pdf'; 
         
+        
+        //print_r($billfile);
+        //exit;
 
 		// Rechnungsdatei, muss existieren        
 		if (!file_exists($billfile))	

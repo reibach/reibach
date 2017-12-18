@@ -268,12 +268,13 @@ class SiteController extends Controller
 			//exit;
 		//}	
 		
+
+		// 2DO: Session komplett loeschen 
 		$address = new Address();
 		$address->address_type = 'MANDATOR';
 
         $mandator = new Mandator();
         $model = new SignupForm();
-
 
 		//user speichern
 		if ($model->load(Yii::$app->request->post())) {
@@ -282,17 +283,37 @@ class SiteController extends Controller
 				
 				$address->save();
 				$mandator->address_id = $address->id;	
-				print "<BR>AddressID: ".$mandator->address_id;
+				//print "<BR>AddressID: ".$mandator->address_id;
 
 				$mandator->user_id = $user['id'];
 				
-				print "<br>UserID: ".$mandator->user_id;
+				//print "<br>UserID: ".$mandator->user_id;
 				$mandator->save();		
-				print "<br>MandatorID: ".$mandator['id'];
+				//print "<br>MandatorID: ".$mandator['id'];
+				//print "<br>MandatorID: ".$mandator['id'];
+				
 
+				// sending mail to admin
+				// return Yii::$app //  bei return wird nach erfolgten Versund TRUE / 1 zurückgegeben
+				Yii::$app
+					->mailer
+					->compose(
+						['html' => 'signupAdmin-html', 'text' => 'signupAdmin-text'],
+						['user' => $user]
+					)
+					->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+					->setTo(Yii::$app->params['supportEmail'])
+					->setSubject(Yii::t('app', 'Signup').' '. Yii::$app->name)
+					->send();
+	
+
+				//exit;
 				if (Yii::$app->getUser()->login($user)) {
-					return $this->goHome();
+					return $this->redirect(['mandator/update', 'id' => $mandator->id, 'model' => $model]);
+					//return $this->goHome();
+					
 				}
+				
 			}
 			
 		}	

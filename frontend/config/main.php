@@ -9,6 +9,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
+    'name'=>'Reibach',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'language'=>'de', // german'language'=>'de_DE', // german
