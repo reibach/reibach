@@ -4,15 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Offer */
+/* @var $model backend\models\Customer */
 
-$this->title = Yii::$app->name.' '.Yii::t('app', 'Offer').": ".$model->id;
-
-
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Offers'), 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Customers'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="offer-view">
+<div class="customer-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -32,17 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'mandator_id',
-            'customer_id',
-            'description:ntext',
-            'status',
-            'offer_number',
-            'offer_date',
-            'created_at',
-            'updated_at',
+            'address_id',
+            'customer_number',
         ],
     ]) ?>
 
- <?= Html::a(Yii::t('app', 'Mutate'), ['mutate', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
- <?= Html::a(Yii::t('app', 'Preview'), ['reporthtml', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-       
 </div>

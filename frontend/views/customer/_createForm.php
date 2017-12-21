@@ -11,7 +11,21 @@ use backend\models\Mandator;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+<div class="customer-create">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <?= $this->render('_form', [
+        'customer' => $customer,
+        'address' => $address, 
+       
+    ]) ?>
+
+</div>
+
+
 <div class="customer-createForm">
+	
 
     <?php $form = ActiveForm::begin(); ?>    	
 

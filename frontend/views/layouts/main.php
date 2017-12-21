@@ -73,6 +73,15 @@ CookieWidget::widget([
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <?= Yii::$app->view->registerMetaTag([
+			'name' => 'description',
+			'content' => 'Reibach - das online Rechnungsprogramm. '
+		]);  ?>
+    <?= Yii::$app->view->registerMetaTag([
+			'name' => 'keywords',
+			'content' => 'Reibach, Rechnungsprogramm, Rechnung, Faktura, Angebote, Plattdeutsch, Niederdeutsch, Einfach, Kostenlos, Kunden, Positionen, Mahnwesen, Steuer, Unternehmer, Freischaffende, Kleinunternehmer'
+		]);  ?>
+    
     <?php $this->head() ?>
 </head>
 <body>

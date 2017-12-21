@@ -153,7 +153,7 @@ class CustomerController extends Controller
 			$customer->save();			
 			return $this->redirect(['view', 'id' => $customer->id]);
         } else {
-            return $this->render('_createForm', [
+            return $this->render('create', [
                 'customer' => $customer,
                 'address' => $address,
 

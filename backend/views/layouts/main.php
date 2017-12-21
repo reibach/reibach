@@ -71,10 +71,7 @@ CookieWidget::widget([
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
-<<<<<<< HEAD
-=======
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
->>>>>>> ed511c9143c4679677ed09aaca9b0b7fd28874c4
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -99,10 +96,10 @@ CookieWidget::widget([
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-
-		$menuItems[] = ['label' => Yii::t('app', 'MUndators'), 'url' => ['/mundator/index']];
-		$menuItems[] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['/mandator/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']];
+		$menuItems[] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['/mandator/index']];
+		$menuItems[] = ['label' => Yii::t('app', 'Customers'), 'url' => ['/customer/index']];
+		$menuItems[] = ['label' => Yii::t('app', 'Bills'), 'url' => ['/bill/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'ABOs'), 'url' => ['/abo/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
@@ -132,7 +129,7 @@ CookieWidget::widget([
 <footer class="footer">
     <div class="container">
 
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Reibach <?= date('Y') ?></p>
 
         <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
 

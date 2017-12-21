@@ -4,40 +4,36 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel frontend\models\CustomerSearch */
+/* @var $searchModel backend\models\BillSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-//$this->title = Yii::$app->name.' '.Yii::t('app', 'Customers');
-$this->title = Yii::t('app', 'Customers');
+$this->title = Yii::t('app', 'Bills');
 $this->params['breadcrumbs'][] = $this->title;
-
-	
 ?>
-
-
-<div class="customer-index">
+<div class="bill-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Customer'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Bill'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <p>
-    Mandant: <?= $mandator_active; ?>
-    </p>
-    
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-			//'customer_number',
+
             'id',
-            //'mandator_id',            
-			//'address_id',
-			'fullName',
-			//'orderAmount',
+            'mandator_id',
+            'customer_id',
+            'description:ntext',
+            'status',
+            // 'billing_number',
+            // 'billing_date',
+            // 'created_at',
+            // 'updated_at',
+
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

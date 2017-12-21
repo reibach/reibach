@@ -31,8 +31,13 @@ class MandatorController extends Controller
                 'only' => ['create','delete','index','view','update'],
                 'rules' => [
                     [
-                        'actions' => ['create','delete','index','view','update'],
+                        'actions' => ['view','update'],
                         'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['create','delete','index'],
+                        'allow' => false,
                         'roles' => ['@'],
                     ],
                 ],

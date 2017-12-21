@@ -30,7 +30,7 @@ Passwort: demodemo
 </p>
 
 
-        <p><a href="index.php/site/quickstart?1="><img src="<?= yii\helpers\Url::to('@web/images/quickstartguide.png') ?>" width="400"/></a></p>
+        <p><a href="quickstart?1="><img src="<?= yii\helpers\Url::to('@web/images/quickstartguide.png') ?>" width="400"/></a></p>
   
         <p>Alle weiteren Informationen finden sich im <a class="btn btn-default" href="https://doku.federa.de/" target="_new">Wiki</a></p>
         
