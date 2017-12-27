@@ -15,6 +15,7 @@ class SendForm extends Model
     public $subject;
     public $body;
     public $verifyCode;
+    public $mandator;
 
 
     /**
@@ -48,15 +49,17 @@ class SendForm extends Model
      * @param string $email the target email address
      * @return bool whether the email was sent
      */
-    public function sendEmail($billfile)
+    public function sendEmail($billfile,$mandator,$mandator_address)
     {
 		
 		if (!isset($billfile))
 			$billfile = "";
 			
+		
         return Yii::$app->mailer->compose()
             ->setTo($this->email)
-            ->setFrom([$this->email => $this->name])
+            //->setFrom([$this->email => $this->name])
+            ->setFrom([$mandator_address->email => $mandator_address ->prename.' '.$mandator_address ->lastname ])
             ->setSubject($this->subject)
             ->setTextBody($this->body)
             ->attach($billfile)

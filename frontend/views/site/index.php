@@ -29,8 +29,18 @@ $this->title = 'Reibach ... to make a big haul.';
 Passwort: demodemo
 </p>
 
+<?= Html::a(Yii::t('app', 'Quickstart'), ['/site/quickstart', ''], ['class' => 'profile-link']) ?>
+<!--
+http://172.22.119.118/reibach/frontend/web/quickstart?1=
+http://172.22.119.118/reibach/frontend/web/index.php/site/quickstart?1=
+-->
 
-        <p><a href="quickstart?1="><img src="<?= yii\helpers\Url::to('@web/images/quickstartguide.png') ?>" width="400"/></a></p>
+
+
+<!--
+        <p><a href="<?=yii\helpers\Url::to('site/quickstart') ?>"><img src="<?= yii\helpers\Url::to('@web/images/quickstartguide.png') ?>" width="400"/></a></p>
+-->
+        <p><img src="<?= yii\helpers\Url::to('@web/images/quickstartguide.png') ?>" width="400"/></p>
   
         <p>Alle weiteren Informationen finden sich im <a class="btn btn-default" href="https://doku.federa.de/" target="_new">Wiki</a></p>
         

@@ -176,6 +176,7 @@ return [
 	'Select Customer' => 'Kunde auswählen',
 	'send' => 'senden',
 	'Send' => 'Senden',
+	'Sending the bill to the customer.' => 'Die Rechnung zum Kunden senden.',
 	'Send Bill as EMail' => 'Rechnung als EMail versenden',
 	'Send the PDF to the EMailaddress of the Customer, if set' => 'Sendet das PDF an die EMail-Adresse des Kunden, falls gesetzt',
 	'Signup' => 'Registrieren',
@@ -230,5 +231,6 @@ return [
 	'Vat Number' => 'UID',
 	'Will open the generated PDF file in a new window' => 'Öffnet das erstellte PDF in einem neuen Fenster',
 	//'Zipcode' => 'Postleitzahl',
+	'Your Signup at' => 'Deine Registrierung bei',
 	'Zipcode' => 'PLZ',
 ];

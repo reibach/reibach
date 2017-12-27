@@ -10,17 +10,14 @@ use yii\captcha\Captcha;
 
 //$this->title = $bill->id;
 //$this->title = Yii::t('app', 'Send');
-$this->title = Yii::t('app', 'Send {modelClass}: ', [
-    'modelClass' => 'Bill',
-]) . $bill->id;
+//$this->title = Yii::t('app', 'Send Bill as EMail', [
+    //'modelClass' => 'Bill',
+//]) . $bill->id;
 
+
+$this->title = Yii::t('app', 'Send Bill as EMail');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Bills'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-?>
-
-<?php 
-// $billfile =  '/var/www/html/reibach/frontend/web/bills/MAN'.$bill['mandator_id'].'/R_'.$bill->id.'.pdf'; 
-// echo $billfile;
 ?>
 
 <div class="bill-send">
@@ -35,10 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </fieldset>
 -->
 
-
-    <p>
-       <?= Yii::t('app', 'Sending the bill to the customer.') ?>
-    </p>
 
     <div class="row">
         <div class="col-lg-5">

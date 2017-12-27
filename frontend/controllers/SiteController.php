@@ -307,6 +307,20 @@ class SiteController extends Controller
 					->send();
 	
 
+				// sending mail to user
+				Yii::$app
+					->mailer
+					->compose(
+						['html' => 'signupUser-html', 'text' => 'signupUser-text'],
+						['user' => $user]
+					)
+					->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name.' '.Yii::t('app', 'Signup')])
+					->setTo($user->email)
+					//->setSubject(Yii::t('app', 'Signup').' '. Yii::$app->name)
+					->setSubject(Yii::t('app', 'Your Signup at').' '. Yii::$app->name)
+					->send();
+	
+
 				//exit;
 				if (Yii::$app->getUser()->login($user)) {
 					return $this->redirect(['mandator/update', 'id' => $mandator->id, 'model' => $model]);

@@ -238,8 +238,8 @@ class BillController extends Controller
         
         // get Mandator 
 		$mandator = Mandator::findOne($bill->mandator_id);
-		//$mandator_address = Mandator::findOne($andator->address_id);
-        
+		$mandator_address = Address::findOne($mandator->address_id);
+       
 		$db = Yii::$app->getDb();
 		$dbName = $this->getDsnAttribute('dbname', $db->dsn);
 		// Rechnungsverzeichnis
@@ -267,7 +267,7 @@ class BillController extends Controller
         
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail($billfile)) {
+            if ($model->sendEmail($billfile,$mandator,$mandator_address)) {
                 Yii::$app->session->setFlash('success', Yii::t('app','The bill has been sent by email.'));
             } else {
                 Yii::$app->session->setFlash('error', Yii::t('app', 'There was an error sending email.'));
@@ -279,6 +279,7 @@ class BillController extends Controller
                 'model' 			=> $model,
                 'bill'  			=> $bill,
                 'mandator'			=> $mandator,
+       			'mandator_address' 	=> $mandator_address,
        			'customer' 			=> $customer,
        			'customer_address' 	=> $customer_address,
             ]);
