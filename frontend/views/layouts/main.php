@@ -75,11 +75,14 @@ CookieWidget::widget([
     <title><?= Html::encode($this->title) ?></title>
     <?= Yii::$app->view->registerMetaTag([
 			'name' => 'description',
-			'content' => 'Reibach - das online Rechnungsprogramm. '
+			'content' => 'Reibach - das online Rechnungsprogramm. Kostenlos und quelloffen.'
 		]);  ?>
     <?= Yii::$app->view->registerMetaTag([
 			'name' => 'keywords',
-			'content' => 'Reibach, Rechnungsprogramm, Rechnung, Faktura, Angebote, Plattdeutsch, Niederdeutsch, Einfach, Kostenlos, Kunden, Positionen, Mahnwesen, Steuer, Unternehmer, Freischaffende, Kleinunternehmer'
+			'content' => 'Reibach, Rechnungsprogramm, Rechnung, Faktura, Angebote, 
+			Plattdeutsch, Niederdeutsch, Einfach, Kostenlos, Kunden, Positionen, 
+			Mahnwesen, Steuer, Unternehmer, Freischaffende, Kleinunternehmer, 
+			Open Source, Umsonst, Offen, Linux, Sicher, Freiberufler'
 		]);  ?>
     
     <?php $this->head() ?>
@@ -87,12 +90,8 @@ CookieWidget::widget([
 <body>
 <?php $this->beginBody() ?>
 
-
 <div class="wrap">
-
-
 <?php
-
 $session = Yii::$app->session;
 $mandator_active = $session->get('mandator_active');
 //echo "mandator_active:".$mandator_active;

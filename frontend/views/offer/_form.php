@@ -38,24 +38,6 @@ use yii\jui\DatePicker;
 		['prompt'=>Yii::t('app','Select Customer')])
 		->label(false) ?>
     </fieldset>
-   
-	<?php
-        //echo $form->field($model->offer, 'updated_at')->widget(DatePicker::className(), [
-            //'language' => 'de',
-            //'inline' => false,
-            //'dateFormat' => 'dd.MM.yyyy',
-            //'clientOptions' => [
-                //'showAnim'=>'slideDown',
-                //'yearRange' => '2017:2022',
-                //'changeMonth'=> true,
-                //'changeYear'=> true,
-                //'autoSize'=>true,
-                //'showOn'=> "button",
-                //'buttonText' => 'Kalender',
-            //]
-        //]);
-
-    ?>
 
 <p><?= Yii::t('app', 'Offer Date') ?></p>
 
@@ -151,12 +133,12 @@ use yii\jui\DatePicker;
                   .append('<tr>' + $('#offer-new-part-block').html().replace(/__id__/g, 'new' + part_k) + '</tr>');
                 
                 // datepicker on copied row
-                //$('#Parts_new' + part_k + '_date_ordered').datepicker({
-                    //"autoclose": true,
-                    //"todayHighlight": true,
-                    //"format": "yyyy-mm-dd",
-                    //"orientation": "top left"
-                //});
+                $('#Parts_new' + part_k + '_date_ordered').datepicker({
+                    "autoclose": true,
+                    "todayHighlight": true,
+                    "format": "yyyy-mm-dd",
+                    "orientation": "top left"
+                });
                 
             });
             
@@ -198,7 +180,4 @@ use yii\jui\DatePicker;
 	");
 
     ?>
-
-        
-
 </div>            

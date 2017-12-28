@@ -7,19 +7,30 @@ use yii\helpers\Html;
 $this->title = Yii::t('app', 'Abosystems');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style>h2 { 
+	color: white;
+	font-weight: bold;
+	 } </style>
+	
 <div class="site-abosystem">
     <h1><?= Html::encode($this->title) ?></h1>
     
     
 <H3>Es gibt drei verschiedene Abosysteme zur Abrechnung</H3>
  
-  <h2>free</h2>
-  <h4>kostet nichts, Logo bleibt erhalten</h4>
-  
-  <h2>standard</h2>
-  <h4>  kostet 4,90 € / mntl.</h4> 
+  <h2 style="background: linear-gradient( #008000, #44D744 30%);width: 20%;">FREE</h2>
+  <h4>kostet nichts,</h4>
+  <li>Logo bleibt erhalten</li>
+  <li>Registrierung gen&uuml;gt</li>
+  <p>&nbsp;</p>
 
-  <h2>premium</h2>
+
+  <h2 style="background: linear-gradient( #A52A2A, #CD6C6C 30%);width: 20%;">STANDARD</h2>
+  <h4>  kostet 4,90 € / mntl.</h4> 
+  <p>&nbsp;</p>
+
+  <h2  style="background: linear-gradient( #003471, #448CCB 30%);width: 20%;">PREMIUM</h2>
   <h4>kostet 9,90 € / mntl.</h4> 
       <li>eigene Datenbank</li>
       <li>Mehrmandantenfähig</li>

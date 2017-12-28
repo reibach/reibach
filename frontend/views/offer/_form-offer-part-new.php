@@ -46,6 +46,6 @@ use yii\helpers\Html;
 </td>
 <td>
     <?= Html::a((Yii::t('app','Remove')) ." 	". $key, 'javascript:void(0);', [
-      'class' => 'bill-remove-part-button btn btn-default btn-xs',
+      'class' => 'offer-remove-part-button btn btn-default btn-xs',
     ]) ?>
 </td>

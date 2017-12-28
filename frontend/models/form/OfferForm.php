@@ -75,6 +75,27 @@ class OfferForm extends Model
         }
         foreach ($query->all() as $part) {
             $part->delete();
+
+		}        
+        return true;
+    }
+
+    public function savePartsId($id) 
+    {
+        $keep = [];
+        foreach ($this->artss as $part) {
+            $part->offer_id = $id;
+            if (!$part->save(false)) {
+                return false;
+            }
+            $keep[] = $part->id;
+        }
+        $query = Part::find()->andWhere(['offer_id' => $id]);
+        if ($keep) {
+            $query->andWhere(['not in', 'id', $keep]);
+        }
+        foreach ($query->all() as $part) {
+            $part->delete();
         }        
         return true;
     }
