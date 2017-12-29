@@ -20,7 +20,7 @@ class MandatorSearch extends Mandator
     {
         return [
             //[['id', 'user_id', 'address_id'], 'integer'],
-            [['id', 'user_id', 'address_id', 'taxable', 'b_id', 'c_id'], 'integer'],
+            [['id', 'user_id', 'address_id', 'taxable', 'own_bill_numbers', 'own_offer_numbers', 'own_customer_numbers'], 'integer'],
             [['fullName'], 'save'],
             [['mandator_name', 'signature'], 'safe'],
         ];
@@ -104,8 +104,9 @@ class MandatorSearch extends Mandator
             'user_id' => $this->user_id,
             'address_id' => $this->address_id,
             'taxable' => $this->taxable,
-            'b_id' => $this->b_id, 
-		    'c_id' => $this->c_id, 
+            'own_bill_numbers' => $this->own_bill_numbers,
+            'own_offer_numbers' => $this->own_offer_numbers,
+            'own_customer_numbers' => $this->own_customer_numbers,
         ]);
 
       $query->andFilterWhere(['like', 'mandator_name', $this->mandator_name]) 

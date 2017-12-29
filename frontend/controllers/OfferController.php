@@ -50,23 +50,20 @@ class OfferController extends Controller
      */
     public function actionIndex()
     {
-		
-			
-		
+
 		$session = Yii::$app->session;
 		$mandator_active = $session->get('mandator_active');
-		//print_r($mandator_active);
-		//echo "TESTME";
+
+		// wenn kein mandant ausgewählt ist, Abbruch
+		if ($mandator_active == '') {
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator.'));
+
+			$this->redirect(array('site/login'));
+		}
+
 		
 		$offer = Offer::find();
 		
-		// wenn kein mandant ausgewählt ist, Abbruch
-		if ($mandator_active == '') {
-			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator selected. Please select one.'));
-			//return $this->redirect('/mandator/index');
-			//$this->redirect(array('mandator/index'));
-			$this->redirect(array('site/login'));
-		}
         $searchModel = new OfferSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -88,13 +85,14 @@ class OfferController extends Controller
     {
 		$session = Yii::$app->session;
 		$mandator_active = $session->get('mandator_active');
-		
+
 		// wenn kein mandant ausgewählt ist, Abbruch
 		if ($mandator_active == '') {
-			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator selected. Please select one.'));
-			//return $this->redirect('/mandator/index');
-			$this->redirect(array('mandator/index'));
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator.'));
+
+			$this->redirect(array('site/login'));
 		}
+
 		
 		$offer = Offer::findOne($id);
 		//Daten für eine Rechnung zusammenbauen:		
@@ -140,8 +138,8 @@ class OfferController extends Controller
 		// wenn kein mandant ausgewählt ist, Abbruch
 		if ($mandator_active == '') {
 			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator.'));
-			//print "ERROR: kein Mandant!!";
-			//exit;
+
+			$this->redirect(array('site/login'));
 		}
 
         $model = new OfferForm();
@@ -164,7 +162,19 @@ class OfferController extends Controller
     }
 
 
-    public function actionReporthtml($id) {
+    public function actionReporthtml($id) 
+    {
+		
+		$session = Yii::$app->session;
+		$mandator_active = $session->get('mandator_active');
+
+		// wenn kein mandant ausgewählt ist, Abbruch
+		if ($mandator_active == '') {
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator.'));
+
+			$this->redirect(array('site/login'));
+		}
+
 		
 		$offer = Offer::findOne($id);
 		//Daten für eine Rechnung zusammenbauen:
@@ -180,6 +190,8 @@ class OfferController extends Controller
         $mandator_id = $customer->mandator_id;
         $mandator = Mandator::findOne($mandator_id);
 		$address_mandator = Address::findOne($mandator->address_id);
+
+	
 
 		// Rechnung:
 		// Teile:		
@@ -223,13 +235,14 @@ class OfferController extends Controller
     {
 		$session = Yii::$app->session;
 		$mandator_active = $session->get('mandator_active');
-		
+
 		// wenn kein mandant ausgewählt ist, Abbruch
 		if ($mandator_active == '') {
-			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator selected. Please select one.'));
-			//return $this->redirect('/mandator/index');
-			$this->redirect(array('mandator/index'));
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator.'));
+
+			$this->redirect(array('site/login'));
 		}
+
 
         $model = new OfferMutate();
         $model->offer = $this->findModel($id);       
@@ -313,12 +326,12 @@ class OfferController extends Controller
     {
 		$session = Yii::$app->session;
 		$mandator_active = $session->get('mandator_active');
-		
+
 		// wenn kein mandant ausgewählt ist, Abbruch
 		if ($mandator_active == '') {
-			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator selected. Please select one.'));
-			//return $this->redirect('/mandator/index');
-			$this->redirect(array('mandator/index'));
+			Yii::$app->session->setFlash('error',  Yii::t('app', 'No Mandator.'));
+
+			$this->redirect(array('site/login'));
 		}
 
         $model = new OfferForm();

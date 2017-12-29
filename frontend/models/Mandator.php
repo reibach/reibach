@@ -39,7 +39,7 @@ class Mandator extends \yii\db\ActiveRecord
     {
         return [
            //  [['mandator_name', 'user_id', 'address_id', 'signature'], 'required'],
-            [['user_id', 'address_id', 'taxable', 'b_id', 'c_id'], 'integer'],
+            [['user_id', 'address_id', 'taxable', 'own_bill_numbers', 'own_offer_numbers', 'own_customer_numbers'], 'integer'],
             [['signature'], 'string'],
             [['mandator_name'], 'string', 'max' => 150],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -58,8 +58,9 @@ class Mandator extends \yii\db\ActiveRecord
             'user_id' => Yii::t('app', 'User ID'),
             'address_id' => Yii::t('app', 'Address ID'),
             'taxable' => Yii::t('app', 'Taxable'),
-            'b_id' => Yii::t('app', 'B ID'),
-            'c_id' => Yii::t('app', 'C ID'),
+            'own_bill_numbers' => Yii::t('app', 'Own Bill Numbers'),
+            'own_offer_numbers' => Yii::t('app', 'Own Offer Numbers'),
+            'own_customer_numbers' => Yii::t('app', 'Own Customer Numbers'),
             'signature' => Yii::t('app', 'Signature'),
         ];
     }

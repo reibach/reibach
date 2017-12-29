@@ -14,6 +14,40 @@ use kartik\form\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+
+<style> 
+	a {
+	position: relative;
+	}
+	
+	
+  a[data-tooltip]:before, span[data-tooltip]:before , .own_legend[data-tooltip]:before {
+  position: absolute;
+  left: 0;
+  top: -40px;
+  background-color: #ff0000;
+  color: #ffffff;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 5px;
+  padding: 0 15px;
+  content: attr(data-tooltip);
+  white-space: nowrap;
+  display: none;
+}
+
+a[data-tooltip]:hover:after, a[data-tooltip]:hover:before, span[data-tooltip]:hover:after, span[data-tooltip]:hover:before {
+  display: block;
+}
+
+	.own_legend { 	
+		color: green;
+		font-weight: bold;
+		font-size: 12px;
+		 } 
+</style>
+	 
+	 
 <div class="mandator-form">
 
 <?php //$form = ActiveForm::begin(['enableClientValidation' => false, // TODO get this working with client validation]); ?>
@@ -88,32 +122,20 @@ echo $form->field($address, 'phone_mobile', [
 
 <fieldset>
 	<legend>
-<!--
-	<?= Yii::t('app','Please fill out this form...'); ?>	
--->
-	<?php 
-	/* Steuerpflicht, eigene Rechungs und Kundennummer werden z.Zt. noch ausgeblended
-	<?= // $form->field($mandator, 'taxable')->textInput() ?> 
-	<?= // $form->field($mandator, 'b_id')->checkBox(['label' => Yii::t('app', 'Own accounting numbers (not unique)'), 'value' => "1"]); ?>
-	<?= // $form->field($mandator, 'c_id')->checkBox(['label' => Yii::t('app', 'Own customer numbers (not unique)'), 'value' => "1"]); ?>
-	*/
-	?>
-	
-	<?php
-	// Wenn der Mandantenname geändert wird, muss auch der Lagerort für die Rechnungen und
-	// weitere Konfigurationen  geändert werden. Daher wird das Formularfeld nicht angezeigt
-	// $form->field($mandator, 'mandator_name')->textInput(['maxlength' => true, 'style'=>'width:200px'])
-    ?>
-    
-
+	<?= $form->field($mandator, 'mandator_name')->textInput(['maxlength' => true, 'style'=>'width:504px']) ?>
+<?= "<br/>" ?>	
+	<span class="own_legend">	<?= Yii::t('app', 'Taxable').' ? '?></span>
+	<?= $form->field($mandator, 'taxable')->dropDownList(['2' => Yii::t('app', 'Yes'), '1' => Yii::t('app', 'No')]) ?>	
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<span class="own_legend"><?= Yii::t('app', 'Own Bill Numbers').' ' ?><a href="#" data-tooltip="F&uuml;r die Eindeutigkeit muss bei eigenen Rechnungsnummern selber gesorgt werden!"> &nbsp;&nbsp;&nbsp;?*</a></span>
+	<?= $form->field($mandator, 'own_bill_numbers')->dropDownList(['2' => Yii::t('app', 'Yes'),'1' => Yii::t('app', 'No')]) ?>	
+<?= "<br/>" ?>	
 	<?= $form->field($address, 'company')->textInput(['maxlength' => true, 'style'=>'width:400px']) ?>
 	<?= $form->field($address, 'title')->textInput(['maxlength' => true, 'style'=>'width:100px']) ?> 
-
 <?= "<br/>" ?>	
     <?= $form->field($address, 'prename')->textInput(['maxlength' => true, 'style'=>'width:250px']) ?>
     <?= $form->field($address, 'lastname')->textInput(['maxlength' => true, 'style'=>'width:250px']) ?>
 <?= "<br/>" ?>	
-
 	<?= $form->field($address, 'street')->textInput(['maxlength' => true, 'style'=>'width:400px']) ?>
 	<?= $form->field($address, 'housenumber')->textInput(['maxlength' => true, 'style'=>'width:100px']) ?>    
 <?= "<br/>" ?>	

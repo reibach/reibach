@@ -29,8 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             'address_id',
             'taxable',
-            // 'b_id',
-            // 'c_id',
+            // 'own_bill_numbers',
+            // 'own_offer_numbers',
+            // 'own_customer_numbers',
             // 'signature:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],
