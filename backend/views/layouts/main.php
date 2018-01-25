@@ -96,6 +96,7 @@ CookieWidget::widget([
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+		$menuItems[] = ['label' => Yii::t('app', 'Gii'), 'url' => ['/gii']];
 		$menuItems[] = ['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['/mandator/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Customers'), 'url' => ['/customer/index']];

@@ -159,6 +159,38 @@ function getBillTotal($id) {
 	return $billPrice;
 }	
 
+ /* Getter for TotalBillPrice 
+  * ist die Summe aller EinzelPositionen  
+  * */
+
+function getBillTotalNetto($id) {
+
+	// Gesamtpreis der Positionen der jeweiligen Rechnung ermitteln und aufsummieren		
+	$searchModel = new PositionSearch();
+	$dataProvider = $searchModel->searchBillPos(Yii::$app->request->queryParams, $id);        
+
+	foreach($dataProvider->models as $myModel){				
+		$taxrate = $myModel->taxrate / 100;
+		$taxrate = $taxrate + 1; 		
+		$myTotalPosPriceNetto[] =  $myModel->quantity * $myModel->price;			
+	} 
+
+	$billTotalNetto = round(array_sum($myTotalPosPrice), 2);
+	//$billTotal = round($myTotalPosPrice, 2);
+	//return $myTotalPosPrice;	
+	//print_r($myTotalPosPrice);	
+	
+	$billPriceNetto[] =  $billTotalNetto;
+	
+	//echo "<p>EEESSEEET</p>";
+
+
+	$billPriceNetto = $billTotalNetto = Yii::$app->formatter->asDecimal(round(array_sum($billPriceNetto), 2));
+	//echo "<p>getbillTotal Gesamtpreis ALLER Positionen: <b>".$billPrice."</b></p>";
+
+	return $billPriceNetto;
+}	
+
 
  /* Getter for TotalBillPrice 
   * ist die Summe aller EinzelPositionen  

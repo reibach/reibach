@@ -151,6 +151,8 @@ class BillController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
             'customer' => $customer,
+            'mandator' => $mandator,
+            'mandator_active' => $mandator_active,
             'address_mandator' => $address_mandator,
             'address_customer' => $address_customer,
             //'positions' => $positions,
@@ -185,6 +187,13 @@ class BillController extends Controller
 		
 		$model->bill->mandator_id = $mandator_active;
 
+
+		// get the address_id of the mandator
+        $mandator_id = $mandator_active;
+        $mandator = Mandator::findOne($mandator_id);
+		$address_mandator = Address::findOne($mandator->address_id);
+		$taxable = $mandator->taxable;
+
         //if ($model->bill->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post()) && $model->bill->save() && $model->save()) {
 
 		// erst die Rechnung speichern, dann die RechnungsID übergeben und die Position(en) speichern, sofern schon vorhanden  
@@ -194,7 +203,13 @@ class BillController extends Controller
             Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Bill has been created: '.$model->bill->id));
             return $this->redirect(['update', 'id' => $model->bill->id]);
         }
-        return $this->render('create', ['model' => $model]);
+        //return $this->render('create', ['model' => $model]);
+          return $this->render('create', [
+			'model' => $model,
+			'mandator' => $mandator,
+            'mandator_active' => $mandator_active,
+			]);
+        
     }
 
 	
@@ -306,6 +321,24 @@ class BillController extends Controller
 			$this->redirect(array('mandator/index'));
 		}
 
+
+		$bill = Bill::findOne($id);
+		//Daten für eine Rechnung zusammenbauen:		
+		
+		
+		//Kunde:
+		// get Customer 
+		$customer = Customer::findOne($bill->customer_id);
+		$address_customer = Address::findOne($customer->address_id);
+
+		//Mandant: 
+		// get Mandator 
+		
+		// get the address_id of the mandator
+        $mandator_id = $customer->mandator_id;
+        $mandator = Mandator::findOne($mandator_id);
+		$address_mandator = Address::findOne($mandator->address_id);
+		
         $model = new BillForm();
         $model->bill = $this->findModel($id);       
         $model->setAttributes(Yii::$app->request->post());
@@ -315,8 +348,14 @@ class BillController extends Controller
 			
             Yii::$app->getSession()->setFlash('success',  Yii::t('app', 'Bill has been updated.'));
             return $this->redirect(['view', 'id' => $model->bill->id]);
-        }
-        return $this->render('update', ['model' => $model]);
+        } else {
+			//$mandator->taxable = 0;
+        return $this->render('update', [
+			'model' => $model,
+			'mandator' => $mandator,
+            'mandator_active' => $mandator_active,
+			]);
+		}	
     }
     
     /**
@@ -485,6 +524,7 @@ class BillController extends Controller
 		$content = $this->renderPartial('_reportView', [
             'model' => $this->findModel($id),
             'customer' => $customer,
+            'mandator' => $mandator,
             'address_mandator' => $address_mandator,
             'address_customer' => $address_customer,
             //'positions' => $positions,
@@ -580,6 +620,7 @@ class BillController extends Controller
 		return $this->render('_reportViewHtml', [
             'model' => $this->findModel($id),
             'customer' => $customer,
+            'mandator' => $mandator,
             'address_mandator' => $address_mandator,
             'address_customer' => $address_customer,
             //'positions' => $positions,

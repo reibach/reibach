@@ -41,12 +41,23 @@ use yii\helpers\Html;
     ])->label(false) ?>
 </td>
 <td>
-    <?= $form->field($position, 'taxrate')->textInput([
+<?php 
+if ($mandator->taxable  != 0 )  {
+	echo $form->field($position, 'taxrate')->textInput([
         'id' => "Positions_{$key}_taxrate",
         'name' => "Positions[$key][taxrate]",
         'value' => Yii::$app->formatter->asDecimal($position['taxrate']),
-    ])->label(false) ?>
+    ])->label(false);
+} else {
+	echo $form->field($position, 'taxrate')->hiddenInput([
+		'value'=> '0',
+		'id' => "Positions_{$key}_taxrate",
+        'name' => "Positions[$key][taxrate]"
+		])->label(true);
+}
+?>
 </td>
+
 <td>
     <?= Html::a((Yii::t('app','Remove')) ." 	". $key, 'javascript:void(0);', [
       'class' => 'bill-remove-position-button btn btn-default btn-xs',

@@ -25,7 +25,7 @@ use kartik\form\ActiveForm;
   position: absolute;
   left: 0;
   top: -40px;
-  background-color: #ff0000;
+  background-color: #FF6660;
   color: #ffffff;
   height: 30px;
   line-height: 30px;
@@ -124,11 +124,11 @@ echo $form->field($address, 'phone_mobile', [
 	<legend>
 	<?= $form->field($mandator, 'mandator_name')->textInput(['maxlength' => true, 'style'=>'width:504px']) ?>
 <?= "<br/>" ?>	
-	<span class="own_legend">	<?= Yii::t('app', 'Taxable').' ? '?></span>
-	<?= $form->field($mandator, 'taxable')->dropDownList(['2' => Yii::t('app', 'Yes'), '1' => Yii::t('app', 'No')]) ?>	
+	<span class="own_legend"><?= Yii::t('app', 'Taxable')?><a href="#" data-tooltip="Wenn nicht steuerpflichtig, werden keine Steuersätze angezeigt. §19-Regelung"> &nbsp;&nbsp;&nbsp;?*</a></span>
+	<?= $form->field($mandator, 'taxable')->dropDownList(['1' => Yii::t('app', 'Yes'), '0' => Yii::t('app', 'No')]) ?>	
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<span class="own_legend"><?= Yii::t('app', 'Own Bill Numbers').' ' ?><a href="#" data-tooltip="F&uuml;r die Eindeutigkeit muss bei eigenen Rechnungsnummern selber gesorgt werden!"> &nbsp;&nbsp;&nbsp;?*</a></span>
-	<?= $form->field($mandator, 'own_bill_numbers')->dropDownList(['2' => Yii::t('app', 'Yes'),'1' => Yii::t('app', 'No')]) ?>	
+	<?= $form->field($mandator, 'own_bill_numbers')->dropDownList(['1' => Yii::t('app', 'Yes'),'0' => Yii::t('app', 'No')]) ?>	
 <?= "<br/>" ?>	
 	<?= $form->field($address, 'company')->textInput(['maxlength' => true, 'style'=>'width:400px']) ?>
 	<?= $form->field($address, 'title')->textInput(['maxlength' => true, 'style'=>'width:100px']) ?> 

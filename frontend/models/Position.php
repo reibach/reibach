@@ -29,19 +29,24 @@ class Position extends \yii\db\ActiveRecord
         return 'position';
     }
 
+	
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
+		 
+		
         return [
             //[['bill_id', 'name'], 'required'],
-		//[['bill_id', 'name', 'quantity'], 'required'],
+			//[['bill_id', 'name', 'quantity'], 'required'],
             //[[ 'name', 'quantity'], 'required'],
             [['bill_id'], 'integer'],
             
-            [['taxrate'], 'number', 'max'=>0],
-            
+            //[['taxrate'], 'number', 'max'=>0],
+            [['taxrate'], 'number'],
+   
             //[['quantity', 'price', 'taxrate'], 'number'],
             [['comment'], 'string'],
             [['name'], 'string', 'max' => 255],

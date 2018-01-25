@@ -100,6 +100,7 @@ foreach($dataProvider->models as $myModel){
 	$taxrate = $myModel->taxrate / 100;
 	$taxrate = $taxrate + 1; 		
 	$myTotalPosPrice[] =  $myModel->quantity * $myModel->price * $taxrate;
+	$myTotalPosPriceNetto[] =  $myModel->quantity * $myModel->price;
 			
 } 
 
@@ -107,12 +108,28 @@ foreach($dataProvider->models as $myModel){
 //echo "sum(a) = " . array_sum($myTotalPosPrice) . "\n";
 //echo "sum(a) = " . round(array_sum($myTotalPosPrice), 2) . "\n";
 //echo "sum(a) = " . Yii::$app->formatter->asDecimal(round(array_sum($myTotalPosPrice), 2)) . "\n";
+if ($mandator->taxable  == 1 ) {
+	$billTotalNetto = Yii::$app->formatter->asDecimal(round(array_sum($myTotalPosPriceNetto), 2)) . "\n";
+	echo "<div align=\"right\"><h3>".Yii::t('app', 'Invoice Amount Net')." : ".$billTotalNetto."</h3></div>";
+}
 $billTotal = Yii::$app->formatter->asDecimal(round(array_sum($myTotalPosPrice), 2)) . "\n";
-echo "<div align=\"right\"><h3>".Yii::t('app', 'Invoice Amount')." : ".$billTotal."</h3></div>"
+echo "<div align=\"right\"><h3>".Yii::t('app', 'Invoice Amount Gross')." : ".$billTotal."</h3></div>";
+
+
+//print_r($mandator_active);
+//print_r($mandator);
+//print_r($mandator->taxable);
+
+//print_r
+
+if ($mandator->taxable  == 0 )
+	echo   Yii::t('app', 'The value added tax is not calculated as a small business in the sense of § 19 (1) UStG!');
 
 
 
-?>    
+?>
+<br>
+<br>
 
 
         

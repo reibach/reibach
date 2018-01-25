@@ -29,6 +29,12 @@ use yii\jui\DatePicker;
 			
 		$session = Yii::$app->session;
 		$mandator_active = $session->get('mandator_active');
+		
+		
+		//if ($mandator->taxable  == 0 );
+		//echo   Yii::t('app', 'The value added tax is not calculated as a small business in the sense of § 19 (1) UStG!');
+
+
 	?> 
 
     <?= $form->field($model->bill, 'customer_id')->dropDownList(
@@ -38,8 +44,7 @@ use yii\jui\DatePicker;
 		['prompt'=>Yii::t('app','Select Customer')])
 		->label(false) ?>
     </fieldset>
-   
-	<?php
+   	<?php
         //echo $form->field($model->bill, 'updated_at')->widget(DatePicker::className(), [
             //'language' => 'de',
             //'inline' => false,
@@ -54,9 +59,7 @@ use yii\jui\DatePicker;
                 //'buttonText' => 'Kalender',
             //]
         //]);
-
     ?>
-
 <p><?= Yii::t('app', 'Billing Date') ?></p>
 
 <?php 
@@ -70,8 +73,6 @@ use yii\jui\DatePicker;
 ]);
 
 ?>
-	
-	
 	<fieldset>
 	<legend>
 	
@@ -95,24 +96,32 @@ use yii\jui\DatePicker;
         $position = new Position();
         $position->loadDefaultValues();
         echo '<table id="bill-positions" class="table table-condensed table-bordered">';
+        echo '<tbody>';
         echo '<thead>';
         echo '<tr>';
-        echo '<th>' . $position->getAttributeLabel(Yii::t('app','pos_num')) . '</th>';
-        echo '<th>' . $position->getAttributeLabel(Yii::t('app','name')) . '</th>';
-        echo '<th>' . $position->getAttributeLabel(Yii::t('app','quantity')) . '</th>';
-        echo '<th>' . $position->getAttributeLabel(Yii::t('app','unit')) . '</th>';
-        echo '<th>' . $position->getAttributeLabel(Yii::t('app','comment')) . '</th>';
-        echo '<th>' . $position->getAttributeLabel(Yii::t('app','price')) . '</th>';
-        echo '<th>' . $position->getAttributeLabel(Yii::t('app','taxrate')) . '</th>';
-        //echo '<td>&nbsp;</td>';
+        echo '<th>'.$position->getAttributeLabel(Yii::t('app','pos_num')) . '</th>';
+        echo '<th>'.$position->getAttributeLabel(Yii::t('app','name')) . '</th>';
+        echo '<th>'.$position->getAttributeLabel(Yii::t('app','quantity')) . '</th>';
+        echo '<th>'.$position->getAttributeLabel(Yii::t('app','unit')) . '</th>';
+        echo '<th>'.$position->getAttributeLabel(Yii::t('app','comment')) . '</th>';
+        echo '<th>'.$position->getAttributeLabel(Yii::t('app','price')) . '</th>';
+		
+		if ($mandator->taxable  != '0' )
+			echo '<th>'.$position->getAttributeLabel(Yii::t('app','taxrate')) . '</th>';
+		
         echo '</tr>';
         echo '</thead>';
+
         
-        //print_r($model->positions);
-        //print_r($_positions);
-        
+
+
         // existing positions fields
         foreach ($model->positions as $key => $_position) {
+			//print "TESTME";
+         //print_r($model->positions);
+         //print_r($key);
+         //print_r($_position);
+		 //exit;
           echo '<tr>';
           echo $this->render('_form-bill-position', [
             'key' => $_position->isNewRecord ? (strpos($key, 'new') !== false ? $key : 'new' . $key) : $_position->id,
@@ -146,18 +155,19 @@ use yii\jui\DatePicker;
             // add position button
             var position_k = <?php echo isset($key) ? str_replace('new', '', $key) : 0; ?>;
            
+           
             $('#bill-new-position-button').on('click', function () {
 				position_k += 1;
                 $('#bill-positions').find('tbody')
                   .append('<tr>' + $('#bill-new-position-block').html().replace(/__id__/g, 'new' + position_k) + '</tr>');
                 
-                // datepicker on copied row
-                $('#Positions_new' + position_k + '_date_ordered').datepicker({
-                    "autoclose": true,
-                    "todayHighlight": true,
-                    "format": "yyyy-mm-dd",
-                    "orientation": "top left"
-                });
+                 //datepicker on copied row
+                //$('#Positions_new' + position_k + '_date_ordered').datepicker({
+                    //"autoclose": true,
+                    //"todayHighlight": true,
+                    //"format": "yyyy-mm-dd",
+                    //"orientation": "top left"
+                //});
                 
             });
             
