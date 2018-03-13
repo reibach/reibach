@@ -21,7 +21,14 @@ $this->title = Yii::t('app', 'Mandator');
 	
 // Index wird ausgeblendet, bis MehrMandantenfähigkeit eingebaut ist
 //$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['index']];
+
+
+//Nach der Registrierung hat der MAndant keinen Namen, bekommt hier einen Defaultnamen zur Anzeige  
+if (empty($mandator->mandator_name))
+	$mandator->mandator_name = Yii::t('app', 'Mandator:').$mandator->id;
 $this->params['breadcrumbs'][] = ['label' => $mandator->mandator_name, 'url' => ['view', 'id' => $mandator->id]];
+
+
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="mandator-update">

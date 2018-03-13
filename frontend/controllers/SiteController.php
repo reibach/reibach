@@ -14,9 +14,6 @@ use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use frontend\models\Mandator;
 use frontend\models\Address;
-
-
-
 use frontend\models\MandatorSearch;
 use yii\web\NotFoundHttpException;
 use kartik\form\ActiveForm;
@@ -278,21 +275,34 @@ class SiteController extends Controller
 
 		//user speichern
 		if ($model->load(Yii::$app->request->post())) {
-			if ($user = $model->signup()) {
-				
-				
+			if ($user = $model->signup()) {								
 				$address->save();
 				$mandator->address_id = $address->id;	
 				//print "<BR>AddressID: ".$mandator->address_id;
 
 				$mandator->user_id = $user['id'];
-				
 				//print "<br>UserID: ".$mandator->user_id;
 				$mandator->save();		
 				//print "<br>MandatorID: ".$mandator['id'];
-				//print "<br>MandatorID: ".$mandator['id'];
 				
+				$db = Yii::$app->getDb();
+				$dbName = $this->getDsnAttribute('dbname', $db->dsn);
+				// Rechnungsverzeichnis
+				$billdir =  '/var/www/html/DB_'.$dbName.'/MAN_'.$mandator->id;
+				//print_r($billdir);
+				//exit;
+				if (!is_dir($billdir))
+					mkdir($billdir);
 
+				//echo "<br>TEst";
+				//echo $mandator->id;
+				//echo "<br>TEst";
+				//exit;
+				
+				// Start der Session
+				$session = Yii::$app->session;
+				$mandator_active = $session->set('mandator_active', $mandator->id);
+			
 				// sending mail to admin
 				// return Yii::$app //  bei return wird nach erfolgten Versund TRUE / 1 zurückgegeben
 				Yii::$app
@@ -322,14 +332,19 @@ class SiteController extends Controller
 	
 
 				//exit;
-				if (Yii::$app->getUser()->login($user)) {
-					return $this->redirect(['mandator/update', 'id' => $mandator->id, 'model' => $model]);
-					//return $this->goHome();
-					
-				}
 				
+				//echo "<br>TEst";
+				//echo $mandator->id;
+				//echo "<br>TEst";
+
+				if (Yii::$app->getUser()->login($user)) {
+					return $this->redirect(['mandator/update', 
+						'id' => $mandator->id, 
+						'model' => $model
+					]);
+					//return $this->goHome();
+				}
 			}
-			
 		}	
 		//exit;
 		return $this->render('signup', [
@@ -387,4 +402,15 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+	private function getDsnAttribute($name, $dsn)
+    {
+        if (preg_match('/' . $name . '=([^;]*)/', $dsn, $match)) {
+            return $match[1];
+        } else {
+            return null;
+        }
+    }
+
+
 }

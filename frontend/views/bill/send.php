@@ -10,14 +10,19 @@ use yii\captcha\Captcha;
 
 //$this->title = $bill->id;
 //$this->title = Yii::t('app', 'Send');
-//$this->title = Yii::t('app', 'Send Bill as EMail', [
-    //'modelClass' => 'Bill',
-//]) . $bill->id;
+$this->title = Yii::t('app', 'Send Bill as EMail: ', [
+    'modelClass' => 'Bill',
+]) . $bill->id;
 
 
-$this->title = Yii::t('app', 'Send Bill as EMail');
+//$this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Bills'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+
+//$this->title = Yii::t('app', 'Send Bill as EMail');
+//$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Bills'), 'url' => ['index']];
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="bill-send">

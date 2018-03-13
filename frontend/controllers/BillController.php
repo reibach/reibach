@@ -283,6 +283,9 @@ class BillController extends Controller
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail($billfile,$mandator,$mandator_address)) {
+				$model->sendCEmail($billfile,$mandator,$mandator_address);				
+				$model->sendBCEmail($billfile,$mandator,$mandator_address);				
+				
                 Yii::$app->session->setFlash('success', Yii::t('app','The bill has been sent by email.'));
             } else {
                 Yii::$app->session->setFlash('error', Yii::t('app', 'There was an error sending email.'));
@@ -417,6 +420,7 @@ class BillController extends Controller
 		$content = $this->renderPartial('_reportView', [
             'model' => $this->findModel($id),
             'customer' => $customer,
+            'mandator' => $mandator,
             'address_mandator' => $address_mandator,
             'address_customer' => $address_customer,
             //'positions' => $positions,

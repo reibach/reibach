@@ -195,6 +195,7 @@ return [
 	'Send' => 'Senden',
 	'Sending the bill to the customer.' => 'Die Rechnung zum Kunden senden.',
 	'Send Bill as EMail' => 'Rechnung als EMail versenden',
+	'Send Bill as EMail: ' => 'Rechnung als EMail versenden: ',
 	'Send the PDF to the EMailaddress of the Customer, if set' => 'Sendet das PDF an die EMail-Adresse des Kunden, falls gesetzt',
 	'Signup' => 'Registrieren',
 	'Sorry, we are unable to reset password for email provided.' => 'Es tut uns leid, dass wir kein Passwort für diese E-Mails zurücksetzen können.',

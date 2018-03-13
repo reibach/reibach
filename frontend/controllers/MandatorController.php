@@ -19,7 +19,6 @@ use kartik\form\ActiveForm;
  */
 class MandatorController extends Controller
 {
-
     /**
      * @inheritdoc
      */
@@ -123,11 +122,15 @@ class MandatorController extends Controller
 			//echo "Address-ID: ".$model->address_id;	
 			$mandator->save();			
 			
-			// Verzeichnis erstellen, in dem die Rechungen gespeichert werden 
-			$billdir =  '/var/www/html/'.$dbName.'/MAN_'.$mandator->id;
+			$db = Yii::$app->getDb();
+			$dbName = $this->getDsnAttribute('dbname', $db->dsn);
+			// Rechnungsverzeichnis
+			$billdir =  '/var/www/html/DB_'.$dbName.'/MAN_'.$mandator->id;
+			//print_r($billdir);
+			//exit;
 			if (!is_dir($billdir))
-				mkdir($billdir, 0777, true);
-			
+				mkdir($billdir);
+				
 			return $this->redirect(['view', 'id' => $mandator->id]);
         } else {
             return $this->render('create', [
@@ -146,6 +149,16 @@ class MandatorController extends Controller
      */
     public function actionUpdate($id)
     {
+	$session = Yii::$app->session;
+		$mandator_active = $session->get('mandator_active');
+
+		// wenn kein mandant ausgewählt ist, Abbruch
+		if ($mandator_active == '') {
+			Yii::$app->session->setFlash('error', Yii::t('app', 'No Mandator selected. Please select or create one.'));
+			//return $this->redirect('/mandator/index');
+			//$this->redirect(array('mandator/index'));
+		}
+		
         //$model = $this->findModel($id);
 		//$mandator = Mandator::findOne($id);
         $mandator = $this->findModel($id);
@@ -155,17 +168,17 @@ class MandatorController extends Controller
         if ($address->load(Yii::$app->request->post()) && $address->save()) {
 			$mandator->load(Yii::$app->request->post());
 			$mandator->save();
-
+			//$mandator_active = $mandator;
 			
-			
-			// Verzeichnis erstellen, in dem die Rechungen gespeichert werden 
-			$billdir =  '/var/www/html/'.$mandator->mandator_name.'/frontend/web/bills/MAN'.$mandator->id;
-			if (!is_dir($billdir))
-				mkdir($billdir, 0777, true);
-			
+			$db = Yii::$app->getDb();
+			$dbName = $this->getDsnAttribute('dbname', $db->dsn);
+			// Rechnungsverzeichnis
+			$billdir =  '/var/www/html/DB_'.$dbName.'/MAN_'.$mandator->id;
+			        
             return $this->redirect(['mandator/view', 'id' => $id]);
         }
         return $this->render('update', [
+            //'mandator_active' => $mandator_active,
             'mandator' => $mandator,
             'address' => $address,
         ]);
