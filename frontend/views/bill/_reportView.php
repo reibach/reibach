@@ -233,7 +233,7 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
 				<div><?=  Yii::t('app', 'Phone').": " .$address_mandator->phone_business ?> </div>
 				<div><?= Yii::t('app', 'Fax').": " .$address_mandator->fax ?></div>
 				<div><?= Yii::t('app', 'Email').": " .$address_mandator->email ?></div>
-				<div><?= Yii::t('app', 'Internet').": " .$address_mandator->email ?></div>
+				<div><?= Yii::t('app', 'Internet').": " .$address_mandator->internet ?></div>
             </td>
           <td style="vertical-align: top; width: 10px; white-space: nowrap;">
 				&nbsp;
