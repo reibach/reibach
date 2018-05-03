@@ -101,7 +101,7 @@ use yii\jui\DatePicker;
         echo '<th>' . $position->getAttributeLabel(Yii::t('app','name')) . '</th>';
         echo '<th>' . $position->getAttributeLabel(Yii::t('app','quantity')) . '</th>';
         echo '<th>' . $position->getAttributeLabel(Yii::t('app','unit')) . '</th>';
-        echo '<th>' . $position->getAttributeLabel(Yii::t('app','comment')) . '</th>';
+        // echo '<th>' . $position->getAttributeLabel(Yii::t('app','comment')) . '</th>';
         echo '<th>' . $position->getAttributeLabel(Yii::t('app','price')) . '</th>';
         echo '<th>' . $position->getAttributeLabel(Yii::t('app','taxrate')) . '</th>';
         //echo '<td>&nbsp;</td>';

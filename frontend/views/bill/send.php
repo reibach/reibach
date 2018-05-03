@@ -56,8 +56,11 @@ $this->params['breadcrumbs'][] = $this->title;
 					$model['subject'] = Yii::t('app','Bill').": R_".$bill->id; ?>				
                 <?= $form->field($model, 'subject') ?>
 
+				<?php // if (empty($model[ 'body']))
+					// $model['body'] = "\n\n--\n".$mandator->signature; ?>
+
 				<?php if (empty($model[ 'body']))
-					$model['body'] = "\n\n--\n".$mandator->signature; ?>
+					$model['body'] = "\n".$mandator->signature; ?>
 
                 <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
 

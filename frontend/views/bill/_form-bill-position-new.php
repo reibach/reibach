@@ -12,6 +12,7 @@ use yii\helpers\Html;
     <?= $form->field($position, 'name')->textInput([
         'id' => "Positions_{$key}_name",
         'name' => "Positions[$key][name]",
+        'style'=>'width:300px'        
     ])->label(false) ?>
 </td>
 <td>
@@ -26,12 +27,14 @@ use yii\helpers\Html;
         'name' => "Positions[$key][unit]",
     ])->label(false) ?>
 </td>
+<!--
 <td>
     <?= $form->field($position, 'comment')->textInput([
         'id' => "Positions_{$key}_comment",
         'name' => "Positions[$key][comment]",
     ])->label(false) ?>
 </td>
+-->
 <td>
     <?= $form->field($position, 'price')->textInput([
         'id' => "Positions_{$key}_price",
@@ -39,23 +42,25 @@ use yii\helpers\Html;
     ])->label(false) ?>
 </td>
 <?php
+
+
 echo "<td>"; 
+
 if ($mandator->taxable  != 0 )  {
-	echo $form->field($position, 'taxrate')->textInput([
-        'id' => "Positions_{$key}_taxrate",
-        'name' => "Positions[$key][taxrate]",
-    ])->label(false);
-} else {
+	echo $form->field($position, 'taxrate')->dropDownList([
+		'19' => Yii::t('app', '19'), 
+		'7'  => Yii::t('app', '7')],
+		['id' => "Positions_{$key}_taxrate",
+        'name' => "Positions[$key][taxrate]"
+		])->label(false); 
+} else { 
 	echo $form->field($position, 'taxrate')->hiddenInput([
 		'value'=> '0',
 		'id' => "Positions_{$key}_taxrate",
         'name' => "Positions[$key][taxrate]"
 		])->label(true);
-	//echo $form->field($position, 'taxrate')->hiddenInput(['value'=> $value])->label(false);
-	
-	//echo   $form->field($position, 'taxrate', 
-      //['options' => ['value'=> '0'] ])->hiddenInput()->label(false);
-}	
+}
+
 echo "</td>";
 ?>
 <td>
