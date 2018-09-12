@@ -51,8 +51,6 @@ $form = ActiveForm::begin([
 	// weitere Konfigurationen  geändert werden. Daher wird das Formularfeld nicht angezeigt
 	// $form->field($mandator, 'mandator_name')->textInput(['maxlength' => true, 'style'=>'width:200px'])
     ?>
-    
-
 	<?= $form->field($address, 'company')->textInput(['maxlength' => true, 'style'=>'width:400px']) ?>
 	<?= $form->field($address, 'title')->textInput(['maxlength' => true, 'style'=>'width:100px']) ?> 
 
@@ -100,6 +98,11 @@ $form = ActiveForm::begin([
 	<?= $form->field($address, 'vat_number')->textInput(['maxlength' => true, 'style'=>'width:200px']) ?> 
 	<?= $form->field($address, 'state')->textInput(['maxlength' => true, 'style'=>'width:400px']) ?>
 -->
+
+
+	<?= Yii::t('app', 'Payment Term: ') ?>
+	<?= $form->field($customer, 'payment_term')->dropDownList(['0' => 0, '10' => 10, '14' => 14, '30' => 30]) ?>	
+
 
 	</legend>	
 </fieldset>

@@ -189,7 +189,13 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
     </tr>
 	<tr>
 		<td colspan="6"  style="vertical-align: top; font: 24px Arial, sans-serif; text-align: center;">
-			<?=  Yii::t('app', 'The invoice amount is due without deduction within 10 days after receipt of the invoice.') ?><br>
+			<?php
+    if ($customer->payment_term  == 0 ) {	
+		echo Yii::t('app', 'The invoice amount is due immediately without deduction after receipt of the invoice.');
+	} else {
+		echo Yii::t('app', 'The invoice amount is due after receipt of the invoice without deduction within the following days: ').$customer->payment_term;
+	};
+	?>
 		<br>
 		<br>
 		</td>

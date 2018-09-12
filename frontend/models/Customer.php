@@ -11,6 +11,7 @@ use Yii;
  * @property integer $mandator_id
  * @property integer $address_id
  * @property string $customer_number 
+ * @property integer $payment_term
  * @property Bill[] $bills
  * @property Address $address
  * @property Mandator $mandator
@@ -33,8 +34,8 @@ class Customer extends \yii\db\ActiveRecord
     {
         return [
             [['mandator_id', 'address_id'], 'required'],
-            [['mandator_id', 'address_id' ], 'integer'],
-            [['customer_number'], 'safe'], 
+            [['mandator_id', 'address_id', 'payment_term' ], 'integer'],
+            [['customer_number', 'payment_term'], 'safe'], 
             [['address_id'], 'exist', 'skipOnError' => true, 'targetClass' => Address::className(), 'targetAttribute' => ['address_id' => 'id']],
             [['mandator_id'], 'exist', 'skipOnError' => true, 'targetClass' => Mandator::className(), 'targetAttribute' => ['mandator_id' => 'id']],
         ];
@@ -51,6 +52,7 @@ class Customer extends \yii\db\ActiveRecord
             'address_id' => Yii::t('app', 'Address ID'),
             'fullName'=>Yii::t('app', 'Full Name'),
             'email'=>Yii::t('app', 'EMail'),            
+            'payment_term' => Yii::t('app', 'Payment Term'),
             'customer_number' => Yii::t('app', 'Customer Number'),
            	'orderAmount' => Yii::t('app', 'Order Amount'),
            	'offerAmount' => Yii::t('app', 'Offer Amount'),

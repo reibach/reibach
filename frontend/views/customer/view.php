@@ -44,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'customer_number',            
             'mandator_id',
             'fullName',
+            'payment_term',
         ],
     ]) ?>
 

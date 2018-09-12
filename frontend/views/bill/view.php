@@ -122,10 +122,14 @@ echo "<div align=\"right\"><h3>".Yii::t('app', 'Invoice Amount Gross')." : ".$bi
 
 //print_r
 
+if ($customer->payment_term  == 0 ) {	
+	echo Yii::t('app', 'The invoice amount is due immediately without deduction after receipt of the invoice.');
+} else {
+	echo Yii::t('app', 'The invoice amount is due after receipt of the invoice without deduction within the following days: ').$customer->payment_term;
+};
+echo "<p>&nbsp;</p>"; 
 if ($mandator->taxable  == 0 )
 	echo   Yii::t('app', 'The value added tax is not calculated as a small business in the sense of § 19 (1) UStG!');
-
-
 
 ?>
 <br>

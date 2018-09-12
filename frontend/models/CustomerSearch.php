@@ -23,7 +23,7 @@ class CustomerSearch extends Customer
     public function rules()
     {
         return [
-            [['id', 'mandator_id', 'address_id'], 'integer'],
+            [['id', 'mandator_id', 'address_id', 'customer_term'], 'integer'],
             [['fullName'], 'save'],
             [['orderAmount'], 'safe']
         ];
