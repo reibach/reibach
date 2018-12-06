@@ -217,7 +217,7 @@ return [
 	'The above error occurred while the Web server was processing your request.' => 'Der obige Fehler trat auf, während der Webserver deine Anfrage verarbeitete.',
 	'The bill has been sent by email.' => 'Die Rechnung wurde per EMail versandt.',
 	'The invoice amount is due without deduction within 10 days after receipt of the invoice.' => 'Der Rechnungsbetrag ist ohne Abzug fällig innerhalb von 10 Tagen nach Erhalt der Rechnung.',
-	'The invoice amount is due after receipt of the invoice without deduction within the following days: ' => 'Der Rechnungsbetrag ist nach Erhalt der Rechnung ohne Abzug fällig innerhalb von folgenden Tagen: ',
+	'The invoice amount is due after receipt of the invoice without deduction within the following days: ' => 'Der Rechnungsbetrag ist nach Erhalt der Rechnung ohne Abzug innerhalb der folgenden Tage fällig: ',
 	'The invoice amount is due immediately without deduction after receipt of the invoice.' => 'Der Rechnungsbetrag ist sofort ohne Abzug nach Erhalt der Rechnung fällig.',
 	'The value added tax is not calculated as a small business in the sense of § 19 (1) UStG!' => 'Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird Umsatzsteuer nicht berechnet!',
 	'There is no user with such email.' => 'Diese EMailAdresse ist unbekannt.',

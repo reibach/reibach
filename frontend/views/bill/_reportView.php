@@ -87,7 +87,7 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
             <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 100px; border:1px solid #BFBFBF; padding-left: 5px;">
             <?=  Yii::t('app', 'Pos Num') ?>
             </td>
-            <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 500px;border:1px solid #BFBFBF; padding-left: 5px;">
+            <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 400px;border:1px solid #BFBFBF; padding-left: 5px;">
             <?=  Yii::t('app', 'Name') ?>
             </td>
             <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 75px;border:1px solid #BFBFBF; padding-left: 5px; padding-right: 5px;">
@@ -96,11 +96,11 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
             <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 75px;border:1px solid #BFBFBF;text-align: right; padding-left: 5px; padding-right: 5px;">
             <?=  Yii::t('app', 'Quantity') ?>
             </td>
-            <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 100px;border:1px solid #BFBFBF;text-align: right;padding-right: 5px;">
-            <?=  Yii::t('app', 'Unit Price') ?> &#8364;
+            <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 140px;border:1px solid #BFBFBF;text-align: right;padding-left: 5px; padding-right: 5px;">
+            <?=  Yii::t('app', 'Unit Price') ?>&nbsp;&#8364;
             </td>
-            <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 150px; border:1px solid #BFBFBF; text-align: right; white-space: nowrap; padding-right: 5px; padding-left: 5px;">
-            <?=  Yii::t('app', 'Total Price') ?> &#8364;
+            <td style="vertical-align: top; font: 24px Arial, sans-serif; width: 100px; border:1px solid #BFBFBF; text-align: right; white-space: nowrap; padding-right: 5px; padding-left: 5px;">
+            <?=  Yii::t('app', 'Total Price') ?>&nbsp;&#8364;
             </td>
           </tr>
 			<?= 
@@ -193,7 +193,7 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
     if ($customer->payment_term  == 0 ) {	
 		echo Yii::t('app', 'The invoice amount is due immediately without deduction after receipt of the invoice.');
 	} else {
-		echo Yii::t('app', 'The invoice amount is due after receipt of the invoice without deduction within the following days: ').$customer->payment_term;
+		echo Yii::t('app', 'The invoice amount is due after receipt of the invoice without deduction within the following days: ')."<b>".$customer->payment_term."</b>";
 	};
 	?>
 		<br>
@@ -235,13 +235,13 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
 			</td>
 			<td style="vertical-align: top; width: 10px;">&nbsp;
 			</td>
-		            <td style="vertical-align: top; width: 150px; font: 10px Arial, sans-serif; white-space: nowrap;">
+		    <td style="vertical-align: top; width: 150px; font: 10px Arial, sans-serif; white-space: nowrap;">
 				<div><?=  Yii::t('app', 'Phone').": " .$address_mandator->phone_business ?> </div>
 				<div><?= Yii::t('app', 'Fax').": " .$address_mandator->fax ?></div>
 				<div><?= Yii::t('app', 'Email').": " .$address_mandator->email ?></div>
 				<div><?= Yii::t('app', 'Internet').": " .$address_mandator->internet ?></div>
             </td>
-          <td style="vertical-align: top; width: 10px; white-space: nowrap;">
+            <td style="vertical-align: top; width: 10px; white-space: nowrap;">
 				&nbsp;
             </td>
             <td style="vertical-align: top; width: 150px; font: 10px Arial, sans-serif; white-space: nowrap;">
