@@ -22,9 +22,6 @@ use yii\jui\DatePicker;
 
     <fieldset>
         <legend><?= Yii::t('app','Customers'); ?></legend>
-
-
-
 	<?php 
 			
 		$session = Yii::$app->session;
@@ -34,6 +31,7 @@ use yii\jui\DatePicker;
     <?= $form->field($model->bill, 'customer_id')->dropDownList(
 		ArrayHelper::map(Customer::find()
 		->where(['mandator_id' => $mandator_active])
+		->orderBy(['id'=>SORT_DESC])
 		->all(),'id','fullName'),
 		['prompt'=>Yii::t('app','Select Customer')])
 		->label(false) ?>
