@@ -22,8 +22,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
         'mandator_active' => $mandator_active,
     ]) ?>
 <?php
-if ($mandator->taxable  == 0 );
+if ($mandator->taxable  == 0 )
 	echo   Yii::t('app', 'The value added tax is not calculated as a small business in the sense of § 19 (1) UStG!');
-
 ?>
 </div>

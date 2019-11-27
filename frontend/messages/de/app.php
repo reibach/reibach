@@ -17,6 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+	'{attr} must be a directory.' => '',
 	'Abo End' => '',
 	'Abo Start' => '',
 	'Abo Turn' => '',
@@ -45,6 +46,7 @@ return [
 	'Billing Date' => 'Rechnungsdatum',
 	'Bill could not been saved.' => 'Die Rechnung konnte nicht gespeichert werden.',
 	'Bill has been created:' => 'Die Rechnung wurde erstellt:',
+	'Bill has been created: ' => 'Die Rechnung wurde erstellt: ',
 	'Bill has been saved.' => 'Die Rechnung wurde gespeichert.',
 	'Bill has been updated.' => 'Die Rechnung wurde bearbeitet:',
 	'Bill ID' => 'Rechnungs ID',
@@ -55,6 +57,7 @@ return [
 	'comment' => 'Kommentar',
 	'Comment' => 'Kommentar',
 	'Company' => 'Firma',
+	'Congratulations' => 'Glückwunsch',
 	'Contact' => 'Kontakt',
 	'Country Name' => 'Land',
 	'Create' => 'Erstelle',
