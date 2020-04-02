@@ -30,7 +30,7 @@ return [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => false,
                         'enableSession' => true,
-                        'authTimeout' => 300, // 5 min
+                        'authTimeout' => 600, // 10 min
                         'loginUrl' => ['site/login'],
         ],
 
