@@ -31,7 +31,7 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
 -->
 <?php
 	 // Workaround fuer Mandant zach
-     if ($mandator['mandator_name'] == "federa") {
+     if ($mandator['mandator_name'] == "zach") {
 		?>
 		<h3><span style="color:red;font: 24px Arial, sans-serif;">Elektrotechnik </span><span style="color:black;font: 16px Arial, sans-serif;">und Hausmeisterservice </span></h3>
 		<?php
