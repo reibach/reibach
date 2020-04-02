@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <h4><?= Yii::t('app', 'Mandator') ?>:&nbsp;	<?= $mandator['mandator_name'] ?></h4>
     <h4><?= Yii::t('app', 'Mandator') ?>:&nbsp;	<?= $address_mandator['fullName'] ?></h4>
     <h4><?= Yii::t('app', 'Customer') ?>:&nbsp; <?= $customer['fullName'] ?></h4>
     <h3><?= Yii::t('app', 'Billing Date') ?>:&nbsp; <?= $model->billing_date ?></h3>
@@ -141,6 +142,11 @@ if ($mandator->taxable  == 0 )
 	/**
 	 * THE VIEW BUTTON
 	 */
+	 // Workaround fuer Mandant zach
+	 //~ echo  $mandator['mandator_name'] ;
+     //~ if ($mandator['mandator_name'] == "federa")
+		//~ $report
+     	 
 	 $desc = Yii::t('app', 'Print');
 	 echo Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> '.$desc, ['/bill/report', 'id' => $model->id], [
 		'class'=>'btn btn-danger', 

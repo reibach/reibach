@@ -24,10 +24,25 @@ LOGO darf nur bei gueltiger Lizenz entfernt werden!
 <table style="text-align: left; width: 1048px; height: 2096x; background-color: #FFFFFF;" border="2" cellpadding="0" cellspacing="0">
 	<tbody>
     <tr>
-      <td style="vertical-align: top;">
+      <td style="vertical-align: top;" width="400">
 		<!-- Mandant -->
-		<h4 style="font: italic 36px Arial, sans-serif;"><?= $address_mandator->company ?></h4>
-		<div class="bill-view" style="font: italic 24px Arial, sans-serif;">
+<!--
+		<h4 style="font: italic 24px Arial, sans-serif;"> Elektrotechnik<?= $address_mandator->company ?></h4>
+-->
+<?php
+	 // Workaround fuer Mandant zach
+     if ($mandator['mandator_name'] == "federa") {
+		?>
+		<h3><span style="color:red;font: 24px Arial, sans-serif;">Elektrotechnik </span><span style="color:black;font: 16px Arial, sans-serif;">und Hausmeisterservice </span></h3>
+		<?php
+		} else {
+		?>
+		<h4 style="font: italic 24px Arial, sans-serif;"><?= $address_mandator->company ?></h4>
+		<?php
+		} 
+		?>
+		
+		<div class="bill-view" style="font: 24px Arial, sans-serif;">
 			<?= $address_mandator->prename ?> <?= $address_mandator->lastname ?><br>
 			<?= $address_mandator->street."&nbsp;".$address_mandator->housenumber ?><br>
 			<?= $address_mandator->zipcode." ".$address_mandator->place ?>
