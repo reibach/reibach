@@ -64,7 +64,12 @@ if ($mandator->taxable  != 0 )  {
 </td>
 
 <td>
+    <?= Html::a((Yii::t('app','Remove')), 'javascript:void(0);', [
+      'class' => 'bill-remove-position-button btn btn-default btn-xs',
+    ]) ?>
+<!--
     <?= Html::a((Yii::t('app','Remove')) ." 	". $key, 'javascript:void(0);', [
       'class' => 'bill-remove-position-button btn btn-default btn-xs',
     ]) ?>
+-->
 </td>

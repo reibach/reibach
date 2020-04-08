@@ -40,7 +40,7 @@ class Position extends \yii\db\ActiveRecord
 		
         return [
             //[['bill_id', 'name'], 'required'],
-			//[['bill_id', 'name', 'quantity'], 'required'],
+			[['bill_id', 'pos_num', 'name', 'quantity', 'unit', 'price'], 'required'],
             //[[ 'name', 'quantity'], 'required'],
             [['bill_id'], 'integer'],
             

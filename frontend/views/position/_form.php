@@ -23,7 +23,7 @@ use frontend\models\Bill;
     <?= $form->field($model, 'pos_num')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'quantity', ['inputOptions' => ['value' => Yii::$app->formatter->asDecimal($model['quantity']), 'class' => 'form-control']]) ?>
     <?= $form->field($model, 'unit')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
+    <?= $//form->field($model, 'comment')->textarea(['rows' => 6]) ?>
 	<?= $form->field($model, 'price', ['inputOptions' => ['value' => Yii::$app->formatter->asDecimal($model['price']), 'class' => 'form-control']]) ?>
     <?= $form->field($model, 'taxrate', ['inputOptions' => ['value' => Yii::$app->formatter->asDecimal($model['taxrate']), 'class' => 'form-control']]) ?>
     

@@ -113,7 +113,7 @@ use yii\jui\DatePicker;
         foreach ($model->positions as $key => $_position) {
           echo '<tr>';
           echo $this->render('_form-bill-position', [
-            'key' => $_position->isNewRecord ? (strpos($key, 'new') !== false ? $key : 'new' . $key) : $_position->id,
+            'key' => $_position->isNewRecord ? (strpos($key, 'new') !== false ? $key : 'new') : $_position->id,
             'form' => $form,
             'mandator' => $mandator,
             'position' => $_position,
@@ -185,7 +185,7 @@ use yii\jui\DatePicker;
 
 
  
-    <?= Html::submitButton('Save'); ?>
+    <?= Html::submitButton(Yii::t('app', 'Save')); ?>
     <?php ActiveForm::end(); 
     
 	$this->registerJs("        

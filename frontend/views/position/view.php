@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'unit',
             'quantity:decimal',
-            'comment:ntext',
+            //~ 'comment:ntext',
             'price:decimal',
             'taxrate:decimal',
         ],

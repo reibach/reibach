@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
              'unit',
             'quantity:decimal',
             'price:decimal',
-             'comment:ntext',
+             //~ 'comment:ntext',
              //Yii::$app->formatter->asDecimal('price'),
              'taxrate:decimal',
              'totalPosPrice:decimal',
