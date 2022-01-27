@@ -25,11 +25,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'taxable') ?>
 
-    <?php // echo $form->field($model, 'own_bill_numbers') ?>
+    <?php // echo $form->field($model, 'b_id') ?>
 
-    <?php // echo $form->field($model, 'own_offer_numbers') ?>
-
-    <?php // echo $form->field($model, 'own_customer_numbers') ?>
+    <?php // echo $form->field($model, 'c_id') ?>
 
     <?php // echo $form->field($model, 'signature') ?>
 

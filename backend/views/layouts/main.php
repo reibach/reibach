@@ -44,7 +44,7 @@ CookieWidget::widget([
 ?>	
 	
 <?php
-//Yii::$app->language = 'de';
+Yii::$app->language = 'de';
  $languageItem = new cetver\LanguageSelector\items\DropDownLanguageItem([
      'languages' => [
          'en' => '<span class="flag-icon flag-icon-gb"></span> English',
@@ -96,12 +96,11 @@ CookieWidget::widget([
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-		$menuItems[] = ['label' => Yii::t('app', 'Gii'), 'url' => ['/gii']];
-		$menuItems[] = ['label' => Yii::t('app', 'Adrs'), 'url' => ['/adr/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Mandators'), 'url' => ['/mandator/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Customers'), 'url' => ['/customer/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'Bills'), 'url' => ['/bill/index']];
+		$menuItems[] = ['label' => Yii::t('app', 'Positions'), 'url' => ['/position/index']];
 		$menuItems[] = ['label' => Yii::t('app', 'ABOs'), 'url' => ['/abo/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

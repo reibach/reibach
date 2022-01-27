@@ -33,9 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             'address_id',
             'taxable',
-            'own_bill_numbers',
-            'own_offer_numbers',
-            'own_customer_numbers',
+            'b_id',
+            'c_id',
             'signature:ntext',
         ],
     ]) ?>

@@ -12,9 +12,8 @@ use Yii;
  * @property integer $user_id
  * @property integer $address_id
  * @property integer $taxable
- * @property integer $own_bill_numbers
- * @property integer $own_offer_numbers
- * @property integer $own_customer_numbers
+ * @property integer $b_id
+ * @property integer $c_id
  * @property string $signature
  *
  * @property Article[] $articles
@@ -41,7 +40,7 @@ class Mandator extends \yii\db\ActiveRecord
     {
         return [
             [['mandator_name', 'user_id', 'address_id', 'signature'], 'required'],
-            [['user_id', 'address_id', 'taxable', 'own_bill_numbers', 'own_offer_numbers', 'own_customer_numbers'], 'integer'],
+            [['user_id', 'address_id', 'taxable', 'b_id', 'c_id'], 'integer'],
             [['signature'], 'string'],
             [['mandator_name'], 'string', 'max' => 150],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -60,9 +59,8 @@ class Mandator extends \yii\db\ActiveRecord
             'user_id' => Yii::t('app', 'User ID'),
             'address_id' => Yii::t('app', 'Address ID'),
             'taxable' => Yii::t('app', 'Taxable'),
-            'own_bill_numbers' => Yii::t('app', 'Own Bill Numbers'),
-            'own_offer_numbers' => Yii::t('app', 'Own Offer Numbers'),
-            'own_customer_numbers' => Yii::t('app', 'Own Customer Numbers'),
+            'b_id' => Yii::t('app', 'B ID'),
+            'c_id' => Yii::t('app', 'C ID'),
             'signature' => Yii::t('app', 'Signature'),
         ];
     }

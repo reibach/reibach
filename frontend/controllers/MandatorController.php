@@ -27,10 +27,12 @@ class MandatorController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                //~ 'only' => ['create','delete','index','view','update'],
                 'only' => ['create','delete','index','view','update'],
                 'rules' => [
                     [
-                        'actions' => ['view','update'],
+                        //~ 'actions' => ['view','update'],
+                        'actions' => ['view'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],

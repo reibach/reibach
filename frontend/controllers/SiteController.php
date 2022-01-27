@@ -31,12 +31,21 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                # 'only' => ['logout', 'signup'],
+                'only' => ['logout'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
-                        'allow' => true,
+                        //~ 'allow' => true,
+                        'allow' => false,
                         'roles' => ['?'],
+                    ],
+                
+                    [
+                        'actions' => ['signup'],
+                        //~ 'allow' => true,
+                        'allow' => false,
+                        'roles' => ['@'],
                     ],
                     [
                         'actions' => ['logout'],
@@ -251,12 +260,17 @@ class SiteController extends Controller
     }
     
 
+
+    public function actionSignup()
+    {
+		echo "Thank you for contacting us. We will respond to you as soon as possible.";
+	}
   /**
      * Signs user up.
      *
      * @return mixed
      */
-    public function actionSignup()
+    public function actionSignupDEACTIVATED()
     {
 		//if (Yii::$app->getUser()->login($user)) {
 			//return $this->goHome();

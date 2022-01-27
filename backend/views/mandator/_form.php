@@ -20,11 +20,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'taxable')->textInput() ?>
 
-    <?= $form->field($model, 'own_bill_numbers')->textInput() ?>
+    <?= $form->field($model, 'b_id')->textInput() ?>
 
-    <?= $form->field($model, 'own_offer_numbers')->textInput() ?>
-
-    <?= $form->field($model, 'own_customer_numbers')->textInput() ?>
+    <?= $form->field($model, 'c_id')->textInput() ?>
 
     <?= $form->field($model, 'signature')->textarea(['rows' => 6]) ?>
 

@@ -4,7 +4,7 @@ namespace common\tests\unit\models;
 
 use Yii;
 use common\models\LoginForm;
-use common\fixtures\UserFixture;
+use common\fixtures\User as UserFixture;
 
 /**
  * Login form test
@@ -12,21 +12,19 @@ use common\fixtures\UserFixture;
 class LoginFormTest extends \Codeception\Test\Unit
 {
     /**
-     * @var \common\tests\UnitTester
+     * @var \frontend\tests\UnitTester
      */
     protected $tester;
 
-    /**
-     * @return array
-     */
-    public function _fixtures()
+
+    public function _before()
     {
-        return [
+        $this->tester->haveFixtures([
             'user' => [
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'user.php'
             ]
-        ];
+        ]);
     }
 
     public function testLoginNoUser()
